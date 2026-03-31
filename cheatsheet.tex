@@ -1,0 +1,526 @@
+\documentclass[8pt]{extarticle}
+\usepackage[letterpaper,margin=0.5in]{geometry}
+\usepackage{multicol}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[C]{\small Page \thepage}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setlength{\columnsep}{14pt}
+\setlength{\columnseprule}{0.3pt}
+
+\titleformat{\section}{\large\bfseries\color{blue!80!black}}{}{0em}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{blue!60!black}}{}{0em}{}
+\titlespacing{\section}{0pt}{10pt}{4pt}
+\titlespacing{\subsection}{0pt}{8pt}{3pt}
+
+\setlist{leftmargin=14pt, itemsep=2pt, parsep=1pt, topsep=3pt}
+
+\renewcommand{\arraystretch}{1.15}
+
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries STAT GU4204 Midterm Cheat Sheet}
+\end{center}
+
+\begin{multicols}{2}
+
+% ============================================================
+\section{Key Definitions}
+
+\textbf{Statistical inference}: Procedure producing a probabilistic statement about parts of a statistical model.
+
+\textbf{Parameter}: Characteristic(s) determining the joint distribution of the r.v.'s of interest.
+
+\textbf{Parameter space} $\Omega$: Set of all possible values of $\theta$.
+
+\textbf{Statistic}: $T = \varphi(X_1,\ldots,X_n)$ --- function of data ONLY, no unknown parameters.
+
+\textbf{Estimator}: $\hat\theta_n = \varphi(X_1,\ldots,X_n)$ --- a statistic used to estimate a parameter; it is a \emph{random variable}.
+
+\textbf{Estimate}: $\varphi(x_1,\ldots,x_n)$ --- the realized \emph{number} after plugging in observed data.
+
+\textbf{Bias}: $b(T_n) = E(T_n) - g(\theta)$.
+
+\textbf{Unbiased}: $E(T_n) = g(\theta)$ for ALL $\theta \in \Omega$ (bias $= 0$ everywhere).
+
+\textbf{Consistent}: $\hat\theta_n \xrightarrow{P} \theta$ as $n\to\infty$. Large-sample property; does NOT tell us about finite-$n$ performance.
+
+\textbf{MSE}: $E[(T_n - g(\theta))^2] = \text{Var}(T_n) + [\text{bias}(T_n)]^2$.
+
+\textbf{Dominates}: $T_n$ dominates $S_n$ if $\text{MSE}(T_n) \le \text{MSE}(S_n)$ for ALL $\theta$.
+
+\textbf{Inadmissible}: $S_n$ is inadmissible if some $T_n$ dominates it.
+
+\textbf{MVUE}: Minimum Variance Unbiased Estimator --- unbiased AND has smallest variance among all unbiased estimators.
+
+\textbf{Efficient estimator}: Unbiased estimator that achieves the Cram\'er-Rao lower bound.
+
+\textbf{Sufficient statistic}: $T$ is sufficient for $\theta$ if the conditional distribution of $X|T{=}t$ does NOT depend on $\theta$.
+
+\textbf{Likelihood}: $L(\theta) = \prod f(X_i, \theta)$.
+
+\textbf{Log-likelihood}: $\ell(\theta) = \sum \log f(X_i,\theta)$.
+
+\textbf{Score function}: $\dot\ell(x,\theta) = \frac{\partial}{\partial\theta}\log f(x,\theta)$.
+
+\textbf{Score equation}: $\sum \dot\ell(X_i,\theta) = 0$ (solve for MLE).
+
+\textbf{Fisher information}: $I(\theta) = E[\dot\ell^2(X,\theta)] = \text{Var}[\dot\ell(X,\theta)]$. Score has mean 0.
+
+\textbf{Sampling distribution}: Distribution of a statistic $T = \varphi(X_1,\ldots,X_n)$.
+
+\textbf{Pivot}: $\Psi(\mathbf{X}_n, g(\theta))$ --- function of data AND parameter whose distribution does NOT depend on $\theta$.
+
+\textbf{Confidence interval}: Random interval $(A,B)$ such that $P_\theta(A \le g(\theta) \le B) \ge 1-\alpha$ for all $\theta$. \textbf{Exact} if equality holds.
+
+\textbf{Prior} $\xi(\theta)$: Belief about $\theta$ BEFORE observing data.
+
+\textbf{Posterior} $\xi(\theta|x)$: Updated belief about $\theta$ AFTER observing data.
+
+\textbf{Conjugate prior}: Prior such that posterior belongs to the SAME family as the prior.
+
+\textbf{Bayes estimator}: Minimizes expected posterior loss.
+\begin{itemize}
+\item Squared error loss $\Rightarrow$ posterior mean
+\item Absolute error loss $\Rightarrow$ posterior median
+\end{itemize}
+
+% ============================================================
+\section{Distributions Reference}
+
+\begin{tabular}{@{}lllll@{}}
+\toprule
+\textbf{Dist} & \textbf{PDF/PMF} & $E(X)$ & $\text{Var}(X)$ & \textbf{MGF} \\
+\midrule
+Ber($p$) & $p^x(1{-}p)^{1-x}$ & $p$ & $p(1{-}p)$ & $1{-}p{+}pe^t$ \\[3pt]
+Bin($n,p$) & $\binom{n}{k}p^k(1{-}p)^{n-k}$ & $np$ & $np(1{-}p)$ & $(1{-}p{+}pe^t)^n$ \\[3pt]
+Poi($\lambda$) & $e^{-\lambda}\lambda^k/k!$ & $\lambda$ & $\lambda$ & $e^{\lambda(e^t-1)}$ \\[3pt]
+Exp($\theta$) & $\theta e^{-\theta x}$ & $1/\theta$ & $1/\theta^2$ & $\theta/(\theta{-}t)$ \\[3pt]
+$N(\mu,\sigma^2)$ & $\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$ & $\mu$ & $\sigma^2$ & $e^{\mu t+\sigma^2t^2/2}$ \\[3pt]
+Unif$[a,b]$ & $\frac{1}{b-a}$ & $\frac{a+b}{2}$ & $\frac{(b-a)^2}{12}$ & $\frac{e^{tb}-e^{ta}}{t(b-a)}$ \\[3pt]
+Gam($\alpha,\beta$) & $\frac{\beta^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x}$ & $\alpha/\beta$ & $\alpha/\beta^2$ & $\left(\frac{\beta}{\beta-t}\right)^\alpha$ \\[3pt]
+$\chi^2_d$ & $= \text{Gam}(d/2, 1/2)$ & $d$ & $2d$ & $(1{-}2t)^{-d/2}$ \\[3pt]
+$t_n$ & symm, heavy tails & $0$ & $\frac{n}{n-2}$ & --- \\[3pt]
+Beta($\alpha,\beta$) & $\frac{x^{\alpha-1}(1-x)^{\beta-1}}{B(\alpha,\beta)}$ & $\frac{\alpha}{\alpha+\beta}$ & $\frac{\alpha\beta}{(\alpha{+}\beta)^2(\alpha{+}\beta{+}1)}$ & --- \\
+\bottomrule
+\end{tabular}
+
+\subsection{Gamma Function}
+
+$\Gamma(\alpha) = \int_0^\infty x^{\alpha-1}e^{-x}\,dx$
+
+$\Gamma(\alpha{+}1) = \alpha\,\Gamma(\alpha)$ \qquad $\Gamma(n) = (n{-}1)!$ \qquad $\Gamma(1/2) = \sqrt{\pi}$
+
+\subsection{Reproductive Properties (Indep.\ Sums)}
+
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{$X_i$ iid from} & $\sum X_i \sim$ \\
+\midrule
+Ber($p$) & Bin($n, p$) \\
+Bin($n_i, p$) & Bin($\sum n_i, p$) \\
+Gam($\alpha_i, \beta$) same $\beta$ & Gam($\sum\alpha_i, \beta$) \\
+$\chi^2_{m_i}$ & $\chi^2_{\sum m_i}$ \\
+Poi($\lambda_i$) & Poi($\sum\lambda_i$) \\
+$N(\mu_i, \sigma_i^2)$ & $N(\sum\mu_i, \sum\sigma_i^2)$ \\
+\bottomrule
+\end{tabular}
+
+\subsection{Normal Properties}
+
+$X \sim N(\mu,\sigma^2) \Rightarrow aX+b \sim N(a\mu+b,\; a^2\sigma^2)$
+
+$\bar X_n \sim N(\mu, \sigma^2/n)$ for iid normal sample.
+
+CDF: $\Phi(z)$, \quad symmetry: $1-\Phi(x) = \Phi(-x)$
+
+Key values: $z_{0.025}=1.96$, \quad $z_{0.05}=1.645$, \quad $z_{0.005}=2.576$
+
+% ============================================================
+\section{Probability Inequalities}
+
+\textbf{Markov}: $W \ge 0 \;\Rightarrow\; P(W \ge t) \le E(W)/t$
+
+\textbf{Chebyshev}: $P(|Z - EZ| \ge \tau) \le \text{Var}(Z)/\tau^2$
+
+\textbf{On $\bar X$}: $P(|\bar X - \mu| \ge \tau) \le \sigma^2/(n\tau^2)$
+
+Sample size: want $P(|\bar X - \mu| \ge \varepsilon) \le \delta$, need $n \ge \sigma^2/(\varepsilon^2\delta)$.
+
+% ============================================================
+\section{Convergence}
+
+\textbf{In probability} ($Z_n \xrightarrow{P} Z$): $P(|Z_n - Z| > \varepsilon) \to 0$ for all $\varepsilon > 0$.
+
+\textbf{In distribution} ($Z_n \xrightarrow{d} Z$): $F_n(u) \to F(u)$ at all continuity points of $F$.
+
+Conv in prob $\Rightarrow$ conv in dist. Converse is FALSE in general (TRUE if limit is a constant).
+
+\textbf{WLLN}: $X_i$ iid, $E|X_1|<\infty \;\Rightarrow\; \bar X_n \xrightarrow{P} \mu$.
+
+Conditions: iid, finite mean. Proof uses Chebyshev (if variance exists).
+
+\textbf{SLLN}: $P(\lim \bar X_n = \mu) = 1$ \quad (almost sure convergence, STRONGER).
+
+\textbf{CLT}: $X_i$ iid, mean $\mu$, $\sigma^2<\infty$:
+$$\frac{\sqrt{n}(\bar X_n - \mu)}{\sigma} \xrightarrow{d} N(0,1)$$
+
+Conditions: iid, finite variance. Gives APPROXIMATE dist for large $n$. Does NOT require normality of $X_i$.
+
+\textbf{Continuous Mapping Theorem}:
+\begin{itemize}
+\item $Z_n \xrightarrow{P} b$, $g$ cts at $b$ $\Rightarrow$ $g(Z_n) \xrightarrow{P} g(b)$
+\item $Z_n \xrightarrow{d} Z$, $g$ continuous $\Rightarrow$ $g(Z_n) \xrightarrow{d} g(Z)$
+\end{itemize}
+
+\textbf{Slutsky}: $X_n \xrightarrow{d} X$, $Y_n \xrightarrow{P} c$ (constant) $\Rightarrow$ $X_nY_n \xrightarrow{d} cX$ and $X_n+Y_n \xrightarrow{d} X+c$.
+
+% ============================================================
+\section{Delta Method}
+
+If $\sqrt{n}(Z_n - \theta)/\sigma \xrightarrow{d} N(0,1)$ and $g'(\theta) \ne 0$:
+$$\sqrt{n}\big(g(Z_n) - g(\theta)\big) \xrightarrow{d} N\!\left(0,\; \sigma^2[g'(\theta)]^2\right)$$
+
+Requires $g'(\theta) \ne 0$. If $g'(\theta)=0$, delta method breaks (need second-order).
+
+Recipe: derivative of $g$, evaluate at $\theta$, square it, multiply by original variance.
+
+% ============================================================
+\section{Method of Moments (MOM)}
+
+Set population moments $=$ sample moments, solve:
+\begin{enumerate}
+\item $\mu_j(\theta) = E(X^j)$ for $j = 1,\ldots,k$ parameters
+\item $\hat\mu_j = \frac{1}{n}\sum X_i^j$
+\item Solve $\mu_j(\theta) = \hat\mu_j$
+\end{enumerate}
+
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Dist} & \textbf{MOM Estimator} \\
+\midrule
+Ber($\theta$), Poi($\lambda$) & $\hat\theta = \bar X$ \\
+$N(\mu,\sigma^2)$ & $\hat\mu = \bar X$, \; $\hat\sigma^2 = \frac{1}{n}\sum(X_i-\bar X)^2$ \\
+Exp($\lambda$) & $\hat\lambda = 1/\bar X$ \\
+Gam($\alpha,\beta$) & use $\bar X = \alpha/\beta$, \; $\hat\mu_2 - \bar X^2 = \alpha/\beta^2$ \\
+\bottomrule
+\end{tabular}
+
+MOM is consistent (LLN + CMT). Not unique. Not always optimal.
+
+% ============================================================
+\section{Maximum Likelihood Estimation (MLE)}
+
+$L(\theta) = \prod f(X_i,\theta)$, \qquad $\ell(\theta) = \sum\log f(X_i,\theta)$
+
+Set $\ell'(\theta) = 0$, verify $\ell''(\hat\theta) < 0$.
+
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Dist} & \textbf{MLE} \\
+\midrule
+Ber($\theta$), Poi($\theta$) & $\hat\theta = \bar X$ \\
+$N(\mu,\sigma^2)$ & $\hat\mu = \bar X$, \; $\hat\sigma^2 = \frac{1}{n}\sum(X_i{-}\bar X)^2$ \textbf{(BIASED)} \\
+Exp($\theta$) rate & $\hat\theta = 1/\bar X$ \\
+Unif$[0,\theta]$ & $\hat\theta = X_{(n)} = \max(X_i)$ (by inspection) \\
+Unif$[\theta,\theta{+}1]$ & any $\theta \in [X_{(n)}{-}1,\; X_{(1)}]$ (NOT unique) \\
+\bottomrule
+\end{tabular}
+
+\textbf{Properties}:
+\begin{itemize}
+\item \textbf{Invariance}: $g(\hat\theta)$ is MLE of $g(\theta)$ for any function $g$
+\item \textbf{Consistent}: $\hat\theta_n \xrightarrow{P} \theta$ (under regularity conditions)
+\item \textbf{Caution}: MLE may NOT exist, NOT be unique, NOT be unbiased
+\end{itemize}
+
+\textbf{When calculus fails}: Unif$[0,\theta]$: $L(\theta) = \theta^{-n}\,I(\theta \ge X_{(n)})$ --- decreasing in $\theta$, so max at $\hat\theta = X_{(n)}$.
+
+% ============================================================
+\section{MSE \& Comparing Estimators}
+
+$$\text{MSE}(T_n) = \text{Var}(T_n) + [\text{bias}(T_n)]^2$$
+
+For unbiased estimator: MSE $=$ Var.
+
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Estimator} & \textbf{Unbiased?} & \textbf{MVUE?} & \textbf{Notes} \\
+\midrule
+$\bar X$ for $\mu$ & Yes (always) & Yes (Normal) & $\text{Var} = \sigma^2/n$ \\[2pt]
+$\frac{1}{n}\sum(X_i{-}\bar X)^2$ & No (for $\sigma^2$) & No & $E = \frac{n-1}{n}\sigma^2$ \\[2pt]
+$s^2 = \frac{1}{n-1}\sum(X_i{-}\bar X)^2$ & Yes ($\sigma^2$) & Yes (Normal) & Bessel's \\[2pt]
+$2\bar X$ for Unif$[0,\theta]$ & Yes & No & MSE $= \theta^2/(3n)$ \\[2pt]
+$X_{(n)}$ for Unif$[0,\theta]$ & \textbf{No} & No & MSE $\ll 2\bar X$ \\[2pt]
+$(1{+}1/n)X_{(n)}$ & Yes & Yes (MVUE) & MSE $= \frac{\theta^2}{n(n+2)}$ \\
+\bottomrule
+\end{tabular}
+
+\medskip
+
+Biased can beat unbiased (bias-variance tradeoff).
+
+Unbiased estimators don't always exist: $\theta/(1{-}\theta)$ for Ber($\theta$) has none.
+
+No universally best estimator in general.
+
+% ============================================================
+\section{Sufficient Statistics}
+
+$T$ is sufficient for $\theta$ $\;\Leftrightarrow\;$ $f(\mathbf{x},\theta) = u(\mathbf{x}) \cdot v(r(\mathbf{x}), \theta)$ \quad \textbf{(Factorization Criterion)}
+
+\begin{itemize}
+\item $u(\mathbf{x})$: depends on data ONLY (not $\theta$)
+\item $v(r(\mathbf{x}),\theta)$: $\theta$ enters ONLY through $r(\mathbf{x})$
+\end{itemize}
+
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Distribution} & \textbf{Sufficient Statistic} \\
+\midrule
+Poi($\theta$), Ber($\theta$), Exp($\theta$) & $\sum X_i$ \\
+$N(\mu,\sigma^2)$ both unknown & $(\sum X_i, \; \sum X_i^2)$ \\
+$N(\mu, \sigma^2$ known$)$ & $\sum X_i$ \\
+Unif$[0,\theta]$ & $X_{(n)} = \max(X_i)$ \\
+Gam($\alpha$ known, $\beta$) & $\sum X_i$ \\
+Gam($\alpha$, $\beta$ known) & $\prod X_i$ \\
+\bottomrule
+\end{tabular}
+
+\subsection{Rao-Blackwell Theorem}
+
+Given ANY estimator $\delta(X)$ and sufficient statistic $T$:
+$$\delta_0(T) = E[\delta(X) \mid T]$$
+
+Then: $\text{MSE}(\delta_0) \le \text{MSE}(\delta)$ for all $\theta$ (never worse, often strictly better).
+
+$\Rightarrow$ Always condition on sufficient statistics to improve estimators.
+
+% ============================================================
+\section{Bayesian Inference}
+
+$$\text{Posterior} \propto \text{Likelihood} \times \text{Prior}: \quad \xi(\theta|x) \propto f(x|\theta) \cdot \xi(\theta)$$
+
+Bayes est (squared error) $= E[\theta|X]$ (posterior mean).
+
+Bayes est (absolute error) $=$ posterior median.
+
+\subsection{Conjugate Priors}
+
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Likelihood} & \textbf{Conjugate Prior} & \textbf{Posterior} \\
+\midrule
+Ber($\theta$) & Beta($\alpha,\beta$) & Beta($\alpha{+}\sum x_i,\; \beta{+}n{-}\sum x_i$) \\[3pt]
+Poi($\lambda$) & Gam($\alpha,\beta$) & Gam($\alpha{+}\sum x_i,\; \beta{+}n$) \\[3pt]
+$N(\mu,\sigma^2$ known$)$ & $N(\mu_0, v_0^2)$ & $N(\mu_n, v_n^2)$ \\[3pt]
+Exp($\theta$) & Gam($\alpha,\beta$) & Gam($\alpha{+}n,\; \beta{+}\sum x_i$) \\
+\bottomrule
+\end{tabular}
+
+\subsection{Normal--Normal Conjugate ($\sigma^2$ known)}
+
+Prior: $\mu \sim N(\mu_0, v_0^2)$. \quad Data: $X_1,\ldots,X_n$ iid $N(\mu, \sigma^2)$.
+
+Posterior: $\mu|X \sim N(\mu_n, v_n^2)$ where:
+$$\mu_n = \frac{\mu_0/v_0^2 + n\bar X/\sigma^2}{1/v_0^2 + n/\sigma^2}, \qquad v_n^2 = \frac{1}{1/v_0^2 + n/\sigma^2}$$
+
+\begin{itemize}
+\item Posterior mean = weighted average of prior mean and $\bar X$, weighted by \textbf{precisions} ($1/\text{variance}$)
+\item As $n\to\infty$: posterior concentrates around $\bar X$ (data overwhelms prior)
+\item As $v_0^2\to\infty$ (vague prior): posterior $\approx N(\bar X, \sigma^2/n)$
+\end{itemize}
+
+% ============================================================
+\section{Sampling Distributions}
+
+\subsection{Chi-Squared}
+
+$Z \sim N(0,1) \;\Rightarrow\; Z^2 \sim \chi^2_1$.
+
+$Z_1,\ldots,Z_d$ iid $N(0,1) \;\Rightarrow\; \sum Z_i^2 \sim \chi^2_d$.
+
+$\chi^2_d = \text{Gam}(d/2,\; 1/2)$. \quad $E(\chi^2_d) = d$, \quad $\text{Var}(\chi^2_d) = 2d$.
+
+Reproductive: $\sum \chi^2_{m_i} \sim \chi^2_{\sum m_i}$ (independent).
+
+\subsection{Normal Sampling --- CRITICAL RESULTS}
+
+$X_1,\ldots,X_n$ iid $N(\mu,\sigma^2)$:
+
+\begin{enumerate}
+\item $\bar X \sim N(\mu, \;\sigma^2/n)$
+\item $s^2 \sim \dfrac{\sigma^2}{n-1}\,\chi^2_{n-1}$, \quad equivalently $\dfrac{S^2}{\sigma^2} = \dfrac{\sum(X_i-\bar X)^2}{\sigma^2} \sim \chi^2_{n-1}$
+\item $\bar X$ and $s^2$ are \textbf{INDEPENDENT} (Proposition 6.3)
+\end{enumerate}
+
+Independence of $\bar X$ and $s^2$ \textbf{characterizes} normality.
+
+\textbf{Theorem 6.4} (statement only): $Z_i$ iid $N(0,1)$, $A$ orthogonal $\Rightarrow$ $V=AZ$ has $V_i$ iid $N(0,1)$ and $\sum V_i^2 = \sum Z_i^2$.
+
+\subsection{t-Distribution}
+
+$Z \sim N(0,1)$, $V \sim \chi^2_n$, $Z \perp V$:
+$$T = \frac{Z}{\sqrt{V/n}} \sim t_n$$
+
+Properties:
+\begin{itemize}
+\item Symmetric about 0 ($T$ and $-T$ have same distribution)
+\item Heavier tails than $N(0,1)$ for finite $n$
+\item As $n\to\infty$: $t_n \to N(0,1)$ (by WLLN: $V/n \xrightarrow{P} 1$)
+\end{itemize}
+
+\textbf{Theorem 6.5}: $X_i$ iid $N(\mu,\sigma^2)$:
+$$\frac{\sqrt{n}(\bar X - \mu)}{s} \sim t_{n-1}$$
+
+% ============================================================
+\section{Confidence Intervals}
+
+$(A,B)$ is level $1{-}\alpha$ CI if $P_\theta(A \le g(\theta) \le B) \ge 1{-}\alpha$ for all $\theta$.
+
+\subsection{Method of Pivots}
+
+\begin{enumerate}
+\item Construct $\Psi(\text{data}, \theta)$ with known distribution FREE of $\theta$
+\item Find quantiles: $P(q_{\beta_1} \le \Psi \le q_{1-\beta_2}) = 1{-}\alpha$ where $\beta_1+\beta_2=\alpha$
+\item Invert the inequalities to isolate $g(\theta)$
+\end{enumerate}
+
+Equal-tailed ($\beta_1{=}\beta_2{=}\alpha/2$) gives shortest CI for symmetric distributions.
+
+\subsection{Normal Mean CIs}
+
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Case} & \textbf{Pivot} & \textbf{Dist} & \textbf{CI} \\
+\midrule
+$\sigma^2$ known & $\frac{\sqrt{n}(\bar X-\mu)}{\sigma}$ & $N(0,1)$ & $\bar X \pm \frac{\sigma}{\sqrt{n}}z_{\alpha/2}$ \\[6pt]
+$\sigma^2$ unknown & $\frac{\sqrt{n}(\bar X-\mu)}{s}$ & $t_{n-1}$ & $\bar X \pm \frac{s}{\sqrt{n}}t_{n-1,\alpha/2}$ \\[6pt]
+Large $n$, any dist & $\frac{\sqrt{n}(\bar X-\mu)}{s}$ & $\approx N(0,1)$ & $\bar X \pm \frac{s}{\sqrt{n}}z_{\alpha/2}$ \\
+\bottomrule
+\end{tabular}
+
+\subsection{Other CIs}
+
+\textbf{Bernoulli} (large $n$): $\;\hat\theta \pm \sqrt{\dfrac{\hat\theta(1-\hat\theta)}{n-1}}\; z_{\alpha/2}$
+
+\textbf{CI for $\sigma^2$} (normal data): Pivot $(n{-}1)s^2/\sigma^2 \sim \chi^2_{n-1}$.
+$$\text{CI}: \quad \left(\frac{(n-1)s^2}{\chi^2_{n-1,\alpha/2}},\quad \frac{(n-1)s^2}{\chi^2_{n-1,1-\alpha/2}}\right)$$
+
+\subsection{CI Properties}
+
+\begin{itemize}
+\item Width (normal, $\sigma$ known): $2\sigma\, z_{\alpha/2}/\sqrt{n}$
+\item Higher confidence (smaller $\alpha$) $\to$ WIDER CI
+\item Larger $n$ $\to$ NARROWER CI (width $\propto 1/\sqrt{n}$)
+\item $4\times$ sample size $\Rightarrow$ half the CI width
+\item $\alpha = 0 \Rightarrow z_{\alpha/2} = \infty \Rightarrow$ infinitely wide
+\end{itemize}
+
+\subsection{CI Interpretation (Classic T/F Trap!)}
+
+\textbf{CORRECT}: ``We have \emph{confidence} $\gamma$ that $\theta$ lies in $(a,b)$.''
+
+\textbf{WRONG}: ``$\theta$ lies in $(a,b)$ with \emph{probability} $\gamma$.'' --- $\theta$ is FIXED (not random), the interval is random. After observing data, it either contains $\theta$ or it doesn't.
+
+% ============================================================
+\section{Cram\'er-Rao Inequality}
+
+Score: $\dot\ell(x,\theta) = \frac{\partial}{\partial\theta}\log f(x,\theta)$. \quad $E[\dot\ell] = 0$. \quad Fisher info: $I(\theta) = E[\dot\ell^2]$.
+
+For $n$ iid observations: total info $= n\,I(\theta)$.
+
+\subsection{Regularity Conditions (KNOW THESE)}
+
+\textbf{(A.1)} Support $\{x : f(x,\theta) > 0\}$ does NOT depend on $\theta$.
+
+\quad Excludes: Unif$[0,\theta]$, Unif$[\theta,\theta{+}1]$ --- support changes with $\theta$.
+
+\textbf{(A.2)} Can interchange $\frac{\partial}{\partial\theta}$ and $\int$:
+$$\frac{\partial}{\partial\theta}\int W(\mathbf{x})\,f(\mathbf{x},\theta)\,d\mathbf{x} = \int W(\mathbf{x})\,\frac{\partial f}{\partial\theta}(\mathbf{x},\theta)\,d\mathbf{x}$$
+
+\textbf{(A.3)} $\frac{\partial}{\partial\theta}\log f(x,\theta)$ exists for all $x \in A$ and all $\theta \in \Omega$, as a finite quantity.
+
+\subsection{The CRLB}
+
+If $T(\mathbf{X}_n)$ is UNBIASED for $g(\theta)$, and A.1--A.3 hold, and $I(\theta) < \infty$:
+
+$$\boxed{\text{Var}_\theta(T) \;\ge\; \frac{[g'(\theta)]^2}{n\,I(\theta)}}$$
+
+Special case $g(\theta) = \theta$: \quad $\text{Var}(T) \ge 1/(n\,I(\theta))$.
+
+Achieves the bound $\Rightarrow$ \textbf{MVUE} (efficient estimator).
+
+\subsection{Common Fisher Information}
+
+\begin{tabular}{@{}lllll@{}}
+\toprule
+\textbf{Dist} & $f(x,\theta)$ & $\dot\ell(x,\theta)$ & $I(\theta)$ & \textbf{CRLB} \\
+\midrule
+Ber($\theta$) & $\theta^x(1{-}\theta)^{1-x}$ & $\frac{x-\theta}{\theta(1-\theta)}$ & $\frac{1}{\theta(1-\theta)}$ & $\frac{\theta(1-\theta)}{n}$ \\[4pt]
+Poi($\theta$) & $e^{-\theta}\theta^x/x!$ & $x/\theta - 1$ & $1/\theta$ & $\theta/n$ \\[4pt]
+$N(\mu,\sigma^2)$ & normal pdf & $(x{-}\mu)/\sigma^2$ & $1/\sigma^2$ & $\sigma^2/n$ \\[4pt]
+Exp($\theta$) & $\theta e^{-\theta x}$ & $1/\theta - x$ & $1/\theta^2$ & $\theta^2/n$ \\
+\bottomrule
+\end{tabular}
+
+\medskip
+
+$\bar X$ is MVUE for: $\mu$ in Normal, $\theta$ in Bernoulli, $\theta$ in Poisson --- all achieve CRLB.
+
+% ============================================================
+\section{True/False Traps}
+
+\begin{enumerate}
+\item \textbf{F}: ``Conv in dist $\Rightarrow$ conv in prob'' (only true if limit is a constant)
+\item \textbf{F}: ``MLE is always unbiased'' ($\hat\sigma^2$ is biased; $X_{(n)}$ is biased)
+\item \textbf{F}: ``MLE always exists and is unique'' (Unif$[\theta,\theta{+}1]$: not unique)
+\item \textbf{F}: ``Unbiased is always better than biased'' (biased $X_{(n)}$ beats $2\bar X$ for Unif)
+\item \textbf{F}: ``$\theta \in$ CI with prob $1{-}\alpha$'' ($\theta$ is fixed; say ``confidence'')
+\item \textbf{T}: MLE invariance: $g(\hat\theta)$ is MLE of $g(\theta)$
+\item \textbf{T}: MLE is consistent under regularity conditions
+\item \textbf{T}: Rao-Blackwell improves estimators via sufficiency
+\item \textbf{F}: ``Unbiased estimators always exist'' ($\theta/(1{-}\theta)$ for Ber: none)
+\item \textbf{F}: ``CRLB applies to all distributions'' (fails for Uniform --- A.1 violated)
+\item \textbf{T}: $\bar X \perp s^2$ for normal data (Prop 6.3; characterizes normality)
+\item \textbf{F}: ``CLT says $\bar X$ is exactly normal'' (approx only; exact only if $X_i$ are normal)
+\item \textbf{T}: Sufficient stat can be vector-valued ($N$: $(\sum X_i, \sum X_i^2)$)
+\item \textbf{F}: ``Consistent $\Rightarrow$ unbiased'' (can be biased for each finite $n$)
+\item \textbf{T}: As $n\to\infty$, posterior $\to$ true $\theta$ regardless of prior
+\end{enumerate}
+
+% ============================================================
+\section{Computation Recipes}
+
+\begin{enumerate}
+\item \textbf{Find MLE}: Write $L(\theta)$, take log, $\ell'(\theta)=0$, check $\ell''<0$. Uniform: by inspection.
+\item \textbf{Find MOM}: Set $E(X^j) = \frac{1}{n}\sum X_i^j$, solve for parameters.
+\item \textbf{Unbiased?}: Compute $E(\text{est})$, check if $= g(\theta)$ for ALL $\theta$.
+\item \textbf{Sufficient stat}: Write joint pdf, factor as $u(\mathbf{x})\cdot v(r(\mathbf{x}),\theta)$.
+\item \textbf{Compare estimators}: MSE $=$ Var $+$ Bias$^2$ for each, compare across all $\theta$.
+\item \textbf{Show consistency}: Show $\hat\theta_n \xrightarrow{P} \theta$ via LLN, Chebyshev, or CMT.
+\item \textbf{Asymptotic dist}: CLT for $\bar X$, then delta method if transformed.
+\item \textbf{Construct CI}: Pick pivot ($Z$, $t$, or $\chi^2$), find quantiles, invert.
+\item \textbf{Fisher information}: $\dot\ell = \partial/\partial\theta \log f$, then $I(\theta) = E[\dot\ell^2]$.
+\item \textbf{Is it MVUE?}: Check unbiased $+$ Var $=$ CRLB, or use Rao-Blackwell.
+\item \textbf{Find posterior}: Write $\propto$ likelihood $\times$ prior, identify the distribution kernel.
+\item \textbf{Bayes estimator}: Sq.\ error $=$ posterior mean; abs.\ error $=$ posterior median.
+\item \textbf{Interpret CI}: Say ``confidence,'' NOT ``probability.'' $\theta$ is fixed.
+\item \textbf{Rao-Blackwell}: Find sufficient $T$, compute $E[\delta(X)|T]$.
+\item \textbf{Sample size}: Use Chebyshev or CI width formula. $n \ge \sigma^2/(\varepsilon^2\delta)$.
+\end{enumerate}
+
+\end{multicols}
+\end{document}
