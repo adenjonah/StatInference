@@ -481,25 +481,48 @@ Exp($\theta$) & $\theta e^{-\theta x}$ & $1/\theta - x$ & $1/\theta^2$ & $\theta
 $\bar X$ is MVUE for: $\mu$ in Normal, $\theta$ in Bernoulli, $\theta$ in Poisson --- all achieve CRLB.
 
 % ============================================================
-\section{True/False Traps}
+\section{True/False Traps (by Topic)}
 
-\begin{enumerate}
-\item \textbf{F}: ``Conv in dist $\Rightarrow$ conv in prob'' (only true if limit is a constant)
-\item \textbf{F}: ``MLE is always unbiased'' ($\hat\sigma^2$ is biased; $X_{(n)}$ is biased)
-\item \textbf{F}: ``MLE always exists and is unique'' (Unif$[\theta,\theta{+}1]$: not unique)
-\item \textbf{F}: ``Unbiased is always better than biased'' (biased $X_{(n)}$ beats $2\bar X$ for Unif)
-\item \textbf{F}: ``$\theta \in$ CI with prob $1{-}\alpha$'' ($\theta$ is fixed; say ``confidence'')
-\item \textbf{T}: MLE invariance: $g(\hat\theta)$ is MLE of $g(\theta)$
-\item \textbf{T}: MLE is consistent under regularity conditions
-\item \textbf{T}: Rao-Blackwell improves estimators via sufficiency
-\item \textbf{F}: ``Unbiased estimators always exist'' ($\theta/(1{-}\theta)$ for Ber: none)
-\item \textbf{F}: ``CRLB applies to all distributions'' (fails for Uniform --- A.1 violated)
-\item \textbf{T}: $\bar X \perp s^2$ for normal data (Prop 6.3; characterizes normality)
-\item \textbf{F}: ``CLT says $\bar X$ is exactly normal'' (approx only; exact only if $X_i$ are normal)
-\item \textbf{T}: Sufficient stat can be vector-valued ($N$: $(\sum X_i, \sum X_i^2)$)
-\item \textbf{F}: ``Consistent $\Rightarrow$ unbiased'' (can be biased for each finite $n$)
-\item \textbf{T}: As $n\to\infty$, posterior $\to$ true $\theta$ regardless of prior
-\end{enumerate}
+\textbf{Convergence}:
+\textbf{F}: conv in dist $\Rightarrow$ conv in prob (only if limit is constant). \;
+\textbf{F}: CLT says $\bar X$ is exactly normal (approx only). \;
+\textbf{T}: conv in prob $\Rightarrow$ conv in dist.
+
+\textbf{MLE}:
+\textbf{F}: MLE always unbiased ($\hat\sigma^2$, $X_{(n)}$ biased). \;
+\textbf{F}: MLE always exists/unique. \;
+\textbf{T}: MLE invariant: $g(\hat\theta)$ is MLE of $g(\theta)$. \;
+\textbf{T}: MLE consistent (reg.\ conds). \;
+\textbf{T}: MLE asymp.\ normal: $\hat\theta_n \approx N(\theta, 1/(nI(\theta)))$.
+
+\textbf{Estimators}:
+\textbf{F}: unbiased always better (biased $X_{(n)} \ll 2\bar X$ for Unif). \;
+\textbf{F}: consistent $\Rightarrow$ unbiased. \;
+\textbf{F}: unbiased est always exists ($\theta/(1{-}\theta)$ for Ber: none). \;
+\textbf{T}: biased can have lower MSE than any unbiased.
+
+\textbf{Sufficiency \& Info}:
+\textbf{T}: 1-to-1 function of suff.\ stat is sufficient. \;
+\textbf{T}: suff stat can be vector-valued. \;
+\textbf{T}: Rao-Blackwell improves via sufficiency. \;
+\textbf{F}: CRLB applies to all dists (fails for Uniform: A.1).
+
+\textbf{CI}: \textbf{F}: ``$\theta \in$ CI with prob $1{-}\alpha$'' ($\theta$ fixed; say confidence).
+
+\textbf{Normal sampling}: \textbf{T}: $\bar X \perp s^2$ (Prop 6.3). \; \textbf{T}: $t_n \to N(0,1)$.
+
+\textbf{Bayesian}: \textbf{T}: posterior $\to$ true $\theta$ as $n\to\infty$ regardless of prior.
+
+\subsection{Fill-in-the-Blank Quick Lookup}
+
+\begin{tabular}{@{}ll@{}}
+$Z_n \xrightarrow{P} c$, $g$ cts $\Rightarrow g(Z_n)\xrightarrow{P}g(c)$ & Continuous Mapping Thm \\
+$X_n\xrightarrow{d}X$, $Y_n\xrightarrow{P}a$ $\Rightarrow X_nY_n\xrightarrow{d}aX$ & Slutsky's Theorem \\
+Minimizes posterior expected loss & Bayes estimator \\
+Sq.\ error $\to$ post.\ mean; abs.\ error $\to$ post.\ median & \\
+$E[\dot\ell(X,\theta)]$ & $= 0$ (score has mean 0) \\
+$I(\theta) = E[\dot\ell^2] = \text{Var}[\dot\ell]$ & Fisher information \\
+\end{tabular}
 
 % ============================================================
 \section{Computation Recipes}
@@ -521,6 +544,261 @@ $\bar X$ is MVUE for: $\mu$ in Normal, $\theta$ in Bernoulli, $\theta$ in Poisso
 \item \textbf{Rao-Blackwell}: Find sufficient $T$, compute $E[\delta(X)|T]$.
 \item \textbf{Sample size}: Use Chebyshev or CI width formula. $n \ge \sigma^2/(\varepsilon^2\delta)$.
 \end{enumerate}
+
+% ============================================================
+\section{Workflow Guides (Plug-and-Play)}
+
+\subsection{Quick Classifier}
+
+\begin{tabular}{@{}ll@{}}
+``Find $\text{Var}(aX+bY+\cdots)$'' & $\to$ \textbf{W1} \\
+``Bound on $P(\ldots)$'' or ``How large $n$?'' & $\to$ \textbf{W2} \\
+``Asymptotic dist of $g(\bar X)$'' & $\to$ \textbf{W3} \\
+``CDF/dist of $X_{(n)} = \max(X_i)$'' & $\to$ \textbf{W4} \\
+``Find the MLE of $\theta$'' & $\to$ \textbf{W5} \\
+``Find MLE of $g(\theta)$'' & $\to$ \textbf{W6} \\
+``Find MOM'' or ``Show MOM $=$ MLE'' & $\to$ \textbf{W7} \\
+``Show $\hat\theta$ is consistent'' & $\to$ \textbf{W8} \\
+``Evaluate $\int x^a e^{-bx}dx$'' or ``$E[X^k]$'' & $\to$ \textbf{W9} \\
+``Dist of $\sum X_i$'' or ``Find MGF'' & $\to$ \textbf{W10} \\
+Fisher info $\to$ efficiency $\to$ asymp MLE $\to$ CI & $\to$ \textbf{W11} \\
+``Margin of error $1/k$ as large'' & $\to$ \textbf{W12} \\
+``Show $T$ sufficient via conditional dist'' & $\to$ \textbf{W13} \\
+\end{tabular}
+
+% ------------------------------------------------------------
+\subsection{W1: Variance of Linear Combinations}
+
+\textbf{Trigger}: Find $\text{Var}(a_1X_1 + a_2X_2 + \cdots + c)$
+
+\textbf{Formula}:
+$$\text{Var}\!\left(\sum a_iX_i + c\right) = \sum_i a_i^2\text{Var}(X_i) + 2\!\!\sum_{i<j} a_ia_j\text{Cov}(X_i,X_j)$$
+
+\textbf{Steps}: (1) Drop constants. (2) List coefficients $a_i$ \emph{with signs}. (3) Square each $\times$ Var. (4) Cross terms: $2a_ia_j\text{Cov}$. (5) Sum.
+
+\textbf{Check}: Var $\ge 0$. Negative $\Rightarrow$ sign error in cross terms.
+
+% ------------------------------------------------------------
+\subsection{W2: Probability Bounds \& Sample Size}
+
+\textbf{Markov} ($W\ge 0$): $P(W\ge t) \le E(W)/t$. Use when only mean known.
+
+\textbf{Chebyshev}: $P(|Z-EZ|\ge \tau) \le \text{Var}(Z)/\tau^2$. Use when variance known.
+
+\textbf{Higher moment}: $P(|X-\mu|\ge t) \le E|X-\mu|^k / t^k$. Use when $\beta_k$ given.
+
+\textbf{Sample size via Chebyshev}: Want $P(|\bar X - \mu|\ge\varepsilon)\le\delta$.
+$$\frac{\sigma^2}{n\varepsilon^2}\le\delta \;\Longrightarrow\; \boxed{n \ge \frac{\sigma^2}{\varepsilon^2\delta}}$$
+
+\textbf{Conv in prob via Markov}: Show $E(X_n)\to 0 \;\Rightarrow\; P(X_n\ge\varepsilon)\le E(X_n)/\varepsilon\to 0$.
+
+% ------------------------------------------------------------
+\subsection{W3: Delta Method}
+
+\textbf{Trigger}: Asymptotic distribution of $g(Z_n)$ where $\sqrt{n}(Z_n-\theta)/\sigma \xrightarrow{d} N(0,1)$.
+
+\textbf{Standard} ($g'(\theta)\ne 0$):
+\begin{enumerate}
+\item Identify $Z_n$, its asymptotic mean $\theta$, and asymptotic variance $\sigma^2/n$
+\item Compute $g'(\theta)$; verify $g'(\theta)\ne 0$
+\item Answer: $g(Z_n) \sim N\!\big(g(\theta),\; (\sigma^2/n)[g'(\theta)]^2\big)$
+\end{enumerate}
+
+\textbf{Second-order} ($g'(\theta)=0$): Standard gives degenerate limit.
+
+If $\sqrt{n}\,Z_n \xrightarrow{d} N(0,\sigma^2)$, then $n\,Z_n^2 = (\sqrt{n}\,Z_n)^2 \xrightarrow{d} \sigma^2\chi^2_1$ by CMT.
+
+More generally: $n(g(Z_n)-g(\theta)) \xrightarrow{d} \tfrac{\sigma^2 g''(\theta)}{2}\,\chi^2_1$.
+
+% ------------------------------------------------------------
+\subsection{W4: Order Statistics}
+
+\textbf{CDF of max}: $P(X_{(n)}\le y) = [F_X(y)]^n$
+
+\textbf{Convergence}: Let $Z_n = n(X_{(n)}-\theta)$.
+$$P(Z_n\le z) = \left[F_X\!\left(\theta + \tfrac{z}{n}\right)\right]^n \;\xrightarrow{n\to\infty}\; e^{z\,f(\theta)}$$
+(using $(1+a/n)^n\to e^a$). Rate is $n$, not $\sqrt{n}$.
+
+% ------------------------------------------------------------
+\subsection{W5: MLE Computation}
+
+\textbf{Step 0}: Is support $\theta$-dependent? Yes $\to$ inspection. No $\to$ calculus.
+
+\textbf{Calculus path --- step by step}:
+
+\textbf{1.\ Likelihood}: $L(\theta) = \prod f(x_i|\theta)$. Key: $\prod\theta = \theta^n$, \; $\prod e^{-\theta x_i} = e^{-\theta\sum x_i}$.
+
+\textbf{2.\ Log-likelihood}: $\ell(\theta) = \sum\log f(x_i|\theta)$. Drop terms not involving $\theta$.
+
+Key: $\log(\theta^n) = n\log\theta$, \; $\log(e^{-n\theta}) = -n\theta$.
+
+\textbf{3.\ Differentiate}: $\frac{d}{d\theta}[n\log\theta] = n/\theta$, \; $\frac{d}{d\theta}[-n\theta] = -n$, \; $\frac{d}{d\theta}[(\sum x_i)\log\theta] = \sum x_i/\theta$.
+
+\textbf{4.\ Set $\ell'(\theta) = 0$, solve}: Pattern is $n/\theta - (\text{sum}) = 0$.
+
+\textbf{5.\ Verify}: $\ell''(\hat\theta) < 0$ (common: $-n/\theta^2 < 0$ $\checkmark$).
+
+\medskip
+
+\textbf{Exp($\beta$)}: $\ell = n\log\beta - \beta\sum x_i$. $\;\ell' = n/\beta - \sum x_i = 0$. $\;\hat\beta = 1/\bar X$.
+
+\textbf{Ber($\theta$)}: $\ell = (\sum x_i)\log\theta + (n{-}\sum x_i)\log(1{-}\theta)$. $\;\ell' = \sum x_i/\theta - (n{-}\sum x_i)/(1{-}\theta) = 0$. $\;\hat\theta = \bar X$.
+
+\textbf{Power} $f = \theta x^{\theta-1}$: $\ell = n\log\theta + (\theta{-}1)\sum\log x_i$. $\;\ell' = n/\theta + \sum\log x_i = 0$. $\;\hat\theta = -n/\sum\log x_i$.
+
+\medskip
+
+\textbf{Inspection} (Uniform): $L(\theta) = \theta^{-n}I(\theta\ge X_{(n)})$, decreasing $\Rightarrow$ $\hat\theta = X_{(n)}$.
+
+\textbf{Restricted domain}: Find unrestricted MLE. If outside domain, pick closest boundary.
+
+% ------------------------------------------------------------
+\subsection{W6: MLE Invariance}
+
+\textbf{Rule}: $\hat\theta$ is MLE of $\theta$ $\;\Rightarrow\;$ $g(\hat\theta)$ is MLE of $g(\theta)$.
+
+Just plug $\hat\theta$ into $g$.
+
+Examples: MLE of median $= ({\log 2})/{\hat\beta}$. \; MLE of $\theta^2 = \hat\theta^2$. \; MLE of $P(X>c) = e^{-c\hat\beta}$.
+
+% ------------------------------------------------------------
+\subsection{W7: MOM (\& MOM $=$ MLE)}
+
+\begin{enumerate}
+\item Population moments: $\mu_1 = E(X)$, $\mu_2 = E(X^2)$
+\item Sample moments: $\hat\mu_1 = \bar X$, $\hat\mu_2 = \frac{1}{n}\sum X_i^2$
+\item Set $\mu_k(\theta) = \hat\mu_k$, solve
+\end{enumerate}
+
+MOM $=$ MLE for: Ber, Poi, Exp, Normal. NOT for Gamma (MLE needs numerics).
+
+% ------------------------------------------------------------
+\subsection{W8: Consistency Proofs}
+
+\textbf{Given}: estimator $\hat\theta_n$ and distribution (so you know $E(X)$). \textbf{Write 3 lines}:
+
+\textbf{LLN + CMT template} (use this 90\% of the time):
+
+Line 1: ``By WLLN, $\bar X_n \xrightarrow{P} E(X) = $ [mean].''
+
+Line 2: ``Let $g(x) = $ [function s.t.\ $g(\bar X) = \hat\theta$]. $g$ is continuous at $x=$ [mean].''
+
+Line 3: ``By CMT, $g(\bar X_n) \xrightarrow{P} g(\text{mean}) = \theta$. $\square$''
+
+\textbf{How to find $g$}: $\hat\theta = 1/\bar X \Rightarrow g(x)=1/x$. \; $\hat\theta = \bar X^2 \Rightarrow g(x)=x^2$.
+
+\medskip
+
+\textbf{Exp}$(\beta)$, $\hat\beta=1/\bar X$: WLLN $\bar X\xrightarrow{P}1/\beta$; $g(x)=1/x$ cts; CMT $\Rightarrow 1/\bar X\xrightarrow{P}\beta$.
+
+\textbf{Any dist}, $\hat\theta=\bar X^2$: WLLN $\bar X\xrightarrow{P}\mu$; $g(x)=x^2$ cts; CMT $\Rightarrow \bar X^2\xrightarrow{P}\mu^2$.
+
+\medskip
+
+\textbf{MSE method} (when they give you $\text{Var}(\hat\theta)$): show bias $\to 0$ and Var $\to 0$, then MSE $\to 0 \Rightarrow \hat\theta_n\xrightarrow{P}\theta$.
+
+% ------------------------------------------------------------
+\subsection{W9: Gamma Integrals \& $E[X^k]$}
+
+\textbf{Master formula}: $\displaystyle\int_0^\infty x^{\alpha-1}e^{-\beta x}\,dx = \frac{\Gamma(\alpha)}{\beta^\alpha}$
+
+Match your integral to this form. Read off $\alpha = \text{power}+1$, $\beta = \text{coeff in exponent}$.
+
+\textbf{$E[X^k]$ for $X\sim\text{Gam}(\alpha,\beta)$}:
+$$E[X^k] = \frac{\Gamma(\alpha+k)}{\beta^k\,\Gamma(\alpha)} = \frac{\alpha(\alpha{+}1)\cdots(\alpha{+}k{-}1)}{\beta^k}$$
+
+Key: $\Gamma(n)=(n{-}1)!$, \; $\Gamma(1/2)=\sqrt\pi$, \; $\Gamma(\alpha{+}1)=\alpha\,\Gamma(\alpha)$.
+
+% ------------------------------------------------------------
+\subsection{W10: MGF Products \& Sampling Dists}
+
+\textbf{Sum of independents}: $M_{\sum X_i}(t) = \prod M_{X_i}(t)$. For iid: $[M_X(t)]^n$.
+
+\textbf{Recognize MGF}:
+$(1{-}p{+}pe^t)^n \to \text{Bin}$, \;
+$e^{\lambda(e^t-1)} \to \text{Poi}$, \;
+$(\beta/(\beta{-}t))^\alpha \to \text{Gam}$
+
+\textbf{Building a $t$-statistic}:
+\begin{enumerate}
+\item Find $Z\sim N(0,1)$ (normalized sum)
+\item Find independent $V\sim\chi^2_m$ (sum of squared normals)
+\item $T = Z/\sqrt{V/m} \sim t_m$
+\end{enumerate}
+
+\textbf{Key facts}: $Z^2\sim\chi^2_1$. \; $(n{-}1)s^2/\sigma^2\sim\chi^2_{n-1}$. \; $\sqrt{n}(\bar X{-}\mu)/s \sim t_{n-1}$.
+
+% ------------------------------------------------------------
+\subsection{W11: Full Estimation Pipeline}
+
+\textbf{Given}: distribution $f(x|\theta)$, sample size $n$. \textbf{$\theta$ and $n$ stay variables.}
+
+\textbf{(a) Fisher info} --- compute score, square it, take expectation:
+
+$\log f \;\to\; \dot\ell = \partial/\partial\theta\log f \;\to\; I_1(\theta) = E[\dot\ell^2] = \text{Var}(\dot\ell)$
+
+$I_n(\theta) = n\,I_1(\theta)$
+
+\begin{tabular}{@{}llll@{}}
+\textbf{Dist} & $\dot\ell$ & $I_1(\theta)$ & $I_n(\theta)$ \\
+\midrule
+Poi($\theta$) & $(x{-}\theta)/\theta$ & $1/\theta$ & $n/\theta$ \\
+Exp($\theta$) & $1/\theta - x$ & $1/\theta^2$ & $n/\theta^2$ \\
+Ber($\theta$) & $(x{-}\theta)/[\theta(1{-}\theta)]$ & $1/[\theta(1{-}\theta)]$ & $n/[\theta(1{-}\theta)]$ \\
+$N(\mu,\sigma^2)$ & $(x{-}\mu)/\sigma^2$ & $1/\sigma^2$ & $n/\sigma^2$ \\
+\end{tabular}
+
+\textbf{(b) Efficiency}: Exam gives $T$ and $\text{Var}(T)$. Compare to CRLB $= 1/(nI_1)$.
+
+$\text{Var}(T) = $ CRLB $\Rightarrow$ efficient. \; $\text{Var}(T) > $ CRLB $\Rightarrow$ not efficient.
+
+\textbf{(c) Asymp MLE}: $\hat\theta_n \sim_{\text{approx}} N(\theta,\; 1/(nI_1(\theta)))$. Just plug in $I_1$.
+
+Poi: $N(\theta, \theta/n)$. Exp: $N(\theta, \theta^2/n)$. Ber: $N(\theta, \theta(1{-}\theta)/n)$.
+
+\textbf{(d) CI}: Plug $\hat\theta$ for $\theta$: $\;\hat\theta \pm z_{\alpha/2}\sqrt{1/(n\,I_1(\hat\theta))}$.
+
+Exp: $1/\bar X \pm z_{\alpha/2}\cdot(1/\bar X)/\sqrt{n}$. \; Poi: $\bar X \pm z_{\alpha/2}\sqrt{\bar X/n}$.
+
+% ------------------------------------------------------------
+\subsection{W12: CI Width Scaling}
+
+CI width $\propto 1/\sqrt{n}$. To cut margin of error by factor $k$: $\boxed{n_{\text{new}} = k^2 \cdot n_{\text{old}}}$
+
+Ex: margin $1/3$ as large $\Rightarrow n_{\text{new}} = 9 \cdot n_{\text{old}}$.
+
+\textbf{Sample size for target margin $E$} (proportion): $n \ge z_{\alpha/2}^2\,\hat p(1{-}\hat p)/E^2$.
+
+Conservative ($\hat p = 0.5$): $n \ge z_{\alpha/2}^2/(4E^2)$.
+
+\textbf{Via Chebyshev}: $P(|\bar X - \mu|\le k\sigma) \ge 1-\delta$ $\;\Rightarrow\;$ $n \ge 1/(k^2\delta)$.
+
+% ------------------------------------------------------------
+\subsection{W13: Sufficiency (Two Methods)}
+
+\textbf{Given}: distribution $f(x|\theta)$ and statistic $T$. \textbf{You need}: distribution of $T$ for Method B.
+
+\textbf{Method A: Factorization} (default, faster):
+
+Write joint $f(\mathbf{x};\theta) = \underbrace{[\text{no }\theta]}_{u(\mathbf{x})} \cdot \underbrace{[\theta\text{ only thru }T]}_{v(T,\theta)}$. Done.
+
+Poi: $\frac{e^{-n\theta}\theta^{\sum x_i}}{\prod x_i!} = \frac{1}{\prod x_i!}\cdot e^{-n\theta}\theta^{\sum x_i}$. $T=\sum X_i$. $\checkmark$
+
+Exp: $\theta^n e^{-\theta\sum x_i} = 1 \cdot \theta^n e^{-\theta\sum x_i}$. $T=\sum X_i$. $\checkmark$
+
+$N(\mu,\sigma^2$ known): $\propto \exp\!\big(\frac{\mu\sum x_i}{\sigma^2} - \frac{n\mu^2}{2\sigma^2}\big)\cdot\exp\!\big(\frac{-\sum x_i^2}{2\sigma^2}\big)$. $T=\sum X_i$. $\checkmark$
+
+\medskip
+
+\textbf{Method B: Conditional} (when problem says ``using the definition''):
+
+Compute $f(\mathbf{x}|T{=}t) = f(\mathbf{x};\theta)\,/\,P(T{=}t;\theta)$. All $\theta$ must cancel.
+
+\textbf{Need to know $P(T{=}t)$}: Ber $\Rightarrow T\sim$ Bin$(n,\theta)$; Poi $\Rightarrow T\sim$ Poi$(n\theta)$.
+
+Ber: $\frac{\theta^t(1-\theta)^{n-t}}{\binom{n}{t}\theta^t(1-\theta)^{n-t}} = \frac{1}{\binom{n}{t}}$. No $\theta$. $\checkmark$
+
+Poi: $\frac{e^{-n\theta}\theta^t/\prod x_i!}{e^{-n\theta}(n\theta)^t/t!} = \frac{t!}{n^t\prod x_i!}$. No $\theta$. $\checkmark$
 
 \end{multicols}
 \end{document}

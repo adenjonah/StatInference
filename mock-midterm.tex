@@ -1,0 +1,411 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{framed}
+\usepackage{titlesec}
+
+\titleformat{\section}{\large\bfseries}{}{0em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{}{0em}{}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\newcounter{qnum}
+\newcommand{\question}[2]{\stepcounter{qnum}\subsection*{Question \theqnum \quad (#1 points) \hfill #2}}
+
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries STAT GU4204 Section 001 --- Mock Midterm Exam}\\[6pt]
+{\large Spring 2026 \hspace{2cm} Total: 100 points \hspace{2cm} Time: 55 minutes}\\[4pt]
+\end{center}
+
+\medskip
+
+Name: \underline{\hspace{3in}} \hspace{1cm} UNI: \underline{\hspace{1.5in}}
+
+\medskip
+
+\textbf{Instructions:} Show work to get full credit. You do NOT need to simplify your answers.
+
+\medskip
+
+You can use, throughout the exam, any of the following values if needed:
+
+$$z_{0.025} = 1.96 \qquad z_{0.05} = 1.645 \qquad z_{0.005} = 2.576 \qquad t_{0.025,\,24} = 2.064 \qquad t_{0.025,\,15} = 2.131$$
+
+\bigskip
+\hrule
+\bigskip
+
+% ====================================================================
+% FILL IN THE BLANK
+% ====================================================================
+\section{Part A: Fill in the Blank \hfill (10 points, 2 points each)}
+
+\question{2}{Fill in the Blank}
+A function $T = \varphi(X_1, \ldots, X_n)$ that depends only on the observed data and contains no unknown parameters is called a \underline{\hspace{2.5in}}.
+
+\question{2}{Fill in the Blank}
+The decomposition $\text{MSE}(\hat\theta) = \text{Var}(\hat\theta) + [\text{bias}(\hat\theta)]^2$ is called the \underline{\hspace{2.5in}} decomposition.
+
+\question{2}{Fill in the Blank}
+If $X_n \xrightarrow{d} X$ and $Y_n \xrightarrow{P} a$ (a constant), then $X_n Y_n \xrightarrow{d} aX$. This result is known as \underline{\hspace{2.5in}} theorem.
+
+\question{2}{Fill in the Blank}
+A prior distribution such that the posterior distribution belongs to the same parametric family is called a \underline{\hspace{2.5in}} prior.
+
+\question{2}{Fill in the Blank}
+An unbiased estimator whose variance equals the Cram\'er-Rao lower bound is called an \underline{\hspace{2.5in}} estimator.
+
+\bigskip
+\hrule
+\bigskip
+
+% ====================================================================
+% TRUE / FALSE
+% ====================================================================
+\section{Part B: True or False \hfill (12 points, 2 points each)}
+\textit{Circle T or F. No justification required.}
+
+\question{2}{True/False}
+\textbf{T \quad F} \quad If $\hat\theta_n$ is a consistent estimator of $\theta$, then $\hat\theta_n$ is unbiased for $\theta$ for every $n$.
+
+\question{2}{True/False}
+\textbf{T \quad F} \quad Any one-to-one function of a sufficient statistic is also a sufficient statistic.
+
+\question{2}{True/False}
+\textbf{T \quad F} \quad If $(3.1,\, 5.7)$ is a 95\% confidence interval for $\mu$, then $P(\mu \in (3.1, 5.7)) = 0.95$.
+
+\question{2}{True/False}
+\textbf{T \quad F} \quad For $X_1, \ldots, X_n$ iid $N(\mu, \sigma^2)$, the Central Limit Theorem guarantees that $\bar X_n$ has an exact normal distribution.
+
+\question{2}{True/False}
+\textbf{T \quad F} \quad The Cram\'er-Rao lower bound can be applied when $X_1, \ldots, X_n$ are iid Uniform$[0, \theta]$.
+
+\question{2}{True/False}
+\textbf{T \quad F} \quad For $X_1, \ldots, X_n$ iid $N(\mu, \sigma^2)$, the sample mean $\bar X$ and the sample variance $s^2$ are independent random variables.
+
+\bigskip
+\hrule
+\bigskip
+
+% ====================================================================
+% MULTIPLE CHOICE
+% ====================================================================
+\section{Part C: Multiple Choice \hfill (9 points, 3 points each)}
+
+\question{3}{Multiple Choice}
+Let $X_1, \ldots, X_n$ be iid Poisson$(\theta)$. The maximum likelihood estimator of $\theta$ is:
+
+\begin{enumerate}[label=(\alph*)]
+\item $\displaystyle\frac{1}{n}\sum_{i=1}^n X_i^2$
+\item $\displaystyle\frac{1}{\bar X_n}$
+\item $\displaystyle\bar X_n$
+\item $\displaystyle\frac{n-1}{n}\bar X_n$
+\end{enumerate}
+
+\question{3}{Multiple Choice}
+Let $X_1, \ldots, X_n$ be iid from a distribution with mean $\mu$ and finite variance $\sigma^2$. The Weak Law of Large Numbers requires which conditions?
+
+\begin{enumerate}[label=(\alph*)]
+\item iid and finite mean only
+\item iid and finite variance only
+\item iid, finite mean, and normality of $X_i$
+\item iid and finite mean (finite variance is sufficient but not necessary for the WLLN)
+\end{enumerate}
+
+\question{3}{Multiple Choice}
+Which of the following is a sufficient statistic for $\theta$ when $X_1, \ldots, X_n$ are iid Exponential$(\theta)$ with pdf $f(x;\theta) = \theta e^{-\theta x}$ for $x > 0$?
+
+\begin{enumerate}[label=(\alph*)]
+\item $X_{(n)} = \max(X_1, \ldots, X_n)$
+\item $X_{(1)} = \min(X_1, \ldots, X_n)$
+\item $\displaystyle\sum_{i=1}^n X_i$
+\item $\displaystyle\prod_{i=1}^n X_i$
+\end{enumerate}
+
+\bigskip
+\hrule
+\bigskip
+
+% ====================================================================
+% SHORT ANSWER / LISTING
+% ====================================================================
+\section{Part D: Short Answer \hfill (9 points)}
+
+\question{3}{Listing}
+State the three regularity conditions (A.1, A.2, A.3) required for the Cram\'er-Rao lower bound to hold.
+
+\vspace{2.5in}
+
+\question{3}{Short Answer}
+Explain, in one or two sentences, why a confidence interval should be interpreted using the word ``confidence'' and not ``probability.'' What is the conceptual error in saying ``$\theta$ lies in the interval with probability $0.95$''?
+
+\vspace{1.5in}
+
+\question{3}{Short Answer}
+State the Central Limit Theorem precisely. Be sure to include all conditions.
+
+\vspace{1.5in}
+
+\bigskip
+\hrule
+\bigskip
+
+% ====================================================================
+% COMPUTATIONAL
+% ====================================================================
+\section{Part E: Computational Problems \hfill (60 points)}
+
+\question{15}{MLE, Bias, and Sufficiency}
+Let $X_1, X_2, \ldots, X_n$ be a random sample from a Poisson distribution with probability mass function
+$$f(x; \theta) = \frac{e^{-\theta}\,\theta^x}{x!}, \quad x = 0, 1, 2, \ldots$$
+
+\begin{enumerate}[label=(\alph*)]
+\item (4 points) Find the maximum likelihood estimator $\hat\theta$ of $\theta$.
+\item (3 points) Is $\hat\theta$ unbiased for $\theta$? Justify your answer.
+\item (4 points) Using the factorization criterion, show that $T = \sum_{i=1}^n X_i$ is a sufficient statistic for $\theta$.
+\item (4 points) Find the Fisher information $I_n(\theta)$ in the sample. Is $\hat\theta$ an efficient estimator of $\theta$?
+\end{enumerate}
+
+\newpage
+
+\question{12}{Delta Method}
+Let $X_1, X_2, \ldots, X_n$ be a random sample from a distribution with mean $\theta > 0$ and variance $\sigma^2$.
+
+\begin{enumerate}[label=(\alph*)]
+\item (4 points) State the asymptotic distribution of $\bar X_n$ (i.e., its approximate distribution for large $n$).
+\item (8 points) Using the delta method, determine the asymptotic distribution of $g(\bar X_n) = 1/\bar X_n$ for large $n$. Clearly state the mean and variance of the asymptotic distribution.
+\end{enumerate}
+
+\vspace{3.5in}
+
+\question{12}{Bayesian Inference}
+Let $X_1, X_2, \ldots, X_n$ be a random sample from a Bernoulli$(\theta)$ distribution, where $\theta \in [0,1]$. Suppose the prior distribution on $\theta$ is Beta$(\alpha, \beta)$, with density
+$$\xi(\theta) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\,\Gamma(\beta)}\,\theta^{\alpha - 1}(1-\theta)^{\beta - 1}, \quad 0 < \theta < 1.$$
+
+\begin{enumerate}[label=(\alph*)]
+\item (5 points) Show that the posterior distribution of $\theta$ given the data is Beta$(\alpha + \sum x_i,\; \beta + n - \sum x_i)$.
+\item (3 points) What is the Bayes estimator of $\theta$ under squared error loss?
+\item (4 points) Show that as $n \to \infty$, the Bayes estimator converges to the MLE.
+\end{enumerate}
+
+\newpage
+
+\question{12}{Confidence Intervals and Sampling Distributions}
+Let $X_1, X_2, \ldots, X_{25}$ be a random sample from a $N(\mu, \sigma^2)$ distribution. Suppose $\bar x = 12.4$ and $s^2 = 9$.
+
+\begin{enumerate}[label=(\alph*)]
+\item (3 points) Construct an exact 95\% confidence interval for $\mu$.
+\item (3 points) If $\sigma^2$ were known to equal 9, construct a 95\% confidence interval for $\mu$ and compare its width to the interval in part (a).
+\item (3 points) How large a sample size would be needed (with $\sigma^2 = 9$ known) so that the 95\% confidence interval has a margin of error no greater than 0.5?
+\item (3 points) State the distribution of $\displaystyle\frac{\sum_{i=1}^{25}(X_i - \bar X)^2}{\sigma^2}$ and use it to give a 95\% confidence interval for $\sigma^2$.
+\end{enumerate}
+
+\vspace{4in}
+
+\question{9}{Probability Inequalities and Convergence}
+Let $X_1, X_2, \ldots, X_n$ be iid with mean $\mu$ and variance $\sigma^2$.
+
+\begin{enumerate}[label=(\alph*)]
+\item (3 points) Using Chebyshev's inequality, find an upper bound on $P(|\bar X_n - \mu| \geq 2\sigma)$.
+\item (3 points) How large must $n$ be so that $P(|\bar X_n - \mu| \leq 0.5\sigma) \geq 0.99$?
+\item (3 points) Using the Weak Law of Large Numbers and the Continuous Mapping Theorem, show that $\bar X_n^2 \xrightarrow{P} \mu^2$.
+\end{enumerate}
+
+\bigskip
+\hrule
+\bigskip
+\begin{center}
+\textbf{--- End of Mock Midterm Exam ---}
+\end{center}
+
+\newpage
+
+% ====================================================================
+% ANSWER KEY
+% ====================================================================
+\section*{\color{blue!80!black} Answer Key}
+
+\subsection*{Part A: Fill in the Blank}
+
+\begin{enumerate}
+\item \textbf{statistic}
+\item \textbf{bias-variance}
+\item \textbf{Slutsky's}
+\item \textbf{conjugate}
+\item \textbf{efficient}
+\end{enumerate}
+
+\subsection*{Part B: True or False}
+
+\begin{enumerate}[start=6]
+\item \textbf{F} --- Consistency is a large-$n$ property ($\hat\theta_n \xrightarrow{P} \theta$). An estimator can be biased at every finite $n$ and still be consistent. Example: $X_{(n)}$ for Unif$[0,\theta]$ is biased but consistent.
+\item \textbf{T} --- If $T$ is sufficient for $\theta$ and $h$ is one-to-one, then $h(T)$ is also sufficient. This follows from the factorization criterion: if $f(\mathbf{x},\theta) = u(\mathbf{x})\,v(T(\mathbf{x}),\theta)$, then we can write the same factorization in terms of $h(T)$ since $h$ is invertible.
+\item \textbf{F} --- $\theta$ is a fixed (unknown) constant, not a random variable. After observing the data, the interval either contains $\theta$ or it doesn't. The correct statement uses ``confidence,'' not ``probability.''
+\item \textbf{F} --- For normal data, $\bar X_n$ is \emph{exactly} normal by the reproductive property of the normal distribution (Corollary 5.6.2), not by the CLT. The CLT provides only an approximation and is not needed here.
+\item \textbf{F} --- Regularity condition A.1 requires the support $\{x : f(x,\theta) > 0\}$ to not depend on $\theta$. For Unif$[0,\theta]$, the support is $[0,\theta]$, which changes with $\theta$. Hence CRLB does not apply.
+\item \textbf{T} --- This is Proposition 6.3. Moreover, this independence \emph{characterizes} the normal distribution: $F$ is normal if and only if $\bar X$ and $s^2$ are independent for all $n$.
+\end{enumerate}
+
+\subsection*{Part C: Multiple Choice}
+
+\begin{enumerate}[start=12]
+\item \textbf{(c)} $\bar X_n$. The log-likelihood is $\ell(\theta) = -n\theta + (\sum x_i)\log\theta - \sum\log(x_i!)$. Setting $\ell'(\theta) = -n + \sum x_i/\theta = 0$ gives $\hat\theta = \bar X_n$.
+\item \textbf{(d)} The WLLN requires iid and $E|X_1| < \infty$ (finite mean). Finite variance is sufficient to prove WLLN via Chebyshev, but is not necessary for the result to hold.
+\item \textbf{(c)} $\sum X_i$. Joint pdf: $\prod \theta e^{-\theta x_i} = \theta^n e^{-\theta\sum x_i}$. This factors as $\underbrace{1}_{u(\mathbf{x})} \cdot \underbrace{\theta^n e^{-\theta\sum x_i}}_{v(\sum x_i, \theta)}$, so $\sum X_i$ is sufficient by the factorization criterion.
+\end{enumerate}
+
+\subsection*{Part D: Short Answer}
+
+\begin{enumerate}[start=15]
+\item \textbf{Regularity Conditions}:
+
+\textbf{(A.1)} The support $\{x : f(x,\theta) > 0\}$ does not depend on $\theta$.
+
+\textbf{(A.2)} Differentiation and integration can be interchanged:
+$\frac{\partial}{\partial\theta}\int W(\mathbf{x})\,f(\mathbf{x},\theta)\,d\mathbf{x} = \int W(\mathbf{x})\,\frac{\partial f}{\partial\theta}(\mathbf{x},\theta)\,d\mathbf{x}$.
+
+\textbf{(A.3)} $\frac{\partial}{\partial\theta}\log f(x,\theta)$ exists for all $x$ in the support and all $\theta \in \Omega$, as a finite quantity.
+
+\item \textbf{CI Interpretation}: $\theta$ is a fixed unknown constant, not a random variable. The interval $(A,B)$ is random (it depends on the data). Before observing data, we can say that the random interval will capture $\theta$ with probability $1-\alpha$. But after observing specific values $(3.1, 5.7)$, the interval either contains $\theta$ or it doesn't---there is no more randomness. Hence we say ``confidence,'' not ``probability.''
+
+\item \textbf{CLT}: Let $X_1, X_2, \ldots$ be iid random variables with $E(X_i) = \mu$ and $\text{Var}(X_i) = \sigma^2 < \infty$. Then
+$$\frac{\sqrt{n}(\bar X_n - \mu)}{\sigma} \xrightarrow{d} N(0,1) \quad \text{as } n \to \infty.$$
+Conditions: (1) iid, (2) finite variance.
+\end{enumerate}
+
+\subsection*{Part E: Computational Problems}
+
+\textbf{Question 18 (Poisson MLE, Bias, Sufficiency, Fisher Info)}
+
+\begin{enumerate}[label=(\alph*)]
+\item \textbf{MLE}: $L(\theta) = \prod_{i=1}^n \frac{e^{-\theta}\theta^{x_i}}{x_i!} = \frac{e^{-n\theta}\,\theta^{\sum x_i}}{\prod x_i!}$.
+
+$\ell(\theta) = -n\theta + \left(\sum x_i\right)\log\theta - \sum\log(x_i!)$.
+
+$\ell'(\theta) = -n + \frac{\sum x_i}{\theta} = 0 \;\Longrightarrow\; \boxed{\hat\theta = \bar X_n}$.
+
+$\ell''(\theta) = -\sum x_i/\theta^2 < 0$, confirming maximum.
+
+\item \textbf{Unbiasedness}: $E(\hat\theta) = E(\bar X_n) = E(X_1) = \theta$ for all $\theta$. So $\hat\theta = \bar X_n$ is \textbf{unbiased}.
+
+\item \textbf{Sufficiency}: The joint pmf is
+$$f(\mathbf{x};\theta) = \frac{e^{-n\theta}\,\theta^{\sum x_i}}{\prod x_i!} = \underbrace{\frac{1}{\prod x_i!}}_{u(\mathbf{x})} \cdot \underbrace{e^{-n\theta}\,\theta^{\sum x_i}}_{v(\sum x_i,\;\theta)}$$
+By the factorization criterion, $T = \sum_{i=1}^n X_i$ is sufficient for $\theta$.
+
+\item \textbf{Fisher Information}: For one observation:
+$$\log f(x;\theta) = -\theta + x\log\theta - \log(x!)$$
+$$\dot\ell(x,\theta) = \frac{\partial}{\partial\theta}\log f = -1 + \frac{x}{\theta} = \frac{x - \theta}{\theta}$$
+$$I_1(\theta) = E\!\left[\left(\frac{X-\theta}{\theta}\right)^2\right] = \frac{\text{Var}(X)}{\theta^2} = \frac{\theta}{\theta^2} = \frac{1}{\theta}$$
+$$I_n(\theta) = \frac{n}{\theta}$$
+
+CRLB for $\theta$: $\text{Var}(T) \ge 1/I_n(\theta) = \theta/n$.
+
+$\text{Var}(\hat\theta) = \text{Var}(\bar X_n) = \theta/n = \text{CRLB}$.
+
+Since $\hat\theta$ is unbiased and achieves the CRLB, it is \textbf{efficient} (and therefore MVUE).
+\end{enumerate}
+
+\bigskip
+
+\textbf{Question 19 (Delta Method)}
+
+\begin{enumerate}[label=(\alph*)]
+\item By the CLT, for large $n$:
+$$\bar X_n \sim_{\text{approx}} N\!\left(\theta,\; \frac{\sigma^2}{n}\right)$$
+
+Equivalently: $\frac{\sqrt{n}(\bar X_n - \theta)}{\sigma} \xrightarrow{d} N(0,1)$.
+
+\item Let $g(x) = 1/x$. Then $g'(x) = -1/x^2$, so $g'(\theta) = -1/\theta^2 \ne 0$ (since $\theta > 0$).
+
+By the delta method:
+$$\sqrt{n}\left(\frac{1}{\bar X_n} - \frac{1}{\theta}\right) \xrightarrow{d} N\!\left(0,\; \sigma^2 \cdot [g'(\theta)]^2\right) = N\!\left(0,\; \frac{\sigma^2}{\theta^4}\right)$$
+
+Therefore, the asymptotic distribution of $1/\bar X_n$ is:
+$$\boxed{\frac{1}{\bar X_n} \sim_{\text{approx}} N\!\left(\frac{1}{\theta},\; \frac{\sigma^2}{n\theta^4}\right)}$$
+\end{enumerate}
+
+\bigskip
+
+\textbf{Question 20 (Bayesian Inference)}
+
+\begin{enumerate}[label=(\alph*)]
+\item The likelihood is:
+$$f(\mathbf{x}|\theta) = \prod_{i=1}^n \theta^{x_i}(1-\theta)^{1-x_i} = \theta^{\sum x_i}(1-\theta)^{n - \sum x_i}$$
+
+Posterior $\propto$ Likelihood $\times$ Prior:
+$$\xi(\theta|\mathbf{x}) \propto \theta^{\sum x_i}(1-\theta)^{n-\sum x_i} \cdot \theta^{\alpha-1}(1-\theta)^{\beta-1} = \theta^{\alpha + \sum x_i - 1}(1-\theta)^{\beta + n - \sum x_i - 1}$$
+
+This is the kernel of a $\boxed{\text{Beta}(\alpha + \textstyle\sum x_i,\; \beta + n - \textstyle\sum x_i)}$ distribution.
+
+\item Under squared error loss, the Bayes estimator is the \textbf{posterior mean}:
+$$\hat\theta_{\text{Bayes}} = E[\theta|\mathbf{X}] = \frac{\alpha + \sum X_i}{\alpha + \beta + n}$$
+
+\item As $n \to \infty$:
+$$\hat\theta_{\text{Bayes}} = \frac{\alpha + \sum X_i}{\alpha + \beta + n} = \frac{\alpha/n + \bar X_n}{(\alpha + \beta)/n + 1} \;\xrightarrow{n\to\infty}\; \frac{0 + \bar X_n}{0 + 1} = \bar X_n = \hat\theta_{\text{MLE}}$$
+
+The prior parameters $\alpha, \beta$ become negligible relative to the sample size, so the Bayes estimator converges to the MLE. (Data overwhelms the prior.)
+\end{enumerate}
+
+\bigskip
+
+\textbf{Question 21 (Confidence Intervals)}
+
+\begin{enumerate}[label=(\alph*)]
+\item $\sigma^2$ unknown $\Rightarrow$ use $t$-distribution. Pivot: $\frac{\sqrt{n}(\bar X - \mu)}{s} \sim t_{n-1} = t_{24}$.
+
+95\% CI: $\bar x \pm t_{0.025,\,24}\cdot\frac{s}{\sqrt{n}} = 12.4 \pm 2.064 \cdot \frac{3}{\sqrt{25}} = 12.4 \pm 2.064 \cdot 0.6 = 12.4 \pm 1.238$.
+
+$$\boxed{(11.162,\; 13.638)}$$
+
+\item $\sigma^2 = 9$ known $\Rightarrow$ use $z$-distribution.
+
+95\% CI: $\bar x \pm z_{0.025}\cdot\frac{\sigma}{\sqrt{n}} = 12.4 \pm 1.96 \cdot \frac{3}{5} = 12.4 \pm 1.176$.
+
+$$\boxed{(11.224,\; 13.576)}$$
+
+This interval is \textbf{narrower} than part (a) because $z_{0.025} = 1.96 < t_{0.025,24} = 2.064$. The $t$-interval is wider to compensate for the additional uncertainty from estimating $\sigma$.
+
+\item Margin of error: $z_{0.025}\cdot\sigma/\sqrt{n} \le 0.5$.
+
+$1.96 \cdot 3/\sqrt{n} \le 0.5 \;\Rightarrow\; \sqrt{n} \ge 1.96 \cdot 6 = 11.76 \;\Rightarrow\; n \ge 138.3$.
+
+$$\boxed{n \ge 139}$$
+
+\item $\frac{\sum(X_i - \bar X)^2}{\sigma^2} = \frac{(n-1)s^2}{\sigma^2} \sim \chi^2_{n-1} = \chi^2_{24}$.
+
+95\% CI for $\sigma^2$: $\left(\frac{(n-1)s^2}{\chi^2_{24,\,0.025}},\; \frac{(n-1)s^2}{\chi^2_{24,\,0.975}}\right)$.
+
+Using $\chi^2_{24,\,0.025} = 39.36$ and $\chi^2_{24,\,0.975} = 12.40$:
+
+$$\boxed{\left(\frac{24 \cdot 9}{39.36},\; \frac{24 \cdot 9}{12.40}\right) = \left(5.49,\; 17.42\right)}$$
+
+(Note: in an actual exam, the $\chi^2$ table values would be provided.)
+\end{enumerate}
+
+\bigskip
+
+\textbf{Question 22 (Probability Inequalities and Convergence)}
+
+\begin{enumerate}[label=(\alph*)]
+\item $P(|\bar X_n - \mu| \ge 2\sigma) \le \frac{\text{Var}(\bar X_n)}{(2\sigma)^2} = \frac{\sigma^2/n}{4\sigma^2} = \boxed{\frac{1}{4n}}$
+
+\item Need $P(|\bar X_n - \mu| \ge 0.5\sigma) \le 0.01$.
+
+By Chebyshev: $\frac{\sigma^2/n}{(0.5\sigma)^2} = \frac{4}{n} \le 0.01 \;\Rightarrow\; n \ge 400$.
+
+$$\boxed{n \ge 400}$$
+
+\item By WLLN: $\bar X_n \xrightarrow{P} \mu$ (requires iid, finite mean).
+
+Let $g(x) = x^2$, which is continuous everywhere (in particular, at $x = \mu$).
+
+By the Continuous Mapping Theorem: $g(\bar X_n) = \bar X_n^2 \xrightarrow{P} g(\mu) = \mu^2$. \quad $\square$
+\end{enumerate}
+
+\end{document}
