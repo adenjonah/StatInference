@@ -1,0 +1,304 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{parskip}
+
+\allowdisplaybreaks
+
+\title{STAT GU4204 --- HW3 Solutions}
+\author{Student Name}
+\date{Due: 04/28/2026}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\iid}{\stackrel{\text{iid}}{\sim}}
+\newcommand{\CRLB}{\mathrm{CRLB}}
+\newcommand{\dto}{\xrightarrow{\,d\,}}
+\newcommand{\pto}{\xrightarrow{\,P\,}}
+
+\begin{document}
+\maketitle
+
+\noindent \textit{All problems from DeGroot \& Schervish, \emph{Probability and Statistics}, 4th ed.}
+
+\bigskip
+%----------------------------------------------------------------
+\section*{Problem 8.5.2(a)}
+\textbf{Setting.} Let $X_1,\dots,X_n \iid N(\mu,\sigma^2)$ with both $\mu$ and $\sigma^2$ unknown. Construct a confidence interval for $\mu$ with confidence coefficient $\gamma$, using the sample mean
+\[
+\bar X_n = \frac{1}{n}\sum_{i=1}^n X_i, \qquad
+(S_n')^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i-\bar X_n)^2.
+\]
+
+\textbf{Step 1: Identify a pivot.} From the Fisher--Cochran theorem (proved in \S 8.3--8.4), $\bar X_n$ and $(S_n')^2$ are independent, with
+\[
+\sqrt{n}\,\frac{\bar X_n-\mu}{\sigma}\sim N(0,1), \qquad \frac{(n-1)(S_n')^2}{\sigma^2}\sim \chi^2_{n-1}.
+\]
+Dividing the $N(0,1)$ random variable by $\sqrt{(n-1)(S_n')^2/\sigma^2/(n-1)}=S_n'/\sigma$ yields the $t$-pivot
+\begin{equation}\label{eq:tpivot}
+T \;=\; \sqrt{n}\,\frac{\bar X_n-\mu}{S_n'} \;\sim\; t_{n-1},
+\end{equation}
+which is free of $\mu$ and $\sigma^2$ (comment: this is exactly what makes it a pivot---its distribution does not depend on the unknown parameters).
+
+\textbf{Step 2: Invert the pivot.} Let $c = T_{n-1,(1+\gamma)/2}$ denote the $(1+\gamma)/2$ quantile of $t_{n-1}$. By symmetry of the $t$ distribution,
+\[
+\Pr(-c \le T \le c) = \gamma.
+\]
+Rearranging inside the probability:
+\begin{align*}
+-c \le \sqrt{n}\,\frac{\bar X_n-\mu}{S_n'} \le c
+&\iff -c\,\frac{S_n'}{\sqrt{n}} \le \bar X_n-\mu \le c\,\frac{S_n'}{\sqrt{n}} \\
+&\iff \bar X_n - c\,\frac{S_n'}{\sqrt{n}} \le \mu \le \bar X_n + c\,\frac{S_n'}{\sqrt{n}}.
+\end{align*}
+
+\textbf{Step 3: Confidence interval.} Therefore the confidence interval with coefficient $\gamma$ is
+\begin{equation}\label{eq:CImu}
+\boxed{\;\; \left(\bar X_n - T_{n-1,(1+\gamma)/2}\,\frac{S_n'}{\sqrt{n}},\; \bar X_n + T_{n-1,(1+\gamma)/2}\,\frac{S_n'}{\sqrt{n}}\right).\;\;}
+\end{equation}
+Since the density of $t_{n-1}$ is symmetric and unimodal about $0$, the equal-tail choice is the \emph{shortest} interval of the form $[-c,c]$ with coverage $\gamma$; hence \eqref{eq:CImu} is the shortest $t$-based confidence interval for $\mu$.
+
+\medskip
+\textit{Remark.} If the observed data yield $\bar X_n=\bar x$ and $S_n'=s'$, one simply plugs in:
+$\bar x \pm T_{n-1,(1+\gamma)/2}\, s'/\sqrt{n}$. For example, with $n=9$, $\bar x=22$, $s'=3$, and $\gamma=0.95$: $T_{8,0.975}\approx 2.306$, so the CI is $22\pm 2.306\cdot 3/3 = (19.694,\,24.306)$.
+
+\bigskip
+%----------------------------------------------------------------
+\section*{Problem 8.5.4}
+\textbf{Setting.} Let $X_1,\dots,X_n \iid N(\mu,\sigma^2)$ with both parameters unknown. Construct a confidence interval for $\sigma^2$ with confidence coefficient $\gamma$.
+
+\textbf{Step 1: Pivot.} Recall $(n-1)(S_n')^2/\sigma^2 \sim \chi^2_{n-1}$. Set
+\[
+V \;=\; \frac{(n-1)(S_n')^2}{\sigma^2} \;\sim\; \chi^2_{n-1}.
+\]
+This is a pivot since its distribution does not depend on $(\mu,\sigma^2)$.
+
+\textbf{Step 2: Equal-tail cutoffs.} Let $\chi^2_{n-1,\alpha}$ denote the $\alpha$-quantile of $\chi^2_{n-1}$, and set $\alpha=1-\gamma$. Choose
+\[
+a = \chi^2_{n-1,\alpha/2}, \qquad b = \chi^2_{n-1,1-\alpha/2}.
+\]
+Then $\Pr(a \le V \le b) = \gamma$. (Comment: because the $\chi^2$ density is not symmetric, equal-tail cutoffs do not minimize the CI length in general, but they are the standard textbook choice and yield a valid CI of coverage $\gamma$.)
+
+\textbf{Step 3: Invert for $\sigma^2$.}
+\begin{align*}
+a \le \frac{(n-1)(S_n')^2}{\sigma^2} \le b
+&\iff \frac{1}{b} \le \frac{\sigma^2}{(n-1)(S_n')^2} \le \frac{1}{a} \\
+&\iff \frac{(n-1)(S_n')^2}{b} \le \sigma^2 \le \frac{(n-1)(S_n')^2}{a}.
+\end{align*}
+
+\textbf{Confidence interval.}
+\begin{equation}\label{eq:CIvar}
+\boxed{\;\;\left(\frac{(n-1)(S_n')^2}{\chi^2_{n-1,\,1-\alpha/2}},\;\; \frac{(n-1)(S_n')^2}{\chi^2_{n-1,\,\alpha/2}}\right),\quad \alpha = 1-\gamma.\;\;}
+\end{equation}
+Taking square roots yields a confidence interval for $\sigma$:
+\[
+\left(\,\sqrt{\frac{(n-1)(S_n')^2}{\chi^2_{n-1,1-\alpha/2}}},\;\;\sqrt{\frac{(n-1)(S_n')^2}{\chi^2_{n-1,\alpha/2}}}\,\right).
+\]
+
+\bigskip
+%----------------------------------------------------------------
+\section*{Problem 8.7.11(a)}
+\textbf{Setting.} Let $X_1,\dots,X_n \iid N(\mu,\sigma^2)$ with both $\mu$ and $\sigma^2$ unknown, $n\ge 2$. Consider the class of estimators of $\sigma^2$ indexed by $c>0$:
+\[
+T_c \;=\; c\sum_{i=1}^n (X_i - \bar X_n)^2.
+\]
+\textbf{Part (a).} Determine the value of $c$ for which $T_c$ is an unbiased estimator of $\sigma^2$.
+
+\textbf{Solution.} From the distribution theory of the sample variance,
+\[
+\frac{1}{\sigma^2}\sum_{i=1}^n (X_i-\bar X_n)^2 \;\sim\; \chi^2_{n-1}.
+\]
+A $\chi^2_{n-1}$ random variable has mean $n-1$, so
+\begin{equation}\label{eq:esumsq}
+\E\!\left[\sum_{i=1}^n (X_i - \bar X_n)^2\right] \;=\; (n-1)\sigma^2.
+\end{equation}
+Therefore
+\[
+\E[T_c] \;=\; c\cdot (n-1)\sigma^2.
+\]
+For $T_c$ to be unbiased for $\sigma^2$ we need $\E[T_c]=\sigma^2$, i.e.
+\[
+c(n-1)=1 \;\Longleftrightarrow\; \boxed{\;c=\frac{1}{n-1}\;.\;}
+\]
+This gives the familiar unbiased sample variance $(S_n')^2 = \frac{1}{n-1}\sum(X_i-\bar X_n)^2$.
+
+\textit{Remark (why not $c=1/n$?).} The maximum-likelihood estimator uses $c=1/n$, which has smaller variance but nonzero bias $\E[T_{1/n}]-\sigma^2 = -\sigma^2/n$. The two estimators trade off bias and variance.
+
+\bigskip
+%----------------------------------------------------------------
+\section*{Problem 8.8.2}
+\textbf{Setting.} Compute the Fisher information $I(\theta)$ for a random sample of one observation from the exponential family
+\[
+f(x\mid \theta) \;=\; \theta\, e^{-\theta x}, \qquad x>0,\; \theta>0.
+\]
+(Equivalently: find the Fisher information about the rate parameter of an exponential random variable.)
+
+\textbf{Step 1: Log-likelihood and score.}
+\[
+\ell(x,\theta) \;=\; \log f(x\mid\theta) \;=\; \log\theta - \theta x.
+\]
+The score function is
+\[
+\dot\ell(x,\theta) \;=\; \frac{\partial \ell}{\partial \theta} \;=\; \frac{1}{\theta} - x.
+\]
+Sanity check: $\E_\theta[\dot\ell(X,\theta)] = 1/\theta - \E_\theta[X] = 1/\theta - 1/\theta = 0$, as required for a regular model.
+
+\textbf{Step 2: Second derivative.}
+\[
+\ddot\ell(x,\theta) \;=\; \frac{\partial^2 \ell}{\partial \theta^2} \;=\; -\frac{1}{\theta^2}.
+\]
+(Comment: $\ddot\ell$ does not depend on $x$, which simplifies the expectation.)
+
+\textbf{Step 3: Fisher information.}
+\begin{equation}\label{eq:IthetaExp}
+I(\theta) \;=\; -\E_\theta[\ddot\ell(X,\theta)] \;=\; -\left(-\frac{1}{\theta^2}\right) \;=\; \boxed{\;\frac{1}{\theta^2}.\;}
+\end{equation}
+
+\textbf{Cross-check via variance of score.}
+\[
+I(\theta) \;=\; \Var_\theta\!\left(\frac{1}{\theta}-X\right) \;=\; \Var_\theta(X) \;=\; \frac{1}{\theta^2}. \quad\checkmark
+\]
+
+\textbf{Information in a sample of size $n$.} By additivity for iid samples, $I_n(\theta) = n\,I(\theta) = n/\theta^2$, and the Cram\'er--Rao lower bound for an unbiased estimator of $\theta$ is $\theta^2/n$.
+
+\bigskip
+%----------------------------------------------------------------
+\section*{Problem 8.8.7}
+\textbf{Setting.} Suppose $X_1,\dots,X_n \iid N(\mu,\sigma^2)$ with $\mu$ \emph{known} and $\sigma^2$ unknown. Consider the maximum likelihood estimator of $\sigma^2$:
+\[
+\hat\sigma^2_{\text{MLE}} \;=\; \frac{1}{n}\sum_{i=1}^n (X_i-\mu)^2.
+\]
+Determine whether $\hat\sigma^2_{\text{MLE}}$ is an efficient estimator of $\sigma^2$.
+
+\textbf{Step 1: Unbiasedness.} Since $\mu$ is known, $(X_i-\mu)/\sigma \sim N(0,1)$ iid, so
+\[
+\frac{1}{\sigma^2}\sum_{i=1}^n (X_i-\mu)^2 \;\sim\; \chi^2_n, \qquad \E\!\left[\sum_{i=1}^n (X_i-\mu)^2\right] = n\sigma^2.
+\]
+Thus $\E[\hat\sigma^2_{\text{MLE}}] = \sigma^2$; the estimator is unbiased.
+
+\textbf{Step 2: Variance of $\hat\sigma^2_{\text{MLE}}$.} Using $\Var(\chi^2_n)=2n$,
+\begin{equation}\label{eq:varMLE}
+\Var(\hat\sigma^2_{\text{MLE}}) \;=\; \frac{1}{n^2}\cdot \sigma^4 \cdot \Var(\chi^2_n) \;=\; \frac{1}{n^2}\cdot \sigma^4 \cdot 2n \;=\; \frac{2\sigma^4}{n}.
+\end{equation}
+
+\textbf{Step 3: Fisher information for $\sigma^2$.} Let $\theta=\sigma^2$. For a single $X\sim N(\mu,\theta)$,
+\[
+\ell(x,\theta) = -\tfrac{1}{2}\log(2\pi) -\tfrac{1}{2}\log\theta -\frac{(x-\mu)^2}{2\theta},
+\]
+\[
+\dot\ell(x,\theta) = -\frac{1}{2\theta}+\frac{(x-\mu)^2}{2\theta^2}, \qquad \ddot\ell(x,\theta) = \frac{1}{2\theta^2}-\frac{(x-\mu)^2}{\theta^3}.
+\]
+Taking $-\E[\cdot]$ with $\E[(X-\mu)^2]=\theta$:
+\begin{equation}\label{eq:ISigma2}
+I(\theta) \;=\; -\frac{1}{2\theta^2} + \frac{\theta}{\theta^3} \;=\; \frac{1}{2\theta^2} \;=\; \frac{1}{2\sigma^4}.
+\end{equation}
+
+\textbf{Step 4: Cram\'er--Rao lower bound.} For an unbiased estimator of $\theta=\sigma^2$ (here $g(\theta)=\theta$, $g'=1$),
+\[
+\CRLB \;=\; \frac{[g'(\theta)]^2}{n\,I(\theta)} \;=\; \frac{1}{n\cdot \frac{1}{2\sigma^4}} \;=\; \frac{2\sigma^4}{n}.
+\]
+
+\textbf{Step 5: Compare.} From \eqref{eq:varMLE} and the CRLB,
+\[
+\Var(\hat\sigma^2_{\text{MLE}}) \;=\; \frac{2\sigma^4}{n} \;=\; \CRLB.
+\]
+Since $\hat\sigma^2_{\text{MLE}}$ is unbiased and attains the Cram\'er--Rao lower bound,
+\[
+\boxed{\;\hat\sigma^2_{\text{MLE}}=\tfrac{1}{n}\sum_{i=1}^n(X_i-\mu)^2 \text{ is an efficient estimator of }\sigma^2.\;}
+\]
+
+\bigskip
+%----------------------------------------------------------------
+\section*{Problem 8.8.17}
+\textbf{Setting.} Suppose $X_1,\dots,X_n$ form a random sample from a distribution with density $f(x\mid\theta)$ satisfying the usual regularity conditions. Let $T=r(X_1,\dots,X_n)$ be an \emph{unbiased} estimator of $g(\theta)$. Show that $T$ attains the Cram\'er--Rao lower bound
+\[
+\Var_\theta(T) \;=\; \frac{[g'(\theta)]^2}{n\,I(\theta)}
+\]
+if and only if there is a function $u(\theta)$ such that
+\begin{equation}\label{eq:817main}
+T - g(\theta) \;=\; u(\theta)\sum_{i=1}^n \dot\ell(X_i,\theta) \qquad \text{a.s.}\ \Pr_\theta,
+\end{equation}
+i.e.\ the centered estimator is proportional (in $\theta$) to the total score.
+
+\textbf{Setup.} Let $U_n(\theta)=\sum_{i=1}^n \dot\ell(X_i,\theta)$ denote the total score. Under regularity:
+\begin{itemize}
+\item $\E_\theta[U_n(\theta)] = 0$;
+\item $\Var_\theta(U_n(\theta)) = n\,I(\theta)$;
+\item For any unbiased estimator $T$ of $g(\theta)$, differentiating $\E_\theta[T]=g(\theta)$ under the integral sign gives
+\begin{equation}\label{eq:817cov}
+\Cov_\theta(T, U_n(\theta)) \;=\; g'(\theta).
+\end{equation}
+\end{itemize}
+
+\textbf{Cauchy--Schwarz / correlation form of CRLB.} By Cauchy--Schwarz,
+\[
+[g'(\theta)]^2 \;=\; [\Cov_\theta(T, U_n)]^2 \;\le\; \Var_\theta(T)\cdot \Var_\theta(U_n) \;=\; \Var_\theta(T)\cdot n\,I(\theta),
+\]
+which is exactly the CRLB inequality.
+
+\textbf{Equality condition.} Equality in Cauchy--Schwarz for random variables $Y=T-g(\theta)$ and $Z=U_n(\theta)$ (both with mean zero under $\theta$) holds \emph{iff} $Y$ and $Z$ are linearly dependent $\Pr_\theta$-almost surely: there exists $u(\theta)\in\R$ such that
+\begin{equation}\label{eq:817equality}
+T - g(\theta) \;=\; u(\theta)\,U_n(\theta) \qquad \text{a.s.}\ \Pr_\theta.
+\end{equation}
+This is precisely \eqref{eq:817main}.
+
+\textbf{Determining $u(\theta)$.} Taking covariance of both sides of \eqref{eq:817equality} with $U_n(\theta)$:
+\[
+g'(\theta) \;=\; \Cov_\theta(T,U_n) \;=\; u(\theta)\,\Var_\theta(U_n) \;=\; u(\theta)\,n\,I(\theta),
+\]
+so
+\[
+u(\theta) \;=\; \frac{g'(\theta)}{n\,I(\theta)}.
+\]
+In this case $\Var_\theta(T) = u(\theta)^2\cdot n I(\theta) = [g'(\theta)]^2/(n I(\theta))$, confirming attainment of the CRLB.
+
+\textbf{Conclusion.}
+\[
+\boxed{\; \Var_\theta(T) = \frac{[g'(\theta)]^2}{n\,I(\theta)} \iff T - g(\theta) = \frac{g'(\theta)}{n\,I(\theta)}\sum_{i=1}^n \dot\ell(X_i,\theta)\ \ \text{a.s.}\;}
+\]
+
+\textit{Interpretation.} Attaining the CRLB forces the centered estimator to be a (deterministic-in-$\theta$) multiple of the score. In particular, $T$ must be a function of the score, and hence of the sufficient statistic---an attainment-forces-sufficiency result.
+
+\bigskip
+%----------------------------------------------------------------
+\section*{Problem 9.1.1(a)}
+\textbf{Setting.} Let $X_1,\dots,X_n \iid N(\mu,1)$, and consider the simple-vs-simple testing problem
+\[
+H_0: \mu = 0 \qquad \text{vs.} \qquad H_1: \mu = 1.
+\]
+A test $\delta$ is defined by rejecting $H_0$ if and only if $\bar X_n > c$, where $c$ is a constant. Part (a) asks: compute the probabilities of type I error ($\alpha$) and type II error ($\beta$) as functions of $c$ and $n$.
+
+\textbf{Sampling distributions.} Under either hypothesis, $\bar X_n\sim N(\mu, 1/n)$, so
+\[
+\sqrt{n}\,(\bar X_n - \mu) \;\sim\; N(0,1).
+\]
+
+\textbf{Type I error probability ($\alpha$, size of the test).}
+\begin{align*}
+\alpha(c) &= \Pr_{\mu=0}(\text{Reject } H_0) \;=\; \Pr_{\mu=0}(\bar X_n > c) \\
+&= \Pr\!\left(\sqrt{n}\,(\bar X_n - 0) > \sqrt{n}\, c\right) \\
+&= 1 - \Phi(\sqrt{n}\,c).
+\end{align*}
+
+\textbf{Type II error probability ($\beta$).}
+\begin{align*}
+\beta(c) &= \Pr_{\mu=1}(\text{Accept } H_0) \;=\; \Pr_{\mu=1}(\bar X_n \le c) \\
+&= \Pr\!\left(\sqrt{n}\,(\bar X_n - 1) \le \sqrt{n}\,(c-1)\right) \\
+&= \Phi\!\left(\sqrt{n}\,(c-1)\right).
+\end{align*}
+
+\textbf{Summary.}
+\[
+\boxed{\;\alpha(c) \;=\; 1-\Phi(\sqrt{n}\,c), \qquad \beta(c) \;=\; \Phi\!\left(\sqrt{n}\,(c-1)\right).\;}
+\]
+
+\textit{Comments.}
+\begin{itemize}
+\item As $c\uparrow$, $\alpha\downarrow$ and $\beta\uparrow$---the usual error tradeoff.
+\item For a test of size $\alpha$, choose $c = z_{1-\alpha}/\sqrt{n}$, where $z_{1-\alpha}=\Phi^{-1}(1-\alpha)$; then $\beta = \Phi\!\big(z_{1-\alpha}/\sqrt{n}\cdot\sqrt{n} - \sqrt{n}\big) = \Phi\!\big(z_{1-\alpha}-\sqrt{n}\big)$, which $\to 0$ as $n\to\infty$ (consistency).
+\item For instance, $n=25$ and $c=0.5$ give $\alpha = 1-\Phi(2.5)\approx 0.0062$ and $\beta = \Phi(-2.5)\approx 0.0062$; the test is nearly symmetric in errors.
+\end{itemize}
+
+\end{document}
