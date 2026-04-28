@@ -2,8 +2,8 @@ This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded forma
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**hw3-solutions.tex
-(./hw3-solutions.tex
+**hw3-submission.tex
+(./hw3-submission.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
 (/usr/local/texlive/2024/texmf-dist/tex/latex/base/article.cls
@@ -128,18 +128,6 @@ LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ))
-(/usr/local/texlive/2024/texmf-dist/tex/latex/amscls/amsthm.sty
-Package: amsthm 2020/05/29 v2.20.6
-\thm@style=\toks24
-\thm@bodyfont=\toks25
-\thm@headfont=\toks26
-\thm@notefont=\toks27
-\thm@headpunct=\toks28
-\thm@preskip=\skip53
-\thm@postskip=\skip54
-\thm@headsep=\skip55
-\dth@everypar=\toks29
-)
 (/usr/local/texlive/2024/texmf-dist/tex/latex/mathtools/mathtools.sty
 Package: mathtools 2024/03/11 v1.30 mathematical typesetting tools
 
@@ -149,19 +137,19 @@ Package: calc 2023/07/08 v4.3 Infix arithmetic (KKT,FJ)
 \calc@Bcount=\count278
 \calc@Adimen=\dimen158
 \calc@Bdimen=\dimen159
-\calc@Askip=\skip56
-\calc@Bskip=\skip57
+\calc@Askip=\skip53
+\calc@Bskip=\skip54
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
 \calc@Ccount=\count279
-\calc@Cskip=\skip58
+\calc@Cskip=\skip55
 )
 (/usr/local/texlive/2024/texmf-dist/tex/latex/mathtools/mhsetup.sty
 Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
 )
 \g_MT_multlinerow_int=\count280
 \l_MT_multwidth_dim=\dimen160
-\origjot=\skip59
+\origjot=\skip56
 \l_MT_shortvdotswithinadjustabove_dim=\dimen161
 \l_MT_shortvdotswithinadjustbelow_dim=\dimen162
 \l_MT_above_intertext_sep=\dimen163
@@ -192,24 +180,23 @@ File: l3backend-pdftex.def 2024-02-20 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count282
 \l__pdf_internal_box=\box54
 )
-(./hw3-solutions.aux)
-\openout1 = `hw3-solutions.aux'.
+No file hw3-submission.aux.
+\openout1 = `hw3-submission.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -268,12 +255,12 @@ File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
 \scratchbox=\box55
 \nofMPsegments=\count284
 \nofMParguments=\count285
-\everyMPshowfont=\toks30
+\everyMPshowfont=\toks24
 \MPscratchCnt=\count286
 \MPscratchDim=\dimen169
 \MPnumerator=\count287
 \makeMPintoPDFobject=\count288
-\everyMPtoPDFconversion=\toks31
+\everyMPtoPDFconversion=\toks25
 )))
 (/usr/local/texlive/2024/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -287,13 +274,13 @@ e
 \Gin@req@height=\dimen170
 \Gin@req@width=\dimen171
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 23.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 20.
 
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 23.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 20.
 
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -301,44 +288,39 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 {/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
- [4]
-(./hw3-solutions.aux)
+
+(./hw3-submission.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
- 4545 strings out of 474116
- 69213 string characters out of 5743682
- 1938187 words of memory out of 5000000
- 26861 multiletter control sequences out of 15000+600000
- 565820 words of font info for 65 fonts, out of 8000000 for 9000
+ 4444 strings out of 474116
+ 67738 string characters out of 5743682
+ 1937187 words of memory out of 5000000
+ 26767 multiletter control sequences out of 15000+600000
+ 565512 words of font info for 64 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 65i,10n,72p,506b,214s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
-></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
-</usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
-/usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></
-usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></us
-r/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/
-local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/lo
-cal/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/loca
-l/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/t
-exlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texl
-ive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texli
-ve/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive
-/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/
-2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texl
-ive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on hw3-solutions.pdf (4 pages, 182028 bytes).
+ 65i,7n,72p,507b,214s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
+></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb>
+</usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
+/usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></u
+sr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr
+/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/l
+ocal/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/loc
+al/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/
+texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/tex
+live/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texl
+ive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texliv
+e/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive
+/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/tex
+live/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on hw3-submission.pdf (3 pages, 154991 bytes).
 PDF statistics:
- 92 PDF objects out of 1000 (max. 8388607)
- 55 compressed objects within 1 object stream
+ 84 PDF objects out of 1000 (max. 8388607)
+ 50 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
