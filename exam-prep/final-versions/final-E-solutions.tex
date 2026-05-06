@@ -1,0 +1,253 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{framed}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\definecolor{boxcolor}{RGB}{230,242,255}
+\newenvironment{answerbox}{\begin{shaded}\color{black}}{\end{shaded}}
+\colorlet{shadecolor}{boxcolor}
+
+\newcommand{\boxedans}[1]{\begin{shaded}\textbf{Answer:} #1\end{shaded}}
+
+\newcounter{qnum}
+\newcommand{\question}[2]{\stepcounter{qnum}\subsection*{Question \theqnum \quad (#1 points) \hfill #2}}
+
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries STAT GU4204 Section 001 --- Final Exam}\\[4pt]
+{\large Variant E: Hybrid / Most-Likely \quad --- \quad SOLUTIONS}\\[6pt]
+{\large Spring 2026 \hspace{1.5cm} Total: 100 points}
+\end{center}
+
+\bigskip
+\hrule
+\bigskip
+
+% ====================================================================
+% PART A
+% ====================================================================
+\section*{Part A: Short Conceptual Questions}
+
+\question{4}{Sufficiency and the Factorization Criterion}
+
+\textbf{Definition.} A statistic $T = r(\mathbf{X})$ is \emph{sufficient} for $\theta$ if the conditional distribution of $\mathbf{X}$ given $T = t$ does not depend on $\theta$. Intuitively, once you know $T$, the data $\mathbf{X}$ contain no further information about $\theta$.
+
+\textbf{Factorization Criterion (Fisher--Neyman).} $T = r(\mathbf{X})$ is sufficient for $\theta$ if and only if the joint density (or pmf) of $\mathbf{X}$ factors as
+\[ f_n(\mathbf{x};\theta) = u(\mathbf{x}) \cdot \nu\bigl(r(\mathbf{x}),\,\theta\bigr), \]
+where $u(\mathbf{x}) \ge 0$ does not depend on $\theta$ and $\nu(t,\theta)$ depends on $\mathbf{x}$ only through $r(\mathbf{x})$.
+
+\textbf{Bernoulli example.} For $X_1,\ldots,X_n \stackrel{\text{iid}}{\sim} \mathrm{Bernoulli}(p)$:
+\[
+f_n(\mathbf{x};p) = \prod_{i=1}^n p^{x_i}(1-p)^{1-x_i}
+= p^{\sum x_i}(1-p)^{n-\sum x_i}
+= \underbrace{1}_{u(\mathbf{x})} \cdot \underbrace{p^{t}(1-p)^{n-t}}_{\nu(t,p)},
+\]
+where $t = \sum_{i=1}^n x_i$. Hence by the factorization criterion, $T = \sum_{i=1}^n X_i$ is \boxed{\text{sufficient for } p}.
+
+\question{3}{Cram\'er-Rao Lower Bound}
+
+\textbf{CRLB statement.} Let $T = T(\mathbf{X})$ be an unbiased estimator of $g(\theta)$ based on a random sample $X_1,\ldots,X_n$. Under regularity conditions (A.1)--(A.3),
+\[ \boxed{\;\mathrm{Var}_\theta(T) \ge \frac{[g'(\theta)]^2}{n\, I(\theta)}\;,} \]
+where $I(\theta) = E_\theta[\dot\ell(X;\theta)^2]$ is the Fisher information for one observation. For $g(\theta)=\theta$ this reduces to $\mathrm{Var}_\theta(T) \ge 1/(n I(\theta))$.
+
+\textbf{Uniform$(0,\theta)$.} The density is $f(x;\theta) = \tfrac{1}{\theta}\mathbb{1}\{0 < x < \theta\}$, whose support $\{x: f(x;\theta) > 0\} = (0,\theta)$ \emph{depends on $\theta$}. This violates condition \boxed{(A.1)} (support independent of $\theta$). Without (A.1) we cannot interchange differentiation and integration in the proof of the CRLB, so the bound is not directly applicable. (Indeed, the MLE $X_{(n)}$ has variance shrinking like $1/n^2$, which would violate any $1/n$ bound.)
+
+\question{3}{Neyman-Pearson Lemma}
+
+\textbf{Statement.} Let $X_1,\ldots,X_n$ be a random sample from $f(\cdot;\theta)$ where $\Omega = \{\theta_0,\theta_1\}$. Consider testing the simple hypotheses
+\[ H_0: \theta = \theta_0 \quad \text{vs.} \quad H_1: \theta = \theta_1. \]
+Let $f_0(\mathbf{x})$ and $f_1(\mathbf{x})$ be the joint densities under $\theta_0$ and $\theta_1$ respectively. For any $k > 0$, define the test $\delta^*$ that
+\begin{itemize}[leftmargin=2em,nosep]
+    \item rejects $H_0$ if $f_1(\mathbf{x}) > k\, f_0(\mathbf{x})$,
+    \item does not reject $H_0$ if $f_1(\mathbf{x}) < k\, f_0(\mathbf{x})$,
+    \item is arbitrary on the boundary set.
+\end{itemize}
+Then for any other test $\delta$ with $\alpha(\delta) \le \alpha(\delta^*)$, we have $\beta(\delta) \ge \beta(\delta^*)$. That is, \boxed{\delta^* \text{ is the most powerful (MP) test of its size}}: among all tests with Type I error $\le \alpha(\delta^*)$, the likelihood ratio test minimizes Type II error (equivalently, maximizes power at $\theta_1$).
+
+\bigskip
+\hrule
+\bigskip
+
+% ====================================================================
+% PART B
+% ====================================================================
+\section*{Part B: Mid-Length Problems}
+
+\question{15}{MLE, Sufficiency, and Fisher Information for the Exponential}
+
+\textbf{(a) MLE of $\theta$.} The likelihood is
+\[ L(\theta) = \prod_{i=1}^n \theta\, e^{-\theta x_i} = \theta^n \exp\!\left(-\theta\sum_{i=1}^n x_i\right). \]
+The log-likelihood is
+\[ \ell(\theta) = n\log\theta - \theta\sum_{i=1}^n x_i. \]
+Differentiating and setting equal to zero:
+\[ \ell'(\theta) = \frac{n}{\theta} - \sum_{i=1}^n x_i = 0 \;\Longrightarrow\; \theta = \frac{n}{\sum_{i=1}^n x_i} = \frac{1}{\overline{X}_n}. \]
+The second derivative is $\ell''(\theta) = -n/\theta^2 < 0$, confirming a maximum. Hence
+\[ \boxed{\hat\theta_n = \dfrac{1}{\overline{X}_n} = \dfrac{n}{\sum_{i=1}^n X_i}}. \]
+
+\textbf{(b) Sufficiency of $T = \sum X_i$.} The joint density is
+\[ f_n(\mathbf{x};\theta) = \theta^n \exp\!\left(-\theta\sum_{i=1}^n x_i\right)\prod_{i=1}^n \mathbb{1}\{x_i > 0\}
+= \underbrace{\prod_{i=1}^n \mathbb{1}\{x_i > 0\}}_{u(\mathbf{x})} \cdot \underbrace{\theta^n e^{-\theta t}}_{\nu(t,\theta)}, \]
+where $t = \sum_{i=1}^n x_i$. The function $u(\mathbf{x})$ does not involve $\theta$, and $\nu(t,\theta)$ depends on $\mathbf{x}$ only through $t$. By the Fisher--Neyman factorization criterion, $T = \sum_{i=1}^n X_i$ is \boxed{\text{sufficient for } \theta}.
+
+\textbf{(c) Fisher information and efficiency.} The score for one observation is
+\[ \dot\ell(x;\theta) = \frac{\partial}{\partial\theta}\bigl[\log\theta - \theta x\bigr] = \frac{1}{\theta} - x. \]
+Then
+\[ I(\theta) = E_\theta[\dot\ell(X;\theta)^2] = \mathrm{Var}_\theta\!\left(\frac{1}{\theta} - X\right) = \mathrm{Var}_\theta(X) = \frac{1}{\theta^2}. \]
+(Equivalently, $-E[\ddot\ell] = -E[-1/\theta^2] = 1/\theta^2$.) For the full sample, $I_n(\theta) = n I(\theta) = \boxed{n/\theta^2}$.
+
+\emph{Efficiency.} First check unbiasedness. Since $T = \sum X_i \sim \mathrm{Gamma}(n,\theta)$,
+\[ E[\hat\theta_n] = E\!\left[\frac{n}{T}\right] = n \int_0^\infty \frac{1}{t} \cdot \frac{\theta^n}{\Gamma(n)} t^{n-1} e^{-\theta t}\,dt = \frac{n\theta^n}{\Gamma(n)} \cdot \frac{\Gamma(n-1)}{\theta^{n-1}} = \frac{n\theta}{n-1}. \]
+Hence $E[\hat\theta_n] = \tfrac{n}{n-1}\theta \neq \theta$ for finite $n$ --- $\hat\theta_n$ is \emph{biased}. Therefore the CRLB (which applies to \emph{unbiased} estimators of $\theta$) does not directly compare to $\mathrm{Var}(\hat\theta_n)$, and we conclude $\hat\theta_n$ is \boxed{\text{not an efficient unbiased estimator of } \theta}. (The bias-corrected estimator $\tfrac{n-1}{n}\hat\theta_n$ is unbiased but still does not attain the CRLB exactly.)
+
+\textbf{(d) Asymptotic distribution.} By the asymptotic normality of the MLE under regularity conditions,
+\[ \boxed{\sqrt{n}(\hat\theta_n - \theta) \xrightarrow{d} N\!\left(0,\, \frac{1}{I(\theta)}\right) = N(0, \theta^2).} \]
+(One can verify this directly via the delta method: $\sqrt{n}(\overline{X}_n - 1/\theta) \to N(0, 1/\theta^2)$ and $g(x) = 1/x$ has $g'(1/\theta) = -\theta^2$, so $\sqrt{n}(1/\overline{X}_n - \theta) \to N(0, (1/\theta^2)\cdot \theta^4) = N(0,\theta^2)$.)
+
+\question{15}{Bayesian Inference for a Bernoulli Proportion}
+
+\textbf{(a) Posterior derivation.} The prior is
+\[ \xi(p) = \frac{1}{B(\alpha,\beta)} p^{\alpha-1}(1-p)^{\beta-1}, \quad p \in (0,1). \]
+The likelihood (given $\sum X_i = s$) is
+\[ f_n(\mathbf{x}\mid p) = p^s (1-p)^{n-s}. \]
+By Bayes' rule,
+\[ \xi(p \mid \mathbf{x}) \propto f_n(\mathbf{x}\mid p)\, \xi(p) \propto p^s(1-p)^{n-s} \cdot p^{\alpha-1}(1-p)^{\beta-1} = p^{(\alpha + s) - 1}(1-p)^{(\beta + n - s) - 1}. \]
+This is the kernel of a Beta distribution. Therefore
+\[ \boxed{p \mid \mathbf{X} \sim \mathrm{Beta}\!\left(\alpha + \textstyle\sum_{i=1}^n X_i,\; \beta + n - \textstyle\sum_{i=1}^n X_i\right).} \]
+
+\textbf{(b) Bayes estimator under squared error loss.} Under squared-error loss, the Bayes estimator is the posterior mean. For $\mathrm{Beta}(\alpha',\beta')$, the mean is $\alpha'/(\alpha'+\beta')$. Thus
+\[ \hat p_B = E[p \mid \mathbf{X}] = \frac{\alpha + \sum X_i}{\alpha + \beta + n}. \]
+Writing $w_n = n/(n+\alpha+\beta)$,
+\[ \hat p_B = \frac{\alpha+\beta}{n+\alpha+\beta}\cdot\underbrace{\frac{\alpha}{\alpha+\beta}}_{\text{prior mean}} + \frac{n}{n+\alpha+\beta}\cdot\underbrace{\frac{\sum X_i}{n}}_{\hat p_n = \overline{X}_n}. \]
+\[ \boxed{\hat p_B = (1 - w_n)\cdot \frac{\alpha}{\alpha+\beta} + w_n \cdot \overline{X}_n, \quad w_n = \frac{n}{n+\alpha+\beta}.} \]
+
+\textbf{(c) Numerical values.} With $\alpha = \beta = 1$, $n = 10$, $\sum X_i = 7$:
+\[ \hat p_B = \frac{1 + 7}{1 + 1 + 10} = \frac{8}{12} = \boxed{\tfrac{2}{3} \approx 0.667}, \qquad \hat p_n = \frac{7}{10} = \boxed{0.7}. \]
+The Bayes estimator pulls the MLE slightly toward the prior mean of $1/2$ (the uniform prior centers at $1/2$), giving a more conservative estimate.
+
+\textbf{(d) Asymptotic relationship.} As $n \to \infty$ with $\alpha,\beta$ fixed, $w_n = n/(n+\alpha+\beta) \to 1$, so
+\[ \boxed{\hat p_B = \hat p_n + O_p(1/n) \;\Longrightarrow\; \hat p_B \xrightarrow{P} p \text{ and } \sqrt{n}(\hat p_B - \hat p_n) \xrightarrow{P} 0.} \]
+\emph{Why:} the data swamp the prior --- the posterior concentrates around the MLE (the data's information grows linearly in $n$, while the prior contributes a fixed amount equivalent to $\alpha+\beta$ ``pseudo-observations''). This is the standard Bernstein--von Mises phenomenon.
+
+\bigskip
+\hrule
+\bigskip
+
+% ====================================================================
+% PART C
+% ====================================================================
+\section*{Part C: Major Problems}
+
+\question{20}{$t$-Test, Confidence Interval, and Test/CI Duality}
+
+Given: $n = 16$, $\overline{X}_n = 12.5$, $s_n^2 = 4.0$ (so $s_n = 2$), $\sigma$ unknown.
+
+\textbf{(a) Two-sided $t$-test of $\mu = 11$ at $\alpha_0 = 0.05$.}
+
+Test statistic:
+\[ U_n = \frac{\sqrt{n}(\overline{X}_n - \mu_0)}{s_n} = \frac{\sqrt{16}(12.5 - 11)}{2} = \frac{4 \cdot 1.5}{2} = \boxed{3.0}. \]
+Under $H_0$, $U_n \sim t_{n-1} = t_{15}$. Reject $H_0$ if $|U_n| \ge t_{0.025,15} = 2.131$.
+
+Since $|U_n| = 3.0 > 2.131$, \boxed{\text{reject } H_0}: there is evidence at the 5\% level that $\mu \neq 11$.
+
+\textbf{(b) 95\% CI for $\mu$.} Using the pivot $\sqrt{n}(\overline{X}_n - \mu)/s_n \sim t_{n-1}$:
+\[ \overline{X}_n \pm t_{0.025,15} \cdot \frac{s_n}{\sqrt{n}} = 12.5 \pm 2.131 \cdot \frac{2}{4} = 12.5 \pm 1.0655. \]
+\[ \boxed{\text{95\% CI: } (11.4345,\; 13.5655).} \]
+
+\emph{Duality check.} The value $\mu_0 = 11$ does \emph{not} lie in $(11.4345, 13.5655)$. By the test/CI duality (DeGroot Theorem 10.3): the level-$\alpha_0$ test of $H_0: \mu = \mu_0$ rejects $H_0$ if and only if $\mu_0 \notin$ the $(1-\alpha_0)$ CI. Indeed, both procedures here reach the same conclusion (reject $H_0$). The CI is precisely the set of null values $\mu_0$ that are not rejected by the level-$\alpha_0$ $t$-test.
+
+\textbf{(c) One-sided test $H_0: \mu \le 11$ vs $H_1: \mu > 11$.}
+
+Same test statistic $U_n = 3.0$, but the rejection rule is now $U_n \ge t_{0.05,15} = 1.753$. Since $3.0 > 1.753$, \boxed{\text{reject } H_0}: there is evidence at level 0.05 that $\mu > 11$.
+
+(Note that the size of this test is $\sup_{\mu \le 11} P_\mu(U_n \ge 1.753) = P_{\mu=11}(U_n \ge 1.753) = 0.05$, achieved at the boundary.)
+
+\textbf{(d) Asymptotic null distribution of $-2\log\Lambda$.} For the two-sided LRT in (a), with $H_0$ specifying one coordinate of $\theta = (\mu,\sigma^2)$ (the constraint $\mu = 11$, with $\sigma^2$ free), Wilks' Theorem gives
+\[ \boxed{-2 \log \Lambda(\mathbf{X}) \xrightarrow{d} \chi^2_1 \text{ under } H_0.} \]
+The degrees of freedom equal $\dim\Omega - \dim\Omega_0 = 2 - 1 = 1$, matching the single linear constraint imposed by $H_0$.
+
+\question{20}{Neyman-Pearson Test, Type I/II Errors, and UMP}
+
+Setup: $X_1,\ldots,X_n$ iid $N(\theta,1)$, $n = 25$. Test $H_0: \theta = 0$ vs $H_1: \theta = 0.5$.
+
+\textbf{(a) Most powerful test via Neyman-Pearson.} The likelihood ratio is
+\[ \frac{f_1(\mathbf{x})}{f_0(\mathbf{x})} = \exp\!\left(-\tfrac{1}{2}\sum (x_i - 0.5)^2 + \tfrac{1}{2}\sum x_i^2\right) = \exp\!\left(0.5\sum x_i - \tfrac{n}{2}(0.5)^2\right) = \exp\!\left(0.5\sum x_i - \tfrac{n}{8}\right). \]
+By the Neyman-Pearson Lemma, the MP test rejects $H_0$ when this ratio exceeds $k$, equivalently when
+\[ 0.5\sum x_i - n/8 > \log k \;\Longleftrightarrow\; \sum x_i > 2(\log k + n/8) \;\Longleftrightarrow\; \overline{X}_n > c, \]
+for some threshold $c$. Hence the rejection region has the form $\boxed{\{\overline{X}_n > c\}}$, a one-sided test on the sample mean.
+
+\textbf{(b) Choose $c$ for level $\alpha_0 = 0.05$.} Under $H_0: \theta = 0$, $\overline{X}_n \sim N(0, 1/n) = N(0, 1/25)$, so $\sqrt{n}\,\overline{X}_n = 5\overline{X}_n \sim N(0,1)$. We want
+\[ P_{\theta=0}(\overline{X}_n > c) = 0.05 \;\Longleftrightarrow\; P(Z > 5c) = 0.05 \;\Longleftrightarrow\; 5c = z_{0.05} = 1.645. \]
+\[ \boxed{c = 1.645/5 = 0.329.} \]
+
+\textbf{(c) Type I and Type II errors.}
+
+\emph{Type I:} $\alpha = P_{\theta=0}(\overline{X}_n > 0.329) = P(Z > 1.645) = 0.05 = \alpha_0$. \checkmark
+
+\emph{Type II:} Under $H_1: \theta = 0.5$, $\overline{X}_n \sim N(0.5, 1/25)$, so $5(\overline{X}_n - 0.5) \sim N(0,1)$.
+\[ \beta = P_{\theta=0.5}(\overline{X}_n \le 0.329) = P\!\left(Z \le \frac{0.329 - 0.5}{1/5}\right) = P(Z \le -0.855) = \Phi(-0.855) = 1 - \Phi(0.855). \]
+Using $\Phi(0.855) \approx 0.80$:
+\[ \boxed{\beta \approx 1 - 0.80 = 0.20.} \]
+The power of the test at $\theta = 0.5$ is $1 - \beta \approx 0.80$.
+
+\textbf{(d) UMP for the composite alternative.} The family $\{N(\theta,1)\}$ has monotone likelihood ratio in $T(\mathbf{X}) = \overline{X}_n$: for any $\theta_1 > \theta_0$,
+\[ \frac{f_{\theta_1}(\mathbf{x})}{f_{\theta_0}(\mathbf{x})} = \exp\!\left((\theta_1 - \theta_0)\sum x_i + \text{const}\right) \]
+is monotone increasing in $\sum x_i$ (equivalently in $\overline{X}_n$). By the Karlin-Rubin theorem (or DeGroot's MLR / UMP theorem), the test ``reject if $\overline{X}_n > c$'' with $c$ chosen so that $P_{\theta=0}(\overline{X}_n > c) = 0.05$ is \boxed{\text{UMP at level 0.05 for } H_0: \theta \le 0 \text{ vs } H_1: \theta > 0}. The size is achieved at the boundary $\theta = 0$ since the power function is monotone increasing in $\theta$.
+
+\textbf{(e) Smallest $n^*$ for power $\ge 0.95$ at $\theta = 0.5$.} For sample size $n$, the level-0.05 test rejects when $\sqrt{n}\,\overline{X}_n > z_{0.05} = 1.645$, i.e.\ $\overline{X}_n > 1.645/\sqrt{n}$. Power at $\theta = 0.5$:
+\[ \pi(0.5) = P_{0.5}\!\left(\overline{X}_n > 1.645/\sqrt{n}\right) = P\!\left(Z > \frac{1.645/\sqrt{n} - 0.5}{1/\sqrt{n}}\right) = P\!\left(Z > 1.645 - 0.5\sqrt{n}\right). \]
+Require $\pi(0.5) \ge 0.95$, i.e.\ $1.645 - 0.5\sqrt{n} \le -z_{0.05} = -1.645$ (since $P(Z > -1.645) = 0.95$). Solving:
+\[ 0.5\sqrt{n} \ge 3.29 \;\Longrightarrow\; \sqrt{n} \ge 6.58 \;\Longrightarrow\; n \ge 43.30. \]
+\[ \boxed{n^* = 44.} \]
+(In symbolic form: $n^* = \lceil ((z_{0.05} + z_{0.05})/0.5)^2 \rceil = \lceil (2 \cdot 1.645 / 0.5)^2 \rceil = \lceil 43.30 \rceil = 44$.)
+
+\question{20}{Two-Sample $t$-Test, CI, and $F$-Test}
+
+Given: $m = n = 10$, $\overline{X}_m = 18.0$, $S_X^2 = 36.0$, $\overline{Y}_n = 15.5$, $S_Y^2 = 28.0$.
+
+\textbf{(a) Pooled variance.}
+\[ s_p^2 = \frac{S_X^2 + S_Y^2}{m + n - 2} = \frac{36.0 + 28.0}{18} = \frac{64}{18} = \frac{32}{9} \approx 3.556. \]
+Hence $s_p \approx 1.886$. \boxed{s_p^2 = 32/9 \approx 3.556}.
+
+\textbf{(b) Two-sample $t$-test.} The test statistic is
+\[ U = \frac{\overline{X}_m - \overline{Y}_n}{s_p \sqrt{1/m + 1/n}} = \frac{18.0 - 15.5}{\sqrt{32/9}\cdot \sqrt{2/10}} = \frac{2.5}{\sqrt{32/9} \cdot \sqrt{1/5}} = \frac{2.5}{\sqrt{32/45}}. \]
+Compute the denominator: $32/45 \approx 0.7111$, so $\sqrt{32/45} \approx 0.8433$. Thus
+\[ U \approx \frac{2.5}{0.8433} \approx 2.964. \]
+Under $H_0: \mu_X = \mu_Y$, $U \sim t_{m+n-2} = t_{18}$. Reject if $|U| > t_{0.025,18} = 2.101$.
+
+Since $|U| \approx 2.964 > 2.101$, \boxed{\text{reject } H_0}: there is evidence at the 5\% level that $\mu_X \neq \mu_Y$.
+
+\textbf{(c) 95\% CI for $\mu_X - \mu_Y$.} Using the same pivot:
+\[ (\overline{X}_m - \overline{Y}_n) \pm t_{0.025,18} \cdot s_p\sqrt{1/m + 1/n} = 2.5 \pm 2.101 \cdot 0.8433 \approx 2.5 \pm 1.772. \]
+\[ \boxed{\text{95\% CI: } (0.728,\; 4.272).} \]
+Since $0$ lies outside this CI, by test/CI duality the test in (b) rejects $H_0: \mu_X - \mu_Y = 0$, consistent with the conclusion. \checkmark
+
+\textbf{(d) $F$-test for equal variances.} The unbiased sample variances are
+\[ s_X^2 = \frac{S_X^2}{m-1} = \frac{36}{9} = 4.0, \qquad s_Y^2 = \frac{S_Y^2}{n-1} = \frac{28}{9} \approx 3.111. \]
+The test statistic is
+\[ V = \frac{s_X^2}{s_Y^2} = \frac{4.0}{28/9} = \frac{36}{28} = \frac{9}{7} \approx 1.286. \]
+Under $H_0: \sigma_X^2 = \sigma_Y^2$, $V \sim F_{m-1, n-1} = F_{9,9}$.
+
+For a two-sided level-$0.10$ test, reject if $V \le F_{0.95,9,9} \approx 0.31$ or $V \ge F_{0.05,9,9} = 3.18$.
+
+Since $0.31 < 1.286 < 3.18$, \boxed{\text{fail to reject } H_0}: there is no evidence at the 10\% level that the variances differ. (This retroactively supports the equal-variance assumption used in part (b).)
+
+\textbf{(e) Wilks' theorem for the test in (b).} The full parameter is $\theta = (\mu_X, \mu_Y, \sigma^2) \in \mathbb{R}^2 \times \mathbb{R}_{>0}$ (3-dim). The null $H_0: \mu_X = \mu_Y$ imposes one linear constraint, leaving the constrained space 2-dim. By Wilks' theorem,
+\[ \boxed{-2 \log \Lambda(\mathbf{X}) \xrightarrow{d} \chi^2_1 \text{ under } H_0,} \]
+with d.f.\ $= \dim\Omega - \dim\Omega_0 = 3 - 2 = 1$, matching the one constraint imposed.
+
+\bigskip
+\hrule
+\bigskip
+
+\begin{center}
+\textbf{End of solutions.} \quad Total: 100 points.
+\end{center}
+
+\end{document}

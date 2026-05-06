@@ -1,0 +1,376 @@
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{parskip}
+
+\setlength{\parskip}{0.6em}
+\setlength{\parindent}{0pt}
+
+\title{\textbf{STAT GU4204 --- Statistical Inference} \\
+       \large Final Examination (Version D) --- \emph{Solutions} \\
+       \normalsize Hypothesis-Testing Centered}
+\author{Spring 2026}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\hrule
+
+\vspace{0.6em}
+
+% ====================================================================
+\section*{Part A --- Conceptual on Testing (10 points)}
+
+\textbf{A1.\ (3 pts) Definitions and relations.}
+
+Let $\delta$ have critical region $S_1$ (and acceptance region $S_0$).
+\begin{itemize}[leftmargin=2em, itemsep=2pt]
+    \item[(i)] \textbf{Type I error:} the event of rejecting $H_0$ when $H_0$ is true. Its probability is $\mathbb{P}_\theta(\mathbf{X} \in S_1)$ for $\theta \in \Omega_0$.
+    \item[(ii)] \textbf{Type II error:} the event of failing to reject $H_0$ when $H_1$ is true. Its probability is $\mathbb{P}_\theta(\mathbf{X} \in S_0) = 1 - \mathbb{P}_\theta(\mathbf{X} \in S_1)$ for $\theta \in \Omega_1$.
+    \item[(iii)] \textbf{Power function:} $\pi(\theta\mid\delta) = \mathbb{P}_\theta(\mathbf{X} \in S_1)$, defined for all $\theta \in \Omega$.
+    \item[(iv)] \textbf{Size:} $\alpha(\delta) = \sup_{\theta \in \Omega_0} \pi(\theta\mid\delta)$. The test $\delta$ is \emph{level} $\alpha_0$ iff $\alpha(\delta) \le \alpha_0$, i.e.\ the worst-case Type I error rate over $\Omega_0$ is bounded by $\alpha_0$.
+\end{itemize}
+
+Relations:
+\[
+    \sup_{\theta \in \Omega_0} \pi(\theta \mid \delta) = \alpha(\delta) = \sup_{\theta\in\Omega_0}\mathbb{P}(\text{Type I}),\qquad
+    \sup_{\theta \in \Omega_1} \bigl[1 - \pi(\theta \mid \delta)\bigr] = \sup_{\theta\in\Omega_1}\mathbb{P}(\text{Type II}).
+\]
+Equivalently, $\inf_{\theta \in \Omega_1} \pi(\theta\mid\delta)$ is the worst-case power.
+
+\vspace{0.4em}
+
+\textbf{A2.\ (3 pts) Neyman--Pearson Lemma.}
+
+Let $f_0$ and $f_1$ be the joint densities under $H_0\!: \theta = \theta_0$ and $H_1\!: \theta = \theta_1$. Suppose $\delta'$ rejects $H_0$ according to:
+\begin{itemize}[leftmargin=2em, itemsep=0pt]
+    \item Reject if $f_1(\mathbf{x}) > k\, f_0(\mathbf{x})$,
+    \item Do not reject if $f_1(\mathbf{x}) < k\, f_0(\mathbf{x})$,
+    \item Either decision allowed if $f_1(\mathbf{x}) = k\, f_0(\mathbf{x})$.
+\end{itemize}
+Then for any other test $\delta$:
+\[
+    \alpha(\delta) \le \alpha(\delta') \;\Longrightarrow\; \beta(\delta) \ge \beta(\delta'),
+\]
+i.e.\ $\delta'$ minimizes the Type II error among all tests with at most the same Type I error.
+
+\textbf{When does NP yield a UMP test against a one-sided composite alternative?} If the family has \emph{monotone likelihood ratio (MLR)} in some statistic $T$, then the NP-optimal rejection region $\{T > c\}$ does not depend on the specific value of $\theta_1 \in \Omega_1$; the same test is optimal against every $\theta_1$ in the one-sided alternative, so it is UMP for $H_0\!: \theta \le \theta_0$ vs.\ $H_1\!: \theta > \theta_0$.
+
+\vspace{0.4em}
+
+\textbf{A3.\ (2 pts) Test/CI duality.}
+
+Given a $1-\alpha_0$ confidence set $\mathcal{S}(\mathbf{X})$, define the test of $H_0\!: \theta = \theta_0$ versus $H_1\!: \theta \neq \theta_0$ by:
+\[
+    \text{reject } H_0 \;\iff\; \theta_0 \notin \mathcal{S}(\mathbf{X}).
+\]
+This test has level $\alpha_0$ because, by the coverage property of the confidence set,
+\[
+    \mathbb{P}_{\theta_0}\bigl(\theta_0 \notin \mathcal{S}(\mathbf{X})\bigr) = 1 - \mathbb{P}_{\theta_0}\bigl(\theta_0 \in \mathcal{S}(\mathbf{X})\bigr) \le 1 - (1 - \alpha_0) = \alpha_0.
+\]
+
+\vspace{0.4em}
+
+\textbf{A4.\ (2 pts) Wilks' theorem.}
+
+Under $H_0$, as $n \to \infty$,
+\[
+    -2 \log \Lambda(\mathbf{X}) \xrightarrow{d} \chi^2_k,
+\]
+where $k$ is the difference in dimension between $\Omega$ and $\Omega_0$ (i.e.\ the number of constraints $H_0$ imposes). \textbf{Conditions:} (i) the parameter space $\Omega$ is an open subset of $\mathbb{R}^p$ and $\Omega_0$ is a $(p-k)$-dimensional smooth submanifold; (ii) the model satisfies the standard regularity conditions for asymptotic normality of the MLE (smoothness of $\log f$, finite Fisher information, support not depending on $\theta$, ability to interchange differentiation and integration); (iii) the true $\theta \in \Omega_0$ lies in the interior of $\Omega_0$.
+
+% ====================================================================
+\bigskip
+\section*{Part B --- Mid-length Testing Problems (30 points)}
+
+\textbf{B1.\ One-sample $t$-test, $p$-value, and CI duality. (15 pts)}
+
+Given $n=25$, $\overline{X} = 22.4$, $s^2 = 9.0$, so $s = 3$ and $s/\sqrt{n} = 3/5 = 0.6$.
+
+\textbf{(a) (5 pts)} Test statistic
+\[
+    U_n = \frac{\overline{X} - \mu_0}{s/\sqrt{n}} = \frac{22.4 - 20}{0.6} = \frac{2.4}{0.6} = 4.0.
+\]
+Under $H_0\!: \mu = 20$, $U_n \sim t_{n-1} = t_{24}$. The two-sided level-$0.05$ rejection region is $|U_n| \ge t_{0.025, 24} = 2.064$. Since $|4.0| = 4.0 > 2.064$, \textbf{reject $H_0$}.
+
+\textbf{(b) (3 pts)} The two-sided $p$-value is $2[1 - T_{24}(|U_n|)] = 2[1 - T_{24}(4.0)]$. Since $|U_n| = 4.0$ is much larger than $t_{0.025, 24} = 2.064$, we have $T_{24}(4.0) > T_{24}(2.064) = 0.975$, so
+\[
+    p\text{-value} = 2[1 - T_{24}(4.0)] < 2[1 - 0.975] = 0.05.
+\]
+Therefore the $p$-value is \textbf{less than $0.05$} (in fact much smaller --- $|U_n| = 4$ on $24$ d.f.\ corresponds to a very small probability). This is consistent with rejection at level $0.05$.
+
+\textbf{(c) (4 pts)} The $95\%$ CI for $\mu$ is
+\[
+    \overline{X} \pm t_{0.025, 24} \cdot \tfrac{s}{\sqrt{n}}
+    = 22.4 \pm 2.064 \cdot 0.6
+    = 22.4 \pm 1.2384
+    = (21.16,\; 23.64).
+\]
+Since $\mu_0 = 20$ is \emph{not} in this interval, we conclude that $\mu \neq 20$ at the $5\%$ level --- the same conclusion as in (a). This is exactly Theorem 10.3 (test/CI duality): the level-$\alpha_0$ two-sided test of $H_0\!: \mu = \mu_0$ rejects iff $\mu_0 \notin (\overline{X} - t_{\alpha_0/2}\cdot s/\sqrt{n},\, \overline{X} + t_{\alpha_0/2}\cdot s/\sqrt{n})$.
+
+\textbf{(d) (3 pts)} The one-sided test of $H_0\!: \mu \le 20$ versus $H_1\!: \mu > 20$ at $\alpha_0 = 0.05$ rejects when
+\[
+    U_n \ge t_{0.05, 24} = 1.711.
+\]
+Since $U_n = 4.0 > 1.711$, \textbf{reject $H_0$} at the $5\%$ level. (Note: the threshold drops from $2.064$ to $1.711$ because the entire $\alpha_0 = 0.05$ is allocated to one tail.)
+
+\vspace{0.6em}
+
+\textbf{B2.\ Two-sample $t$-test and $F$-test. (15 pts)}
+
+Given $m = n = 8$, $\overline{X} = 14.0$, $\overline{Y} = 11.5$, $S_X^2 = 16.0$, $S_Y^2 = 9.0$.
+
+\textbf{(a) (5 pts)} The $F$-statistic is
+\[
+    V_{m,n} = \frac{S_X^2/(m-1)}{S_Y^2/(n-1)} = \frac{16/7}{9/7} = \frac{16}{9} \approx 1.778.
+\]
+Under $H_0\!: \sigma_X^2 = \sigma_Y^2$, $V_{m,n} \sim F_{7,7}$. At $\alpha_0 = 0.10$ two-sided we reject if
+\[
+    V \le F_{0.95, 7, 7} = 1/3.79 \approx 0.264 \quad\text{or}\quad V \ge F_{0.05, 7, 7} = 3.79.
+\]
+Since $0.264 < 1.778 < 3.79$, \textbf{fail to reject} the equal-variance hypothesis. The data are consistent with $\sigma_X^2 = \sigma_Y^2$, so it is reasonable to proceed with the pooled-variance two-sample $t$-test.
+
+\textbf{(b) (5 pts)} Pooled-variance two-sample $t$-statistic:
+\begin{align*}
+    \tfrac{1}{m} + \tfrac{1}{n} &= \tfrac{1}{8} + \tfrac{1}{8} = \tfrac{1}{4}, \\
+    S_X^2 + S_Y^2 &= 16 + 9 = 25, \\
+    \bigl(\tfrac{1}{m} + \tfrac{1}{n}\bigr)(S_X^2 + S_Y^2) &= \tfrac{1}{4}\cdot 25 = \tfrac{25}{4}, \\
+    \sqrt{\bigl(\tfrac{1}{m} + \tfrac{1}{n}\bigr)(S_X^2 + S_Y^2)} &= \tfrac{5}{2}, \\
+    \sqrt{m+n-2} &= \sqrt{14}, \\
+    U_{m,n} &= \frac{\sqrt{14}\,(14.0 - 11.5)}{5/2} = \frac{\sqrt{14}\cdot 2.5}{2.5} = \sqrt{14} \approx 3.742.
+\end{align*}
+
+\textbf{(c) (3 pts)} Under $H_0\!: \mu_X = \mu_Y$, $U_{m,n} \sim t_{m+n-2} = t_{14}$. Reject if $|U_{m,n}| \ge t_{0.025, 14} = 2.145$. Since $\sqrt{14} \approx 3.742 > 2.145$, \textbf{reject $H_0$}: there is significant evidence that $\mu_X \neq \mu_Y$ at the $5\%$ level.
+
+\textbf{(d) (2 pts)} The corresponding $95\%$ CI for $\mu_X - \mu_Y$ (by inverting the level-$0.05$ acceptance region) is
+\[
+    (\overline{X} - \overline{Y}) \pm t_{0.025, 14} \cdot \frac{\sqrt{(\tfrac{1}{m}+\tfrac{1}{n})(S_X^2 + S_Y^2)}}{\sqrt{m+n-2}}
+    = 2.5 \pm 2.145 \cdot \frac{5/2}{\sqrt{14}}
+    = 2.5 \pm 2.145 \cdot 0.668.
+\]
+Numerically: $2.5 \pm 1.434 = (1.066,\; 3.934)$. The interval excludes $0$, consistent with rejection in (c).
+
+% ====================================================================
+\newpage
+\section*{Part C --- Major Problems (60 points)}
+
+\textbf{C1.\ Neyman--Pearson and UMP for the exponential rate. (18 pts)}
+
+\textbf{(a) (6 pts)} The joint density is
+\[
+    f(\mathbf{x} \mid \lambda) = \prod_{i=1}^n \lambda e^{-\lambda x_i} = \lambda^n e^{-\lambda T}, \qquad T = \sum_{i=1}^n x_i.
+\]
+For $\lambda_1 > \lambda_0 > 0$, the likelihood ratio is
+\[
+    \frac{f(\mathbf{x}\mid\lambda_1)}{f(\mathbf{x}\mid\lambda_0)}
+    = \left(\frac{\lambda_1}{\lambda_0}\right)^{\!n} \exp\bigl[-(\lambda_1 - \lambda_0)\,T\bigr].
+\]
+The NP lemma says reject $H_0$ when this ratio exceeds $k$:
+\[
+    \left(\frac{\lambda_1}{\lambda_0}\right)^{\!n} e^{-(\lambda_1 - \lambda_0)T} > k
+    \;\iff\; -(\lambda_1 - \lambda_0)\,T > \log k - n\log(\lambda_1/\lambda_0)
+    \;\iff\; T < c,
+\]
+where $c = \dfrac{n\log(\lambda_1/\lambda_0) - \log k}{\lambda_1 - \lambda_0}$.
+
+The inequality flipped because $\lambda_1 - \lambda_0 > 0$, so dividing both sides reverses the sign. \textbf{Intuition:} a larger rate $\lambda$ produces \emph{smaller} observations on average, hence smaller $T$. Small $T$ is evidence for the alternative $\lambda_1 > \lambda_0$.
+
+\textbf{Most powerful test:} reject $H_0$ iff $T \le c$.
+
+\textbf{(b) (4 pts)} Under $H_0$, $T = \sum_{i=1}^n X_i$ is a sum of $n$ i.i.d.\ Exp$(\lambda_0)$ random variables, so
+\[
+    T \sim \text{Gamma}(n, \lambda_0)
+\]
+in DeGroot's rate parameterization, with density $f_T(t) = \frac{\lambda_0^n}{(n-1)!}t^{n-1}e^{-\lambda_0 t}$ for $t > 0$.
+
+To get size $\alpha_0 = 0.05$, choose $c$ so that $\mathbb{P}_{\lambda_0}(T \le c) = 0.05$, i.e.\ $c = G^{-1}_{n,\lambda_0}(0.05)$, the $0.05$-quantile of Gamma$(n, \lambda_0)$. Equivalently, $2\lambda_0 T \sim \chi^2_{2n}$ under $H_0$, so
+\[
+    c = \frac{1}{2\lambda_0}\, \chi^2_{0.05,\, 2n} = \frac{1}{2\lambda_0}\cdot \chi^2_{0.05, 40} \quad (\text{since } n = 20).
+\]
+
+\textbf{(c) (4 pts)} The Exponential family with rate has \emph{monotone likelihood ratio} in $-T$ (equivalently, decreasing MLR in $T$): for any $\lambda_1 > \lambda_0$, the ratio $f_\mathbf{x}(\lambda_1)/f_\mathbf{x}(\lambda_0)$ is a decreasing function of $T$. Therefore the most powerful test from (a), which rejects for $T \le c$, takes the same form for \emph{every} $\lambda_1 > \lambda_0$ --- the cutoff $c$ does not depend on the particular $\lambda_1$.
+
+To confirm size control over $\Omega_0 = \{\lambda \le \lambda_0\}$: for any $\lambda \le \lambda_0$,
+\[
+    \pi(\lambda) = \mathbb{P}_\lambda(T \le c).
+\]
+Since $T$ under rate $\lambda$ is stochastically larger when $\lambda$ is smaller (smaller rate $\Rightarrow$ longer waits $\Rightarrow$ larger $T$), $\mathbb{P}_\lambda(T \le c)$ is non-decreasing in $\lambda$. Hence $\sup_{\lambda \le \lambda_0} \pi(\lambda) = \pi(\lambda_0) = \alpha_0$. Combined with the previous paragraph, the test is UMP at level $\alpha_0$.
+
+\textbf{(d) (4 pts)} For any $\lambda > 0$,
+\[
+    \pi(\lambda) = \mathbb{P}_\lambda(T \le c) = \int_0^c \frac{\lambda^n}{(n-1)!} t^{n-1} e^{-\lambda t}\, dt = G_{n, \lambda}(c),
+\]
+where $G_{n, \lambda}$ is the cdf of Gamma$(n, \lambda)$. Equivalently, since $2\lambda T \sim \chi^2_{2n}$,
+\[
+    \pi(\lambda) = \mathbb{P}\bigl(\chi^2_{2n} \le 2\lambda c\bigr) = F_{\chi^2_{2n}}(2\lambda c).
+\]
+This is increasing in $\lambda$ (the test has more power against larger $\lambda$, as expected).
+
+\vspace{0.6em}
+
+\textbf{C2.\ Likelihood ratio test for a normal variance. (18 pts)}
+
+\textbf{(a) (8 pts)} The likelihood is
+\[
+    L(\mu, \sigma^2) = (2\pi\sigma^2)^{-n/2}\exp\!\left(-\frac{1}{2\sigma^2}\sum_{i=1}^n (X_i - \mu)^2\right).
+\]
+Let $S = \sum_{i=1}^n (X_i - \overline{X})^2$.
+
+\emph{Numerator (sup over $\Omega_0$):} $\sigma^2 = \sigma_0^2$ is fixed; the only free parameter is $\mu$. The MLE of $\mu$ is $\overline{X}$, and at this value $\sum(X_i - \mu)^2 = S$. Hence
+\[
+    \sup_{\Omega_0} L = (2\pi\sigma_0^2)^{-n/2}\exp\!\left(-\frac{S}{2\sigma_0^2}\right).
+\]
+
+\emph{Denominator (sup over $\Omega$):} both $\mu$ and $\sigma^2$ free; MLEs are $\widehat\mu = \overline{X}$ and $\widehat{\sigma}^2 = S/n$. At these values,
+\[
+    \sup_{\Omega} L = (2\pi\widehat{\sigma}^2)^{-n/2}\exp\!\left(-\frac{S}{2\widehat\sigma^2}\right) = (2\pi S/n)^{-n/2}\, e^{-n/2}.
+\]
+
+Therefore
+\[
+    \Lambda_n(\mathbf{X})
+    = \frac{\sup_{\Omega_0} L}{\sup_{\Omega} L}
+    = \frac{(2\pi\sigma_0^2)^{-n/2}\exp(-S/(2\sigma_0^2))}{(2\pi S/n)^{-n/2}\, e^{-n/2}}
+    = \left(\frac{S/n}{\sigma_0^2}\right)^{\!n/2} \exp\!\left(\frac{n}{2} - \frac{S}{2\sigma_0^2}\right).
+\]
+Define $T = S/\sigma_0^2 = \sum (X_i - \overline{X})^2/\sigma_0^2$. Then $S/(n\sigma_0^2) = T/n$, and
+\[
+    \boxed{\;\Lambda_n(\mathbf{X}) = \left(\frac{T}{n}\right)^{\!n/2} \exp\!\left(\frac{n - T}{2}\right).\;}
+\]
+$\Lambda_n$ is a function of $T$ alone.
+
+\textbf{(b) (5 pts)} Take logs:
+\[
+    \log \Lambda_n = \frac{n}{2}\log(T/n) + \frac{n - T}{2} = \frac{n}{2}\bigl[\log(T/n) + 1 - T/n\bigr].
+\]
+Setting $u = T/n$, $g(u) = \log u + 1 - u$ has derivative $g'(u) = 1/u - 1$, so $g$ is uniquely maximized at $u = 1$ (i.e.\ $T = n$) with $g(1) = 0$. $g(u) \to -\infty$ as $u \to 0^+$ or $u \to \infty$. Therefore $\log \Lambda_n$ (and hence $\Lambda_n$) is a single-peaked function of $T$ with maximum $\Lambda_n = 1$ at $T = n$, decreasing on both sides.
+
+It follows that for any threshold $k \in (0, 1)$, $\{\Lambda_n \le k\}$ is equivalent to $\{T \le c_1\}\cup\{T \ge c_2\}$ for constants $c_1 < n < c_2$ chosen so that the size equals $\alpha_0$.
+
+Under $H_0\!: \sigma^2 = \sigma_0^2$, the standard result gives
+\[
+    T = \frac{\sum (X_i - \overline{X})^2}{\sigma_0^2} \sim \chi^2_{n-1}.
+\]
+The standard equal-tailed $\chi^2$-test takes $c_1 = \chi^2_{\alpha_0/2,\, n-1}$ and $c_2 = \chi^2_{1 - \alpha_0/2,\, n-1}$. This isn't exactly equal-tailed in the LRT sense (the LRT would split based on equal $\Lambda_n$ values rather than equal tail probabilities) but it is the standard chi-square test and is asymptotically equivalent.
+
+\textbf{(c) (5 pts)} With $n = 9$, $\sigma_0^2 = 4$, observed $\sum(X_i - \overline{X})^2 = 32$:
+\[
+    T = \frac{32}{4} = 8.
+\]
+Under $H_0$, $T \sim \chi^2_8$. The level-$0.05$ equal-tailed rejection region is
+\[
+    \{T \le \chi^2_{0.025, 8}\} \cup \{T \ge \chi^2_{0.975, 8}\} = \{T \le 2.18\} \cup \{T \ge 17.53\}.
+\]
+Since $2.18 < 8 < 17.53$, $T$ falls in the acceptance region. \textbf{Fail to reject $H_0$}: the data are consistent with $\sigma^2 = 4$. (Note that $E[T] = n - 1 = 8$ under $H_0$, and we observed exactly $T = 8$, so this is the most consistent possible value.)
+
+\vspace{0.6em}
+
+\textbf{C3.\ Support-dependent family --- direct Type I/II calculation. (12 pts)}
+
+The pdf $f(x \mid \theta) = 2(1-\theta)x + \theta$ on $[0,1]$ has:
+\begin{itemize}[leftmargin=2em, itemsep=0pt]
+    \item $\int_0^1 [2(1-\theta)x + \theta]\,dx = (1-\theta) + \theta = 1$ \,(valid pdf), and
+    \item $f(x\mid\theta) \ge 0$ for $\theta \in [0,1]$ (since both terms are non-negative).
+\end{itemize}
+The test rejects $H_0\!: \theta \ge 1/2$ when $X > 1/3$, so the power function is
+\[
+    \pi(\theta) = \mathbb{P}_\theta(X > 1/3) = \int_{1/3}^{1}\bigl[2(1-\theta)x + \theta\bigr]dx.
+\]
+Compute:
+\begin{align*}
+    \int_{1/3}^{1} 2x\,dx &= \bigl[x^2\bigr]_{1/3}^{1} = 1 - \tfrac{1}{9} = \tfrac{8}{9}, \\
+    \int_{1/3}^{1} 1\,dx &= 1 - \tfrac{1}{3} = \tfrac{2}{3}.
+\end{align*}
+Therefore
+\[
+    \pi(\theta) = (1-\theta)\cdot \tfrac{8}{9} + \theta \cdot \tfrac{2}{3}
+    = \tfrac{8}{9} - \tfrac{8}{9}\theta + \tfrac{6}{9}\theta
+    = \tfrac{8}{9} - \tfrac{2}{9}\theta.
+\]
+
+\textbf{(a) (5 pts) Type I error.}
+$\pi(\theta) = \tfrac{8}{9} - \tfrac{2}{9}\theta$ is \emph{decreasing} in $\theta$ (slope $-2/9 < 0$). Hence on $\Omega_0 = [1/2, 1]$ the supremum is attained at the smallest $\theta$, namely $\theta = 1/2$:
+\[
+    \alpha(\delta) = \sup_{\theta \ge 1/2} \pi(\theta) = \pi(1/2) = \tfrac{8}{9} - \tfrac{2}{9}\cdot \tfrac{1}{2}
+    = \tfrac{8}{9} - \tfrac{1}{9} = \tfrac{7}{9}.
+\]
+This is a \emph{very} large Type I error --- the test rejects too readily because the cutoff $X > 1/3$ excludes only a small portion of the unit interval. The rejection region should be moved closer to $1$ to reduce $\alpha$.
+
+\textbf{(b) (3 pts) Type II error at $\theta = 0$.}
+\[
+    1 - \pi(0) = 1 - \tfrac{8}{9} = \tfrac{1}{9}.
+\]
+
+\textbf{(c) (2 pts) Cram\'er--Rao does not apply (or is irrelevant) here} for two reasons:
+\begin{itemize}[leftmargin=2em, itemsep=0pt]
+    \item The parameter space $\Theta = [0,1]$ is \emph{closed}, so the regularity condition that $\theta$ lie in the interior of an open set fails at the endpoints. Standard differentiation-under-the-integral arguments break at $\theta \in \{0, 1\}$.
+    \item More fundamentally, the CR lower bound is a lower bound on the variance of \emph{unbiased estimators}; here we are computing exact Type I/II errors of a fixed test, not assessing an estimator's efficiency. The CR bound is silent about the power function of a test.
+\end{itemize}
+(Note: the support $[0,1]$ does \emph{not} depend on $\theta$, so the classical "support depends on $\theta$" failure does not apply.)
+
+\textbf{(d) (2 pts) Sketch of $\pi(\theta)$.}
+$\pi(\theta) = \tfrac{8}{9} - \tfrac{2}{9}\theta$ is a straight line decreasing from $\pi(0) = 8/9$ to $\pi(1) = 6/9 = 2/3$. Specifically:
+\[
+    \pi(0) = \tfrac{8}{9} \approx 0.889, \qquad \pi(1/2) = \tfrac{7}{9} \approx 0.778, \qquad \pi(1) = \tfrac{6}{9} = \tfrac{2}{3} \approx 0.667.
+\]
+
+\begin{center}
+\begin{tabular}{c|ccc}
+$\theta$ & $0$ & $1/2$ & $1$ \\
+\hline
+$\pi(\theta)$ & $8/9$ & $7/9$ & $6/9$ \\
+\end{tabular}
+\end{center}
+
+The line slopes gently downward over $[0, 1]$. A "good" test would have $\pi$ small on $\Omega_0 = [1/2, 1]$ and large on $\Omega_1 = [0, 1/2)$; here $\pi$ is roughly the same value across the entire parameter space, indicating that this test does poorly at distinguishing $H_0$ from $H_1$.
+
+\vspace{0.6em}
+
+\textbf{C4.\ Cumulative review --- sufficiency, Bayes, consistency. (12 pts)}
+
+\textbf{(a) (4 pts)} The joint pmf is
+\[
+    f(\mathbf{x} \mid p) = \prod_{i=1}^n p(1-p)^{x_i} = p^n (1-p)^{\sum x_i} = p^n (1-p)^{T}, \quad T = \sum x_i.
+\]
+Define $g(T, p) = p^n (1-p)^T$ and $h(\mathbf{x}) = 1$ (subject to $x_i \in \{0, 1, 2, \dots\}$, which we encode as an indicator). Then
+\[
+    f(\mathbf{x}\mid p) = g(T(\mathbf{x}), p)\cdot h(\mathbf{x}).
+\]
+By the Fisher--Neyman factorization criterion, $T = \sum_{i=1}^n X_i$ is a sufficient statistic for $p$.
+
+\textbf{(b) (4 pts)} The prior density is $\xi(p) \propto p^{\alpha_0 - 1}(1-p)^{\beta_0 - 1}$ on $(0,1)$. The posterior is proportional to prior $\times$ likelihood:
+\[
+    \xi(p \mid \mathbf{x}) \propto p^{\alpha_0 - 1}(1-p)^{\beta_0 - 1} \cdot p^n (1-p)^T
+    = p^{(n + \alpha_0) - 1}(1-p)^{(T + \beta_0) - 1}.
+\]
+This is the kernel of a Beta distribution:
+\[
+    p \mid \mathbf{X} = \mathbf{x} \;\sim\; \text{Beta}(n + \alpha_0,\; T + \beta_0).
+\]
+
+\textbf{(c) (2 pts)} Under squared-error loss, the Bayes estimator equals the posterior mean. For Beta$(a, b)$ the mean is $a/(a+b)$, so
+\[
+    \widehat{p}_{\text{Bayes}} = \mathbb{E}[p \mid \mathbf{X}] = \frac{n + \alpha_0}{(n + \alpha_0) + (T + \beta_0)} = \frac{n + \alpha_0}{n + \alpha_0 + \beta_0 + T}.
+\]
+
+\textbf{(d) (2 pts)} For Geometric$(p)$, $\mathbb{E}[X_i] = (1-p)/p$, so by the WLLN
+\[
+    \frac{T}{n} = \overline{X}_n \xrightarrow{P} \frac{1-p}{p}.
+\]
+Then
+\[
+    \widehat{p}_{\text{MLE}} = \frac{n}{n + T} = \frac{1}{1 + T/n} \xrightarrow{P} \frac{1}{1 + (1-p)/p} = p.
+\]
+For the Bayes estimator, divide numerator and denominator by $n$:
+\[
+    \widehat{p}_{\text{Bayes}} = \frac{1 + \alpha_0/n}{1 + (\alpha_0 + \beta_0)/n + T/n} \xrightarrow{P} \frac{1 + 0}{1 + 0 + (1-p)/p} = \frac{p}{p + (1-p)} = p.
+\]
+By the continuous mapping theorem (or just Slutsky), both estimators converge in probability to $p$. The prior parameters $\alpha_0, \beta_0$ are washed out as $n \to \infty$, which is the usual phenomenon: the data dominate the prior in the large-sample limit.
+
+\end{document}

@@ -1,0 +1,182 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+
+\newcommand{\bX}{\overline{X}}
+\newcommand{\bY}{\overline{Y}}
+\newcommand{\iid}{\stackrel{\text{iid}}{\sim}}
+
+\begin{document}
+
+\begin{center}
+    {\large\textbf{STAT GU4204 --- Statistical Inference}}\\[2pt]
+    {\normalsize Final Exam --- Version C (Computation-Heavy / Numerical)}\\[2pt]
+    {\small Spring 2026 \quad $\cdot$ \quad Prof. Banu Baydil \quad $\cdot$ \quad 150 minutes \quad $\cdot$ \quad 100 points}
+\end{center}
+
+\vspace{0.5em}
+
+\textbf{Name:} \rule{6cm}{0.4pt} \hfill \textbf{UNI:} \rule{4cm}{0.4pt}
+
+\vspace{0.5em}
+
+\hrule
+\vspace{0.5em}
+
+\textbf{Instructions.}
+\begin{itemize}[leftmargin=*, itemsep=0pt, topsep=0pt]
+    \item Show \emph{all} work. Numerical answers without supporting computation receive no credit.
+    \item Fractions and unsimplified square roots are acceptable wherever they appear.
+    \item No calculators, computers, or phones. One double-sided handwritten cheat sheet permitted.
+    \item All distributions follow the DeGroot \& Schervish conventions (e.g.\ $\text{Geometric}(p)$ has PMF $p(1-p)^x$ for $x = 0,1,2,\dots$).
+\end{itemize}
+
+\textbf{Quantile Table (provided).}
+\begin{align*}
+&z_{0.10} = 1.282, \quad z_{0.05} = 1.645, \quad z_{0.025} = 1.960, \quad z_{0.01} = 2.326, \quad z_{0.005} = 2.576 \\[2pt]
+&t_{0.025,\,7} = 2.365, \quad t_{0.025,\,8} = 2.306, \quad t_{0.025,\,14} = 2.145, \quad t_{0.025,\,19} = 2.093 \\[2pt]
+&t_{0.05,\,7} = 1.895, \quad t_{0.05,\,8} = 1.860, \quad t_{0.05,\,14} = 1.761 \\[2pt]
+&\chi^2_{0.95,\,7} = 14.07, \quad \chi^2_{0.05,\,7} = 2.17, \quad \chi^2_{0.975,\,9} = 19.02, \quad \chi^2_{0.025,\,9} = 2.700 \\[2pt]
+&F_{0.05,\,7,7} = 3.79, \quad F_{0.025,\,7,7} = 4.99, \quad F_{0.975,\,7,7} = 1/F_{0.025,\,7,7} = 0.20
+\end{align*}
+
+(Notation: $z_{\alpha}$, $t_{\alpha, d}$, $\chi^2_{\alpha, d}$, $F_{\alpha, d_1, d_2}$ each denote the value such that the upper-tail probability above it equals $\alpha$.)
+
+\hrule
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Part A --- Short Numerical (10 points, 2 each)}
+
+\textbf{A1.} (2 pts) For a two-sided $z$-test of $H_0: \mu = \mu_0$ vs.\ $H_1: \mu \ne \mu_0$, the observed test statistic is $Z = 2.326$. Compute the (two-sided) $p$-value.
+
+\vspace{0.5em}
+
+\textbf{A2.} (2 pts) Suppose a $95\%$ confidence interval for $\mu$ based on a normal sample is reported as $(10,\ 20)$. Use the test/CI duality to test $H_0: \mu = 12$ vs.\ $H_1: \mu \ne 12$ at significance level $\alpha_0 = 0.05$. State the conclusion in one sentence.
+
+\vspace{0.5em}
+
+\textbf{A3.} (2 pts) Let $X_1, \dots, X_n \iid N(\mu, \sigma^2)$ with $\sigma = 4$ known. Find the smallest sample size $n$ such that the resulting $95\%$ confidence interval for $\mu$ has total width at most $1$.
+
+\vspace{0.5em}
+
+\textbf{A4.} (2 pts) Let $Y$ and $W$ be independent $\chi^2_8$ random variables. Compute
+\[
+P\!\left(\frac{Y}{W} > 3.44\right),
+\]
+given that $F_{0.05,\,8,\,8} = 3.44$. (Hint: identify the distribution of $Y/W$.)
+
+\vspace{0.5em}
+
+\textbf{A5.} (2 pts) A one-sided $z$-test has Type I error rate $\alpha_0 = 0.05$ and power $0.80$ at the alternative value $\theta = 1$. What is the Type II error probability $\beta$ at $\theta = 1$?
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Part B --- Mid-Length Problems (30 points)}
+
+\subsection*{Problem B1 --- One-Sample $t$-Inference (15 pts)}
+
+A random sample $X_1, \dots, X_8 \iid N(\mu, \sigma^2)$ with $\mu, \sigma^2$ unknown produces the data
+\[
+3.1,\ 3.5,\ 2.6,\ 3.4,\ 3.8,\ 3.0,\ 2.9,\ 2.2.
+\]
+
+\begin{enumerate}[label=(\alph*),leftmargin=2em]
+    \item (4 pts) Compute the sample mean $\bar{x}$ and the (unbiased) sample standard deviation $s$. Report each to three decimals. \emph{Useful: $\sum_i (x_i - \bar{x})^2 = 1.83875$.}
+    \item (4 pts) Construct the $95\%$ confidence interval for $\mu$ using the $t$-pivot. Leave $\sqrt{8}$ unsimplified if needed.
+    \item (4 pts) Test $H_0: \mu = 3$ vs.\ $H_1: \mu \ne 3$ at $\alpha_0 = 0.05$. Report the test statistic, the critical value, and your conclusion.
+    \item (3 pts) For a \emph{future} study, suppose $\sigma$ is known to equal $0.5$. Find the smallest sample size $n^\star$ such that the resulting $95\%$ confidence interval for $\mu$ has half-width at most $0.05$.
+\end{enumerate}
+
+\subsection*{Problem B2 --- Two-Sample $t$-Inference (15 pts)}
+
+Two independent random samples were collected:
+\begin{itemize}[leftmargin=*, itemsep=0pt]
+    \item Sample 1: $X_1, \dots, X_8 \iid N(\mu_X, \sigma^2)$ with $\bar{x} = 10.0$ and \emph{unbiased sample variance} $s_X^2 = 4.0$.
+    \item Sample 2: $Y_1, \dots, Y_8 \iid N(\mu_Y, \sigma^2)$ with $\bar{y} = 8.0$ and \emph{unbiased sample variance} $s_Y^2 = 2.0$.
+\end{itemize}
+Assume the two populations share a common (unknown) variance $\sigma^2$.
+
+\begin{enumerate}[label=(\alph*),leftmargin=2em]
+    \item (3 pts) Compute the pooled sample variance $s_p^2$.
+    \item (4 pts) Compute the two-sample $t$-statistic $T$ and state its degrees of freedom under $H_0: \mu_X = \mu_Y$.
+    \item (4 pts) Test $H_0: \mu_X = \mu_Y$ vs.\ $H_1: \mu_X \ne \mu_Y$ at $\alpha_0 = 0.05$. Report the critical value and your conclusion.
+    \item (4 pts) Construct a $95\%$ confidence interval for $\mu_X - \mu_Y$. (You may leave $\sqrt{3}$ unsimplified.)
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Part C --- Major Problems (60 points)}
+
+\subsection*{Problem C1 --- Power Function and Sample Size (15 pts)}
+
+Let $X_1, \dots, X_n \iid N(\mu, \sigma^2)$ with $\sigma = 2$ known. Consider testing
+\[
+H_0: \mu \le 10 \quad \text{vs.} \quad H_1: \mu > 10
+\]
+at significance level $\alpha_0 = 0.05$ using the test that rejects $H_0$ when $\bar{X}$ exceeds a threshold.
+
+\begin{enumerate}[label=(\alph*),leftmargin=2em]
+    \item (4 pts) Find the rejection threshold $c_n$ for $\bar{X}$ as an explicit function of $n$. Justify briefly why your test has size $\alpha_0$.
+    \item (5 pts) Take $n = 16$. Compute the power of the test at $\mu = 11.645$, i.e., $\pi(11.645)$. Express the answer as $\Phi(\,\cdot\,)$ and then evaluate using the table.
+    \item (6 pts) Find the smallest sample size $n$ such that $\pi(11.645) \ge 0.99$.
+\end{enumerate}
+
+\subsection*{Problem C2 --- $F$-Test for Equality of Variances (15 pts)}
+
+Let $X_1, \dots, X_8 \iid N(\mu_X, \sigma_X^2)$ and $Y_1, \dots, Y_8 \iid N(\mu_Y, \sigma_Y^2)$ be independent samples with all four parameters unknown. Define
+\[
+S_X^2 = \sum_{i=1}^8 (X_i - \bar{X})^2, \qquad S_Y^2 = \sum_{j=1}^8 (Y_j - \bar{Y})^2.
+\]
+The data give $S_X^2 = 20.0$ and $S_Y^2 = 5.0$.
+
+\begin{enumerate}[label=(\alph*),leftmargin=2em]
+    \item (3 pts) Compute the test statistic
+    \[
+    V = \frac{S_X^2/(m-1)}{S_Y^2/(n-1)} \quad\text{with } m = n = 8.
+    \]
+    \item (3 pts) State the null distribution of $V$ under $H_0: \sigma_X^2 = \sigma_Y^2$.
+    \item (5 pts) Test $H_0: \sigma_X^2 = \sigma_Y^2$ vs.\ $H_1: \sigma_X^2 \ne \sigma_Y^2$ at $\alpha_0 = 0.05$. Use the critical region $\{V \le 0.20\} \cup \{V \ge 4.99\}$. State the decision and justify.
+    \item (4 pts) Construct a $95\%$ confidence interval for the variance ratio $\sigma_X^2/\sigma_Y^2$ by inverting the two-sided $F$-test.
+\end{enumerate}
+
+\subsection*{Problem C3 --- Bayesian Inference for a Bernoulli Proportion (15 pts)}
+
+Let $X_1, \dots, X_n \iid \text{Bernoulli}(p)$ and place a $\text{Beta}(2, 2)$ prior on $p$. We observe $n = 10$ trials with $\sum_{i=1}^{10} X_i = 7$.
+
+\begin{enumerate}[label=(\alph*),leftmargin=2em]
+    \item (4 pts) Find the posterior distribution of $p$ given the data. State its parameters explicitly.
+    \item (3 pts) Compute the posterior mean (the Bayes estimator under squared-error loss).
+    \item (4 pts) Compute the posterior mode. Recall: for $\text{Beta}(\alpha, \beta)$ with $\alpha, \beta > 1$, the mode is $(\alpha - 1)/(\alpha + \beta - 2)$.
+    \item (4 pts) Compute the maximum likelihood estimate $\hat{p}_{\text{MLE}}$. Report all three quantities (posterior mean, posterior mode, MLE) as fractions and one-line numerical decimals; comment in one sentence on how the prior shifts the estimate.
+\end{enumerate}
+
+\subsection*{Problem C4 --- Geometric MLE and Asymptotic CI (15 pts)}
+
+Let $X_1, \dots, X_n \iid \text{Geometric}(p)$ with PMF
+\[
+f(x \mid p) = p(1-p)^x, \quad x = 0, 1, 2, \dots, \quad p \in (0,1).
+\]
+Take $n = 50$ and assume the observed sum is $\sum_{i=1}^{50} X_i = 60$ (so the sample mean is $\bar{X} = 1.2$).
+
+\begin{enumerate}[label=(\alph*),leftmargin=2em]
+    \item (4 pts) Show that the maximum likelihood estimator of $p$ is
+    \[
+    \hat{p}_n = \frac{n}{n + \sum_i X_i} = \frac{1}{1 + \bar{X}}.
+    \]
+    Compute the numerical value of $\hat{p}_n$.
+    \item (4 pts) Compute the Fisher information $I_n(p)$ in the entire sample.
+    \item (5 pts) Use the asymptotic normality of the MLE to construct an approximate $95\%$ confidence interval for $p$. Express the answer as $\hat{p}_n \pm 1.96 \cdot (\text{plug-in standard error})$; you may leave the standard error as a single unsimplified square root.
+    \item (2 pts) Interpret the interval in one sentence (avoid the common probability misstatement).
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\begin{center}
+\textit{End of exam --- check that you have answered all five sections.}
+\end{center}
+
+\end{document}

@@ -1,0 +1,271 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+% Problem command: \prob{points}{title}
+\newcounter{probnum}
+\newcommand{\prob}[2]{%
+  \stepcounter{probnum}%
+  \bigskip
+  \noindent\textbf{Problem \theprobnum.\ #2 \hfill (#1 points)}\par\nobreak
+}
+
+% Sub-part command: (a), (b), ...
+\newcommand{\partlabel}[2]{\medskip\noindent\textbf{(#1)} \emph{(#2 pts)}\quad}
+
+\begin{document}
+
+% =====================================================================
+% COVER PAGE
+% =====================================================================
+
+\begin{center}
+{\LARGE\bfseries STAT GU4204 --- Statistical Inference}\\[6pt]
+{\Large Final Exam --- Practice Version A}\\[6pt]
+{\large Spring 2026 \hspace{1.5cm} Total: 100 points \hspace{1.5cm} Time: 150 minutes}
+\end{center}
+
+\medskip
+
+Name: \underline{\hspace{3.5in}} \hspace{0.5cm} UNI: \underline{\hspace{1.5in}}
+
+\medskip
+\hrule
+\medskip
+
+\textbf{Instructions.} Show all work to get full credit. Calculators are \textbf{NOT} allowed. You may use a one-page (8.5$\times$11) double-sided \emph{hand-written} cheat sheet. Probability tables are provided below. You do NOT need to simplify final numerical answers (e.g., leaving $\sqrt{10}$ unevaluated is acceptable). Cross out anything you do not want graded.
+
+\medskip
+\hrule
+\medskip
+
+\textbf{Quantile Table.} You may use the following values throughout.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}l@{\hspace{1em}}l@{\hspace{1em}}l@{\hspace{1em}}l@{\hspace{1em}}l@{}}
+\multicolumn{5}{@{}l}{\textbf{Standard normal quantiles} (so $P(Z > z_p) = p$):}\\
+$z_{0.10} = 1.282$ & $z_{0.05} = 1.645$ & $z_{0.025} = 1.960$ & $z_{0.01} = 2.326$ & $z_{0.005} = 2.576$\\[4pt]
+\multicolumn{5}{@{}l}{\textbf{Student's $t$ quantiles} (so $P(T_d > t_{p,d}) = p$):}\\
+$t_{0.025,7} = 2.365$ & $t_{0.025,8} = 2.306$ & $t_{0.025,9} = 2.262$ & $t_{0.025,14} = 2.145$ & $t_{0.025,15} = 2.131$\\
+$t_{0.025,16} = 2.120$ & $t_{0.025,19} = 2.093$ & $t_{0.025,24} = 2.064$ & $t_{0.05,8} = 1.860$ & $t_{0.05,14} = 1.761$\\[4pt]
+\multicolumn{5}{@{}l}{\textbf{Chi-square quantiles} (so $P(\chi^2_d > \chi^2_{p,d}) = p$, i.e.\ upper tail):}\\
+$\chi^2_{0.05,1} = 3.841$ & $\chi^2_{0.05,7} = 14.07$ & $\chi^2_{0.05,8} = 15.51$ & $\chi^2_{0.95,8} = 2.733$ & $\chi^2_{0.025,9} = 19.02$\\[4pt]
+\multicolumn{5}{@{}l}{\textbf{$F$ quantiles} (so $P(F_{m,n} > F_{p,m,n}) = p$):}\\
+$F_{0.05,4,4} = 6.39$ & $F_{0.05,7,7} = 3.79$ & $F_{0.025,7,7} = 4.99$ & $F_{0.975,7,7} = 0.20$ &\\
+\end{tabular}
+\end{center}
+
+\medskip
+\hrule
+\medskip
+
+\textbf{Point Distribution.}
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+Section & Problems & Points\\
+\midrule
+Part A --- Short Conceptual & 4 short & 10\\
+Part B --- Mid-Length Problems & 2 problems $\times$ 15 pts & 30\\
+Part C --- Major Problems & 3 problems $\times$ 20 pts & 60\\
+\midrule
+\textbf{Total} & & \textbf{100}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\newpage
+
+% =====================================================================
+% PART A: Short Conceptual
+% =====================================================================
+\section*{Part A --- Short Conceptual \hfill (10 points total)}
+
+\textit{Each question requires only a brief but precise answer. Justification beyond what is asked is not necessary.}
+
+\prob{3}{Cram\'er--Rao Lower Bound}
+State the Cram\'er--Rao Lower Bound (CRLB) for the variance of an unbiased estimator $T = T(X_1, \dots, X_n)$ of $g(\theta)$. Then state \textbf{one} regularity condition required for the bound to hold.
+
+\vfill
+
+\prob{3}{Neyman--Pearson Lemma}
+State the Neyman--Pearson Lemma. Be sure to specify the testing setup (simple vs.\ composite hypotheses) and the form of the optimal test.
+
+\vfill
+
+\prob{2}{Sufficient Statistics}
+Define what it means for a statistic $T = \varphi(X_1, \dots, X_n)$ to be \emph{sufficient} for $\theta$, and state the \textbf{factorization criterion}.
+
+\vfill
+
+\prob{2}{Test/CI Duality}
+In 2--3 sentences, describe the duality between hypothesis tests and confidence intervals. In particular, explain how a level-$\alpha_0$ test of $H_0: \theta = \theta_0$ gives rise to a $(1-\alpha_0)$ confidence set for $\theta$.
+
+\vfill
+\newpage
+
+% =====================================================================
+% PART B: Mid-Length Problems
+% =====================================================================
+\section*{Part B --- Mid-Length Problems \hfill (30 points total)}
+
+\prob{15}{MLE for the Exponential, Delta Method, and CI}
+Let $X_1, \dots, X_n$ be a random sample from the exponential distribution with rate parameter $\theta > 0$, i.e.\ density
+\[
+f(x \mid \theta) = \theta e^{-\theta x}, \qquad x > 0.
+\]
+Recall that $E_\theta[X_1] = 1/\theta$ and $\mathrm{Var}_\theta(X_1) = 1/\theta^2$.
+
+\partlabel{a}{5}
+Find the maximum likelihood estimator (MLE) $\widehat{\theta}_n$ of $\theta$. Show your work.
+
+\vspace{1.4cm}
+
+\partlabel{b}{3}
+Show that $\widehat{\theta}_n$ is a consistent estimator of $\theta$. State clearly which limit theorem(s) you are using.
+
+\vspace{1.4cm}
+
+\partlabel{c}{4}
+Use the delta method to find the asymptotic distribution of $\sqrt{n}(\widehat{\theta}_n - \theta)$. That is, give a result of the form
+\(
+\sqrt{n}(\widehat{\theta}_n - \theta) \xrightarrow{d} N(0, \tau^2(\theta))
+\)
+and identify $\tau^2(\theta)$.
+
+\vspace{1.6cm}
+
+\partlabel{d}{3}
+Using the result from (c), construct an approximate $95\%$ confidence interval for $\theta$. (You may plug in $\widehat{\theta}_n$ for $\theta$ in the asymptotic variance --- justify briefly why this is allowed.)
+
+\vfill
+\newpage
+
+\prob{15}{Bernoulli with a Beta Prior; Sufficiency}
+Let $X_1, \dots, X_n$ be i.i.d.\ $\mathrm{Bernoulli}(p)$, where $p \in (0,1)$ is unknown. Suppose the prior on $p$ is $\mathrm{Beta}(\alpha, \beta)$ with known hyperparameters $\alpha, \beta > 0$.
+
+\partlabel{a}{5}
+Find the posterior distribution of $p$ given $X_1, \dots, X_n$ and identify it by name and parameters.
+
+\vspace{2cm}
+
+\partlabel{b}{3}
+Find the Bayes estimator of $p$ under squared-error loss.
+
+\vspace{1.6cm}
+
+\partlabel{c}{4}
+Using the factorization criterion, show that $T = \sum_{i=1}^n X_i$ is a sufficient statistic for $p$.
+
+\vspace{1.8cm}
+
+\partlabel{d}{3}
+What does the Bayes estimator from (b) converge to as $n \to \infty$? Justify briefly.
+
+\vfill
+\newpage
+
+% =====================================================================
+% PART C: Major Problems
+% =====================================================================
+\section*{Part C --- Major Problems \hfill (60 points total)}
+
+\prob{20}{Two-Sample $t$-Test and $F$-Test}
+A researcher collects two independent samples assumed to follow normal distributions. Specifically:
+\[
+X_1, \dots, X_m \overset{\text{iid}}{\sim} N(\mu_X, \sigma^2), \qquad Y_1, \dots, Y_n \overset{\text{iid}}{\sim} N(\mu_Y, \sigma^2),
+\]
+with $m = 8$ and $n = 8$. The two samples are independent. The observed summary statistics are
+\[
+\bar{X}_m = 23.5, \qquad \bar{Y}_n = 21.0, \qquad S_X^2 = \sum_{i=1}^m (X_i - \bar{X}_m)^2 = 21, \qquad S_Y^2 = \sum_{j=1}^n (Y_j - \bar{Y}_n)^2 = 14.
+\]
+
+\partlabel{a}{10}
+Test $H_0: \mu_X = \mu_Y$ versus $H_1: \mu_X \neq \mu_Y$ at significance level $\alpha_0 = 0.05$, assuming the common-variance model above. Specifically:
+\begin{enumerate}[label=(\roman*),leftmargin=*]
+  \item Write down the test statistic $U_{m,n}$ and its distribution under $H_0$.
+  \item Compute the observed value of $U_{m,n}$ from the data.
+  \item State the critical value, the rejection rule, and your decision.
+\end{enumerate}
+
+\vspace{4cm}
+
+\partlabel{b}{5}
+Construct a $95\%$ confidence interval for $\mu_X - \mu_Y$ (still under the common-variance model).
+
+\vspace{3cm}
+
+\partlabel{c}{5}
+Now suppose the researcher questions the common-variance assumption. Set up and carry out a two-sided test of
+\[
+H_0: \sigma_X^2 = \sigma_Y^2 \qquad \text{versus} \qquad H_1: \sigma_X^2 \neq \sigma_Y^2
+\]
+at level $\alpha_0 = 0.10$. Give the test statistic, its null distribution, the rejection region, and your decision. (Use the values of $S_X^2$ and $S_Y^2$ from above.)
+
+\vfill
+\newpage
+
+\prob{20}{Neyman--Pearson Test, Power, and Sample Size}
+Let $X_1, \dots, X_n$ be i.i.d.\ $N(\theta, 1)$, with $\theta$ unknown. Consider the simple-versus-simple testing problem
+\[
+H_0: \theta = 0 \quad \text{versus} \quad H_1: \theta = 1
+\]
+at significance level $\alpha_0 = 0.05$. Take $n = 16$.
+
+\partlabel{a}{8}
+Apply the Neyman--Pearson Lemma to derive the most powerful test of $H_0$ versus $H_1$ at level $\alpha_0$. Show that the rejection region can be written in the form $\{\bar{X}_n > c\}$ for some constant $c$.
+
+\vspace{4cm}
+
+\partlabel{b}{4}
+Find the constant $c$ explicitly (using $n = 16$ and $\alpha_0 = 0.05$).
+
+\vspace{2.5cm}
+
+\partlabel{c}{5}
+Compute the power $\pi(1) = P_{\theta=1}(\text{reject } H_0)$ of this test, expressed in terms of $\Phi$, the standard normal cdf. Then state the corresponding probability of Type II error $\beta$.
+
+\vspace{3cm}
+
+\partlabel{d}{3}
+Using a level-$\alpha_0 = 0.05$ test of the same form as in (a), what is the smallest sample size $n^*$ such that the power against the alternative $\theta = 1$ satisfies $\pi(1) \geq 0.99$?
+
+\vfill
+\newpage
+
+\prob{20}{MLE, Fisher Information, and Likelihood Ratio Test for Poisson}
+Let $X_1, \dots, X_n$ be i.i.d.\ $\mathrm{Poisson}(\lambda)$, where $\lambda > 0$ is unknown. Recall the pmf $f(x \mid \lambda) = e^{-\lambda} \lambda^x / x!$ for $x = 0, 1, 2, \dots$
+
+\partlabel{a}{5}
+Find the MLE $\widehat{\lambda}_n$ of $\lambda$ and show that it is unbiased for $\lambda$.
+
+\vspace{2.5cm}
+
+\partlabel{b}{5}
+Compute the Fisher information $I(\lambda)$ in a single observation, and the Fisher information $I_n(\lambda)$ in the full sample. Use the Cram\'er--Rao Lower Bound to determine whether $\widehat{\lambda}_n$ is efficient.
+
+\vspace{3.5cm}
+
+\partlabel{c}{6}
+Derive the likelihood ratio test statistic $\Lambda(\mathbf{X})$ for testing
+\[
+H_0: \lambda = \lambda_0 \quad \text{versus} \quad H_1: \lambda \neq \lambda_0,
+\]
+where $\lambda_0 > 0$ is a fixed value. Simplify $-2 \log \Lambda(\mathbf{X})$ as much as possible (your answer should be in terms of $n$, $\widehat{\lambda}_n$, and $\lambda_0$).
+
+\vspace{4cm}
+
+\partlabel{d}{4}
+Using Wilks' theorem, give an asymptotic level-$\alpha_0 = 0.05$ rejection rule based on $-2\log\Lambda(\mathbf{X})$. State the limiting distribution clearly.
+
+\vfill
+
+\end{document}

@@ -1,0 +1,333 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+
+\newcommand{\bX}{\overline{X}}
+\newcommand{\bY}{\overline{Y}}
+\newcommand{\iid}{\stackrel{\text{iid}}{\sim}}
+
+\begin{document}
+
+\begin{center}
+    {\large\textbf{STAT GU4204 --- Statistical Inference}}\\[2pt]
+    {\normalsize Final Exam --- Version C --- \emph{Full Solutions}}\\[2pt]
+    {\small Spring 2026 \quad $\cdot$ \quad Prof. Banu Baydil}
+\end{center}
+
+\vspace{1em}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Part A --- Short Numerical}
+
+\textbf{A1.} For a two-sided $z$-test the $p$-value is
+\[
+p = 2\bigl(1 - \Phi(|Z|)\bigr) = 2\bigl(1 - \Phi(2.326)\bigr).
+\]
+From the table, $z_{0.01} = 2.326 \Rightarrow \Phi(2.326) = 0.99$, hence
+\[
+\boxed{p\text{-value} = 2(1 - 0.99) = 0.02.}
+\]
+
+\textbf{A2.} By test/CI duality, the level-$\alpha$ two-sided test of $H_0: \mu = \mu_0$ fails to reject if and only if $\mu_0$ lies in the corresponding $1-\alpha$ confidence interval. Since $12 \in (10, 20)$,
+\[
+\boxed{\text{fail to reject } H_0 \text{ at } \alpha_0 = 0.05.}
+\]
+The data are consistent with $\mu = 12$ at the $5\%$ level.
+
+\textbf{A3.} For $\sigma$ known, the $95\%$ CI has total width $W = 2 z_{0.025}\, \sigma/\sqrt{n}$. Setting $W \le 1$ with $\sigma = 4$:
+\[
+\frac{2(1.960)(4)}{\sqrt{n}} \le 1
+\quad\Longleftrightarrow\quad
+\sqrt{n} \ge 2(1.960)(4) = 15.68
+\quad\Longleftrightarrow\quad
+n \ge 15.68^2 = 245.86\ldots
+\]
+\[
+\boxed{n = 246.}
+\]
+
+\textbf{A4.} Since $Y, W \iid \chi^2_8$, the ratio
+\[
+\frac{Y}{W} = \frac{Y/8}{W/8} \sim F_{8,\,8},
+\]
+so by the definition of an upper-tail $F$-quantile,
+\[
+P\!\bigl(Y/W > F_{0.05,\,8,\,8}\bigr) = P\!\bigl(F_{8,8} > 3.44\bigr) = \boxed{0.05.}
+\]
+
+\textbf{A5.} By definition, $\beta = 1 - \pi$ where $\pi$ is the power, so
+\[
+\boxed{\beta = 1 - 0.80 = 0.20.}
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Part B --- Mid-Length Problems}
+
+\subsection*{Problem B1 --- One-Sample $t$-Inference}
+
+\textbf{(a) Sample mean and SD.} Sum: $3.1+3.5+2.6+3.4+3.8+3.0+2.9+2.2 = 24.5$. Therefore
+\[
+\bar{x} = \frac{24.5}{8} = \boxed{3.0625.}
+\]
+Using the given $\sum (x_i - \bar{x})^2 = 1.83875$,
+\[
+s^2 = \frac{1.83875}{7} = 0.26268,
+\qquad
+s = \sqrt{0.26268} = \boxed{0.513.}
+\]
+
+\textbf{(b) $95\%$ $t$-CI.} With $n = 8$, $t_{0.025, 7} = 2.365$, and $s/\sqrt{n} = 0.513/\sqrt{8} = 0.513/2.828 = 0.1814$:
+\[
+\bar{x} \pm t_{0.025,\,7}\,\frac{s}{\sqrt{n}}
+= 3.0625 \pm (2.365)(0.1814)
+= 3.0625 \pm 0.4290.
+\]
+\[
+\boxed{95\% \text{ CI for }\mu:\ (2.634,\ 3.491).}
+\]
+
+\textbf{(c) Test $H_0: \mu = 3$ vs.\ $H_1: \mu \ne 3$ at $\alpha_0 = 0.05$.}
+\[
+T = \frac{\bar{x} - 3}{s/\sqrt{n}} = \frac{3.0625 - 3}{0.1814} = \frac{0.0625}{0.1814} = 0.345.
+\]
+Critical value: $t_{0.025,\,7} = 2.365$. Since $|T| = 0.345 < 2.365$,
+\[
+\boxed{\text{fail to reject } H_0\text{ at level } 0.05.}
+\]
+(Equivalently, $\mu_0 = 3$ lies inside the CI from (b).)
+
+\textbf{(d) Sample size with $\sigma = 0.5$ known.} Half-width $z_{0.025}\, \sigma/\sqrt{n} \le 0.05$:
+\[
+\frac{(1.96)(0.5)}{\sqrt{n}} \le 0.05
+\;\Longleftrightarrow\;
+\sqrt{n} \ge \frac{(1.96)(0.5)}{0.05} = 19.6
+\;\Longleftrightarrow\;
+n \ge 19.6^2 = 384.16.
+\]
+\[
+\boxed{n^\star = 385.}
+\]
+
+\subsection*{Problem B2 --- Two-Sample $t$-Inference}
+
+\textbf{(a) Pooled variance.} Using the unbiased sample variances $s_X^2 = 4.0$, $s_Y^2 = 2.0$ with $m = n = 8$:
+\[
+s_p^2 = \frac{(m-1)s_X^2 + (n-1)s_Y^2}{m + n - 2}
+= \frac{7(4.0) + 7(2.0)}{14}
+= \frac{28 + 14}{14}
+= \boxed{3.}
+\]
+
+\textbf{(b) Test statistic and degrees of freedom.}
+\[
+T = \frac{\bar{x} - \bar{y}}{\sqrt{s_p^2\bigl(\tfrac{1}{m}+\tfrac{1}{n}\bigr)}}
+= \frac{10 - 8}{\sqrt{3 \cdot \tfrac{1}{4}}}
+= \frac{2}{\sqrt{3}/2}
+= \frac{4}{\sqrt{3}}
+= \frac{4\sqrt{3}}{3} \approx 2.309.
+\]
+Degrees of freedom: $m + n - 2 = \boxed{14}$.
+
+\textbf{(c) Test $H_0: \mu_X = \mu_Y$ vs.\ $H_1: \mu_X \ne \mu_Y$ at $\alpha_0 = 0.05$.} Critical value $t_{0.025,\,14} = 2.145$. Since $|T| = 2.309 > 2.145$,
+\[
+\boxed{\text{reject } H_0\text{ at level } 0.05.}
+\]
+
+\textbf{(d) $95\%$ CI for $\mu_X - \mu_Y$.}
+\[
+(\bar{x} - \bar{y}) \pm t_{0.025,\,14}\sqrt{s_p^2\bigl(\tfrac{1}{m}+\tfrac{1}{n}\bigr)}
+= 2 \pm (2.145)\frac{\sqrt{3}}{2}.
+\]
+Numerically: $(2.145)(\sqrt{3}/2) = (2.145)(0.866) = 1.858$, giving
+\[
+\boxed{95\% \text{ CI:}\ \left(2 - \tfrac{2.145\sqrt{3}}{2},\ 2 + \tfrac{2.145\sqrt{3}}{2}\right) = (0.142,\ 3.858).}
+\]
+Since $0$ is not in the interval, the conclusion is consistent with rejecting $H_0$ in (c).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Part C --- Major Problems}
+
+\subsection*{Problem C1 --- Power Function and Sample Size}
+
+\textbf{(a) Rejection threshold.} For the one-sided test, reject $H_0$ when $\bar{X} > c_n$. Under $\mu = 10$ (the boundary of $\Omega_0$), $\bar{X} \sim N(10, 4/n)$, so
+\[
+P_{\mu=10}(\bar{X} > c_n) = 1 - \Phi\!\left(\frac{c_n - 10}{2/\sqrt{n}}\right) = \alpha_0
+\;\Longleftrightarrow\;
+\frac{c_n - 10}{2/\sqrt{n}} = z_{0.05} = 1.645.
+\]
+Hence
+\[
+\boxed{c_n = 10 + \frac{1.645 \cdot 2}{\sqrt{n}} = 10 + \frac{3.29}{\sqrt{n}}.}
+\]
+Because the power function is increasing in $\mu$ (one-sided alternative), the size is attained at $\mu = 10$ and equals $\alpha_0$.
+
+\textbf{(b) Power at $\mu = 11.645$ for $n = 16$.} Threshold $c_{16} = 10 + 3.29/4 = 10.8225$. Under $\mu = 11.645$, $\bar{X} \sim N(11.645, 4/16) = N(11.645,\ 0.25)$, so
+\[
+\pi(11.645) = P_{\mu=11.645}(\bar{X} > 10.8225)
+= 1 - \Phi\!\left(\frac{10.8225 - 11.645}{0.5}\right)
+= 1 - \Phi(-1.645)
+= \Phi(1.645).
+\]
+From the table, $z_{0.05} = 1.645 \Rightarrow \Phi(1.645) = 1 - 0.05 = 0.95$. Hence
+\[
+\boxed{\pi(11.645) = 0.95.}
+\]
+
+\textbf{(c) Smallest $n$ with $\pi(11.645) \ge 0.99$.} In general,
+\[
+\pi(\mu) = 1 - \Phi\!\left(\frac{c_n - \mu}{\sigma/\sqrt{n}}\right)
+= \Phi\!\left(-z_{0.05} + \frac{\sqrt{n}\,(\mu - 10)}{\sigma}\right),
+\]
+so at $\mu = 11.645$ and $\sigma = 2$ this becomes
+\[
+\pi(11.645) = \Phi\!\left(-1.645 + \frac{\sqrt{n}\,(1.645)}{2}\right) = \Phi\!\bigl(-1.645 + 0.8225\sqrt{n}\bigr).
+\]
+We require $\pi(11.645) \ge 0.99 = \Phi(z_{0.01}) = \Phi(2.326)$. Equivalently
+\[
+-1.645 + 0.8225\sqrt{n} \ge 2.326
+\;\Longleftrightarrow\;
+\sqrt{n} \ge \frac{2.326 + 1.645}{0.8225} = \frac{3.971}{0.8225} = 4.828.
+\]
+Squaring: $n \ge 23.31$, so the smallest integer is
+\[
+\boxed{n = 24.}
+\]
+
+\subsection*{Problem C2 --- $F$-Test for Equality of Variances}
+
+\textbf{(a) Test statistic.}
+\[
+V = \frac{S_X^2/(m-1)}{S_Y^2/(n-1)} = \frac{20.0/7}{5.0/7} = \frac{20.0}{5.0} = \boxed{4.}
+\]
+
+\textbf{(b) Null distribution.} Under $H_0: \sigma_X^2 = \sigma_Y^2$, the numerator $S_X^2/(m-1)$ and denominator $S_Y^2/(n-1)$ are independent unbiased estimators of the common variance, with $S_X^2/\sigma^2 \sim \chi^2_{m-1}$ and $S_Y^2/\sigma^2 \sim \chi^2_{n-1}$. Therefore
+\[
+\boxed{V \sim F_{m-1,\, n-1} = F_{7,\,7}.}
+\]
+
+\textbf{(c) Two-sided test at $\alpha_0 = 0.05$.} Reject $H_0$ when $V \le F_{0.975,\,7,7} = 0.20$ or $V \ge F_{0.025,\,7,7} = 4.99$. Since $V = 4$ satisfies $0.20 < 4 < 4.99$,
+\[
+\boxed{\text{fail to reject } H_0\text{ at level } 0.05.}
+\]
+The data are consistent with $\sigma_X^2 = \sigma_Y^2$ at the $5\%$ level.
+
+\textbf{(d) $95\%$ CI for $\sigma_X^2/\sigma_Y^2$.} Define
+\[
+F^\star = V \cdot \frac{\sigma_Y^2}{\sigma_X^2} = \frac{S_X^2/[(m-1)\sigma_X^2]}{S_Y^2/[(n-1)\sigma_Y^2]} \sim F_{7,\,7}.
+\]
+Then with $1 - \alpha = 0.95$:
+\[
+P\!\bigl(0.20 \le F^\star \le 4.99\bigr) = 0.95
+\;\Longleftrightarrow\;
+P\!\left(\frac{V}{4.99} \le \frac{\sigma_X^2}{\sigma_Y^2} \le \frac{V}{0.20}\right) = 0.95.
+\]
+Plug in $V = 4$:
+\[
+\boxed{95\%\text{ CI for } \sigma_X^2/\sigma_Y^2:\ \left(\tfrac{4}{4.99},\ \tfrac{4}{0.20}\right) = (0.802,\ 20).}
+\]
+The interval contains $1$, again consistent with (c).
+
+\subsection*{Problem C3 --- Bayesian Inference}
+
+\textbf{(a) Posterior.} The Beta-Bernoulli conjugacy gives
+\[
+p \mid X_1,\dots,X_{10} \;\sim\; \text{Beta}\bigl(\alpha_0 + \textstyle\sum X_i,\ \beta_0 + n - \sum X_i\bigr)
+= \text{Beta}(2 + 7,\ 2 + 10 - 7) = \boxed{\text{Beta}(9,\,5).}
+\]
+
+\textbf{(b) Posterior mean.} For $\text{Beta}(\alpha,\beta)$, $\mathbb{E}[p] = \alpha/(\alpha+\beta)$:
+\[
+\widehat{p}_{\text{Bayes}} = \frac{9}{9 + 5} = \frac{9}{14} \approx \boxed{0.643.}
+\]
+
+\textbf{(c) Posterior mode.} For $\text{Beta}(\alpha,\beta)$ with $\alpha,\beta>1$, mode $= (\alpha-1)/(\alpha+\beta-2)$:
+\[
+\widehat{p}_{\text{mode}} = \frac{9 - 1}{9 + 5 - 2} = \frac{8}{12} = \frac{2}{3} \approx \boxed{0.667.}
+\]
+
+\textbf{(d) MLE and comparison.}
+\[
+\widehat{p}_{\text{MLE}} = \frac{1}{n}\sum X_i = \frac{7}{10} = \boxed{0.700.}
+\]
+
+\begin{tabular}{lll}
+Posterior mean: & $9/14 \approx 0.643$ \\
+Posterior mode: & $8/12 = 2/3 \approx 0.667$ \\
+MLE: & $7/10 = 0.700$
+\end{tabular}
+
+The $\text{Beta}(2,2)$ prior is symmetric with mean $0.5$, so it pulls the estimator toward $0.5$. The mode (with $\alpha,\beta>1$ shrinking by one in numerator and two in denominator) coincides with the MLE of an effective \emph{augmented} sample $(8, 4)$, while the posterior mean uses the full prior mass.
+
+\subsection*{Problem C4 --- Geometric MLE and Asymptotic CI}
+
+\textbf{(a) MLE.} The log-likelihood is
+\[
+\ell(p) = \log L(p) = n \log p + \Bigl(\textstyle\sum X_i\Bigr)\log(1-p).
+\]
+Setting $\ell'(p) = 0$:
+\[
+\ell'(p) = \frac{n}{p} - \frac{\sum X_i}{1-p} = 0
+\;\Longleftrightarrow\;
+n(1-p) = p\textstyle\sum X_i
+\;\Longleftrightarrow\;
+\widehat{p}_n = \frac{n}{n + \sum X_i} = \frac{1}{1 + \bar{X}}.
+\]
+Numerically, with $n=50$ and $\sum X_i = 60$,
+\[
+\boxed{\widehat{p}_n = \frac{50}{50 + 60} = \frac{50}{110} = \frac{5}{11} \approx 0.4545.}
+\]
+
+\textbf{(b) Fisher information.} For one observation $X$ with $\mathbb{E}[X] = (1-p)/p$:
+\[
+\ell_1(p) = \log p + X\log(1-p),
+\quad
+\ell_1'(p) = \frac{1}{p} - \frac{X}{1-p},
+\quad
+\ell_1''(p) = -\frac{1}{p^2} - \frac{X}{(1-p)^2}.
+\]
+Hence
+\[
+I_1(p) = -\mathbb{E}[\ell_1''(p)] = \frac{1}{p^2} + \frac{\mathbb{E}[X]}{(1-p)^2}
+= \frac{1}{p^2} + \frac{(1-p)/p}{(1-p)^2}
+= \frac{1}{p^2} + \frac{1}{p(1-p)}
+= \frac{1}{p^2(1-p)}.
+\]
+Therefore
+\[
+\boxed{I_n(p) = \frac{n}{p^2(1-p)}.}
+\]
+
+\textbf{(c) $95\%$ asymptotic CI.} By MLE asymptotic normality,
+\[
+\sqrt{n}(\widehat{p}_n - p) \;\xrightarrow{d}\; N\!\bigl(0,\ I_1(p)^{-1}\bigr) = N\!\bigl(0,\ p^2(1-p)\bigr).
+\]
+Plugging in the MLE for the standard error,
+\[
+\widehat{\text{SE}}(\widehat{p}_n) = \sqrt{\frac{\widehat{p}_n^{\,2}(1-\widehat{p}_n)}{n}}
+= \widehat{p}_n \sqrt{\frac{1-\widehat{p}_n}{n}}
+= \frac{5}{11}\sqrt{\frac{6/11}{50}}
+= \frac{5}{11}\sqrt{\frac{6}{550}}
+= \frac{5}{11}\sqrt{\frac{3}{275}}.
+\]
+Approximate $95\%$ CI:
+\[
+\boxed{\widehat{p}_n \pm 1.96 \cdot \widehat{\text{SE}}(\widehat{p}_n)
+= \frac{5}{11} \pm 1.96 \cdot \frac{5}{11}\sqrt{\frac{3}{275}}.}
+\]
+For reference (not required by the prompt), $\sqrt{3/275} \approx 0.1044$, so the SE is $\approx (5/11)(0.1044) \approx 0.0475$ and the interval is approximately $(0.361,\ 0.548)$.
+
+\textbf{(d) Interpretation.} ``We are $95\%$ confident that the true parameter $p$ lies in the computed interval'' --- where the confidence statement refers to the long-run coverage of the random procedure, \emph{not} a probability statement about the (fixed but unknown) parameter $p$.
+
+\vspace{1em}
+\hrule
+\begin{center}
+\textit{End of solutions.}
+\end{center}
+
+\end{document}

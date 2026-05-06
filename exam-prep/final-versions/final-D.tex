@@ -1,0 +1,216 @@
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{parskip}
+
+\setlength{\parskip}{0.6em}
+\setlength{\parindent}{0pt}
+
+\title{\textbf{STAT GU4204 --- Statistical Inference} \\
+       \large Final Examination (Version D) \\
+       \normalsize Hypothesis-Testing Centered}
+\author{Spring 2026 \quad\quad Prof.\ Banu Baydil}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\vspace{-1.5em}
+
+\hrule
+
+\vspace{0.6em}
+
+\textbf{Name:} \underline{\hspace{4in}} \quad\quad
+\textbf{UNI:} \underline{\hspace{1.2in}}
+
+\vspace{0.4em}
+
+\hrule
+
+\vspace{0.8em}
+
+\textbf{Instructions.}
+\begin{itemize}[leftmargin=*, itemsep=2pt, topsep=2pt]
+    \item You have 150 minutes. The exam has \textbf{100 points} total across three parts.
+    \item One double-sided handwritten 8.5$\times$11 cheat sheet is allowed. \emph{No calculators, no phones, no books.}
+    \item \textbf{Show all work.} Numerical answers without justification will not receive full credit.
+    \item Use the DeGroot \& Schervish parameterizations:
+    \begin{itemize}[leftmargin=*, itemsep=0pt]
+        \item Exponential$(\lambda)$ with rate $\lambda$: $f(x\mid\lambda) = \lambda e^{-\lambda x}$, $E[X] = 1/\lambda$.
+        \item Gamma$(\alpha, \beta)$ with rate $\beta$: $E[X] = \alpha/\beta$.
+        \item Geometric$(p)$: $f(x\mid p) = p(1-p)^x$, $x = 0, 1, 2, \dots$
+    \end{itemize}
+\end{itemize}
+
+\textbf{Quantile reference table.}
+\begin{center}
+\small
+\begin{tabular}{ll}
+\hline
+Standard normal & $z_{0.10}=1.282$, $z_{0.05}=1.645$, $z_{0.025}=1.960$, $z_{0.01}=2.326$, $z_{0.005}=2.576$ \\
+\hline
+$t$-distribution &
+$t_{0.025, 7}=2.365$, $t_{0.025, 8}=2.306$, $t_{0.025, 9}=2.262$, $t_{0.025, 14}=2.145$, \\
+& $t_{0.025, 15}=2.131$, $t_{0.025, 19}=2.093$, $t_{0.025, 24}=2.064$ \\
+& $t_{0.05, 8}=1.860$, $t_{0.05, 14}=1.761$, $t_{0.05, 19}=1.729$, $t_{0.05, 24}=1.711$ \\
+\hline
+Chi-square & $\chi^{2}_{0.95, 7}=14.07$, $\chi^{2}_{0.95, 8}=15.51$, $\chi^{2}_{0.05, 8}=2.733$, \\
+&  $\chi^{2}_{0.975, 8}=17.53$, $\chi^{2}_{0.025, 8}=2.180$, $\chi^{2}_{0.975, 9}=19.02$, $\chi^{2}_{0.025, 9}=2.700$ \\
+\hline
+$F$-distribution & $F_{0.05, 7, 7}=3.79$, $F_{0.025, 7, 7}=4.99$, $F_{0.95, 7, 7}=1/F_{0.05, 7, 7}=0.264$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\hrule
+
+\vspace{0.8em}
+
+% ====================================================================
+\section*{Part A --- Conceptual on Testing (10 points)}
+
+Each part should be answered concisely. Justify briefly.
+
+\textbf{A1.\ (3 pts)} Let $\delta$ be a test of $H_0\!: \theta \in \Omega_0$ vs.\ $H_1\!: \theta \in \Omega_1$ with critical region $S_1$. Define each of the following:
+\begin{itemize}[leftmargin=2em, itemsep=0pt]
+    \item[(i)] Type~I error,
+    \item[(ii)] Type~II error,
+    \item[(iii)] the power function $\pi(\theta\mid\delta)$,
+    \item[(iv)] the size $\alpha(\delta)$, and what it means for $\delta$ to be a level-$\alpha_0$ test.
+\end{itemize}
+State the relations between $\pi(\theta\mid\delta)$ and the error probabilities (using $\sup_{\theta\in\Omega_0}$ and $\inf_{\theta\in\Omega_1}$ as appropriate).
+
+\vspace{0.4em}
+
+\textbf{A2.\ (3 pts)} State the \textbf{Neyman--Pearson Lemma} in full for testing a simple null $H_0\!: \theta = \theta_0$ versus a simple alternative $H_1\!: \theta = \theta_1$. Then explain in one or two sentences when (and why) the NP lemma yields a \emph{uniformly most powerful} (UMP) test against a one-sided composite alternative.
+
+\vspace{0.4em}
+
+\textbf{A3.\ (2 pts)} State the test/CI duality. Specifically: given a $1-\alpha_0$ confidence set $\mathcal{S}(\mathbf{X})$ for $\theta$, describe how to construct a level-$\alpha_0$ test of $H_0\!: \theta = \theta_0$ versus $H_1\!: \theta \neq \theta_0$. Why is this test of level $\alpha_0$?
+
+\vspace{0.4em}
+
+\textbf{A4.\ (2 pts)} Let $\Lambda(\mathbf{X})$ be the likelihood ratio statistic for $H_0\!: \theta \in \Omega_0$ versus $H_1\!: \theta \in \Omega_1$, where $\Omega_0$ specifies $k$ coordinates of $\theta$ and $\dim(\Omega) = p$. State the asymptotic distribution of $-2\log \Lambda(\mathbf{X})$ under $H_0$ as $n \to \infty$, and list the key regularity conditions that must hold.
+
+% ====================================================================
+\newpage
+\section*{Part B --- Mid-length Testing Problems (30 points)}
+
+\textbf{B1.\ One-sample $t$-test, $p$-value, and CI duality. (15 pts)}
+
+Let $X_1, \dots, X_n$ be a random sample from $N(\mu, \sigma^2)$ with both parameters unknown. Suppose $n = 25$, $\overline{X} = 22.4$, and the sample variance $s^2 = 9.0$.
+
+\begin{enumerate}[label=(\alph*), leftmargin=*]
+    \item \textbf{(5 pts)} Test $H_0\!: \mu = 20$ versus $H_1\!: \mu \neq 20$ at significance level $\alpha_0 = 0.05$. Give the test statistic $U_n$, its distribution under $H_0$, the critical region, the observed value, and the decision.
+    \item \textbf{(3 pts)} Bound the two-sided $p$-value using the fact that $t_{0.025, 24} = 2.064$ corresponds to a two-sided probability of $0.05$. State whether the $p$-value is less than or greater than $0.05$ and justify.
+    \item \textbf{(4 pts)} Construct a $95\%$ confidence interval for $\mu$ and verify directly (using the interval, not the test) that it gives the same conclusion as part (a). Briefly explain why this is an instance of the test/CI duality.
+    \item \textbf{(3 pts)} Now consider the one-sided test $H_0\!: \mu \le 20$ versus $H_1\!: \mu > 20$ at $\alpha_0 = 0.05$. State the rejection threshold for $U_n$ and conclude.
+\end{enumerate}
+
+\vspace{0.6em}
+
+\textbf{B2.\ Two-sample $t$-test and $F$-test for variances. (15 pts)}
+
+Two independent random samples are drawn from normal populations with possibly different parameters. Sample sizes $m = 8$ and $n = 8$, with summary statistics
+\[
+    \overline{X} = 14.0, \quad S_X^2 = \sum_{i=1}^m (X_i - \overline{X})^2 = 16.0, \qquad
+    \overline{Y} = 11.5, \quad S_Y^2 = \sum_{j=1}^n (Y_j - \overline{Y})^2 = 9.0.
+\]
+
+\begin{enumerate}[label=(\alph*), leftmargin=*]
+    \item \textbf{(5 pts)} First test $H_0\!: \sigma_X^2 = \sigma_Y^2$ versus $H_1\!: \sigma_X^2 \neq \sigma_Y^2$ at level $\alpha_0 = 0.10$, using the $F$-statistic
+    \[
+        V_{m,n} = \frac{S_X^2/(m-1)}{S_Y^2/(n-1)}.
+    \]
+    Use $F_{0.05, 7, 7} = 3.79$ and $F_{0.95, 7, 7} = 1/3.79 \approx 0.264$. Show the rejection region, the observed value, and your decision.
+    \item \textbf{(5 pts)} Now \emph{assume} the equal-variance condition holds. Compute the pooled-variance two-sample $t$-statistic
+    \[
+        U_{m,n} = \frac{\sqrt{m+n-2}\,(\overline{X} - \overline{Y})}{\sqrt{\bigl(\tfrac{1}{m}+\tfrac{1}{n}\bigr)\bigl(S_X^2 + S_Y^2\bigr)}}
+    \]
+    for testing $H_0\!: \mu_X = \mu_Y$ versus $H_1\!: \mu_X \neq \mu_Y$.
+    \item \textbf{(3 pts)} At $\alpha_0 = 0.05$, give the rejection region and state your conclusion. Use $t_{0.025, 14} = 2.145$.
+    \item \textbf{(2 pts)} State the corresponding $95\%$ confidence interval for $\mu_X - \mu_Y$ implied by the duality of part (c). (Just the formula and the interval; no need to re-derive.)
+\end{enumerate}
+
+% ====================================================================
+\newpage
+\section*{Part C --- Major Problems (60 points)}
+
+\textbf{C1.\ Neyman--Pearson and UMP for the exponential rate. (18 pts)}
+
+Let $X_1, \dots, X_n$ be a random sample from the Exponential distribution with rate $\lambda > 0$ (DeGroot's parameterization), so $f(x\mid\lambda) = \lambda e^{-\lambda x}$ for $x > 0$. Take $n = 20$, and let $T = \sum_{i=1}^n X_i$.
+
+\begin{enumerate}[label=(\alph*), leftmargin=*]
+    \item \textbf{(6 pts)} Fix $\lambda_1 > \lambda_0 > 0$. Derive the most powerful test of $H_0\!: \lambda = \lambda_0$ versus $H_1\!: \lambda = \lambda_1$ using the Neyman--Pearson lemma. Show that the rejection region can be written in the form $\{T \le c\}$ for some constant $c$, and explain (with a sentence) why the inequality is in this direction.
+    \item \textbf{(4 pts)} State the exact null distribution of $T$ under $H_0$, and explain how to choose $c$ so that the test has size $\alpha_0 = 0.05$. Express $c$ in terms of a quantile of a standard distribution.
+    \item \textbf{(4 pts)} Argue that the test in part (a) is in fact \emph{uniformly most powerful at level} $\alpha_0$ for the one-sided composite problem $H_0\!: \lambda \le \lambda_0$ versus $H_1\!: \lambda > \lambda_0$. Be specific about why the same critical value $c$ controls the size over all of $\Omega_0$.
+    \item \textbf{(4 pts)} Express the power function $\pi(\lambda)$ of this test (for $\lambda > 0$) as a probability statement involving a Gamma random variable. You do not need to evaluate it numerically.
+\end{enumerate}
+
+\vspace{0.6em}
+
+\textbf{C2.\ Likelihood ratio test for a normal variance. (18 pts)}
+
+Let $X_1, \dots, X_n$ be i.i.d.\ from $N(\mu, \sigma^2)$, where \emph{both} $\mu$ and $\sigma^2$ are unknown. We wish to test
+\[
+    H_0\!: \sigma^2 = \sigma_0^2 \quad\text{versus}\quad H_1\!: \sigma^2 \neq \sigma_0^2.
+\]
+
+\begin{enumerate}[label=(\alph*), leftmargin=*]
+    \item \textbf{(8 pts)} Derive the likelihood ratio statistic $\Lambda_n(\mathbf{X})$. Show that $\Lambda_n$ is a function only of
+    \[
+        T = \frac{1}{\sigma_0^2}\sum_{i=1}^n (X_i - \overline{X})^2,
+    \]
+    and exhibit the explicit dependence (you may absorb constants).
+    \item \textbf{(5 pts)} Show that the LRT rejection region $\{\Lambda_n \le k\}$ is equivalent to a two-sided rejection region of the form $\{T \le c_1\}\cup \{T \ge c_2\}$, and identify the null distribution of $T$. Briefly explain how this connects to a standard $\chi^2$-test.
+    \item \textbf{(5 pts)} For $n = 9$, $\sigma_0^2 = 4$, and the observed value $\sum_{i=1}^n(X_i - \overline{X})^2 = 32$, perform the test at level $\alpha_0 = 0.05$ using the equal-tailed $\chi^2$ critical values $\chi^{2}_{0.025, 8} = 2.18$ and $\chi^{2}_{0.975, 8} = 17.53$. Show your decision.
+\end{enumerate}
+
+\vspace{0.6em}
+
+\textbf{C3.\ Support-dependent family --- direct Type I/II calculation. (12 pts)}
+
+Let $X$ be a single observation from the density
+\[
+    f(x \mid \theta) = 2(1 - \theta)x + \theta, \quad x \in [0, 1], \quad \theta \in [0, 1].
+\]
+Consider the test of $H_0\!: \theta \ge 1/2$ versus $H_1\!: \theta < 1/2$ that rejects $H_0$ when $X > 1/3$.
+
+\begin{enumerate}[label=(\alph*), leftmargin=*]
+    \item \textbf{(5 pts)} Compute the size of this test:
+    \[
+        \alpha(\delta) = \sup_{\theta \ge 1/2} \mathbb{P}_\theta(X > 1/3).
+    \]
+    Identify the value of $\theta \in \Omega_0$ at which the supremum is attained, and justify why.
+    \item \textbf{(3 pts)} Compute the Type II error probability at $\theta = 0$.
+    \item \textbf{(2 pts)} Why does the Cram\'er--Rao lower bound \emph{not} apply to this family? Cite the specific regularity condition that fails (or holds) and explain in one sentence.
+    \item \textbf{(2 pts)} Sketch (qualitatively) the power function $\pi(\theta)$ on $[0,1]$. Label the values of $\pi$ at $\theta = 0$, $\theta = 1/2$, and $\theta = 1$.
+\end{enumerate}
+
+\vspace{0.6em}
+
+\textbf{C4.\ Cumulative review --- sufficiency, Bayes, and consistency. (12 pts)}
+
+Let $X_1, \dots, X_n$ be a random sample from the Geometric$(p)$ distribution with PMF $f(x\mid p) = p(1-p)^x$ for $x = 0, 1, 2, \dots$, where $p \in (0, 1)$ is unknown.
+
+\begin{enumerate}[label=(\alph*), leftmargin=*]
+    \item \textbf{(4 pts)} Using the factorization criterion, show that $T = \sum_{i=1}^n X_i$ is a sufficient statistic for $p$.
+    \item \textbf{(4 pts)} Place a Beta$(\alpha_0, \beta_0)$ prior on $p$. Find the posterior distribution of $p$ given $\mathbf{X} = \mathbf{x}$.
+    \item \textbf{(2 pts)} Find the Bayes estimator of $p$ under squared-error loss.
+    \item \textbf{(2 pts)} Recall that the MLE of $p$ is $\widehat{p}_{\text{MLE}} = n / (n + T)$. Show that as $n \to \infty$, the Bayes estimator from (c) and $\widehat{p}_{\text{MLE}}$ converge to the same limit in probability. (You may invoke the WLLN.)
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{0.4em}
+\begin{center}
+\emph{End of exam. Total: 100 points.}
+\end{center}
+
+\end{document}

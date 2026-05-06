@@ -1,0 +1,388 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\newcounter{probnum}
+\newcommand{\prob}[2]{%
+  \stepcounter{probnum}%
+  \bigskip
+  \noindent\textbf{Problem \theprobnum.\ #2 \hfill (#1 points)}\par\nobreak
+}
+
+\newcommand{\partlabel}[2]{\medskip\noindent\textbf{(#1)} \emph{(#2 pts)}\quad}
+
+% Boxed-answer macro
+\newcommand{\boxedans}[1]{\medskip\par\noindent\fbox{\parbox{0.96\linewidth}{\textbf{Answer.} #1}}\par\medskip}
+
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries STAT GU4204 --- Statistical Inference}\\[6pt]
+{\Large Final Exam --- Practice Version A: \textbf{Solutions}}\\[6pt]
+{\large Spring 2026}
+\end{center}
+
+\medskip
+\hrule
+\medskip
+
+\textit{Solutions show full derivations. Final answers are boxed. Notation matches the exam.}
+
+\bigskip
+
+% =====================================================================
+% PART A
+% =====================================================================
+\section*{Part A --- Short Conceptual}
+
+\prob{3}{Cram\'er--Rao Lower Bound}
+
+If $T(X_1, \dots, X_n)$ is an unbiased estimator of $g(\theta)$ (so $E_\theta[T] = g(\theta)$ for all $\theta$), then under the regularity conditions
+\[
+\mathrm{Var}_\theta(T) \;\geq\; \frac{[g'(\theta)]^2}{n\, I(\theta)},
+\]
+where $I(\theta) = E_\theta\!\left[\left(\tfrac{\partial}{\partial\theta}\log f(X;\theta)\right)^2\right]$ is the Fisher information in a single observation. In the special case $g(\theta) = \theta$, the bound becomes $\mathrm{Var}_\theta(T) \geq 1/[n I(\theta)]$.
+
+\textbf{One regularity condition.} Any one of the following:
+\begin{itemize}[topsep=0pt,itemsep=0pt]
+  \item (A.1) The support $\{x : f(x;\theta) > 0\}$ does not depend on $\theta$.
+  \item (A.2) Differentiation under the integral sign is valid: $\frac{\partial}{\partial\theta}\int W(x) f(x;\theta) \,dx = \int W(x) \frac{\partial}{\partial\theta} f(x;\theta) \,dx$.
+  \item (A.3) $\frac{\partial}{\partial\theta} \log f(x;\theta)$ exists and is finite for every $x$ in the support.
+\end{itemize}
+
+\boxedans{$\mathrm{Var}_\theta(T) \geq [g'(\theta)]^2 / [n I(\theta)]$, with one regularity condition such as ``support of $f$ does not depend on $\theta$.''}
+
+% --- A2 ---
+\prob{3}{Neyman--Pearson Lemma}
+
+\textbf{Setup.} Simple null vs.\ simple alternative: $H_0: \theta = \theta_0$ vs.\ $H_1: \theta = \theta_1$, with joint densities $f_0$ and $f_1$.
+
+\textbf{Statement.} For any constant $k \geq 0$, the test $\delta^*$ defined by
+\begin{itemize}[topsep=0pt,itemsep=0pt]
+  \item Reject $H_0$ if $f_1(\mathbf{x}) > k\, f_0(\mathbf{x})$,
+  \item Do not reject if $f_1(\mathbf{x}) < k\, f_0(\mathbf{x})$,
+  \item Either decision is allowed when $f_1(\mathbf{x}) = k\, f_0(\mathbf{x})$,
+\end{itemize}
+is most powerful at its level: for any other test $\delta$ with $\alpha(\delta) \leq \alpha(\delta^*)$, we have $\beta(\delta) \geq \beta(\delta^*)$ (equivalently, $\pi(\theta_1; \delta) \leq \pi(\theta_1; \delta^*)$).
+
+\boxedans{The likelihood-ratio test that rejects when $f_1/f_0 > k$ minimizes Type II error among all level-$\alpha(\delta^*)$ tests.}
+
+% --- A3 ---
+\prob{2}{Sufficient Statistics}
+
+A statistic $T = \varphi(X_1, \dots, X_n)$ is \emph{sufficient} for $\theta$ if the conditional distribution of $(X_1, \dots, X_n)$ given $T = t$ does not depend on $\theta$.
+
+\textbf{Factorization criterion.} $T$ is sufficient for $\theta$ if and only if the joint density/pmf factors as
+\[
+f_n(\mathbf{x}; \theta) = u(\mathbf{x}) \cdot v(\varphi(\mathbf{x}), \theta)
+\]
+for some non-negative functions $u$ (free of $\theta$) and $v$ (depending on the data only through $T$).
+
+\boxedans{Sufficiency means the conditional distribution of the data given $T$ is free of $\theta$; factorization: $f_n(\mathbf{x};\theta) = u(\mathbf{x}) v(\varphi(\mathbf{x}),\theta)$.}
+
+% --- A4 ---
+\prob{2}{Test/CI Duality}
+
+For each $\theta_0 \in \Omega$, let $\mathcal{A}(\theta_0)$ be the acceptance region of a level-$\alpha_0$ test of $H_0: \theta = \theta_0$. Define the random set
+\[
+\mathcal{S}(\mathbf{X}) = \{\theta_0 : \mathbf{X} \in \mathcal{A}(\theta_0)\}.
+\]
+Then $\mathcal{S}(\mathbf{X})$ is a $(1 - \alpha_0)$ confidence set for $\theta$, because $P_\theta(\theta \in \mathcal{S}(\mathbf{X})) = P_\theta(\mathbf{X} \in \mathcal{A}(\theta)) \geq 1 - \alpha_0$. Conversely, given a confidence set $\mathcal{S}$, the test ``reject $H_0:\theta=\theta_0$ iff $\theta_0 \notin \mathcal{S}(\mathbf{X})$'' has level $\alpha_0$.
+
+\boxedans{The $(1-\alpha_0)$ CI is the set of null values $\theta_0$ that the level-$\alpha_0$ test would NOT reject; equivalently, invert the acceptance region.}
+
+\bigskip\hrule
+
+% =====================================================================
+% PART B
+% =====================================================================
+\section*{Part B --- Mid-Length Problems}
+
+\prob{15}{Exponential MLE, Delta Method, CI}
+
+\partlabel{a}{5}
+The likelihood and log-likelihood are
+\[
+L_n(\theta) = \prod_{i=1}^n \theta e^{-\theta X_i} = \theta^n \exp\!\Big(-\theta \textstyle\sum_i X_i\Big), \qquad
+\ell_n(\theta) = n \log\theta - \theta \sum_{i=1}^n X_i.
+\]
+Score: $\dot{\ell}_n(\theta) = n/\theta - \sum X_i$. Setting equal to zero gives $\theta = n/\sum X_i = 1/\bar{X}_n$. The second derivative is $-n/\theta^2 < 0$, so this is the unique maximum.
+
+\boxedans{$\widehat{\theta}_n = 1/\bar{X}_n$.}
+
+\partlabel{b}{3}
+By the Weak Law of Large Numbers, $\bar{X}_n \xrightarrow{P} E_\theta[X_1] = 1/\theta$. The map $g(t) = 1/t$ is continuous on $(0, \infty)$, so by the continuous mapping theorem,
+\[
+\widehat{\theta}_n = 1/\bar{X}_n \xrightarrow{P} 1/(1/\theta) = \theta.
+\]
+
+\boxedans{$\widehat{\theta}_n \xrightarrow{P} \theta$ by WLLN + continuous mapping theorem; hence $\widehat{\theta}_n$ is consistent.}
+
+\partlabel{c}{4}
+By the Central Limit Theorem applied to $\bar{X}_n$ (with mean $1/\theta$ and variance $1/\theta^2$):
+\[
+\sqrt{n}\big(\bar{X}_n - 1/\theta\big) \xrightarrow{d} N(0, 1/\theta^2).
+\]
+Apply the delta method with $g(t) = 1/t$, so $g'(t) = -1/t^2$ and $g'(1/\theta) = -\theta^2$. Thus
+\[
+\sqrt{n}\big(\widehat{\theta}_n - \theta\big) = \sqrt{n}\big(g(\bar{X}_n) - g(1/\theta)\big) \xrightarrow{d} N\!\big(0,\, [g'(1/\theta)]^2 \cdot 1/\theta^2\big) = N(0,\, \theta^4 \cdot 1/\theta^2) = N(0, \theta^2).
+\]
+
+\boxedans{$\sqrt{n}(\widehat{\theta}_n - \theta) \xrightarrow{d} N(0, \theta^2)$, i.e.\ $\tau^2(\theta) = \theta^2$.}
+
+\partlabel{d}{3}
+From (c), for large $n$, $\widehat{\theta}_n \approx N(\theta, \theta^2/n)$. Replacing $\theta$ by the consistent estimator $\widehat{\theta}_n$ in the asymptotic standard error is justified by Slutsky's theorem (since $\widehat{\theta}_n / \theta \xrightarrow{P} 1$). An approximate $95\%$ CI for $\theta$ is therefore
+\[
+\widehat{\theta}_n \pm z_{0.025} \cdot \frac{\widehat{\theta}_n}{\sqrt{n}} = \widehat{\theta}_n \left(1 \pm \frac{1.96}{\sqrt{n}}\right).
+\]
+
+\boxedans{$\Big[\,\widehat{\theta}_n\big(1 - 1.96/\sqrt{n}\big),\; \widehat{\theta}_n\big(1 + 1.96/\sqrt{n}\big)\,\Big]$, where $\widehat{\theta}_n = 1/\bar{X}_n$.}
+
+\bigskip\hrule
+
+% --- B2 ---
+\prob{15}{Bernoulli with Beta Prior; Sufficiency}
+
+Let $T = \sum_{i=1}^n X_i$, so $T \mid p \sim \mathrm{Binomial}(n, p)$ and the likelihood is $L(p) \propto p^t (1-p)^{n-t}$.
+
+\partlabel{a}{5}
+The Beta$(\alpha, \beta)$ prior has density $\pi(p) \propto p^{\alpha - 1}(1 - p)^{\beta - 1}$ on $(0,1)$. By Bayes' rule,
+\[
+\pi(p \mid \mathbf{X}) \;\propto\; L(p)\,\pi(p) \;\propto\; p^{\alpha + t - 1}(1 - p)^{\beta + n - t - 1}.
+\]
+This is the kernel of a Beta distribution.
+
+\boxedans{$p \mid \mathbf{X} \;\sim\; \mathrm{Beta}\big(\alpha + T,\; \beta + n - T\big)$, where $T = \sum_{i=1}^n X_i$.}
+
+\partlabel{b}{3}
+Under squared-error loss the Bayes estimator is the posterior mean. For a $\mathrm{Beta}(a, b)$ distribution the mean is $a/(a+b)$, so
+\[
+\widehat{p}_{\text{Bayes}} = \frac{\alpha + T}{\alpha + \beta + n}.
+\]
+
+\boxedans{$\widehat{p}_{\text{Bayes}} = (\alpha + \sum X_i)/(\alpha + \beta + n)$.}
+
+\partlabel{c}{4}
+The joint pmf of $(X_1, \dots, X_n)$ is
+\[
+f_n(\mathbf{x} \mid p) = \prod_{i=1}^n p^{x_i}(1-p)^{1 - x_i} = p^{\,t}(1-p)^{n - t}, \qquad t = \textstyle\sum x_i,
+\]
+where each $x_i \in \{0, 1\}$. Take
+\[
+u(\mathbf{x}) = 1 \cdot \mathbf{1}\{x_i \in \{0,1\} \text{ for all } i\}, \qquad v(t, p) = p^t (1-p)^{n - t}.
+\]
+Then $f_n(\mathbf{x} \mid p) = u(\mathbf{x}) \cdot v(T(\mathbf{x}), p)$, which is the factorization criterion.
+
+\boxedans{$T = \sum X_i$ is sufficient for $p$ by factorization with $u \equiv 1$ and $v(t, p) = p^t(1-p)^{n-t}$.}
+
+\partlabel{d}{3}
+Rewrite the Bayes estimator:
+\[
+\widehat{p}_{\text{Bayes}} = \frac{\alpha + n \bar{X}_n}{\alpha + \beta + n}
+= \frac{n}{\alpha + \beta + n}\,\bar{X}_n + \frac{\alpha}{\alpha + \beta + n}.
+\]
+As $n \to \infty$, the first coefficient tends to $1$, the second to $0$, and $\bar{X}_n \xrightarrow{P} p$ by the WLLN. Hence (using continuous mapping / Slutsky):
+\[
+\widehat{p}_{\text{Bayes}} \;\xrightarrow{P}\; p.
+\]
+The data dominates the prior asymptotically; equivalently, the Bayes estimator converges to the MLE $\bar{X}_n$.
+
+\boxedans{$\widehat{p}_{\text{Bayes}} \xrightarrow{P} p$ as $n \to \infty$ (the prior washes out; estimator $\to$ MLE).}
+
+\bigskip\hrule
+
+% =====================================================================
+% PART C
+% =====================================================================
+\section*{Part C --- Major Problems}
+
+\prob{20}{Two-Sample $t$-Test and $F$-Test}
+
+Throughout, $m = n = 8$, $\bar{X} = 23.5$, $\bar{Y} = 21.0$, $S_X^2 = 21$, $S_Y^2 = 14$.
+
+\partlabel{a}{10}
+
+\textbf{(i) Test statistic.} Under the common-variance model, the two-sample $t$-statistic is
+\[
+U_{m,n} = \frac{\sqrt{m + n - 2}\,(\bar{X} - \bar{Y})}{\sqrt{\big(\tfrac{1}{m} + \tfrac{1}{n}\big)\,(S_X^2 + S_Y^2)}}.
+\]
+Under $H_0: \mu_X = \mu_Y$, $U_{m,n} \sim t_{m + n - 2} = t_{14}$.
+
+\textbf{(ii) Plug in.} Numerator: $\sqrt{14}\,(23.5 - 21.0) = 2.5\sqrt{14}$. Denominator: $\sqrt{(\tfrac{1}{8} + \tfrac{1}{8})(21 + 14)} = \sqrt{\tfrac{1}{4} \cdot 35} = \sqrt{35/4} = \tfrac{1}{2}\sqrt{35}$. Therefore
+\[
+U_{m,n} = \frac{2.5\sqrt{14}}{\tfrac{1}{2}\sqrt{35}} = 5\sqrt{14/35} = 5\sqrt{2/5} = \sqrt{25 \cdot 2/5} = \sqrt{10} \approx 3.162.
+\]
+
+\textbf{(iii) Decision.} For a two-sided level-$0.05$ test, reject if $|U_{m,n}| > t_{0.025, 14} = 2.145$. Since $|\sqrt{10}| \approx 3.162 > 2.145$, we reject $H_0$.
+
+\boxedans{$U_{m,n} = \sqrt{10} \approx 3.162$. Critical value $t_{0.025,14} = 2.145$. \textbf{Reject $H_0$} at $\alpha_0 = 0.05$: there is significant evidence that $\mu_X \neq \mu_Y$.}
+
+\partlabel{b}{5}
+The pooled variance estimator is
+\[
+\widehat{\sigma}^2 = \frac{S_X^2 + S_Y^2}{m + n - 2} = \frac{35}{14} = 2.5.
+\]
+The standard error of $\bar{X} - \bar{Y}$ is
+\[
+\mathrm{SE}(\bar{X} - \bar{Y}) = \sqrt{\widehat{\sigma}^2\big(\tfrac{1}{m} + \tfrac{1}{n}\big)} = \sqrt{2.5 \cdot \tfrac{1}{4}} = \sqrt{0.625} = \tfrac{\sqrt{10}}{4}.
+\]
+A $95\%$ CI for $\mu_X - \mu_Y$ is therefore
+\[
+(\bar{X} - \bar{Y}) \pm t_{0.025, 14} \cdot \mathrm{SE} = 2.5 \pm 2.145 \cdot \tfrac{\sqrt{10}}{4}.
+\]
+
+Numerically, $2.145 \cdot \sqrt{10}/4 \approx 2.145 \cdot 0.7906 \approx 1.696$.
+
+\boxedans{$95\%$ CI for $\mu_X - \mu_Y$: $\big[\,2.5 - 2.145 \cdot \tfrac{\sqrt{10}}{4},\; 2.5 + 2.145 \cdot \tfrac{\sqrt{10}}{4}\,\big] \approx [0.804,\, 4.196]$. Note $0$ is not in this interval, consistent with rejecting $H_0$ in part (a).}
+
+\partlabel{c}{5}
+The $F$-statistic for comparing variances is
+\[
+V_{m,n} = \frac{S_X^2/(m - 1)}{S_Y^2/(n - 1)} = \frac{21/7}{14/7} = \frac{3}{2} = 1.5.
+\]
+Under $H_0: \sigma_X^2 = \sigma_Y^2$, $V_{m,n} \sim F_{m-1, n-1} = F_{7, 7}$.
+
+For a two-sided level-$\alpha_0 = 0.10$ test, reject if
+\[
+V \leq F_{0.95, 7, 7} = 1/F_{0.05, 7, 7} = 1/3.79 \approx 0.264 \quad \text{or} \quad V \geq F_{0.05, 7, 7} = 3.79.
+\]
+Since $0.264 < 1.5 < 3.79$, we fail to reject $H_0$.
+
+\boxedans{$V = 1.5$, rejection region $V \leq 0.264$ or $V \geq 3.79$. \textbf{Fail to reject $H_0$} at $\alpha_0 = 0.10$: no significant evidence that $\sigma_X^2 \neq \sigma_Y^2$. The common-variance assumption used in (a)--(b) is not contradicted by the data.}
+
+\bigskip\hrule
+
+% --- C2 ---
+\prob{20}{Neyman--Pearson, Power, Sample Size}
+
+\partlabel{a}{8}
+The joint density under $\theta$ is
+\[
+f_\theta(\mathbf{x}) = (2\pi)^{-n/2} \exp\!\Big(-\tfrac{1}{2}\textstyle\sum_i (x_i - \theta)^2\Big).
+\]
+The likelihood ratio is
+\[
+\frac{f_1(\mathbf{x})}{f_0(\mathbf{x})} = \exp\!\Big(-\tfrac{1}{2}\textstyle\sum_i [(x_i - 1)^2 - x_i^2]\Big) = \exp\!\Big(\textstyle\sum_i x_i - \tfrac{n}{2}\Big) = \exp\!\big(n \bar{x} - \tfrac{n}{2}\big).
+\]
+By the Neyman--Pearson Lemma, the most powerful level-$\alpha_0$ test rejects $H_0$ when $f_1/f_0 > k$ for some $k > 0$. Since $\exp(n\bar{x} - n/2)$ is strictly increasing in $\bar{x}$, this is equivalent to rejecting when
+\[
+\bar{X}_n > c \qquad \text{for some constant } c.
+\]
+
+The constant $c$ is chosen so that $P_{\theta = 0}(\bar{X}_n > c) = \alpha_0$.
+
+\boxedans{The MP test rejects when $\bar{X}_n > c$, with $c$ chosen to make the size $= \alpha_0$.}
+
+\partlabel{b}{4}
+Under $H_0$ ($\theta = 0$), $\bar{X}_n \sim N(0, 1/n)$, so $\sqrt{n}\,\bar{X}_n \sim N(0,1)$. We need
+\[
+P_0(\bar{X}_n > c) = P\big(Z > \sqrt{n}\,c\big) = 0.05 \;\Longrightarrow\; \sqrt{n}\,c = z_{0.05} = 1.645.
+\]
+With $n = 16$, $\sqrt{n} = 4$, so $c = 1.645/4$.
+
+\boxedans{$c = 1.645/4 \approx 0.4113$.}
+
+\partlabel{c}{5}
+Under $\theta = 1$, $\bar{X}_n \sim N(1, 1/n)$, so $\sqrt{n}(\bar{X}_n - 1) \sim N(0, 1)$. The power is
+\[
+\pi(1) = P_{\theta = 1}\big(\bar{X}_n > c\big) = P\!\left(Z > \sqrt{n}(c - 1)\right) = 1 - \Phi\big(\sqrt{n}\,c - \sqrt{n}\big) = \Phi\big(\sqrt{n} - \sqrt{n}\,c\big).
+\]
+Since $\sqrt{n}\,c = z_{0.05} = 1.645$ and $\sqrt{n} = 4$,
+\[
+\pi(1) = \Phi(4 - 1.645) = \Phi(2.355).
+\]
+The Type II error probability is $\beta = 1 - \pi(1) = 1 - \Phi(2.355)$.
+
+Numerically $\Phi(2.355) \approx 0.9907$ (between $\Phi(2.326) = 0.99$ and $\Phi(2.576) = 0.995$), so $\beta \approx 0.0093$.
+
+\boxedans{$\pi(1) = \Phi(4 - 1.645) = \Phi(2.355) \approx 0.9907$. \quad $\beta = 1 - \pi(1) \approx 0.0093$.}
+
+\partlabel{d}{3}
+For the analogous test with sample size $n$, the rejection threshold is $c_n = z_{0.05}/\sqrt{n}$ and the power is
+\[
+\pi(1; n) = \Phi\big(\sqrt{n} - z_{0.05}\big) = \Phi(\sqrt{n} - 1.645).
+\]
+We need $\pi(1; n) \geq 0.99 = \Phi(z_{0.01})$, i.e.\ $\sqrt{n} - 1.645 \geq z_{0.01} = 2.326$, hence
+\[
+\sqrt{n} \geq 1.645 + 2.326 = 3.971 \quad\Longleftrightarrow\quad n \geq 3.971^2 \approx 15.77.
+\]
+The smallest integer $n$ satisfying this is $n^* = 16$. (The current sample size already meets the $0.99$ power requirement, consistent with $\pi(1) \approx 0.9907$ from part (c).)
+
+\boxedans{$n^* = 16$.}
+
+\bigskip\hrule
+
+% --- C3 ---
+\prob{20}{Poisson MLE, Fisher Information, LRT}
+
+\partlabel{a}{5}
+The log-likelihood (dropping terms free of $\lambda$) is
+\[
+\ell_n(\lambda) = -n\lambda + \log(\lambda) \sum_{i=1}^n X_i + \text{const}.
+\]
+Differentiating: $\dot{\ell}_n(\lambda) = -n + (\sum X_i)/\lambda$. Setting $= 0$ gives $\lambda = \bar{X}_n$. The second derivative $-(\sum X_i)/\lambda^2 < 0$, confirming a maximum.
+
+\textbf{Unbiasedness:} $E_\lambda[\widehat{\lambda}_n] = E_\lambda[\bar{X}_n] = \tfrac{1}{n}\sum_{i=1}^n E_\lambda[X_i] = \tfrac{1}{n}(n\lambda) = \lambda$.
+
+\boxedans{$\widehat{\lambda}_n = \bar{X}_n$. It is unbiased: $E_\lambda[\widehat{\lambda}_n] = \lambda$.}
+
+\partlabel{b}{5}
+For a single observation $X \sim \mathrm{Poisson}(\lambda)$:
+$\log f(x;\lambda) = -\lambda + x \log \lambda - \log(x!)$, so the score is $\dot{\ell}(x;\lambda) = -1 + x/\lambda$. The Fisher information is
+\[
+I(\lambda) = E_\lambda\!\left[\dot{\ell}(X;\lambda)^2\right] = \mathrm{Var}_\lambda(\dot{\ell}) = \mathrm{Var}_\lambda(X/\lambda) = \frac{\mathrm{Var}_\lambda(X)}{\lambda^2} = \frac{\lambda}{\lambda^2} = \frac{1}{\lambda}.
+\]
+For the full sample (i.i.d.): $I_n(\lambda) = n I(\lambda) = n/\lambda$.
+
+\textbf{Efficiency check.} The CRLB for unbiased estimators of $\lambda$ is $1/[n I(\lambda)] = \lambda/n$. The variance of $\widehat{\lambda}_n$ is
+\[
+\mathrm{Var}_\lambda(\widehat{\lambda}_n) = \mathrm{Var}_\lambda(\bar{X}_n) = \frac{\mathrm{Var}_\lambda(X_1)}{n} = \frac{\lambda}{n}.
+\]
+This equals the CRLB, so $\widehat{\lambda}_n$ achieves the bound and is therefore efficient.
+
+\boxedans{$I(\lambda) = 1/\lambda$, $\;I_n(\lambda) = n/\lambda$, $\;$CRLB $= \lambda/n = \mathrm{Var}_\lambda(\widehat{\lambda}_n)$. Yes, $\widehat{\lambda}_n$ is efficient.}
+
+\partlabel{c}{6}
+The likelihood is (constant $C(\mathbf{x}) = 1/\prod x_i!$)
+\[
+L_n(\lambda; \mathbf{x}) = e^{-n\lambda} \lambda^{\,n\bar{x}} \cdot C(\mathbf{x}).
+\]
+Under $H_0$ the supremum is $L_n(\lambda_0)$. Over all of $\Omega$ the supremum is $L_n(\widehat{\lambda}_n) = L_n(\bar{x})$. Therefore
+\[
+\Lambda(\mathbf{X}) = \frac{L_n(\lambda_0)}{L_n(\widehat{\lambda}_n)} = \frac{e^{-n\lambda_0} \lambda_0^{\,n\widehat{\lambda}_n}}{e^{-n\widehat{\lambda}_n} \widehat{\lambda}_n^{\,n\widehat{\lambda}_n}} = \exp\!\Big(-n(\lambda_0 - \widehat{\lambda}_n)\Big) \left(\frac{\lambda_0}{\widehat{\lambda}_n}\right)^{n\widehat{\lambda}_n}.
+\]
+Take logs:
+\[
+\log\Lambda = -n(\lambda_0 - \widehat{\lambda}_n) + n\widehat{\lambda}_n \log(\lambda_0/\widehat{\lambda}_n) = n(\widehat{\lambda}_n - \lambda_0) - n\widehat{\lambda}_n \log(\widehat{\lambda}_n/\lambda_0).
+\]
+Therefore
+\[
+-2 \log \Lambda(\mathbf{X}) = 2n\!\left[\widehat{\lambda}_n \log\!\frac{\widehat{\lambda}_n}{\lambda_0} \;-\; \big(\widehat{\lambda}_n - \lambda_0\big)\right].
+\]
+
+\boxedans{$\Lambda(\mathbf{X}) = e^{-n(\lambda_0 - \widehat{\lambda}_n)}\,(\lambda_0/\widehat{\lambda}_n)^{n\widehat{\lambda}_n}$. Equivalently, $-2\log\Lambda(\mathbf{X}) = 2n\big[\widehat{\lambda}_n \log(\widehat{\lambda}_n/\lambda_0) - (\widehat{\lambda}_n - \lambda_0)\big]$.}
+
+\partlabel{d}{4}
+Wilks' theorem: under $H_0$ with $H_0$ specifying $k = 1$ coordinate, as $n \to \infty$,
+\[
+-2 \log \Lambda(\mathbf{X}) \;\xrightarrow{d}\; \chi^2_1.
+\]
+A level-$\alpha_0 = 0.05$ asymptotic test therefore rejects $H_0$ when
+\[
+-2\log\Lambda(\mathbf{X}) \;>\; \chi^2_{0.05, 1} = 3.841.
+\]
+
+\boxedans{Reject $H_0$ at asymptotic level $0.05$ when $-2\log\Lambda(\mathbf{X}) > 3.841$. (Limiting distribution: $\chi^2_1$.)}
+
+\bigskip\hrule\bigskip
+
+\textit{End of Solutions --- Total Points: $10 + 30 + 60 = 100$.}
+
+\end{document}

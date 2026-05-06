@@ -1,0 +1,170 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{framed}
+\usepackage{titlesec}
+
+\titleformat{\section}{\large\bfseries}{}{0em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{}{0em}{}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\newcounter{qnum}
+\newcommand{\question}[2]{\stepcounter{qnum}\subsection*{Question \theqnum \quad (#1 points) \hfill #2}}
+
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries STAT GU4204 Section 001 --- Final Exam}\\[4pt]
+{\large Variant B: Theory \& Proofs}\\[6pt]
+{\large Spring 2026 \hspace{1.5cm} Total: 100 points \hspace{1.5cm} Time: 150 minutes}\\[4pt]
+\end{center}
+
+\medskip
+
+Name: \underline{\hspace{3in}} \hspace{1cm} UNI: \underline{\hspace{1.5in}}
+
+\medskip
+
+\textbf{Instructions.} This is an in-class, closed-book exam. You may bring \textbf{one} double-sided, hand-written 8.5$\times$11 cheat sheet. No calculators, computers, books, notes, or phones. Show all work to get full credit. Justify every step --- correct answers without justification will receive partial credit only. You may quote any theorem from class or from DeGroot \& Schervish (4th ed.) provided you state its name and verify its hypotheses.
+
+\medskip
+
+\textbf{Conventions.} Throughout the exam:
+\begin{itemize}[leftmargin=2em,nosep]
+    \item ``Random sample of size $n$ from $f(\cdot;\theta)$'' means $X_1,\ldots,X_n$ are i.i.d.\ with density (or pmf) $f(\cdot;\theta)$.
+    \item Exponential$(\theta)$ has density $f(x;\theta) = \theta e^{-\theta x}$ on $x>0$ (rate parameterization). $E[X]=1/\theta$, $\mathrm{Var}(X)=1/\theta^2$.
+    \item ``Regularity conditions'' refer to (A.1)--(A.3) for the Cram\'er-Rao bound and the standard regularity assumptions for asymptotic normality of the MLE.
+\end{itemize}
+
+\medskip
+
+\textbf{Quantile Table (use these as needed):}
+\begin{center}\small
+\begin{tabular}{ll}
+\toprule
+\textbf{Normal} & $z_{0.10}=1.282 \quad z_{0.05}=1.645 \quad z_{0.025}=1.960 \quad z_{0.01}=2.326 \quad z_{0.005}=2.576$ \\
+\textbf{$t$} & $t_{0.025,7}=2.365 \quad t_{0.025,8}=2.306 \quad t_{0.025,9}=2.262 \quad t_{0.025,14}=2.145$ \\
+            & $t_{0.025,15}=2.131 \quad t_{0.025,19}=2.093 \quad t_{0.025,24}=2.064$ \\
+            & $t_{0.05,8}=1.860 \quad t_{0.05,14}=1.761 \quad t_{0.05,19}=1.729$ \\
+\textbf{$\chi^2$} & $\chi^2_{0.95,7}=14.07 \quad \chi^2_{0.95,8}=15.51 \quad \chi^2_{0.05,8}=2.733$ \\
+                  & $\chi^2_{0.975,9}=19.02 \quad \chi^2_{0.025,9}=2.700$ \\
+                  & $\chi^2_{0.95,1}=3.841 \quad \chi^2_{0.95,2}=5.991$ \\
+\textbf{$F$} & $F_{0.05,4,4}=6.39 \quad F_{0.05,7,7}=3.79 \quad F_{0.025,7,7}=4.99$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\bigskip
+\hrule
+\bigskip
+
+% ====================================================================
+% PART A
+% ====================================================================
+\section*{Part A: Short Theoretical Questions \hfill (12 points, 4 each)}
+
+\textit{Brief but complete answers. State theorems precisely. 1--3 sentences of justification each.}
+
+\question{4}{Cram\'er-Rao Regularity}
+State and briefly justify (one sentence each) \textbf{two} of the regularity conditions (A.1)--(A.3) required for the Cram\'er-Rao Lower Bound to hold for an unbiased estimator of $\theta$. Then give one parametric family that \textbf{violates} regularity and explain precisely which condition fails and why.
+
+\question{4}{Neyman-Pearson Lemma}
+State the Neyman-Pearson Lemma in full for testing a simple null $H_0: \theta = \theta_0$ versus a simple alternative $H_1: \theta = \theta_1$. Then explain in one or two sentences why the Neyman-Pearson Lemma does \textbf{not} directly imply the existence of a uniformly most powerful (UMP) test for the two-sided alternative $H_0: \theta = \theta_0$ versus $H_1: \theta \neq \theta_0$.
+
+\question{4}{Wilks' Theorem}
+State Wilks' Theorem giving the asymptotic null distribution of $-2\log\Lambda(\mathbf{X})$, where $\Lambda$ is the likelihood ratio statistic. Be sure to identify the degrees of freedom in terms of the dimensions of $\Omega_0$ and $\Omega$. As a concrete instance: if $\theta = (\theta_1,\theta_2,\theta_3) \in \mathbb{R}^3$ and $H_0$ specifies $\theta_1 = 0$ and $\theta_2 = 0$ (with $\theta_3$ unrestricted), what is the limiting distribution of $-2\log\Lambda$ under $H_0$?
+
+\bigskip
+\hrule
+\bigskip
+
+% ====================================================================
+% PART B
+% ====================================================================
+\section*{Part B: Mid-Length Proofs \hfill (28 points)}
+
+\question{14}{Sufficiency and Rao-Blackwellization (Poisson)}
+Let $X_1,\ldots,X_n$ be a random sample from a Poisson distribution with parameter $\lambda > 0$. Define $T = \sum_{i=1}^n X_i$.
+
+\begin{enumerate}[label=(\alph*),leftmargin=2em]
+    \item (5 pts) Use the Fisher--Neyman factorization criterion to show that $T$ is sufficient for $\lambda$. State the factorization explicitly, identifying the functions $u(\mathbf{x})$ and $\nu(t,\lambda)$.
+    \item (3 pts) Consider the (admittedly poor) estimator $\delta(\mathbf{X}) = X_1$ of $\lambda$. Compute the bias and the variance of $\delta$.
+    \item (4 pts) Apply the Rao-Blackwell theorem: compute the conditional expectation $\delta_0(t) = E_\lambda[X_1 \mid T = t]$ and write down the resulting Rao-Blackwellized estimator $\delta_0(T)$. \emph{Hint:} use symmetry of the conditional distribution.
+    \item (2 pts) Verify directly that $\mathrm{Var}_\lambda(\delta_0(T)) \le \mathrm{Var}_\lambda(\delta(\mathbf{X}))$, with strict inequality whenever $n>1$. Conclude the comparison of MSEs.
+\end{enumerate}
+
+\question{14}{Cram\'er-Rao Bound for the Exponential}
+Let $X_1,\ldots,X_n$ be a random sample from the Exponential distribution with rate $\theta > 0$, i.e.\ $f(x;\theta) = \theta e^{-\theta x}$ for $x > 0$.
+
+\begin{enumerate}[label=(\alph*),leftmargin=2em]
+    \item (3 pts) Derive the score function $\dot{\ell}(x,\theta) = \dfrac{\partial}{\partial\theta}\log f(x;\theta)$ for a single observation.
+    \item (3 pts) Verify directly that $E_\theta[\dot{\ell}(X,\theta)] = 0$.
+    \item (3 pts) Compute the Fisher information $I(\theta) = E_\theta[\dot{\ell}(X,\theta)^2]$ for a single observation. (You may verify by also computing $-E_\theta[\ddot{\ell}(X,\theta)]$.)
+    \item (5 pts) Find the maximum likelihood estimator $\hat\theta_n$ of $\theta$. Determine whether $\hat\theta_n$ is unbiased; if not, compute its bias. Then state whether $\hat\theta_n$ attains the Cram\'er-Rao Lower Bound for unbiased estimators of $\theta$. If it does not (or if the CRLB does not directly apply), use the asymptotic theory of the MLE to find the asymptotic distribution
+    \[ \sqrt{n}\,(\hat\theta_n - \theta) \xrightarrow{d} N(0, v(\theta)) \]
+    and identify $v(\theta)$ explicitly.
+\end{enumerate}
+
+\bigskip
+\hrule
+\bigskip
+
+% ====================================================================
+% PART C
+% ====================================================================
+\section*{Part C: Major Theory + Applications \hfill (60 points)}
+
+\question{20}{Likelihood Ratio Test for the Normal Mean ($\sigma^2$ unknown)}
+Let $X_1,\ldots,X_n$ be a random sample from $N(\mu,\sigma^2)$ where \textbf{both} $\mu \in \mathbb{R}$ and $\sigma^2 > 0$ are unknown. We test
+\[ H_0: \mu = \mu_0 \quad \text{vs.} \quad H_1: \mu \neq \mu_0. \]
+
+\begin{enumerate}[label=(\alph*),leftmargin=2em]
+    \item (10 pts) Derive the likelihood ratio statistic
+    \[ \Lambda(\mathbf{X}) = \frac{\sup_{\sigma^2 > 0} L_n(\mu_0,\sigma^2; \mathbf{X})}{\sup_{(\mu,\sigma^2)} L_n(\mu,\sigma^2; \mathbf{X})}. \]
+    Show all steps: (i) write down $L_n$, (ii) maximize the numerator over $\sigma^2$ holding $\mu = \mu_0$, (iii) maximize the denominator over $(\mu,\sigma^2)$, and (iv) simplify $\Lambda$ to a closed form involving $\sum_i (X_i - \overline{X}_n)^2$ and $(\overline{X}_n - \mu_0)^2$.
+    \item (8 pts) Show that the LRT \emph{reject $H_0$ when $\Lambda(\mathbf{X}) \le k$} is equivalent to the two-sided $t$-test \emph{reject $H_0$ when $|U_n| \ge c$}, where
+    \[ U_n = \frac{\sqrt{n}\,(\overline{X}_n - \mu_0)}{s_n}, \qquad s_n^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i - \overline{X}_n)^2. \]
+    Express $c$ in terms of $k$ and identify it as a quantile of the appropriate distribution under $H_0$.
+    \item (2 pts) State the asymptotic null distribution of $-2\log\Lambda(\mathbf{X})$ as $n \to \infty$ and verify that the degrees of freedom you obtain match what Wilks' Theorem predicts (count the constraints).
+\end{enumerate}
+
+\question{20}{Most Powerful and UMP Tests for the Exponential Rate}
+Let $X_1,\ldots,X_n$ be a random sample from $\mathrm{Exp}(\lambda)$ (rate parameterization) and let $T = \sum_{i=1}^n X_i$. Fix $\lambda_1 > \lambda_0 > 0$.
+
+\begin{enumerate}[label=(\alph*),leftmargin=2em]
+    \item (8 pts) Test $H_0: \lambda = \lambda_0$ vs.\ $H_1: \lambda = \lambda_1$. Using the Neyman-Pearson Lemma, derive the most powerful (MP) level-$\alpha_0$ test. Reduce the rejection region to a region of the form $\{T \le c\}$ or $\{T \ge c\}$ (you must determine which).
+    \item (5 pts) State and justify the null distribution of $T$ under $H_0$. (\emph{Hint:} sums of i.i.d.\ exponentials are Gamma; relate Gamma to $\chi^2$.) Express the critical value $c$ as a quantile of a chi-squared distribution. For $n=4$ and $\alpha_0 = 0.05$, give a closed-form expression for $c$ in terms of a single $\chi^2$ quantile.
+    \item (4 pts) Show that the same form of test (with the \emph{same} critical value) is uniformly most powerful (UMP) of level $\alpha_0$ for the one-sided composite problem
+    \[ H_0: \lambda \le \lambda_0 \quad \text{vs.} \quad H_1: \lambda > \lambda_0. \]
+    You may use the monotone likelihood ratio (MLR) property if you state and verify it.
+    \item (3 pts) Write the power function $\pi(\lambda) = \mathbb{P}_\lambda(T \in R)$ in terms of a $\chi^2$ cdf, and use it to argue that $\pi$ is monotone increasing in $\lambda$ on $(0,\infty)$.
+\end{enumerate}
+
+\question{20}{MLE Asymptotics, Delta Method, and Test/CI Duality (Bernoulli)}
+Let $X_1,\ldots,X_n$ be a random sample from $\mathrm{Bernoulli}(p)$ with $p \in (0,1)$ unknown.
+
+\begin{enumerate}[label=(\alph*),leftmargin=2em]
+    \item (3 pts) Derive the maximum likelihood estimator $\hat p_n$ of $p$ and the Fisher information $I_n(p)$ in the full sample. Verify $\hat p_n$ is unbiased.
+    \item (3 pts) State (assuming the standard regularity conditions) the asymptotic normality of the MLE in the form
+    \[ \sqrt{n}\,(\hat p_n - p) \xrightarrow{d} N(0, \sigma^2(p)) \]
+    and identify $\sigma^2(p)$. Briefly justify why the regularity conditions hold here.
+    \item (5 pts) Let $g(p) = \log\!\bigl(\tfrac{p}{1-p}\bigr)$ (the log-odds). Apply the delta method to find the asymptotic distribution of $g(\hat p_n)$. State explicitly the condition $g'(p) \neq 0$ and the values of $p$ for which this fails (if any), and write the asymptotic variance $\tau^2(p)$ as a function of $p$.
+    \item (4 pts) Construct an approximate $(1-\alpha_0)$ confidence interval for the log-odds $g(p)$, expressed entirely in terms of $\hat p_n$, $n$, and $z_{\alpha_0/2}$.
+    \item (5 pts) Let $\alpha_0 = 0.05$. Show that the test of $H_0: p = 1/2$ at level $\alpha_0$ obtained by inverting the CI in (d) (i.e.\ ``reject $H_0$ iff $0 \notin$ CI for $g(p)$'') is, at the level of test statistics, equivalent to a test based directly on $\hat p_n$ vs.\ a critical value. Identify the equivalent rejection region in terms of $\hat p_n$.
+\end{enumerate}
+
+\bigskip
+\hrule
+\bigskip
+
+\begin{center}
+\textbf{End of exam.} \quad Total: 100 points.\\
+Check that you answered all parts. Justification is required for full credit.
+\end{center}
+
+\end{document}

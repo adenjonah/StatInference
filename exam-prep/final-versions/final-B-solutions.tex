@@ -1,0 +1,398 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{framed}
+\usepackage{titlesec}
+
+\titleformat{\section}{\large\bfseries}{}{0em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{}{0em}{}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\newcounter{qnum}
+\newcommand{\question}[2]{\stepcounter{qnum}\subsection*{Question \theqnum \quad (#1 points) \hfill #2}}
+\newcommand{\soln}{\medskip\textbf{Solution.}\quad}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\xbar}{\overline{X}}
+
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries STAT GU4204 Section 001 --- Final Exam --- Solutions}\\[4pt]
+{\large Variant B: Theory \& Proofs}\\[6pt]
+{\large Spring 2026 \hspace{1.5cm} Total: 100 points \hspace{1.5cm} Time: 150 minutes}\\[4pt]
+\end{center}
+
+\medskip
+
+\textbf{Note.} These solutions show full reasoning. On the actual exam, somewhat shorter justification suffices for full credit, but every claim used must be either proved or quoted by name (and its hypotheses verified).
+
+\bigskip
+\hrule
+\bigskip
+
+% ====================================================================
+% PART A SOLUTIONS
+% ====================================================================
+\section*{Part A: Short Theoretical Questions \hfill (12 points, 4 each)}
+
+\question{4}{Cram\'er-Rao Regularity}
+
+\soln Two of the three regularity conditions:
+
+\begin{itemize}[leftmargin=2em,nosep]
+    \item \textbf{(A.1) Common support.} The support $A_\theta = \{x : f(x;\theta) > 0\}$ does not depend on $\theta$. \emph{Why needed:} the proof of the CRLB requires $\frac{\partial}{\partial\theta}\int f(x;\theta)\,dx = 0$, and if the limits of integration depend on $\theta$ this fails by Leibniz's rule (boundary terms appear).
+    \item \textbf{(A.2) Differentiation under the integral.} $\frac{\partial}{\partial\theta} E_\theta[W(\bX_n)] = \int W(\mathbf{x})\,\frac{\partial}{\partial\theta} f_n(\mathbf{x};\theta)\,d\mathbf{x}$. \emph{Why needed:} this is the step that makes $E_\theta[\dot\ell_n] = 0$ and that turns $\frac{d}{d\theta}E_\theta[T] = g'(\theta)$ into a covariance formula, after which Cauchy--Schwarz gives the bound.
+\end{itemize}
+
+(One could equally state (A.3): the score $\frac{\partial}{\partial\theta}\log f$ exists and is finite for all $x \in A,\,\theta\in\Omega$.)
+
+\medskip
+
+\textbf{Family that violates regularity:} $X_1,\ldots,X_n \stackrel{\text{iid}}{\sim} \mathrm{Unif}(0,\theta)$, $\theta>0$. Here $A_\theta = (0,\theta)$ \emph{depends on} $\theta$, so condition (A.1) fails. Concretely, the MLE $\hat\theta = X_{(n)}$ satisfies $\Var(\hat\theta) = \frac{n\theta^2}{(n+1)^2(n+2)} = O(n^{-2})$, which is asymptotically smaller than $1/(n I(\theta)) = O(n^{-1})$ --- so without regularity the CRLB does not bind.
+
+\question{4}{Neyman-Pearson Lemma}
+
+\soln \textbf{Statement.} Let $f_0,f_1$ be the joint densities/pmfs of $\bX$ under $\theta_0,\theta_1$. For any $k>0$, define a test $\delta^*$ that
+\begin{itemize}[leftmargin=2em,nosep]
+    \item rejects $H_0$ if $f_1(\bX) > k\,f_0(\bX)$,
+    \item does not reject $H_0$ if $f_1(\bX) < k\,f_0(\bX)$,
+    \item makes either decision (possibly randomized) when $f_1(\bX) = k\,f_0(\bX)$.
+\end{itemize}
+Let $\alpha(\delta) = P_{\theta_0}(\text{reject})$ and $\beta(\delta) = P_{\theta_1}(\text{do not reject})$. Then for any other test $\delta$:
+\[
+\alpha(\delta) \le \alpha(\delta^*) \;\Longrightarrow\; \beta(\delta) \ge \beta(\delta^*),
+\]
+i.e.\ $\delta^*$ minimizes the Type II error rate among all tests with Type I rate at most $\alpha(\delta^*)$. (Equivalently, $\delta^*$ is most powerful at its level.)
+
+\medskip
+
+\textbf{Why no UMP for two-sided alternatives.} The NP lemma constructs a most powerful test for a \emph{single} pair $(\theta_0,\theta_1)$. For the two-sided alternative $H_1: \theta \neq \theta_0$, the alternative parameter set is $\Omega_1 = \{\theta : \theta \neq \theta_0\}$. The NP-optimal rejection region for $\theta_1 > \theta_0$ is one-sided in one direction (say $T \ge c$), while the NP-optimal region for $\theta_1 < \theta_0$ is one-sided in the \emph{other} direction ($T \le c'$); these regions disagree, so no single test is simultaneously most powerful against every $\theta_1 \in \Omega_1$. Hence the NP lemma gives MP tests pointwise but does not yield a UMP test for two-sided alternatives.
+
+\question{4}{Wilks' Theorem}
+
+\soln \textbf{Statement (Wilks).} Let $\Omega \subseteq \mathbb{R}^d$ and $\Omega_0 \subset \Omega$ be a $(d-k)$-dimensional smooth submanifold (equivalently, $H_0$ specifies $k$ functionally independent constraints on $\theta$). Under standard regularity conditions on the model and assuming $\theta \in \Omega_0$, as $n\to\infty$,
+\[
+-2\log \Lambda(\bX) \;\xrightarrow{d}\; \chi^2_k.
+\]
+The degrees of freedom equal $\dim(\Omega) - \dim(\Omega_0) = k$, the number of constraints under $H_0$.
+
+\medskip
+
+\textbf{Concrete example.} Here $d = 3$, $\Omega_0 = \{(0,0,\theta_3): \theta_3 \in \mathbb{R}\}$ has dimension $1$, so $k = 3-1 = 2$. Therefore under $H_0$,
+\[
+-2\log\Lambda(\bX) \xrightarrow{d} \chi^2_2.
+\]
+
+\bigskip
+\hrule
+\bigskip
+
+% ====================================================================
+% PART B SOLUTIONS
+% ====================================================================
+\section*{Part B: Mid-Length Proofs \hfill (28 points)}
+
+\question{14}{Sufficiency and Rao-Blackwellization (Poisson)}
+
+\textbf{(a) Factorization.}\quad The joint pmf is
+\[
+f_n(\mathbf{x};\lambda) = \prod_{i=1}^n \frac{e^{-\lambda}\lambda^{x_i}}{x_i!}
+= \underbrace{\frac{1}{\prod_i x_i!}}_{u(\mathbf{x})} \cdot \underbrace{e^{-n\lambda}\,\lambda^{\sum_i x_i}}_{\nu(t,\lambda),\;t = \sum_i x_i}.
+\]
+Here $u(\mathbf{x}) \ge 0$ does not depend on $\lambda$, and $\nu(t,\lambda)$ depends on $\mathbf{x}$ only through $t = \sum_i x_i$. By the Fisher--Neyman factorization criterion, $T = \sum_{i=1}^n X_i$ is sufficient for $\lambda$. \hfill$\square$
+
+\medskip
+
+\textbf{(b) Bias and variance of $\delta(\bX) = X_1$.}\quad Since $X_1 \sim \mathrm{Poisson}(\lambda)$,
+\[
+E_\lambda[\delta] = E[X_1] = \lambda \;\Rightarrow\; \text{bias} = 0, \qquad \Var_\lambda(\delta) = \Var(X_1) = \lambda.
+\]
+So $\delta$ is unbiased with $\mathrm{MSE}(\delta) = \lambda$.
+
+\medskip
+
+\textbf{(c) Rao-Blackwellization.}\quad We compute $\delta_0(t) = E_\lambda[X_1 \mid T = t]$. Conditional on $T = t$, the vector $(X_1,\ldots,X_n)$ is multinomial$(t; 1/n,\ldots,1/n)$ (a standard result: given the sum of i.i.d.\ Poissons, the components are multinomial with equal probabilities). Hence by symmetry $E[X_i \mid T = t] = t/n$ for each $i$, and in particular
+\[
+\delta_0(t) = E_\lambda[X_1 \mid T = t] = \frac{t}{n}.
+\]
+Note this does not depend on $\lambda$ (as it must, since $T$ is sufficient). The Rao-Blackwellized estimator is
+\[
+\delta_0(T) = \frac{T}{n} = \overline{X}_n.
+\]
+
+\medskip
+
+\textbf{(d) Comparing variances.}\quad Since $T = \sum_i X_i \sim \mathrm{Poisson}(n\lambda)$ has variance $n\lambda$,
+\[
+\Var_\lambda\!\left(\frac{T}{n}\right) = \frac{n\lambda}{n^2} = \frac{\lambda}{n}.
+\]
+Both estimators are unbiased, so MSE $=$ Variance, and
+\[
+\mathrm{MSE}(\delta_0) = \frac{\lambda}{n} \;\le\; \lambda = \mathrm{MSE}(\delta),
+\]
+with strict inequality for $n > 1$. This is consistent with the Rao-Blackwell theorem. \hfill$\square$
+
+\question{14}{Cram\'er-Rao Bound for the Exponential}
+
+\textbf{(a) Score function.}\quad For a single observation,
+\[
+\log f(x;\theta) = \log\theta - \theta x \;\Rightarrow\; \dot\ell(x,\theta) = \frac{\partial}{\partial\theta}\log f(x;\theta) = \frac{1}{\theta} - x.
+\]
+
+\medskip
+
+\textbf{(b) Mean of the score.}\quad Since $E_\theta[X] = 1/\theta$,
+\[
+E_\theta[\dot\ell(X,\theta)] = \frac{1}{\theta} - E_\theta[X] = \frac{1}{\theta} - \frac{1}{\theta} = 0. \quad\checkmark
+\]
+
+\medskip
+
+\textbf{(c) Fisher information.}\quad
+\[
+I(\theta) = \Var_\theta\!\bigl(\dot\ell(X,\theta)\bigr) = \Var_\theta\!\bigl(\tfrac{1}{\theta}-X\bigr) = \Var_\theta(X) = \frac{1}{\theta^2}.
+\]
+Verification via the second-derivative form: $\ddot\ell(x,\theta) = -1/\theta^2$, so $-E_\theta[\ddot\ell(X,\theta)] = 1/\theta^2$. \quad\checkmark
+
+For the full sample of size $n$: $I_n(\theta) = n/\theta^2$.
+
+\medskip
+
+\textbf{(d) MLE, bias, and CRLB.}\quad The log-likelihood is
+\[
+\ell_n(\theta) = n\log\theta - \theta \sum_{i=1}^n X_i,
+\]
+so $\dot\ell_n(\theta) = n/\theta - \sum_i X_i = 0$ gives
+\[
+\boxed{\hat\theta_n = \frac{1}{\overline{X}_n}.}
+\]
+(Since $\ddot\ell_n = -n/\theta^2 < 0$, this is a maximum.)
+
+\textbf{Bias.} Note $\sum_i X_i \sim \mathrm{Gamma}(n,\theta)$ (shape $n$, rate $\theta$), so $\overline{X}_n = \frac{1}{n}\sum X_i \sim \mathrm{Gamma}(n, n\theta)$. For $Y \sim \mathrm{Gamma}(n, n\theta)$ with $n \ge 2$,
+\[
+E[1/Y] = \frac{n\theta}{n-1}.
+\]
+(This uses $E[Y^{-1}] = \frac{\beta}{\alpha-1}$ for $Y \sim \mathrm{Gamma}(\alpha,\beta)$, valid for $\alpha > 1$.) Hence
+\[
+E_\theta[\hat\theta_n] = \frac{n}{n-1}\theta \;\neq\; \theta,
+\]
+so $\hat\theta_n$ is \emph{biased} with bias $\theta/(n-1)$. (An unbiased version is $\hat\theta_n^{\,\text{unb}} = \frac{n-1}{n}\hat\theta_n = \frac{n-1}{\sum X_i}$.)
+
+\textbf{CRLB.} Since $\hat\theta_n$ is biased, the standard Cram\'er-Rao bound for unbiased estimators of $\theta$ does not directly compare. (One could compare an unbiased estimator $T$ against $1/(nI(\theta)) = \theta^2/n$.)
+
+\textbf{Asymptotic distribution.} The model has support $(0,\infty)$ independent of $\theta$ and is smooth in $\theta$, so regularity conditions hold. By the asymptotic theory of the MLE,
+\[
+\sqrt{n}\,(\hat\theta_n - \theta) \xrightarrow{d} N\!\left(0,\,\frac{1}{I(\theta)}\right) = N(0,\theta^2).
+\]
+We may also derive this directly: by the CLT, $\sqrt{n}(\overline{X}_n - 1/\theta) \xrightarrow{d} N(0,1/\theta^2)$. Apply the delta method with $g(x) = 1/x$, $g'(1/\theta) = -\theta^2$:
+\[
+\sqrt{n}\bigl(\hat\theta_n - \theta\bigr) = \sqrt{n}\bigl(g(\overline{X}_n) - g(1/\theta)\bigr) \xrightarrow{d} N\!\bigl(0,\,(g'(1/\theta))^2 \cdot \tfrac{1}{\theta^2}\bigr) = N(0,\theta^2).
+\]
+So $v(\theta) = \theta^2$. Asymptotically the variance is $\theta^2/n$, which equals $1/(nI(\theta))$ --- the MLE is asymptotically efficient. \hfill$\square$
+
+\bigskip
+\hrule
+\bigskip
+
+% ====================================================================
+% PART C SOLUTIONS
+% ====================================================================
+\section*{Part C: Major Theory + Applications \hfill (60 points)}
+
+\question{20}{Likelihood Ratio Test for the Normal Mean ($\sigma^2$ unknown)}
+
+\textbf{(a) Deriving $\Lambda$.}\quad The joint density at $(\mu,\sigma^2)$ is
+\[
+L_n(\mu,\sigma^2;\bX) = (2\pi\sigma^2)^{-n/2} \exp\!\left\{-\frac{1}{2\sigma^2}\sum_{i=1}^n (X_i - \mu)^2\right\}.
+\]
+
+\emph{(ii) Numerator}: maximize over $\sigma^2$ with $\mu = \mu_0$. Setting $\frac{\partial}{\partial \sigma^2}\log L_n = -\frac{n}{2\sigma^2} + \frac{1}{2\sigma^4}\sum (X_i-\mu_0)^2 = 0$ yields
+\[
+\hat\sigma_0^2 = \frac{1}{n}\sum_{i=1}^n (X_i - \mu_0)^2,
+\]
+and substituting back,
+\[
+\sup_{\sigma^2} L_n(\mu_0,\sigma^2;\bX) = (2\pi\hat\sigma_0^2)^{-n/2} e^{-n/2}.
+\]
+
+\emph{(iii) Denominator}: free maximization gives the standard MLEs $\hat\mu = \overline{X}_n$ and $\hat\sigma^2 = \frac{1}{n}\sum_i (X_i-\overline{X}_n)^2$. Hence
+\[
+\sup L_n = (2\pi\hat\sigma^2)^{-n/2} e^{-n/2}.
+\]
+
+\emph{(iv) Ratio:} the $e^{-n/2}$ and $(2\pi)^{-n/2}$ factors cancel, leaving
+\[
+\Lambda(\bX) = \left(\frac{\hat\sigma^2}{\hat\sigma_0^2}\right)^{n/2}
+= \left(\frac{\sum_i (X_i - \overline{X}_n)^2}{\sum_i (X_i - \mu_0)^2}\right)^{n/2}.
+\]
+Using the algebraic identity $\sum (X_i-\mu_0)^2 = \sum (X_i-\overline{X}_n)^2 + n(\overline{X}_n-\mu_0)^2$:
+\[
+\boxed{\;\Lambda(\bX) = \left(1 + \frac{n(\overline{X}_n - \mu_0)^2}{\sum_i (X_i - \overline{X}_n)^2}\right)^{-n/2}.\;}
+\]
+
+\medskip
+
+\textbf{(b) Equivalence with the $t$-test.}\quad Recall $s_n^2 = \frac{1}{n-1}\sum_i (X_i - \overline{X}_n)^2$, so $\sum_i (X_i-\overline{X}_n)^2 = (n-1)s_n^2$. Then
+\[
+\frac{n(\overline{X}_n - \mu_0)^2}{\sum_i (X_i - \overline{X}_n)^2}
+= \frac{n(\overline{X}_n - \mu_0)^2}{(n-1)s_n^2}
+= \frac{1}{n-1}\,U_n^2,\qquad U_n = \frac{\sqrt{n}\,(\overline{X}_n - \mu_0)}{s_n}.
+\]
+Therefore
+\[
+\Lambda(\bX) = \left(1 + \frac{U_n^2}{n-1}\right)^{-n/2}.
+\]
+This is a strictly decreasing function of $U_n^2$. Hence
+\[
+\Lambda(\bX) \le k \iff U_n^2 \ge \kappa \iff |U_n| \ge c
+\]
+where $c = \sqrt{\kappa}$ and $\kappa = (n-1)\bigl(k^{-2/n} - 1\bigr)$. Under $H_0$ we have $U_n \sim t_{n-1}$ (standard sampling result for the normal model), so to achieve level $\alpha_0$ we choose
+\[
+c = T_{n-1}^{-1}(1 - \alpha_0/2),
+\]
+the $(1-\alpha_0/2)$-quantile of the $t_{n-1}$ distribution. This is exactly the two-sided $t$-test. \hfill$\square$
+
+\medskip
+
+\textbf{(c) Wilks' theorem check.}\quad Here $\theta = (\mu,\sigma^2) \in \Omega = \mathbb{R}\times(0,\infty)$ with $\dim\Omega = 2$. Under $H_0$, $\Omega_0 = \{\mu_0\}\times(0,\infty)$ has dimension $1$. So Wilks predicts $-2\log\Lambda \xrightarrow{d}\chi^2_{2-1} = \chi^2_1$.
+
+We verify directly: $-2\log\Lambda = n\log(1 + U_n^2/(n-1))$. Under $H_0$, $U_n \to N(0,1)$ in distribution (since $t_{n-1} \to N(0,1)$), so $U_n^2 \to \chi^2_1$. Using $n\log(1 + a/(n-1)) = a + O(1/n)$ for fixed $a$ (Taylor expand), we get $-2\log\Lambda = U_n^2 + o_P(1) \xrightarrow{d}\chi^2_1$. \quad\checkmark
+
+\question{20}{Most Powerful and UMP Tests for the Exponential Rate}
+
+\textbf{(a) NP-MP test for $\lambda_0$ vs.\ $\lambda_1 > \lambda_0$.}\quad Joint density at rate $\lambda$ is
+\[
+f_n(\mathbf{x};\lambda) = \lambda^n \exp\!\Bigl(-\lambda \sum_i x_i\Bigr) = \lambda^n e^{-\lambda t},\quad t = \sum_i x_i.
+\]
+Likelihood ratio:
+\[
+\frac{f_n(\mathbf{x};\lambda_1)}{f_n(\mathbf{x};\lambda_0)} = \left(\frac{\lambda_1}{\lambda_0}\right)^n \exp\!\bigl(-(\lambda_1-\lambda_0)\,t\bigr).
+\]
+Since $\lambda_1 > \lambda_0$, the coefficient $-(\lambda_1-\lambda_0) < 0$, so the LR is a \emph{decreasing} function of $t$. Therefore
+\[
+\frac{f_1}{f_0} > k \iff t < c
+\]
+for some $c$ depending on $k$. By the Neyman-Pearson lemma, the most powerful level-$\alpha_0$ test rejects $H_0$ iff
+\[
+T = \sum_{i=1}^n X_i \le c,
+\]
+where $c$ is chosen so that $P_{\lambda_0}(T \le c) = \alpha_0$. \hfill$\square$
+
+\medskip
+
+\textbf{(b) Null distribution and critical value.}\quad If $X_i \stackrel{\text{iid}}{\sim}\mathrm{Exp}(\lambda)$ then $T = \sum_{i=1}^n X_i \sim \mathrm{Gamma}(n,\lambda)$. Recall $\mathrm{Gamma}(n,1/2) = \chi^2_{2n}$ (with rate $1/2$); rescaling, if $T \sim \mathrm{Gamma}(n,\lambda)$ then $2\lambda T \sim \chi^2_{2n}$. So under $H_0$, $2\lambda_0 T \sim \chi^2_{2n}$, and
+\[
+P_{\lambda_0}(T \le c) = \alpha_0 \;\iff\; P(\chi^2_{2n} \le 2\lambda_0 c) = \alpha_0 \;\iff\; 2\lambda_0 c = \chi^2_{\alpha_0,\,2n},
+\]
+where $\chi^2_{\alpha_0, 2n}$ is the $\alpha_0$-quantile of $\chi^2_{2n}$. Hence
+\[
+\boxed{\;c = \frac{\chi^2_{\alpha_0,\,2n}}{2\lambda_0}.\;}
+\]
+For $n = 4$ and $\alpha_0 = 0.05$: $c = \chi^2_{0.05,\,8}/(2\lambda_0) = 2.733/(2\lambda_0)$ (using the table value $\chi^2_{0.05,8} = 2.733$).
+
+\medskip
+
+\textbf{(c) UMP for $H_0:\lambda \le \lambda_0$ vs.\ $H_1: \lambda > \lambda_0$.}\quad For any fixed $\lambda' < \lambda''$ in this family, the same calculation as (a) shows
+\[
+\frac{f_n(\mathbf{x};\lambda'')}{f_n(\mathbf{x};\lambda')} = \left(\frac{\lambda''}{\lambda'}\right)^n e^{-(\lambda''-\lambda')t}
+\]
+is monotone decreasing in $t$. So the family $\{f_n(\cdot;\lambda)\}$ has \textbf{monotone likelihood ratio} (MLR) in the statistic $-T$ (equivalently, decreasing MLR in $T$).
+
+By the Karlin--Rubin theorem (a corollary of NP for MLR families), for the one-sided composite test $H_0: \lambda \le \lambda_0$ vs.\ $H_1: \lambda > \lambda_0$, the test ``reject iff $T \le c$'' --- with the same $c$ as in (b) --- is UMP at level $\alpha_0$. The level is achieved at the boundary because the power function $\pi(\lambda) = P_\lambda(T \le c)$ is monotone increasing in $\lambda$ (see (d)), so $\sup_{\lambda \le \lambda_0}\pi(\lambda) = \pi(\lambda_0) = \alpha_0$. \hfill$\square$
+
+\medskip
+
+\textbf{(d) Power function.}\quad Using $2\lambda T \sim \chi^2_{2n}$ for any $\lambda > 0$:
+\[
+\pi(\lambda) = P_\lambda(T \le c) = P(\chi^2_{2n} \le 2\lambda c) = F_{\chi^2_{2n}}(2\lambda c),
+\]
+where $F_{\chi^2_{2n}}$ is the $\chi^2_{2n}$ cdf. Since $F_{\chi^2_{2n}}$ is strictly increasing on $(0,\infty)$ and $2\lambda c$ is strictly increasing in $\lambda$, the composition $\pi(\lambda)$ is strictly increasing in $\lambda$. As $\lambda\to 0$, $\pi(\lambda)\to 0$; as $\lambda\to\infty$, $\pi(\lambda)\to 1$. \hfill$\square$
+
+\question{20}{MLE Asymptotics, Delta Method, and Test/CI Duality (Bernoulli)}
+
+\textbf{(a) MLE and Fisher information.}\quad Likelihood: $L_n(p) = p^{\sum X_i}(1-p)^{n-\sum X_i}$. Log-likelihood: $\ell_n(p) = (\sum X_i)\log p + (n - \sum X_i)\log(1-p)$. Score:
+\[
+\dot\ell_n(p) = \frac{\sum X_i}{p} - \frac{n-\sum X_i}{1-p} = 0 \;\Longrightarrow\; \hat p_n = \overline{X}_n.
+\]
+Then $E[\hat p_n] = E[X_1] = p$, so $\hat p_n$ is unbiased.
+
+For Fisher information per observation: $\dot\ell(x,p) = \frac{x}{p} - \frac{1-x}{1-p}$. Then
+\[
+I(p) = \Var_p(\dot\ell) = \Var\!\left(\frac{X}{p} - \frac{1-X}{1-p}\right) = \Var\!\left(\frac{X-p}{p(1-p)}\right) = \frac{p(1-p)}{p^2(1-p)^2} = \frac{1}{p(1-p)}.
+\]
+For the full sample: $\boxed{I_n(p) = \dfrac{n}{p(1-p)}}.$
+
+\medskip
+
+\textbf{(b) Asymptotic normality of the MLE.}\quad The Bernoulli$(p)$ family has support $\{0,1\}$ independent of $p$; the density is smooth in $p \in (0,1)$; and $I(p) = 1/[p(1-p)] \in (0,\infty)$ on $(0,1)$ --- regularity holds. By the standard CLT for $\hat p_n = \overline{X}_n$ (with $\Var(X_1) = p(1-p)$),
+\[
+\sqrt{n}(\hat p_n - p) \xrightarrow{d} N(0, p(1-p)),
+\]
+i.e.\ $\sigma^2(p) = p(1-p) = 1/I(p)$ as the general MLE asymptotic theory predicts.
+
+\medskip
+
+\textbf{(c) Delta method for $g(p) = \log\!\bigl(\tfrac{p}{1-p}\bigr)$.}\quad Differentiating,
+\[
+g'(p) = \frac{d}{dp}\bigl[\log p - \log(1-p)\bigr] = \frac{1}{p} + \frac{1}{1-p} = \frac{1}{p(1-p)}.
+\]
+On the open interval $p \in (0,1)$, $g'(p) > 0$ everywhere --- so $g'(p) = 0$ \emph{never} occurs (the delta method does not fail at any interior point; it only ``fails'' in the boundary sense as $p \to 0$ or $p\to 1$, where $g'(p)\to\infty$).
+
+By the delta method (Theorem 1.7 in Sen's notes, with $a_n = \sqrt{n}$):
+\[
+\sqrt{n}\bigl(g(\hat p_n) - g(p)\bigr) \xrightarrow{d} N\!\bigl(0,\,(g'(p))^2 \cdot p(1-p)\bigr) = N\!\left(0,\,\frac{1}{p^2(1-p)^2}\cdot p(1-p)\right) = N\!\left(0,\,\frac{1}{p(1-p)}\right).
+\]
+So
+\[
+\boxed{\;\tau^2(p) = \frac{1}{p(1-p)}.\;}
+\]
+
+\medskip
+
+\textbf{(d) Approximate CI for $g(p)$.}\quad From (c), an asymptotically pivotal quantity is
+\[
+Z_n = \sqrt{n}\bigl(g(\hat p_n) - g(p)\bigr)\,\sqrt{\hat p_n(1-\hat p_n)} \;\xrightarrow{d}\; N(0,1)
+\]
+(by Slutsky, replacing $\tau^2(p)$ with the consistent plug-in $\tau^2(\hat p_n) = 1/[\hat p_n(1-\hat p_n)]$, equivalently dividing by $1/\sqrt{\hat p_n(1-\hat p_n)}$). Inverting $|Z_n|\le z_{\alpha_0/2}$ gives the approximate $(1-\alpha_0)$ CI
+\[
+\boxed{\;g(\hat p_n) \pm \frac{z_{\alpha_0/2}}{\sqrt{n\,\hat p_n(1-\hat p_n)}}.\;}
+\]
+That is, $\bigl[\,\log\!\tfrac{\hat p_n}{1-\hat p_n} - \tfrac{z_{\alpha_0/2}}{\sqrt{n\hat p_n(1-\hat p_n)}},\;\log\!\tfrac{\hat p_n}{1-\hat p_n} + \tfrac{z_{\alpha_0/2}}{\sqrt{n\hat p_n(1-\hat p_n)}}\,\bigr]$.
+
+\medskip
+
+\textbf{(e) Test/CI duality at $p = 1/2$.}\quad By the duality of Theorem 10.3, the level-$\alpha_0$ test is: reject $H_0: g(p) = 0$ iff $0$ lies outside the CI from (d), i.e.\ iff
+\[
+\bigl|\,g(\hat p_n) - 0\,\bigr| > \frac{z_{\alpha_0/2}}{\sqrt{n\,\hat p_n(1-\hat p_n)}}.
+\]
+Equivalently:
+\[
+\sqrt{n\,\hat p_n(1-\hat p_n)}\,\bigl|\log\tfrac{\hat p_n}{1-\hat p_n}\bigr| > z_{\alpha_0/2}.
+\]
+This rejection rule depends on the data only through $\hat p_n$, so it is precisely a test of the form ``reject iff $\hat p_n \notin (L,U)$'' where $L < 1/2 < U$ are the two solutions of
+\[
+\sqrt{n\,\hat p(1-\hat p)}\,\log\tfrac{\hat p}{1-\hat p} = \pm z_{\alpha_0/2}.
+\]
+For $\alpha_0 = 0.05$, $z_{\alpha_0/2} = 1.960$; the equivalent rejection region is
+\[
+\Bigl\{\hat p_n : \sqrt{n\,\hat p_n(1-\hat p_n)}\,\bigl|\log\tfrac{\hat p_n}{1-\hat p_n}\bigr| > 1.96\Bigr\},
+\]
+which is monotone in $|\hat p_n - 1/2|$ near $1/2$, so it has the form $\{|\hat p_n - 1/2| > c_n\}$ for an explicit $c_n$ found by inversion. (At the null $p = 1/2$, $g(p) = 0$ and $p(1-p) = 1/4$, so the test statistic reduces in the usual way to a function of $\sqrt{n}(\hat p_n - 1/2)$, recovering the standard Wald test for $H_0: p = 1/2$.) \hfill$\square$
+
+\bigskip
+\hrule
+\bigskip
+
+\begin{center}
+\textbf{End of solutions.} \quad Total: 100 points.
+\end{center}
+
+\end{document}
