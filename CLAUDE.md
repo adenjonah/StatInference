@@ -4,23 +4,45 @@
 **Professor**: Banu Baydil  
 **Textbook**: DeGroot & Schervish, *Probability and Statistics*, 4th ed.
 
+## Repo Layout
+
+```
+StatInference/
+├── homework/        # Per-assignment subdirs (questions + solutions + submission)
+│   ├── hw1/
+│   └── hw3/
+├── exam-prep/       # Cheatsheet, mock midterms, practice exams
+├── reference/       # Master assignment PDF, terms-and-symbols glossary
+├── chunks/          # RAG-chunked course notes (DO NOT split further)
+├── README.md        # Source/chunk index
+└── CLAUDE.md        # This file
+```
+
 ## Homework
 
-All graded HW assignments live in this repo root. Solutions are written in LaTeX and compiled to PDF.
-
-| Assignment | Due | Status | File |
+| Assignment | Due | Status | Path |
 |---|---|---|---|
-| HW1 | 02/06 | Submitted | `HW1_Sol.pdf` |
-| HW3 | 04/28 | Complete | `hw3-solutions.tex` / `.pdf` |
+| HW1 | 02/06 | Submitted | `homework/hw1/HW1_Sol.pdf` |
+| HW2 (unofficial) | n/a | Solutions in `reference/Additional_Ex_Sol.pdf` | `chunks/homework-2-additional-problems.md` |
+| HW3 | 04/28 | Complete | `homework/hw3/hw3-{questions,solutions,submission}.{tex,pdf}` |
+| HW4 (extra credit) | 05/05 | Complete | `homework/hw4/hw4-{questions,solutions,worksheet}.{tex,pdf}` |
 
-Compile: `/Library/TeX/texbin/pdflatex -interaction=nonstopmode hw3-solutions.tex`
+Compile: `cd homework/hw3 && /Library/TeX/texbin/pdflatex -interaction=nonstopmode hw3-solutions.tex`
+
+LaTeX artifacts (`*.aux`, `*.log`, etc.) are gitignored — clean rebuilds are safe.
 
 ## Course Notes (RAG Chunks)
 
 All course content is chunked in `chunks/` — read `README.md` for the full index. Key chunks:
-- `chunks/homework-1-problems.md` — HW1 problems
+- `chunks/homework-{1,2,3,4}-problems.md` — Per-assignment problem chunks
 - `chunks/13-confidence-intervals.md`, `chunks/14-cramer-rao-inequality.md` — HW3 topics
+- `chunks/16-hypothesis-testing.md` — HW4 + final exam material (Neyman-Pearson, UMP, t/F-tests, LRT)
 - `chunks/textbook-rag/` — full DeGroot & Schervish reference
+
+Source PDFs in `reference/`:
+- `HWs_Spring_2026.pdf` — master HW doc (current as of 5/2 update)
+- `STAT_GU4204_08.pdf` — Sen notes Ch 10 (Hypothesis Testing)
+- `Additional_Ex_Sol.pdf` — solutions to additional/HW2 exercises
 
 ## Grading
 

@@ -2,6 +2,15 @@
 
 RAG-optimized notes for **STAT GU4204: Statistical Inference** (Columbia University, Spring 2026).
 
+## Layout
+
+| Dir | Contents |
+|------|----------|
+| `homework/` | Per-assignment subdirs (`hw1/`, `hw3/`, `hw4/`) with `.tex` sources and compiled `.pdf`s |
+| `exam-prep/` | Cheatsheet, mock midterms, practice exams |
+| `reference/` | Master assignment PDF (`HWs_Spring_2026.pdf`), `Additional_Ex_Sol.pdf` (additional/HW2 solutions), `STAT_GU4204_08.pdf` (full Sen notes Ch 1–10), `terms-and-symbols.md` glossary |
+| `chunks/` | RAG-chunked course notes (indexed below) |
+
 ## Sources
 
 | File | Author | Content |
@@ -12,10 +21,12 @@ RAG-optimized notes for **STAT GU4204: Statistical Inference** (Columbia Univers
 | STAT_GU4204_04.pdf | Banu Baydil | Lecture slides: Probability Inequalities, LLN, CLT |
 | STAT_GU4204_05.pdf | Bodhisattva Sen | Comprehensive notes: Ch 4 (Estimation Principles, Sufficiency) |
 | STAT_GU4204_06.pdf | Bodhisattva Sen | Comprehensive notes: Ch 5-7 (Bayesian, Sampling Distributions, Confidence Intervals) |
-| STAT_GU4204_07.pdf | Bodhisattva Sen | Comprehensive notes: Ch 8-10 (Cramer-Rao, Large Sample MLE, Hypothesis Testing) |
+| STAT_GU4204_07.pdf | Bodhisattva Sen | Comprehensive notes: Ch 8-9 (Cramer-Rao, Large Sample MLE) |
+| STAT_GU4204_08.pdf | Bodhisattva Sen | Comprehensive notes: Ch 10 (Hypothesis Testing) — full final-exam content |
+| Additional_Ex_Sol.pdf | Course TA | Solutions to Additional Exercises (HW2/practice) |
 | Midterm_Exam_Information_GU4204_S26.pdf | Banu Baydil | Midterm exam info, scope, cheat sheet rules |
 | 01_19_STAT_GU4204_Syllabus_S26.pdf | Banu Baydil | Course syllabus |
-| 03_27_HWs_STAT_GU4204_Spring_2026.pdf | Banu Baydil | All homework assignments and additional exercises |
+| HWs_Spring_2026.pdf (5/2 update) | Banu Baydil | All homework assignments + HW4-Extra Credit |
 
 ## Chunk Index
 
@@ -38,11 +49,15 @@ RAG-optimized notes for **STAT GU4204: Statistical Inference** (Columbia Univers
 | [13-confidence-intervals](chunks/13-confidence-intervals.md) | Confidence Intervals | Pivots, exact/approximate CIs, t-intervals, CLT-based CIs |
 | [14-cramer-rao-inequality](chunks/14-cramer-rao-inequality.md) | Cramer-Rao Inequality | Fisher information, score function, CRLB, efficiency, MVUE |
 | [15-midterm-info](chunks/15-midterm-info.md) | Midterm Exam Info | Exam scope, rules, cheat sheet policy, question types |
+| [16-hypothesis-testing](chunks/16-hypothesis-testing.md) | Hypothesis Testing | Type I/II errors, power function, p-value, Neyman-Pearson, UMP, t-test, F-test, LRT, test/CI duality |
 
 ### Homework & Textbook RAG
 | File | Topic | Purpose |
 |------|-------|---------|
-| [homework-1-problems](chunks/homework-1-problems.md) | Homework 1 + Additional Exercises | Ch 6.3, 7.5, 7.6, 7.7, 8.2, 8.4 problems; MLE, delta method, Bernoulli/Poisson/Normal inference |
+| [homework-1-problems](chunks/homework-1-problems.md) | Homework 1 + Additional Exercises | Ch 6.3, 7.5, 7.6 problems; MLE, delta method, Bernoulli/Poisson/Normal inference |
+| [homework-2-additional-problems](chunks/homework-2-additional-problems.md) | HW2 (Unofficial) + Additional Practice | Ch 7.7, 8.2, 8.4; sufficiency, MoM/MLE, MGF, gamma E(X³) |
+| [homework-3-problems](chunks/homework-3-problems.md) | Homework 3 | Ch 8.5, 8.7, 8.8, 9.1; Fisher info, large-sample MLE, CIs, intro to testing |
+| [homework-4-problems](chunks/homework-4-problems.md) | HW4 Extra Credit | Ch 9.5, 9.6, 9.10; Neyman-Pearson, UMP tests, Type I/II errors |
 | [textbook-rag/](chunks/textbook-rag/) | **Textbook RAG System** | **Full DeGroot & Schervish reference with solution guidance for each HW problem** |
 
 ## Concept Cross-Reference
@@ -60,10 +75,15 @@ RAG-optimized notes for **STAT GU4204: Statistical Inference** (Columbia Univers
 | Bayesian inference | 11 |
 | Chi-squared distribution | 12 |
 | t-distribution | 12, 13 |
-| Confidence intervals | 13 |
+| Confidence intervals | 13, 16 (test/CI duality) |
 | Fisher information | 14 |
 | Cramer-Rao lower bound | 14 |
 | Gamma distribution | 01, 06, 12 |
+| Hypothesis testing | 16 |
+| Type I / II errors, power function | 16 |
+| p-value | 16 |
+| Neyman-Pearson lemma, UMP tests | 16 |
+| t-test, F-test, likelihood ratio test | 16 |
 
 ## Textbook
 
