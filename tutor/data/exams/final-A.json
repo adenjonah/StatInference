@@ -1,0 +1,228 @@
+{
+  "variantId": "A",
+  "title": "Mock Final — Variant A (Predictable Standard)",
+  "totalPoints": 100,
+  "timeMinutes": 150,
+  "quantileTable": "- **Standard normal quantiles**: $P(Z > z_p) = p$\n- $z_{0.10} = 1.282$, $z_{0.05} = 1.645$, $z_{0.025} = 1.960$, $z_{0.01} = 2.326$, $z_{0.005} = 2.576$\n- **Student's $t$ quantiles**: $t$, $P(T_d > t_{p,d}) = p$\n- $t_{0.025,7} = 2.365$, $t_{0.025,8} = 2.306$, $t_{0.025,9} = 2.262$, $t_{0.025,14} = 2.145$, $t_{0.025,15} = 2.131$\n- $t_{0.025,16} = 2.120$, $t_{0.025,19} = 2.093$, $t_{0.025,24} = 2.064$, $t_{0.05,8} = 1.860$, $t_{0.05,14} = 1.761$\n- **Chi-square quantiles**: $P(\\chi^2_d > \\chi^2_{p,d}) = p$\n- $\\chi^2_{0.05,1} = 3.841$, $\\chi^2_{0.05,7} = 14.07$, $\\chi^2_{0.05,8} = 15.51$, $\\chi^2_{0.95,8} = 2.733$, $\\chi^2_{0.025,9} = 19.02$\n- **$F$ quantiles**: $F$, $P(F_{m,n} > F_{p,m,n}) = p$\n- $F_{0.05,4,4} = 6.39$, $F_{0.05,7,7} = 3.79$, $F_{0.025,7,7} = 4.99$, $F_{0.975,7,7} = 0.20$",
+  "problems": [
+    {
+      "num": 1,
+      "title": "Cramér--Rao Lower Bound",
+      "section": "Part A",
+      "points": 3,
+      "prompt": "State the Cram\\'er--Rao Lower Bound (CRLB) for the variance of an unbiased estimator $T = T(X_1, \\dots, X_n)$ of $g(\\theta)$. Then state \\textbf{one} regularity condition required for the bound to hold.",
+      "parts": [
+        {
+          "label": "(answer)",
+          "points": 3,
+          "prompt": "",
+          "modelAnswer": "If $T(X_1, \\dots, X_n)$ is an unbiased estimator of $g(\\theta)$ (so $E_\\theta[T] = g(\\theta)$ for all $\\theta$), then under the regularity conditions\n\\[\n\\mathrm{Var}_\\theta(T) \\;\\geq\\; \\frac{[g'(\\theta)]^2}{n\\, I(\\theta)},\n\\]\nwhere $I(\\theta) = E_\\theta\\!\\left[\\left(\\tfrac{\\partial}{\\partial\\theta}\\log f(X;\\theta)\\right)^2\\right]$ is the Fisher information in a single observation. In the special case $g(\\theta) = \\theta$, the bound becomes $\\mathrm{Var}_\\theta(T) \\geq 1/[n I(\\theta)]$.\n\n**One regularity condition.** Any one of the following:\n\n  - (A.1) The support $\\{x : f(x;\\theta) > 0\\}$ does not depend on $\\theta$.\n  - (A.2) Differentiation under the integral sign is valid: $\\frac{\\partial}{\\partial\\theta}\\int W(x) f(x;\\theta) \\,dx = \\int W(x) \\frac{\\partial}{\\partial\\theta} f(x;\\theta) \\,dx$.\n  - (A.3) $\\frac{\\partial}{\\partial\\theta} \\log f(x;\\theta)$ exists and is finite for every $x$ in the support.\n\n**Answer.** $\\mathrm{Var}_\\theta(T) \\geq [g'(\\theta)]^2 / [n I(\\theta)]$, with one regularity condition such as ``support of $f$ does not depend on $\\theta$.''}\n\n% --- A2 ---"
+        }
+      ]
+    },
+    {
+      "num": 2,
+      "title": "Neyman--Pearson Lemma",
+      "section": "Part A",
+      "points": 3,
+      "prompt": "State the Neyman--Pearson Lemma. Be sure to specify the testing setup (simple vs.\\ composite hypotheses) and the form of the optimal test.",
+      "parts": [
+        {
+          "label": "(answer)",
+          "points": 3,
+          "prompt": "",
+          "modelAnswer": "**Setup.** Simple null vs.\\ simple alternative: $H_0: \\theta = \\theta_0$ vs.\\ $H_1: \\theta = \\theta_1$, with joint densities $f_0$ and $f_1$.\n\n**Statement.** For any constant $k \\geq 0$, the test $\\delta^*$ defined by\n\n  - Reject $H_0$ if $f_1(\\mathbf{x}) > k\\, f_0(\\mathbf{x})$,\n  - Do not reject if $f_1(\\mathbf{x}) < k\\, f_0(\\mathbf{x})$,\n  - Either decision is allowed when $f_1(\\mathbf{x}) = k\\, f_0(\\mathbf{x})$,\n\nis most powerful at its level: for any other test $\\delta$ with $\\alpha(\\delta) \\leq \\alpha(\\delta^*)$, we have $\\beta(\\delta) \\geq \\beta(\\delta^*)$ (equivalently, $\\pi(\\theta_1; \\delta) \\leq \\pi(\\theta_1; \\delta^*)$).\n\n**Answer.** The likelihood-ratio test that rejects when $f_1/f_0 > k$ minimizes Type II error among all level-$\\alpha(\\delta^*)$ tests.}\n\n% --- A3 ---"
+        }
+      ]
+    },
+    {
+      "num": 3,
+      "title": "Sufficient Statistics",
+      "section": "Part A",
+      "points": 2,
+      "prompt": "Define what it means for a statistic $T = \\varphi(X_1, \\dots, X_n)$ to be \\emph{sufficient} for $\\theta$, and state the \\textbf{factorization criterion}.",
+      "parts": [
+        {
+          "label": "(answer)",
+          "points": 2,
+          "prompt": "",
+          "modelAnswer": "A statistic $T = \\varphi(X_1, \\dots, X_n)$ is _sufficient_ for $\\theta$ if the conditional distribution of $(X_1, \\dots, X_n)$ given $T = t$ does not depend on $\\theta$.\n\n**Factorization criterion.** $T$ is sufficient for $\\theta$ if and only if the joint density/pmf factors as\n\\[\nf_n(\\mathbf{x}; \\theta) = u(\\mathbf{x}) \\cdot v(\\varphi(\\mathbf{x}), \\theta)\n\\]\nfor some non-negative functions $u$ (free of $\\theta$) and $v$ (depending on the data only through $T$).\n\n**Answer.** Sufficiency means the conditional distribution of the data given $T$ is free of $\\theta$; factorization: $f_n(\\mathbf{x};\\theta) = u(\\mathbf{x}) v(\\varphi(\\mathbf{x}),\\theta)$.}\n\n% --- A4 ---"
+        }
+      ]
+    },
+    {
+      "num": 4,
+      "title": "Test/CI Duality",
+      "section": "Part A",
+      "points": 2,
+      "prompt": "In 2--3 sentences, describe the duality between hypothesis tests and confidence intervals. In particular, explain how a level-$\\alpha_0$ test of $H_0: \\theta = \\theta_0$ gives rise to a $(1-\\alpha_0)$ confidence set for $\\theta$.\n\n% =====================================================================\n% PART B: Mid-Length Problems\n% =====================================================================\n\\section*{Part B --- Mid-Length Problems \\hfill (30 points total)}",
+      "parts": [
+        {
+          "label": "(answer)",
+          "points": 2,
+          "prompt": "",
+          "modelAnswer": "For each $\\theta_0 \\in \\Omega$, let $\\mathcal{A}(\\theta_0)$ be the acceptance region of a level-$\\alpha_0$ test of $H_0: \\theta = \\theta_0$. Define the random set\n\\[\n\\mathcal{S}(\\mathbf{X}) = \\{\\theta_0 : \\mathbf{X} \\in \\mathcal{A}(\\theta_0)\\}.\n\\]\nThen $\\mathcal{S}(\\mathbf{X})$ is a $(1 - \\alpha_0)$ confidence set for $\\theta$, because $P_\\theta(\\theta \\in \\mathcal{S}(\\mathbf{X})) = P_\\theta(\\mathbf{X} \\in \\mathcal{A}(\\theta)) \\geq 1 - \\alpha_0$. Conversely, given a confidence set $\\mathcal{S}$, the test ``reject $H_0:\\theta=\\theta_0$ iff $\\theta_0 \\notin \\mathcal{S}(\\mathbf{X})$'' has level $\\alpha_0$.\n\n**Answer.** The $(1-\\alpha_0)$ CI is the set of null values $\\theta_0$ that the level-$\\alpha_0$ test would NOT reject; equivalently, invert the acceptance region.}\n\n% =====================================================================\n% PART B\n% =====================================================================\n\\section*{Part B --- Mid-Length Problems}"
+        }
+      ]
+    },
+    {
+      "num": 5,
+      "title": "MLE for the Exponential, Delta Method, and CI",
+      "section": "Part B",
+      "points": 15,
+      "prompt": "Let $X_1, \\dots, X_n$ be a random sample from the exponential distribution with rate parameter $\\theta > 0$, i.e.\\ density\n\\[\nf(x \\mid \\theta) = \\theta e^{-\\theta x}, \\qquad x > 0.\n\\]\nRecall that $E_\\theta[X_1] = 1/\\theta$ and $\\mathrm{Var}_\\theta(X_1) = 1/\\theta^2$.",
+      "parts": [
+        {
+          "label": "(a)",
+          "points": 5,
+          "prompt": "Find the maximum likelihood estimator (MLE) $\\widehat{\\theta}_n$ of $\\theta$. Show your work.",
+          "modelAnswer": "The likelihood and log-likelihood are\n\\[\nL_n(\\theta) = \\prod_{i=1}^n \\theta e^{-\\theta X_i} = \\theta^n \\exp\\!\\Big(-\\theta \\textstyle\\sum_i X_i\\Big), \\qquad\n\\ell_n(\\theta) = n \\log\\theta - \\theta \\sum_{i=1}^n X_i.\n\\]\nScore: $\\dot{\\ell}_n(\\theta) = n/\\theta - \\sum X_i$. Setting equal to zero gives $\\theta = n/\\sum X_i = 1/\\bar{X}_n$. The second derivative is $-n/\\theta^2 < 0$, so this is the unique maximum.\n\n**Answer.** $\\widehat{\\theta}_n = 1/\\bar{X}_n$.}"
+        },
+        {
+          "label": "(b)",
+          "points": 3,
+          "prompt": "Show that $\\widehat{\\theta}_n$ is a consistent estimator of $\\theta$. State clearly which limit theorem(s) you are using.",
+          "modelAnswer": "By the Weak Law of Large Numbers, $\\bar{X}_n \\xrightarrow{P} E_\\theta[X_1] = 1/\\theta$. The map $g(t) = 1/t$ is continuous on $(0, \\infty)$, so by the continuous mapping theorem,\n\\[\n\\widehat{\\theta}_n = 1/\\bar{X}_n \\xrightarrow{P} 1/(1/\\theta) = \\theta.\n\\]\n\n**Answer.** $\\widehat{\\theta}_n \\xrightarrow{P} \\theta$ by WLLN + continuous mapping theorem; hence $\\widehat{\\theta}_n$ is consistent.}"
+        },
+        {
+          "label": "(c)",
+          "points": 4,
+          "prompt": "Use the delta method to find the asymptotic distribution of $\\sqrt{n}(\\widehat{\\theta}_n - \\theta)$. That is, give a result of the form\n\\(\n\\sqrt{n}(\\widehat{\\theta}_n - \\theta) \\xrightarrow{d} N(0, \\tau^2(\\theta))\n\\)\nand identify $\\tau^2(\\theta)$.",
+          "modelAnswer": "By the Central Limit Theorem applied to $\\bar{X}_n$ (with mean $1/\\theta$ and variance $1/\\theta^2$):\n\\[\n\\sqrt{n}\\big(\\bar{X}_n - 1/\\theta\\big) \\xrightarrow{d} N(0, 1/\\theta^2).\n\\]\nApply the delta method with $g(t) = 1/t$, so $g'(t) = -1/t^2$ and $g'(1/\\theta) = -\\theta^2$. Thus\n\\[\n\\sqrt{n}\\big(\\widehat{\\theta}_n - \\theta\\big) = \\sqrt{n}\\big(g(\\bar{X}_n) - g(1/\\theta)\\big) \\xrightarrow{d} N\\!\\big(0,\\, [g'(1/\\theta)]^2 \\cdot 1/\\theta^2\\big) = N(0,\\, \\theta^4 \\cdot 1/\\theta^2) = N(0, \\theta^2).\n\\]\n\n**Answer.** $\\sqrt{n}(\\widehat{\\theta}_n - \\theta) \\xrightarrow{d} N(0, \\theta^2)$, i.e.\\ $\\tau^2(\\theta) = \\theta^2$.}"
+        },
+        {
+          "label": "(d)",
+          "points": 3,
+          "prompt": "Using the result from (c), construct an approximate $95\\%$ confidence interval for $\\theta$. (You may plug in $\\widehat{\\theta}_n$ for $\\theta$ in the asymptotic variance --- justify briefly why this is allowed.)",
+          "modelAnswer": "From (c), for large $n$, $\\widehat{\\theta}_n \\approx N(\\theta, \\theta^2/n)$. Replacing $\\theta$ by the consistent estimator $\\widehat{\\theta}_n$ in the asymptotic standard error is justified by Slutsky's theorem (since $\\widehat{\\theta}_n / \\theta \\xrightarrow{P} 1$). An approximate $95\\%$ CI for $\\theta$ is therefore\n\\[\n\\widehat{\\theta}_n \\pm z_{0.025} \\cdot \\frac{\\widehat{\\theta}_n}{\\sqrt{n}} = \\widehat{\\theta}_n \\left(1 \\pm \\frac{1.96}{\\sqrt{n}}\\right).\n\\]\n\n**Answer.** $\\Big[\\,\\widehat{\\theta}_n\\big(1 - 1.96/\\sqrt{n}\\big),\\; \\widehat{\\theta}_n\\big(1 + 1.96/\\sqrt{n}\\big)\\,\\Big]$, where $\\widehat{\\theta}_n = 1/\\bar{X}_n$.}\n\n% --- B2 ---"
+        }
+      ]
+    },
+    {
+      "num": 6,
+      "title": "Bernoulli with a Beta Prior; Sufficiency",
+      "section": "Part B",
+      "points": 15,
+      "prompt": "Let $X_1, \\dots, X_n$ be i.i.d.\\ $\\mathrm{Bernoulli}(p)$, where $p \\in (0,1)$ is unknown. Suppose the prior on $p$ is $\\mathrm{Beta}(\\alpha, \\beta)$ with known hyperparameters $\\alpha, \\beta > 0$.",
+      "parts": [
+        {
+          "label": "(a)",
+          "points": 5,
+          "prompt": "Find the posterior distribution of $p$ given $X_1, \\dots, X_n$ and identify it by name and parameters.",
+          "modelAnswer": "The Beta$(\\alpha, \\beta)$ prior has density $\\pi(p) \\propto p^{\\alpha - 1}(1 - p)^{\\beta - 1}$ on $(0,1)$. By Bayes' rule,\n\\[\n\\pi(p \\mid \\mathbf{X}) \\;\\propto\\; L(p)\\,\\pi(p) \\;\\propto\\; p^{\\alpha + t - 1}(1 - p)^{\\beta + n - t - 1}.\n\\]\nThis is the kernel of a Beta distribution.\n\n**Answer.** $p \\mid \\mathbf{X} \\;\\sim\\; \\mathrm{Beta}\\big(\\alpha + T,\\; \\beta + n - T\\big)$, where $T = \\sum_{i=1}^n X_i$.}"
+        },
+        {
+          "label": "(b)",
+          "points": 3,
+          "prompt": "Find the Bayes estimator of $p$ under squared-error loss.",
+          "modelAnswer": "Under squared-error loss the Bayes estimator is the posterior mean. For a $\\mathrm{Beta}(a, b)$ distribution the mean is $a/(a+b)$, so\n\\[\n\\widehat{p}_{\\text{Bayes}} = \\frac{\\alpha + T}{\\alpha + \\beta + n}.\n\\]\n\n**Answer.** $\\widehat{p}_{\\text{Bayes}} = (\\alpha + \\sum X_i)/(\\alpha + \\beta + n)$.}"
+        },
+        {
+          "label": "(c)",
+          "points": 4,
+          "prompt": "Using the factorization criterion, show that $T = \\sum_{i=1}^n X_i$ is a sufficient statistic for $p$.",
+          "modelAnswer": "The joint pmf of $(X_1, \\dots, X_n)$ is\n\\[\nf_n(\\mathbf{x} \\mid p) = \\prod_{i=1}^n p^{x_i}(1-p)^{1 - x_i} = p^{\\,t}(1-p)^{n - t}, \\qquad t = \\textstyle\\sum x_i,\n\\]\nwhere each $x_i \\in \\{0, 1\\}$. Take\n\\[\nu(\\mathbf{x}) = 1 \\cdot \\mathbf{1}\\{x_i \\in \\{0,1\\} \\text{ for all } i\\}, \\qquad v(t, p) = p^t (1-p)^{n - t}.\n\\]\nThen $f_n(\\mathbf{x} \\mid p) = u(\\mathbf{x}) \\cdot v(T(\\mathbf{x}), p)$, which is the factorization criterion.\n\n**Answer.** $T = \\sum X_i$ is sufficient for $p$ by factorization with $u \\equiv 1$ and $v(t, p) = p^t(1-p)^{n-t}$.}"
+        },
+        {
+          "label": "(d)",
+          "points": 3,
+          "prompt": "What does the Bayes estimator from (b) converge to as $n \\to \\infty$? Justify briefly.\n\n% =====================================================================\n% PART C: Major Problems\n% =====================================================================\n\\section*{Part C --- Major Problems \\hfill (60 points total)}",
+          "modelAnswer": "Rewrite the Bayes estimator:\n\\[\n\\widehat{p}_{\\text{Bayes}} = \\frac{\\alpha + n \\bar{X}_n}{\\alpha + \\beta + n}\n= \\frac{n}{\\alpha + \\beta + n}\\,\\bar{X}_n + \\frac{\\alpha}{\\alpha + \\beta + n}.\n\\]\nAs $n \\to \\infty$, the first coefficient tends to $1$, the second to $0$, and $\\bar{X}_n \\xrightarrow{P} p$ by the WLLN. Hence (using continuous mapping / Slutsky):\n\\[\n\\widehat{p}_{\\text{Bayes}} \\;\\xrightarrow{P}\\; p.\n\\]\nThe data dominates the prior asymptotically; equivalently, the Bayes estimator converges to the MLE $\\bar{X}_n$.\n\n**Answer.** $\\widehat{p}_{\\text{Bayes}} \\xrightarrow{P} p$ as $n \\to \\infty$ (the prior washes out; estimator $\\to$ MLE).}\n\n% =====================================================================\n% PART C\n% =====================================================================\n\\section*{Part C --- Major Problems}"
+        }
+      ]
+    },
+    {
+      "num": 7,
+      "title": "Two-Sample $t$-Test and $F$-Test",
+      "section": "Part C",
+      "points": 20,
+      "prompt": "A researcher collects two independent samples assumed to follow normal distributions. Specifically:\n\\[\nX_1, \\dots, X_m \\overset{\\text{iid}}{\\sim} N(\\mu_X, \\sigma^2), \\qquad Y_1, \\dots, Y_n \\overset{\\text{iid}}{\\sim} N(\\mu_Y, \\sigma^2),\n\\]\nwith $m = 8$ and $n = 8$. The two samples are independent. The observed summary statistics are\n\\[\n\\bar{X}_m = 23.5, \\qquad \\bar{Y}_n = 21.0, \\qquad S_X^2 = \\sum_{i=1}^m (X_i - \\bar{X}_m)^2 = 21, \\qquad S_Y^2 = \\sum_{j=1}^n (Y_j - \\bar{Y}_n)^2 = 14.\n\\]",
+      "parts": [
+        {
+          "label": "(a)",
+          "points": 10,
+          "prompt": "Test $H_0: \\mu_X = \\mu_Y$ versus $H_1: \\mu_X \\neq \\mu_Y$ at significance level $\\alpha_0 = 0.05$, assuming the common-variance model above. Specifically:\n\\begin{enumerate}[label=(\\roman*),leftmargin=*]\n  \\item Write down the test statistic $U_{m,n}$ and its distribution under $H_0$.\n  \\item Compute the observed value of $U_{m,n}$ from the data.\n  \\item State the critical value, the rejection rule, and your decision.\n\\end{enumerate}",
+          "modelAnswer": "**(i) Test statistic.** Under the common-variance model, the two-sample $t$-statistic is\n\\[\nU_{m,n} = \\frac{\\sqrt{m + n - 2}\\,(\\bar{X} - \\bar{Y})}{\\sqrt{\\big(\\tfrac{1}{m} + \\tfrac{1}{n}\\big)\\,(S_X^2 + S_Y^2)}}.\n\\]\nUnder $H_0: \\mu_X = \\mu_Y$, $U_{m,n} \\sim t_{m + n - 2} = t_{14}$.\n\n**(ii) Plug in.** Numerator: $\\sqrt{14}\\,(23.5 - 21.0) = 2.5\\sqrt{14}$. Denominator: $\\sqrt{(\\tfrac{1}{8} + \\tfrac{1}{8})(21 + 14)} = \\sqrt{\\tfrac{1}{4} \\cdot 35} = \\sqrt{35/4} = \\tfrac{1}{2}\\sqrt{35}$. Therefore\n\\[\nU_{m,n} = \\frac{2.5\\sqrt{14}}{\\tfrac{1}{2}\\sqrt{35}} = 5\\sqrt{14/35} = 5\\sqrt{2/5} = \\sqrt{25 \\cdot 2/5} = \\sqrt{10} \\approx 3.162.\n\\]\n\n**(iii) Decision.** For a two-sided level-$0.05$ test, reject if $|U_{m,n}| > t_{0.025, 14} = 2.145$. Since $|\\sqrt{10}| \\approx 3.162 > 2.145$, we reject $H_0$.\n\n**Answer.** $U_{m,n} = \\sqrt{10} \\approx 3.162$. Critical value $t_{0.025,14} = 2.145$. **Reject $H_0$** at $\\alpha_0 = 0.05$: there is significant evidence that $\\mu_X \\neq \\mu_Y$.}"
+        },
+        {
+          "label": "(b)",
+          "points": 5,
+          "prompt": "Construct a $95\\%$ confidence interval for $\\mu_X - \\mu_Y$ (still under the common-variance model).",
+          "modelAnswer": "The pooled variance estimator is\n\\[\n\\widehat{\\sigma}^2 = \\frac{S_X^2 + S_Y^2}{m + n - 2} = \\frac{35}{14} = 2.5.\n\\]\nThe standard error of $\\bar{X} - \\bar{Y}$ is\n\\[\n\\mathrm{SE}(\\bar{X} - \\bar{Y}) = \\sqrt{\\widehat{\\sigma}^2\\big(\\tfrac{1}{m} + \\tfrac{1}{n}\\big)} = \\sqrt{2.5 \\cdot \\tfrac{1}{4}} = \\sqrt{0.625} = \\tfrac{\\sqrt{10}}{4}.\n\\]\nA $95\\%$ CI for $\\mu_X - \\mu_Y$ is therefore\n\\[\n(\\bar{X} - \\bar{Y}) \\pm t_{0.025, 14} \\cdot \\mathrm{SE} = 2.5 \\pm 2.145 \\cdot \\tfrac{\\sqrt{10}}{4}.\n\\]\n\nNumerically, $2.145 \\cdot \\sqrt{10}/4 \\approx 2.145 \\cdot 0.7906 \\approx 1.696$.\n\n**Answer.** $95\\%$ CI for $\\mu_X - \\mu_Y$: $\\big[\\,2.5 - 2.145 \\cdot \\tfrac{\\sqrt{10}}{4},\\; 2.5 + 2.145 \\cdot \\tfrac{\\sqrt{10}}{4}\\,\\big] \\approx [0.804,\\, 4.196]$. Note $0$ is not in this interval, consistent with rejecting $H_0$ in part (a).}"
+        },
+        {
+          "label": "(c)",
+          "points": 5,
+          "prompt": "Now suppose the researcher questions the common-variance assumption. Set up and carry out a two-sided test of\n\\[\nH_0: \\sigma_X^2 = \\sigma_Y^2 \\qquad \\text{versus} \\qquad H_1: \\sigma_X^2 \\neq \\sigma_Y^2\n\\]\nat level $\\alpha_0 = 0.10$. Give the test statistic, its null distribution, the rejection region, and your decision. (Use the values of $S_X^2$ and $S_Y^2$ from above.)",
+          "modelAnswer": "The $F$-statistic for comparing variances is\n\\[\nV_{m,n} = \\frac{S_X^2/(m - 1)}{S_Y^2/(n - 1)} = \\frac{21/7}{14/7} = \\frac{3}{2} = 1.5.\n\\]\nUnder $H_0: \\sigma_X^2 = \\sigma_Y^2$, $V_{m,n} \\sim F_{m-1, n-1} = F_{7, 7}$.\n\nFor a two-sided level-$\\alpha_0 = 0.10$ test, reject if\n\\[\nV \\leq F_{0.95, 7, 7} = 1/F_{0.05, 7, 7} = 1/3.79 \\approx 0.264 \\quad \\text{or} \\quad V \\geq F_{0.05, 7, 7} = 3.79.\n\\]\nSince $0.264 < 1.5 < 3.79$, we fail to reject $H_0$.\n\n**Answer.** $V = 1.5$, rejection region $V \\leq 0.264$ or $V \\geq 3.79$. **Fail to reject $H_0$** at $\\alpha_0 = 0.10$: no significant evidence that $\\sigma_X^2 \\neq \\sigma_Y^2$. The common-variance assumption used in (a)--(b) is not contradicted by the data.}\n\n% --- C2 ---"
+        }
+      ]
+    },
+    {
+      "num": 8,
+      "title": "Neyman--Pearson Test, Power, and Sample Size",
+      "section": "Part C",
+      "points": 20,
+      "prompt": "Let $X_1, \\dots, X_n$ be i.i.d.\\ $N(\\theta, 1)$, with $\\theta$ unknown. Consider the simple-versus-simple testing problem\n\\[\nH_0: \\theta = 0 \\quad \\text{versus} \\quad H_1: \\theta = 1\n\\]\nat significance level $\\alpha_0 = 0.05$. Take $n = 16$.",
+      "parts": [
+        {
+          "label": "(a)",
+          "points": 8,
+          "prompt": "Apply the Neyman--Pearson Lemma to derive the most powerful test of $H_0$ versus $H_1$ at level $\\alpha_0$. Show that the rejection region can be written in the form $\\{\\bar{X}_n > c\\}$ for some constant $c$.",
+          "modelAnswer": "The joint density under $\\theta$ is\n\\[\nf_\\theta(\\mathbf{x}) = (2\\pi)^{-n/2} \\exp\\!\\Big(-\\tfrac{1}{2}\\textstyle\\sum_i (x_i - \\theta)^2\\Big).\n\\]\nThe likelihood ratio is\n\\[\n\\frac{f_1(\\mathbf{x})}{f_0(\\mathbf{x})} = \\exp\\!\\Big(-\\tfrac{1}{2}\\textstyle\\sum_i [(x_i - 1)^2 - x_i^2]\\Big) = \\exp\\!\\Big(\\textstyle\\sum_i x_i - \\tfrac{n}{2}\\Big) = \\exp\\!\\big(n \\bar{x} - \\tfrac{n}{2}\\big).\n\\]\nBy the Neyman--Pearson Lemma, the most powerful level-$\\alpha_0$ test rejects $H_0$ when $f_1/f_0 > k$ for some $k > 0$. Since $\\exp(n\\bar{x} - n/2)$ is strictly increasing in $\\bar{x}$, this is equivalent to rejecting when\n\\[\n\\bar{X}_n > c \\qquad \\text{for some constant } c.\n\\]\n\nThe constant $c$ is chosen so that $P_{\\theta = 0}(\\bar{X}_n > c) = \\alpha_0$.\n\n**Answer.** The MP test rejects when $\\bar{X}_n > c$, with $c$ chosen to make the size $= \\alpha_0$.}"
+        },
+        {
+          "label": "(b)",
+          "points": 4,
+          "prompt": "Find the constant $c$ explicitly (using $n = 16$ and $\\alpha_0 = 0.05$).",
+          "modelAnswer": "Under $H_0$ ($\\theta = 0$), $\\bar{X}_n \\sim N(0, 1/n)$, so $\\sqrt{n}\\,\\bar{X}_n \\sim N(0,1)$. We need\n\\[\nP_0(\\bar{X}_n > c) = P\\big(Z > \\sqrt{n}\\,c\\big) = 0.05 \\;\\Longrightarrow\\; \\sqrt{n}\\,c = z_{0.05} = 1.645.\n\\]\nWith $n = 16$, $\\sqrt{n} = 4$, so $c = 1.645/4$.\n\n**Answer.** $c = 1.645/4 \\approx 0.4113$.}"
+        },
+        {
+          "label": "(c)",
+          "points": 5,
+          "prompt": "Compute the power $\\pi(1) = P_{\\theta=1}(\\text{reject } H_0)$ of this test, expressed in terms of $\\Phi$, the standard normal cdf. Then state the corresponding probability of Type II error $\\beta$.",
+          "modelAnswer": "Under $\\theta = 1$, $\\bar{X}_n \\sim N(1, 1/n)$, so $\\sqrt{n}(\\bar{X}_n - 1) \\sim N(0, 1)$. The power is\n\\[\n\\pi(1) = P_{\\theta = 1}\\big(\\bar{X}_n > c\\big) = P\\!\\left(Z > \\sqrt{n}(c - 1)\\right) = 1 - \\Phi\\big(\\sqrt{n}\\,c - \\sqrt{n}\\big) = \\Phi\\big(\\sqrt{n} - \\sqrt{n}\\,c\\big).\n\\]\nSince $\\sqrt{n}\\,c = z_{0.05} = 1.645$ and $\\sqrt{n} = 4$,\n\\[\n\\pi(1) = \\Phi(4 - 1.645) = \\Phi(2.355).\n\\]\nThe Type II error probability is $\\beta = 1 - \\pi(1) = 1 - \\Phi(2.355)$.\n\nNumerically $\\Phi(2.355) \\approx 0.9907$ (between $\\Phi(2.326) = 0.99$ and $\\Phi(2.576) = 0.995$), so $\\beta \\approx 0.0093$.\n\n**Answer.** $\\pi(1) = \\Phi(4 - 1.645) = \\Phi(2.355) \\approx 0.9907$. \\quad $\\beta = 1 - \\pi(1) \\approx 0.0093$.}"
+        },
+        {
+          "label": "(d)",
+          "points": 3,
+          "prompt": "Using a level-$\\alpha_0 = 0.05$ test of the same form as in (a), what is the smallest sample size $n^*$ such that the power against the alternative $\\theta = 1$ satisfies $\\pi(1) \\geq 0.99$?",
+          "modelAnswer": "For the analogous test with sample size $n$, the rejection threshold is $c_n = z_{0.05}/\\sqrt{n}$ and the power is\n\\[\n\\pi(1; n) = \\Phi\\big(\\sqrt{n} - z_{0.05}\\big) = \\Phi(\\sqrt{n} - 1.645).\n\\]\nWe need $\\pi(1; n) \\geq 0.99 = \\Phi(z_{0.01})$, i.e.\\ $\\sqrt{n} - 1.645 \\geq z_{0.01} = 2.326$, hence\n\\[\n\\sqrt{n} \\geq 1.645 + 2.326 = 3.971 \\quad\\Longleftrightarrow\\quad n \\geq 3.971^2 \\approx 15.77.\n\\]\nThe smallest integer $n$ satisfying this is $n^* = 16$. (The current sample size already meets the $0.99$ power requirement, consistent with $\\pi(1) \\approx 0.9907$ from part (c).)\n\n**Answer.** $n^* = 16$.}\n\n% --- C3 ---"
+        }
+      ]
+    },
+    {
+      "num": 9,
+      "title": "MLE, Fisher Information, and Likelihood Ratio Test for Poisson",
+      "section": "Part C",
+      "points": 20,
+      "prompt": "Let $X_1, \\dots, X_n$ be i.i.d.\\ $\\mathrm{Poisson}(\\lambda)$, where $\\lambda > 0$ is unknown. Recall the pmf $f(x \\mid \\lambda) = e^{-\\lambda} \\lambda^x / x!$ for $x = 0, 1, 2, \\dots$",
+      "parts": [
+        {
+          "label": "(a)",
+          "points": 5,
+          "prompt": "Find the MLE $\\widehat{\\lambda}_n$ of $\\lambda$ and show that it is unbiased for $\\lambda$.",
+          "modelAnswer": "The log-likelihood (dropping terms free of $\\lambda$) is\n\\[\n\\ell_n(\\lambda) = -n\\lambda + \\log(\\lambda) \\sum_{i=1}^n X_i + \\text{const}.\n\\]\nDifferentiating: $\\dot{\\ell}_n(\\lambda) = -n + (\\sum X_i)/\\lambda$. Setting $= 0$ gives $\\lambda = \\bar{X}_n$. The second derivative $-(\\sum X_i)/\\lambda^2 < 0$, confirming a maximum.\n\n**Unbiasedness:** $E_\\lambda[\\widehat{\\lambda}_n] = E_\\lambda[\\bar{X}_n] = \\tfrac{1}{n}\\sum_{i=1}^n E_\\lambda[X_i] = \\tfrac{1}{n}(n\\lambda) = \\lambda$.\n\n**Answer.** $\\widehat{\\lambda}_n = \\bar{X}_n$. It is unbiased: $E_\\lambda[\\widehat{\\lambda}_n] = \\lambda$.}"
+        },
+        {
+          "label": "(b)",
+          "points": 5,
+          "prompt": "Compute the Fisher information $I(\\lambda)$ in a single observation, and the Fisher information $I_n(\\lambda)$ in the full sample. Use the Cram\\'er--Rao Lower Bound to determine whether $\\widehat{\\lambda}_n$ is efficient.",
+          "modelAnswer": "For a single observation $X \\sim \\mathrm{Poisson}(\\lambda)$:\n$\\log f(x;\\lambda) = -\\lambda + x \\log \\lambda - \\log(x!)$, so the score is $\\dot{\\ell}(x;\\lambda) = -1 + x/\\lambda$. The Fisher information is\n\\[\nI(\\lambda) = E_\\lambda\\!\\left[\\dot{\\ell}(X;\\lambda)^2\\right] = \\mathrm{Var}_\\lambda(\\dot{\\ell}) = \\mathrm{Var}_\\lambda(X/\\lambda) = \\frac{\\mathrm{Var}_\\lambda(X)}{\\lambda^2} = \\frac{\\lambda}{\\lambda^2} = \\frac{1}{\\lambda}.\n\\]\nFor the full sample (i.i.d.): $I_n(\\lambda) = n I(\\lambda) = n/\\lambda$.\n\n**Efficiency check.** The CRLB for unbiased estimators of $\\lambda$ is $1/[n I(\\lambda)] = \\lambda/n$. The variance of $\\widehat{\\lambda}_n$ is\n\\[\n\\mathrm{Var}_\\lambda(\\widehat{\\lambda}_n) = \\mathrm{Var}_\\lambda(\\bar{X}_n) = \\frac{\\mathrm{Var}_\\lambda(X_1)}{n} = \\frac{\\lambda}{n}.\n\\]\nThis equals the CRLB, so $\\widehat{\\lambda}_n$ achieves the bound and is therefore efficient.\n\n**Answer.** $I(\\lambda) = 1/\\lambda$, $\\;I_n(\\lambda) = n/\\lambda$, $\\;$CRLB $= \\lambda/n = \\mathrm{Var}_\\lambda(\\widehat{\\lambda}_n)$. Yes, $\\widehat{\\lambda}_n$ is efficient.}"
+        },
+        {
+          "label": "(c)",
+          "points": 6,
+          "prompt": "Derive the likelihood ratio test statistic $\\Lambda(\\mathbf{X})$ for testing\n\\[\nH_0: \\lambda = \\lambda_0 \\quad \\text{versus} \\quad H_1: \\lambda \\neq \\lambda_0,\n\\]\nwhere $\\lambda_0 > 0$ is a fixed value. Simplify $-2 \\log \\Lambda(\\mathbf{X})$ as much as possible (your answer should be in terms of $n$, $\\widehat{\\lambda}_n$, and $\\lambda_0$).",
+          "modelAnswer": "The likelihood is (constant $C(\\mathbf{x}) = 1/\\prod x_i!$)\n\\[\nL_n(\\lambda; \\mathbf{x}) = e^{-n\\lambda} \\lambda^{\\,n\\bar{x}} \\cdot C(\\mathbf{x}).\n\\]\nUnder $H_0$ the supremum is $L_n(\\lambda_0)$. Over all of $\\Omega$ the supremum is $L_n(\\widehat{\\lambda}_n) = L_n(\\bar{x})$. Therefore\n\\[\n\\Lambda(\\mathbf{X}) = \\frac{L_n(\\lambda_0)}{L_n(\\widehat{\\lambda}_n)} = \\frac{e^{-n\\lambda_0} \\lambda_0^{\\,n\\widehat{\\lambda}_n}}{e^{-n\\widehat{\\lambda}_n} \\widehat{\\lambda}_n^{\\,n\\widehat{\\lambda}_n}} = \\exp\\!\\Big(-n(\\lambda_0 - \\widehat{\\lambda}_n)\\Big) \\left(\\frac{\\lambda_0}{\\widehat{\\lambda}_n}\\right)^{n\\widehat{\\lambda}_n}.\n\\]\nTake logs:\n\\[\n\\log\\Lambda = -n(\\lambda_0 - \\widehat{\\lambda}_n) + n\\widehat{\\lambda}_n \\log(\\lambda_0/\\widehat{\\lambda}_n) = n(\\widehat{\\lambda}_n - \\lambda_0) - n\\widehat{\\lambda}_n \\log(\\widehat{\\lambda}_n/\\lambda_0).\n\\]\nTherefore\n\\[\n-2 \\log \\Lambda(\\mathbf{X}) = 2n\\!\\left[\\widehat{\\lambda}_n \\log\\!\\frac{\\widehat{\\lambda}_n}{\\lambda_0} \\;-\\; \\big(\\widehat{\\lambda}_n - \\lambda_0\\big)\\right].\n\\]\n\n**Answer.** $\\Lambda(\\mathbf{X}) = e^{-n(\\lambda_0 - \\widehat{\\lambda}_n)}\\,(\\lambda_0/\\widehat{\\lambda}_n)^{n\\widehat{\\lambda}_n}$. Equivalently, $-2\\log\\Lambda(\\mathbf{X}) = 2n\\big[\\widehat{\\lambda}_n \\log(\\widehat{\\lambda}_n/\\lambda_0) - (\\widehat{\\lambda}_n - \\lambda_0)\\big]$.}"
+        },
+        {
+          "label": "(d)",
+          "points": 4,
+          "prompt": "Using Wilks' theorem, give an asymptotic level-$\\alpha_0 = 0.05$ rejection rule based on $-2\\log\\Lambda(\\mathbf{X})$. State the limiting distribution clearly.",
+          "modelAnswer": "Wilks' theorem: under $H_0$ with $H_0$ specifying $k = 1$ coordinate, as $n \\to \\infty$,\n\\[\n-2 \\log \\Lambda(\\mathbf{X}) \\;\\xrightarrow{d}\\; \\chi^2_1.\n\\]\nA level-$\\alpha_0 = 0.05$ asymptotic test therefore rejects $H_0$ when\n\\[\n-2\\log\\Lambda(\\mathbf{X}) \\;>\\; \\chi^2_{0.05, 1} = 3.841.\n\\]\n\n**Answer.** Reject $H_0$ at asymptotic level $0.05$ when $-2\\log\\Lambda(\\mathbf{X}) > 3.841$. (Limiting distribution: $\\chi^2_1$.)}\n\n_End of Solutions --- Total Points: $10 + 30 + 60 = 100$._"
+        }
+      ]
+    }
+  ]
+}

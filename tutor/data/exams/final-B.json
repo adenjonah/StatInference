@@ -1,0 +1,219 @@
+{
+  "variantId": "B",
+  "title": "Mock Final — Variant B (Theory-Heavy)",
+  "totalPoints": 100,
+  "timeMinutes": 150,
+  "quantileTable": "**Quantile Table (use these as needed):**\n- **Normal**: $z_{0.10}=1.282 \\quad z_{0.05}=1.645 \\quad z_{0.025}=1.960 \\quad z_{0.01}=2.326 \\quad z_{0.005}=2.576$\n- **$t$**: $t$, $t_{0.025,7}=2.365 \\quad t_{0.025,8}=2.306 \\quad t_{0.025,9}=2.262 \\quad t_{0.025,14}=2.145$\n- $t_{0.025,15}=2.131 \\quad t_{0.025,19}=2.093 \\quad t_{0.025,24}=2.064$\n- $t_{0.05,8}=1.860 \\quad t_{0.05,14}=1.761 \\quad t_{0.05,19}=1.729$\n- **$\\chi^2$**: $\\chi^2$, $\\chi^2_{0.95,7}=14.07 \\quad \\chi^2_{0.95,8}=15.51 \\quad \\chi^2_{0.05,8}=2.733$\n- $\\chi^2_{0.975,9}=19.02 \\quad \\chi^2_{0.025,9}=2.700$\n- $\\chi^2_{0.95,1}=3.841 \\quad \\chi^2_{0.95,2}=5.991$\n- **$F$**: $F$, $F_{0.05,4,4}=6.39 \\quad F_{0.05,7,7}=3.79 \\quad F_{0.025,7,7}=4.99$",
+  "problems": [
+    {
+      "num": 1,
+      "title": "Cramér-Rao Regularity",
+      "section": "Part A",
+      "points": 4,
+      "prompt": "State and briefly justify (one sentence each) \\textbf{two} of the regularity conditions (A.1)--(A.3) required for the Cram\\'er-Rao Lower Bound to hold for an unbiased estimator of $\\theta$. Then give one parametric family that \\textbf{violates} regularity and explain precisely which condition fails and why.",
+      "parts": [
+        {
+          "label": "(answer)",
+          "points": 4,
+          "prompt": "",
+          "modelAnswer": "\\soln Two of the three regularity conditions:\n\n    - **(A.1) Common support.** The support $A_\\theta = \\{x : f(x;\\theta) > 0\\}$ does not depend on $\\theta$. _Why needed:_ the proof of the CRLB requires $\\frac{\\partial}{\\partial\\theta}\\int f(x;\\theta)\\,dx = 0$, and if the limits of integration depend on $\\theta$ this fails by Leibniz's rule (boundary terms appear).\n    - **(A.2) Differentiation under the integral.** $\\frac{\\partial}{\\partial\\theta} E_\\theta[W(\\bX_n)] = \\int W(\\mathbf{x})\\,\\frac{\\partial}{\\partial\\theta} f_n(\\mathbf{x};\\theta)\\,d\\mathbf{x}$. _Why needed:_ this is the step that makes $E_\\theta[\\dot\\ell_n] = 0$ and that turns $\\frac{d}{d\\theta}E_\\theta[T] = g'(\\theta)$ into a covariance formula, after which Cauchy--Schwarz gives the bound.\n\n(One could equally state (A.3): the score $\\frac{\\partial}{\\partial\\theta}\\log f$ exists and is finite for all $x \\in A,\\,\\theta\\in\\Omega$.)\n\n**Family that violates regularity:** $X_1,\\ldots,X_n \\stackrel{\\text{iid}}{\\sim} \\mathrm{Unif}(0,\\theta)$, $\\theta>0$. Here $A_\\theta = (0,\\theta)$ _depends on_ $\\theta$, so condition (A.1) fails. Concretely, the MLE $\\hat\\theta = X_{(n)}$ satisfies $\\Var(\\hat\\theta) = \\frac{n\\theta^2}{(n+1)^2(n+2)} = O(n^{-2})$, which is asymptotically smaller than $1/(n I(\\theta)) = O(n^{-1})$ --- so without regularity the CRLB does not bind."
+        }
+      ]
+    },
+    {
+      "num": 2,
+      "title": "Neyman-Pearson Lemma",
+      "section": "Part A",
+      "points": 4,
+      "prompt": "State the Neyman-Pearson Lemma in full for testing a simple null $H_0: \\theta = \\theta_0$ versus a simple alternative $H_1: \\theta = \\theta_1$. Then explain in one or two sentences why the Neyman-Pearson Lemma does \\textbf{not} directly imply the existence of a uniformly most powerful (UMP) test for the two-sided alternative $H_0: \\theta = \\theta_0$ versus $H_1: \\theta \\neq \\theta_0$.",
+      "parts": [
+        {
+          "label": "(answer)",
+          "points": 4,
+          "prompt": "",
+          "modelAnswer": "\\soln **Statement.** Let $f_0,f_1$ be the joint densities/pmfs of $\\bX$ under $\\theta_0,\\theta_1$. For any $k>0$, define a test $\\delta^*$ that\n\n    - rejects $H_0$ if $f_1(\\bX) > k\\,f_0(\\bX)$,\n    - does not reject $H_0$ if $f_1(\\bX) < k\\,f_0(\\bX)$,\n    - makes either decision (possibly randomized) when $f_1(\\bX) = k\\,f_0(\\bX)$.\n\nLet $\\alpha(\\delta) = P_{\\theta_0}(\\text{reject})$ and $\\beta(\\delta) = P_{\\theta_1}(\\text{do not reject})$. Then for any other test $\\delta$:\n\\[\n\\alpha(\\delta) \\le \\alpha(\\delta^*) \\;\\Longrightarrow\\; \\beta(\\delta) \\ge \\beta(\\delta^*),\n\\]\ni.e.\\ $\\delta^*$ minimizes the Type II error rate among all tests with Type I rate at most $\\alpha(\\delta^*)$. (Equivalently, $\\delta^*$ is most powerful at its level.)\n\n**Why no UMP for two-sided alternatives.** The NP lemma constructs a most powerful test for a _single_ pair $(\\theta_0,\\theta_1)$. For the two-sided alternative $H_1: \\theta \\neq \\theta_0$, the alternative parameter set is $\\Omega_1 = \\{\\theta : \\theta \\neq \\theta_0\\}$. The NP-optimal rejection region for $\\theta_1 > \\theta_0$ is one-sided in one direction (say $T \\ge c$), while the NP-optimal region for $\\theta_1 < \\theta_0$ is one-sided in the _other_ direction ($T \\le c'$); these regions disagree, so no single test is simultaneously most powerful against every $\\theta_1 \\in \\Omega_1$. Hence the NP lemma gives MP tests pointwise but does not yield a UMP test for two-sided alternatives."
+        }
+      ]
+    },
+    {
+      "num": 3,
+      "title": "Wilks' Theorem",
+      "section": "Part A",
+      "points": 4,
+      "prompt": "State Wilks' Theorem giving the asymptotic null distribution of $-2\\log\\Lambda(\\mathbf{X})$, where $\\Lambda$ is the likelihood ratio statistic. Be sure to identify the degrees of freedom in terms of the dimensions of $\\Omega_0$ and $\\Omega$. As a concrete instance: if $\\theta = (\\theta_1,\\theta_2,\\theta_3) \\in \\mathbb{R}^3$ and $H_0$ specifies $\\theta_1 = 0$ and $\\theta_2 = 0$ (with $\\theta_3$ unrestricted), what is the limiting distribution of $-2\\log\\Lambda$ under $H_0$?\n\n% ====================================================================\n% PART B\n% ====================================================================\n\\section*{Part B: Mid-Length Proofs \\hfill (28 points)}",
+      "parts": [
+        {
+          "label": "(answer)",
+          "points": 4,
+          "prompt": "",
+          "modelAnswer": "\\soln **Statement (Wilks).** Let $\\Omega \\subseteq \\mathbb{R}^d$ and $\\Omega_0 \\subset \\Omega$ be a $(d-k)$-dimensional smooth submanifold (equivalently, $H_0$ specifies $k$ functionally independent constraints on $\\theta$). Under standard regularity conditions on the model and assuming $\\theta \\in \\Omega_0$, as $n\\to\\infty$,\n\\[\n-2\\log \\Lambda(\\bX) \\;\\xrightarrow{d}\\; \\chi^2_k.\n\\]\nThe degrees of freedom equal $\\dim(\\Omega) - \\dim(\\Omega_0) = k$, the number of constraints under $H_0$.\n\n**Concrete example.** Here $d = 3$, $\\Omega_0 = \\{(0,0,\\theta_3): \\theta_3 \\in \\mathbb{R}\\}$ has dimension $1$, so $k = 3-1 = 2$. Therefore under $H_0$,\n\\[\n-2\\log\\Lambda(\\bX) \\xrightarrow{d} \\chi^2_2.\n\\]\n\n% ====================================================================\n% PART B SOLUTIONS\n% ====================================================================\n\\section*{Part B: Mid-Length Proofs \\hfill (28 points)}"
+        }
+      ]
+    },
+    {
+      "num": 4,
+      "title": "Sufficiency and Rao-Blackwellization (Poisson)",
+      "section": "Part B",
+      "points": 14,
+      "prompt": "Let $X_1,\\ldots,X_n$ be a random sample from a Poisson distribution with parameter $\\lambda > 0$. Define $T = \\sum_{i=1}^n X_i$.",
+      "parts": [
+        {
+          "label": "(a)",
+          "points": 5,
+          "prompt": "Use the Fisher--Neyman factorization criterion to show that $T$ is sufficient for $\\lambda$. State the factorization explicitly, identifying the functions $u(\\mathbf{x})$ and $\\nu(t,\\lambda)$.",
+          "modelAnswer": "**Factorization.**\\quad The joint pmf is\n\\[\nf_n(\\mathbf{x};\\lambda) = \\prod_{i=1}^n \\frac{e^{-\\lambda}\\lambda^{x_i}}{x_i!}\n= \\underbrace{\\frac{1}{\\prod_i x_i!}}_{u(\\mathbf{x})} \\cdot \\underbrace{e^{-n\\lambda}\\,\\lambda^{\\sum_i x_i}}_{\\nu(t,\\lambda),\\;t = \\sum_i x_i}.\n\\]\nHere $u(\\mathbf{x}) \\ge 0$ does not depend on $\\lambda$, and $\\nu(t,\\lambda)$ depends on $\\mathbf{x}$ only through $t = \\sum_i x_i$. By the Fisher--Neyman factorization criterion, $T = \\sum_{i=1}^n X_i$ is sufficient for $\\lambda$. \\hfill$\\square$"
+        },
+        {
+          "label": "(b)",
+          "points": 3,
+          "prompt": "Consider the (admittedly poor) estimator $\\delta(\\mathbf{X}) = X_1$ of $\\lambda$. Compute the bias and the variance of $\\delta$.",
+          "modelAnswer": "**Bias and variance of $\\delta(\\bX) = X_1$.**\\quad Since $X_1 \\sim \\mathrm{Poisson}(\\lambda)$,\n\\[\nE_\\lambda[\\delta] = E[X_1] = \\lambda \\;\\Rightarrow\\; \\text{bias} = 0, \\qquad \\Var_\\lambda(\\delta) = \\Var(X_1) = \\lambda.\n\\]\nSo $\\delta$ is unbiased with $\\mathrm{MSE}(\\delta) = \\lambda$."
+        },
+        {
+          "label": "(c)",
+          "points": 4,
+          "prompt": "Apply the Rao-Blackwell theorem: compute the conditional expectation $\\delta_0(t) = E_\\lambda[X_1 \\mid T = t]$ and write down the resulting Rao-Blackwellized estimator $\\delta_0(T)$. \\emph{Hint:} use symmetry of the conditional distribution.",
+          "modelAnswer": "**Rao-Blackwellization.**\\quad We compute $\\delta_0(t) = E_\\lambda[X_1 \\mid T = t]$. Conditional on $T = t$, the vector $(X_1,\\ldots,X_n)$ is multinomial$(t; 1/n,\\ldots,1/n)$ (a standard result: given the sum of i.i.d.\\ Poissons, the components are multinomial with equal probabilities). Hence by symmetry $E[X_i \\mid T = t] = t/n$ for each $i$, and in particular\n\\[\n\\delta_0(t) = E_\\lambda[X_1 \\mid T = t] = \\frac{t}{n}.\n\\]\nNote this does not depend on $\\lambda$ (as it must, since $T$ is sufficient). The Rao-Blackwellized estimator is\n\\[\n\\delta_0(T) = \\frac{T}{n} = \\overline{X}_n.\n\\]"
+        },
+        {
+          "label": "(d)",
+          "points": 2,
+          "prompt": "Verify directly that $\\mathrm{Var}_\\lambda(\\delta_0(T)) \\le \\mathrm{Var}_\\lambda(\\delta(\\mathbf{X}))$, with strict inequality whenever $n>1$. Conclude the comparison of MSEs.",
+          "modelAnswer": "**Comparing variances.**\\quad Since $T = \\sum_i X_i \\sim \\mathrm{Poisson}(n\\lambda)$ has variance $n\\lambda$,\n\\[\n\\Var_\\lambda\\!\\left(\\frac{T}{n}\\right) = \\frac{n\\lambda}{n^2} = \\frac{\\lambda}{n}.\n\\]\nBoth estimators are unbiased, so MSE $=$ Variance, and\n\\[\n\\mathrm{MSE}(\\delta_0) = \\frac{\\lambda}{n} \\;\\le\\; \\lambda = \\mathrm{MSE}(\\delta),\n\\]\nwith strict inequality for $n > 1$. This is consistent with the Rao-Blackwell theorem. \\hfill$\\square$"
+        }
+      ]
+    },
+    {
+      "num": 5,
+      "title": "Cramér-Rao Bound for the Exponential",
+      "section": "Part B",
+      "points": 14,
+      "prompt": "Let $X_1,\\ldots,X_n$ be a random sample from the Exponential distribution with rate $\\theta > 0$, i.e.\\ $f(x;\\theta) = \\theta e^{-\\theta x}$ for $x > 0$.",
+      "parts": [
+        {
+          "label": "(a)",
+          "points": 3,
+          "prompt": "Derive the score function $\\dot{\\ell}(x,\\theta) = \\dfrac{\\partial}{\\partial\\theta}\\log f(x;\\theta)$ for a single observation.",
+          "modelAnswer": "**Score function.**\\quad For a single observation,\n\\[\n\\log f(x;\\theta) = \\log\\theta - \\theta x \\;\\Rightarrow\\; \\dot\\ell(x,\\theta) = \\frac{\\partial}{\\partial\\theta}\\log f(x;\\theta) = \\frac{1}{\\theta} - x.\n\\]"
+        },
+        {
+          "label": "(b)",
+          "points": 3,
+          "prompt": "Verify directly that $E_\\theta[\\dot{\\ell}(X,\\theta)] = 0$.",
+          "modelAnswer": "**Mean of the score.**\\quad Since $E_\\theta[X] = 1/\\theta$,\n\\[\nE_\\theta[\\dot\\ell(X,\\theta)] = \\frac{1}{\\theta} - E_\\theta[X] = \\frac{1}{\\theta} - \\frac{1}{\\theta} = 0. \\quad\\checkmark\n\\]"
+        },
+        {
+          "label": "(c)",
+          "points": 3,
+          "prompt": "Compute the Fisher information $I(\\theta) = E_\\theta[\\dot{\\ell}(X,\\theta)^2]$ for a single observation. (You may verify by also computing $-E_\\theta[\\ddot{\\ell}(X,\\theta)]$.)",
+          "modelAnswer": "**Fisher information.**\\quad\n\\[\nI(\\theta) = \\Var_\\theta\\!\\bigl(\\dot\\ell(X,\\theta)\\bigr) = \\Var_\\theta\\!\\bigl(\\tfrac{1}{\\theta}-X\\bigr) = \\Var_\\theta(X) = \\frac{1}{\\theta^2}.\n\\]\nVerification via the second-derivative form: $\\ddot\\ell(x,\\theta) = -1/\\theta^2$, so $-E_\\theta[\\ddot\\ell(X,\\theta)] = 1/\\theta^2$. \\quad\\checkmark\n\nFor the full sample of size $n$: $I_n(\\theta) = n/\\theta^2$."
+        },
+        {
+          "label": "(d)",
+          "points": 5,
+          "prompt": "Find the maximum likelihood estimator $\\hat\\theta_n$ of $\\theta$. Determine whether $\\hat\\theta_n$ is unbiased; if not, compute its bias. Then state whether $\\hat\\theta_n$ attains the Cram\\'er-Rao Lower Bound for unbiased estimators of $\\theta$. If it does not (or if the CRLB does not directly apply), use the asymptotic theory of the MLE to find the asymptotic distribution\n    \\[ \\sqrt{n}\\,(\\hat\\theta_n - \\theta) \\xrightarrow{d} N(0, v(\\theta)) \\]\n    and identify $v(\\theta)$ explicitly.",
+          "modelAnswer": "**MLE, bias, and CRLB.**\\quad The log-likelihood is\n\\[\n\\ell_n(\\theta) = n\\log\\theta - \\theta \\sum_{i=1}^n X_i,\n\\]\nso $\\dot\\ell_n(\\theta) = n/\\theta - \\sum_i X_i = 0$ gives\n\\[\n\\boxed{\\hat\\theta_n = \\frac{1}{\\overline{X}_n}.}\n\\]\n(Since $\\ddot\\ell_n = -n/\\theta^2 < 0$, this is a maximum.)\n\n**Bias.** Note $\\sum_i X_i \\sim \\mathrm{Gamma}(n,\\theta)$ (shape $n$, rate $\\theta$), so $\\overline{X}_n = \\frac{1}{n}\\sum X_i \\sim \\mathrm{Gamma}(n, n\\theta)$. For $Y \\sim \\mathrm{Gamma}(n, n\\theta)$ with $n \\ge 2$,\n\\[\nE[1/Y] = \\frac{n\\theta}{n-1}.\n\\]\n(This uses $E[Y^{-1}] = \\frac{\\beta}{\\alpha-1}$ for $Y \\sim \\mathrm{Gamma}(\\alpha,\\beta)$, valid for $\\alpha > 1$.) Hence\n\\[\nE_\\theta[\\hat\\theta_n] = \\frac{n}{n-1}\\theta \\;\\neq\\; \\theta,\n\\]\nso $\\hat\\theta_n$ is _biased_ with bias $\\theta/(n-1)$. (An unbiased version is $\\hat\\theta_n^{\\,\\text{unb}} = \\frac{n-1}{n}\\hat\\theta_n = \\frac{n-1}{\\sum X_i}$.)\n\n**CRLB.** Since $\\hat\\theta_n$ is biased, the standard Cram\\'er-Rao bound for unbiased estimators of $\\theta$ does not directly compare. (One could compare an unbiased estimator $T$ against $1/(nI(\\theta)) = \\theta^2/n$.)\n\n**Asymptotic distribution.** The model has support $(0,\\infty)$ independent of $\\theta$ and is smooth in $\\theta$, so regularity conditions hold. By the asymptotic theory of the MLE,\n\\[\n\\sqrt{n}\\,(\\hat\\theta_n - \\theta) \\xrightarrow{d} N\\!\\left(0,\\,\\frac{1}{I(\\theta)}\\right) = N(0,\\theta^2).\n\\]\nWe may also derive this directly: by the CLT, $\\sqrt{n}(\\overline{X}_n - 1/\\theta) \\xrightarrow{d} N(0,1/\\theta^2)$. Apply the delta method with $g(x) = 1/x$, $g'(1/\\theta) = -\\theta^2$:\n\\[\n\\sqrt{n}\\bigl(\\hat\\theta_n - \\theta\\bigr) = \\sqrt{n}\\bigl(g(\\overline{X}_n) - g(1/\\theta)\\bigr) \\xrightarrow{d} N\\!\\bigl(0,\\,(g'(1/\\theta))^2 \\cdot \\tfrac{1}{\\theta^2}\\bigr) = N(0,\\theta^2).\n\\]\nSo $v(\\theta) = \\theta^2$. Asymptotically the variance is $\\theta^2/n$, which equals $1/(nI(\\theta))$ --- the MLE is asymptotically efficient. \\hfill$\\square$\n\n% ====================================================================\n% PART C SOLUTIONS\n% ====================================================================\n\\section*{Part C: Major Theory + Applications \\hfill (60 points)}"
+        }
+      ]
+    },
+    {
+      "num": 6,
+      "title": "Likelihood Ratio Test for the Normal Mean ($\\sigma^2$ unknown)",
+      "section": "Part C",
+      "points": 20,
+      "prompt": "Let $X_1,\\ldots,X_n$ be a random sample from $N(\\mu,\\sigma^2)$ where \\textbf{both} $\\mu \\in \\mathbb{R}$ and $\\sigma^2 > 0$ are unknown. We test\n\\[ H_0: \\mu = \\mu_0 \\quad \\text{vs.} \\quad H_1: \\mu \\neq \\mu_0. \\]",
+      "parts": [
+        {
+          "label": "(a)",
+          "points": 10,
+          "prompt": "Derive the likelihood ratio statistic\n    \\[ \\Lambda(\\mathbf{X}) = \\frac{\\sup_{\\sigma^2 > 0} L_n(\\mu_0,\\sigma^2; \\mathbf{X})}{\\sup_{(\\mu,\\sigma^2)} L_n(\\mu,\\sigma^2; \\mathbf{X})}. \\]\n    Show all steps: (i) write down $L_n$, (ii) maximize the numerator over $\\sigma^2$ holding $\\mu = \\mu_0$, (iii) maximize the denominator over $(\\mu,\\sigma^2)$, and (iv) simplify $\\Lambda$ to a closed form involving $\\sum_i (X_i - \\overline{X}_n)^2$ and $(\\overline{X}_n - \\mu_0)^2$.",
+          "modelAnswer": "**Deriving $\\Lambda$.**\\quad The joint density at $(\\mu,\\sigma^2)$ is\n\\[\nL_n(\\mu,\\sigma^2;\\bX) = (2\\pi\\sigma^2)^{-n/2} \\exp\\!\\left\\{-\\frac{1}{2\\sigma^2}\\sum_{i=1}^n (X_i - \\mu)^2\\right\\}.\n\\]\n\n_(ii) Numerator_: maximize over $\\sigma^2$ with $\\mu = \\mu_0$. Setting $\\frac{\\partial}{\\partial \\sigma^2}\\log L_n = -\\frac{n}{2\\sigma^2} + \\frac{1}{2\\sigma^4}\\sum (X_i-\\mu_0)^2 = 0$ yields\n\\[\n\\hat\\sigma_0^2 = \\frac{1}{n}\\sum_{i=1}^n (X_i - \\mu_0)^2,\n\\]\nand substituting back,\n\\[\n\\sup_{\\sigma^2} L_n(\\mu_0,\\sigma^2;\\bX) = (2\\pi\\hat\\sigma_0^2)^{-n/2} e^{-n/2}.\n\\]\n\n_(iii) Denominator_: free maximization gives the standard MLEs $\\hat\\mu = \\overline{X}_n$ and $\\hat\\sigma^2 = \\frac{1}{n}\\sum_i (X_i-\\overline{X}_n)^2$. Hence\n\\[\n\\sup L_n = (2\\pi\\hat\\sigma^2)^{-n/2} e^{-n/2}.\n\\]\n\n_(iv) Ratio:_ the $e^{-n/2}$ and $(2\\pi)^{-n/2}$ factors cancel, leaving\n\\[\n\\Lambda(\\bX) = \\left(\\frac{\\hat\\sigma^2}{\\hat\\sigma_0^2}\\right)^{n/2}\n= \\left(\\frac{\\sum_i (X_i - \\overline{X}_n)^2}{\\sum_i (X_i - \\mu_0)^2}\\right)^{n/2}.\n\\]\nUsing the algebraic identity $\\sum (X_i-\\mu_0)^2 = \\sum (X_i-\\overline{X}_n)^2 + n(\\overline{X}_n-\\mu_0)^2$:\n\\[\n\\boxed{\\;\\Lambda(\\bX) = \\left(1 + \\frac{n(\\overline{X}_n - \\mu_0)^2}{\\sum_i (X_i - \\overline{X}_n)^2}\\right)^{-n/2}.\\;}\n\\]"
+        },
+        {
+          "label": "(b)",
+          "points": 8,
+          "prompt": "Show that the LRT \\emph{reject $H_0$ when $\\Lambda(\\mathbf{X}) \\le k$} is equivalent to the two-sided $t$-test \\emph{reject $H_0$ when $|U_n| \\ge c$}, where\n    \\[ U_n = \\frac{\\sqrt{n}\\,(\\overline{X}_n - \\mu_0)}{s_n}, \\qquad s_n^2 = \\frac{1}{n-1}\\sum_{i=1}^n (X_i - \\overline{X}_n)^2. \\]\n    Express $c$ in terms of $k$ and identify it as a quantile of the appropriate distribution under $H_0$.",
+          "modelAnswer": "**Equivalence with the $t$-test.**\\quad Recall $s_n^2 = \\frac{1}{n-1}\\sum_i (X_i - \\overline{X}_n)^2$, so $\\sum_i (X_i-\\overline{X}_n)^2 = (n-1)s_n^2$. Then\n\\[\n\\frac{n(\\overline{X}_n - \\mu_0)^2}{\\sum_i (X_i - \\overline{X}_n)^2}\n= \\frac{n(\\overline{X}_n - \\mu_0)^2}{(n-1)s_n^2}\n= \\frac{1}{n-1}\\,U_n^2,\\qquad U_n = \\frac{\\sqrt{n}\\,(\\overline{X}_n - \\mu_0)}{s_n}.\n\\]\nTherefore\n\\[\n\\Lambda(\\bX) = \\left(1 + \\frac{U_n^2}{n-1}\\right)^{-n/2}.\n\\]\nThis is a strictly decreasing function of $U_n^2$. Hence\n\\[\n\\Lambda(\\bX) \\le k \\iff U_n^2 \\ge \\kappa \\iff |U_n| \\ge c\n\\]\nwhere $c = \\sqrt{\\kappa}$ and $\\kappa = (n-1)\\bigl(k^{-2/n} - 1\\bigr)$. Under $H_0$ we have $U_n \\sim t_{n-1}$ (standard sampling result for the normal model), so to achieve level $\\alpha_0$ we choose\n\\[\nc = T_{n-1}^{-1}(1 - \\alpha_0/2),\n\\]\nthe $(1-\\alpha_0/2)$-quantile of the $t_{n-1}$ distribution. This is exactly the two-sided $t$-test. \\hfill$\\square$"
+        },
+        {
+          "label": "(c)",
+          "points": 2,
+          "prompt": "State the asymptotic null distribution of $-2\\log\\Lambda(\\mathbf{X})$ as $n \\to \\infty$ and verify that the degrees of freedom you obtain match what Wilks' Theorem predicts (count the constraints).",
+          "modelAnswer": "**Wilks' theorem check.**\\quad Here $\\theta = (\\mu,\\sigma^2) \\in \\Omega = \\mathbb{R}\\times(0,\\infty)$ with $\\dim\\Omega = 2$. Under $H_0$, $\\Omega_0 = \\{\\mu_0\\}\\times(0,\\infty)$ has dimension $1$. So Wilks predicts $-2\\log\\Lambda \\xrightarrow{d}\\chi^2_{2-1} = \\chi^2_1$.\n\nWe verify directly: $-2\\log\\Lambda = n\\log(1 + U_n^2/(n-1))$. Under $H_0$, $U_n \\to N(0,1)$ in distribution (since $t_{n-1} \\to N(0,1)$), so $U_n^2 \\to \\chi^2_1$. Using $n\\log(1 + a/(n-1)) = a + O(1/n)$ for fixed $a$ (Taylor expand), we get $-2\\log\\Lambda = U_n^2 + o_P(1) \\xrightarrow{d}\\chi^2_1$. \\quad\\checkmark"
+        }
+      ]
+    },
+    {
+      "num": 7,
+      "title": "Most Powerful and UMP Tests for the Exponential Rate",
+      "section": "Part C",
+      "points": 20,
+      "prompt": "Let $X_1,\\ldots,X_n$ be a random sample from $\\mathrm{Exp}(\\lambda)$ (rate parameterization) and let $T = \\sum_{i=1}^n X_i$. Fix $\\lambda_1 > \\lambda_0 > 0$.",
+      "parts": [
+        {
+          "label": "(a)",
+          "points": 8,
+          "prompt": "Test $H_0: \\lambda = \\lambda_0$ vs.\\ $H_1: \\lambda = \\lambda_1$. Using the Neyman-Pearson Lemma, derive the most powerful (MP) level-$\\alpha_0$ test. Reduce the rejection region to a region of the form $\\{T \\le c\\}$ or $\\{T \\ge c\\}$ (you must determine which).",
+          "modelAnswer": "**NP-MP test for $\\lambda_0$ vs.\\ $\\lambda_1 > \\lambda_0$.**\\quad Joint density at rate $\\lambda$ is\n\\[\nf_n(\\mathbf{x};\\lambda) = \\lambda^n \\exp\\!\\Bigl(-\\lambda \\sum_i x_i\\Bigr) = \\lambda^n e^{-\\lambda t},\\quad t = \\sum_i x_i.\n\\]\nLikelihood ratio:\n\\[\n\\frac{f_n(\\mathbf{x};\\lambda_1)}{f_n(\\mathbf{x};\\lambda_0)} = \\left(\\frac{\\lambda_1}{\\lambda_0}\\right)^n \\exp\\!\\bigl(-(\\lambda_1-\\lambda_0)\\,t\\bigr).\n\\]\nSince $\\lambda_1 > \\lambda_0$, the coefficient $-(\\lambda_1-\\lambda_0) < 0$, so the LR is a _decreasing_ function of $t$. Therefore\n\\[\n\\frac{f_1}{f_0} > k \\iff t < c\n\\]\nfor some $c$ depending on $k$. By the Neyman-Pearson lemma, the most powerful level-$\\alpha_0$ test rejects $H_0$ iff\n\\[\nT = \\sum_{i=1}^n X_i \\le c,\n\\]\nwhere $c$ is chosen so that $P_{\\lambda_0}(T \\le c) = \\alpha_0$. \\hfill$\\square$"
+        },
+        {
+          "label": "(b)",
+          "points": 5,
+          "prompt": "State and justify the null distribution of $T$ under $H_0$. (\\emph{Hint:} sums of i.i.d.\\ exponentials are Gamma; relate Gamma to $\\chi^2$.) Express the critical value $c$ as a quantile of a chi-squared distribution. For $n=4$ and $\\alpha_0 = 0.05$, give a closed-form expression for $c$ in terms of a single $\\chi^2$ quantile.",
+          "modelAnswer": "**Null distribution and critical value.**\\quad If $X_i \\stackrel{\\text{iid}}{\\sim}\\mathrm{Exp}(\\lambda)$ then $T = \\sum_{i=1}^n X_i \\sim \\mathrm{Gamma}(n,\\lambda)$. Recall $\\mathrm{Gamma}(n,1/2) = \\chi^2_{2n}$ (with rate $1/2$); rescaling, if $T \\sim \\mathrm{Gamma}(n,\\lambda)$ then $2\\lambda T \\sim \\chi^2_{2n}$. So under $H_0$, $2\\lambda_0 T \\sim \\chi^2_{2n}$, and\n\\[\nP_{\\lambda_0}(T \\le c) = \\alpha_0 \\;\\iff\\; P(\\chi^2_{2n} \\le 2\\lambda_0 c) = \\alpha_0 \\;\\iff\\; 2\\lambda_0 c = \\chi^2_{\\alpha_0,\\,2n},\n\\]\nwhere $\\chi^2_{\\alpha_0, 2n}$ is the $\\alpha_0$-quantile of $\\chi^2_{2n}$. Hence\n\\[\n\\boxed{\\;c = \\frac{\\chi^2_{\\alpha_0,\\,2n}}{2\\lambda_0}.\\;}\n\\]\nFor $n = 4$ and $\\alpha_0 = 0.05$: $c = \\chi^2_{0.05,\\,8}/(2\\lambda_0) = 2.733/(2\\lambda_0)$ (using the table value $\\chi^2_{0.05,8} = 2.733$)."
+        },
+        {
+          "label": "(c)",
+          "points": 4,
+          "prompt": "Show that the same form of test (with the \\emph{same} critical value) is uniformly most powerful (UMP) of level $\\alpha_0$ for the one-sided composite problem\n    \\[ H_0: \\lambda \\le \\lambda_0 \\quad \\text{vs.} \\quad H_1: \\lambda > \\lambda_0. \\]\n    You may use the monotone likelihood ratio (MLR) property if you state and verify it.",
+          "modelAnswer": "**UMP for $H_0:\\lambda \\le \\lambda_0$ vs.\\ $H_1: \\lambda > \\lambda_0$.**\\quad For any fixed $\\lambda' < \\lambda''$ in this family, the same calculation as (a) shows\n\\[\n\\frac{f_n(\\mathbf{x};\\lambda'')}{f_n(\\mathbf{x};\\lambda')} = \\left(\\frac{\\lambda''}{\\lambda'}\\right)^n e^{-(\\lambda''-\\lambda')t}\n\\]\nis monotone decreasing in $t$. So the family $\\{f_n(\\cdot;\\lambda)\\}$ has **monotone likelihood ratio** (MLR) in the statistic $-T$ (equivalently, decreasing MLR in $T$).\n\nBy the Karlin--Rubin theorem (a corollary of NP for MLR families), for the one-sided composite test $H_0: \\lambda \\le \\lambda_0$ vs.\\ $H_1: \\lambda > \\lambda_0$, the test ``reject iff $T \\le c$'' --- with the same $c$ as in (b) --- is UMP at level $\\alpha_0$. The level is achieved at the boundary because the power function $\\pi(\\lambda) = P_\\lambda(T \\le c)$ is monotone increasing in $\\lambda$ (see (d)), so $\\sup_{\\lambda \\le \\lambda_0}\\pi(\\lambda) = \\pi(\\lambda_0) = \\alpha_0$. \\hfill$\\square$"
+        },
+        {
+          "label": "(d)",
+          "points": 3,
+          "prompt": "Write the power function $\\pi(\\lambda) = \\mathbb{P}_\\lambda(T \\in R)$ in terms of a $\\chi^2$ cdf, and use it to argue that $\\pi$ is monotone increasing in $\\lambda$ on $(0,\\infty)$.",
+          "modelAnswer": "**Power function.**\\quad Using $2\\lambda T \\sim \\chi^2_{2n}$ for any $\\lambda > 0$:\n\\[\n\\pi(\\lambda) = P_\\lambda(T \\le c) = P(\\chi^2_{2n} \\le 2\\lambda c) = F_{\\chi^2_{2n}}(2\\lambda c),\n\\]\nwhere $F_{\\chi^2_{2n}}$ is the $\\chi^2_{2n}$ cdf. Since $F_{\\chi^2_{2n}}$ is strictly increasing on $(0,\\infty)$ and $2\\lambda c$ is strictly increasing in $\\lambda$, the composition $\\pi(\\lambda)$ is strictly increasing in $\\lambda$. As $\\lambda\\to 0$, $\\pi(\\lambda)\\to 0$; as $\\lambda\\to\\infty$, $\\pi(\\lambda)\\to 1$. \\hfill$\\square$"
+        }
+      ]
+    },
+    {
+      "num": 8,
+      "title": "MLE Asymptotics, Delta Method, and Test/CI Duality (Bernoulli)",
+      "section": "Part C",
+      "points": 20,
+      "prompt": "Let $X_1,\\ldots,X_n$ be a random sample from $\\mathrm{Bernoulli}(p)$ with $p \\in (0,1)$ unknown.",
+      "parts": [
+        {
+          "label": "(a)",
+          "points": 3,
+          "prompt": "Derive the maximum likelihood estimator $\\hat p_n$ of $p$ and the Fisher information $I_n(p)$ in the full sample. Verify $\\hat p_n$ is unbiased.",
+          "modelAnswer": "**MLE and Fisher information.**\\quad Likelihood: $L_n(p) = p^{\\sum X_i}(1-p)^{n-\\sum X_i}$. Log-likelihood: $\\ell_n(p) = (\\sum X_i)\\log p + (n - \\sum X_i)\\log(1-p)$. Score:\n\\[\n\\dot\\ell_n(p) = \\frac{\\sum X_i}{p} - \\frac{n-\\sum X_i}{1-p} = 0 \\;\\Longrightarrow\\; \\hat p_n = \\overline{X}_n.\n\\]\nThen $E[\\hat p_n] = E[X_1] = p$, so $\\hat p_n$ is unbiased.\n\nFor Fisher information per observation: $\\dot\\ell(x,p) = \\frac{x}{p} - \\frac{1-x}{1-p}$. Then\n\\[\nI(p) = \\Var_p(\\dot\\ell) = \\Var\\!\\left(\\frac{X}{p} - \\frac{1-X}{1-p}\\right) = \\Var\\!\\left(\\frac{X-p}{p(1-p)}\\right) = \\frac{p(1-p)}{p^2(1-p)^2} = \\frac{1}{p(1-p)}.\n\\]\nFor the full sample: $\\boxed{I_n(p) = \\dfrac{n}{p(1-p)}}.$"
+        },
+        {
+          "label": "(b)",
+          "points": 3,
+          "prompt": "State (assuming the standard regularity conditions) the asymptotic normality of the MLE in the form\n    \\[ \\sqrt{n}\\,(\\hat p_n - p) \\xrightarrow{d} N(0, \\sigma^2(p)) \\]\n    and identify $\\sigma^2(p)$. Briefly justify why the regularity conditions hold here.",
+          "modelAnswer": "**Asymptotic normality of the MLE.**\\quad The Bernoulli$(p)$ family has support $\\{0,1\\}$ independent of $p$; the density is smooth in $p \\in (0,1)$; and $I(p) = 1/[p(1-p)] \\in (0,\\infty)$ on $(0,1)$ --- regularity holds. By the standard CLT for $\\hat p_n = \\overline{X}_n$ (with $\\Var(X_1) = p(1-p)$),\n\\[\n\\sqrt{n}(\\hat p_n - p) \\xrightarrow{d} N(0, p(1-p)),\n\\]\ni.e.\\ $\\sigma^2(p) = p(1-p) = 1/I(p)$ as the general MLE asymptotic theory predicts."
+        },
+        {
+          "label": "(c)",
+          "points": 5,
+          "prompt": "Let $g(p) = \\log\\!\\bigl(\\tfrac{p}{1-p}\\bigr)$ (the log-odds). Apply the delta method to find the asymptotic distribution of $g(\\hat p_n)$. State explicitly the condition $g'(p) \\neq 0$ and the values of $p$ for which this fails (if any), and write the asymptotic variance $\\tau^2(p)$ as a function of $p$.",
+          "modelAnswer": "**Delta method for $g(p) = \\log\\!\\bigl(\\tfrac{p**{1-p}\\bigr)$.}\\quad Differentiating,\n\\[\ng'(p) = \\frac{d}{dp}\\bigl[\\log p - \\log(1-p)\\bigr] = \\frac{1}{p} + \\frac{1}{1-p} = \\frac{1}{p(1-p)}.\n\\]\nOn the open interval $p \\in (0,1)$, $g'(p) > 0$ everywhere --- so $g'(p) = 0$ _never_ occurs (the delta method does not fail at any interior point; it only ``fails'' in the boundary sense as $p \\to 0$ or $p\\to 1$, where $g'(p)\\to\\infty$).\n\nBy the delta method (Theorem 1.7 in Sen's notes, with $a_n = \\sqrt{n}$):\n\\[\n\\sqrt{n}\\bigl(g(\\hat p_n) - g(p)\\bigr) \\xrightarrow{d} N\\!\\bigl(0,\\,(g'(p))^2 \\cdot p(1-p)\\bigr) = N\\!\\left(0,\\,\\frac{1}{p^2(1-p)^2}\\cdot p(1-p)\\right) = N\\!\\left(0,\\,\\frac{1}{p(1-p)}\\right).\n\\]\nSo\n\\[\n\\boxed{\\;\\tau^2(p) = \\frac{1}{p(1-p)}.\\;}\n\\]"
+        },
+        {
+          "label": "(d)",
+          "points": 4,
+          "prompt": "Construct an approximate $(1-\\alpha_0)$ confidence interval for the log-odds $g(p)$, expressed entirely in terms of $\\hat p_n$, $n$, and $z_{\\alpha_0/2}$.",
+          "modelAnswer": "**Approximate CI for $g(p)$.**\\quad From (c), an asymptotically pivotal quantity is\n\\[\nZ_n = \\sqrt{n}\\bigl(g(\\hat p_n) - g(p)\\bigr)\\,\\sqrt{\\hat p_n(1-\\hat p_n)} \\;\\xrightarrow{d}\\; N(0,1)\n\\]\n(by Slutsky, replacing $\\tau^2(p)$ with the consistent plug-in $\\tau^2(\\hat p_n) = 1/[\\hat p_n(1-\\hat p_n)]$, equivalently dividing by $1/\\sqrt{\\hat p_n(1-\\hat p_n)}$). Inverting $|Z_n|\\le z_{\\alpha_0/2}$ gives the approximate $(1-\\alpha_0)$ CI\n\\[\n\\boxed{\\;g(\\hat p_n) \\pm \\frac{z_{\\alpha_0/2}}{\\sqrt{n\\,\\hat p_n(1-\\hat p_n)}}.\\;}\n\\]\nThat is, $\\bigl[\\,\\log\\!\\tfrac{\\hat p_n}{1-\\hat p_n} - \\tfrac{z_{\\alpha_0/2}}{\\sqrt{n\\hat p_n(1-\\hat p_n)}},\\;\\log\\!\\tfrac{\\hat p_n}{1-\\hat p_n} + \\tfrac{z_{\\alpha_0/2}}{\\sqrt{n\\hat p_n(1-\\hat p_n)}}\\,\\bigr]$."
+        },
+        {
+          "label": "(e)",
+          "points": 5,
+          "prompt": "Let $\\alpha_0 = 0.05$. Show that the test of $H_0: p = 1/2$ at level $\\alpha_0$ obtained by inverting the CI in (d) (i.e.\\ ``reject $H_0$ iff $0 \\notin$ CI for $g(p)$'') is, at the level of test statistics, equivalent to a test based directly on $\\hat p_n$ vs.\\ a critical value. Identify the equivalent rejection region in terms of $\\hat p_n$.",
+          "modelAnswer": "**Test/CI duality at $p = 1/2$.**\\quad By the duality of Theorem 10.3, the level-$\\alpha_0$ test is: reject $H_0: g(p) = 0$ iff $0$ lies outside the CI from (d), i.e.\\ iff\n\\[\n\\bigl|\\,g(\\hat p_n) - 0\\,\\bigr| > \\frac{z_{\\alpha_0/2}}{\\sqrt{n\\,\\hat p_n(1-\\hat p_n)}}.\n\\]\nEquivalently:\n\\[\n\\sqrt{n\\,\\hat p_n(1-\\hat p_n)}\\,\\bigl|\\log\\tfrac{\\hat p_n}{1-\\hat p_n}\\bigr| > z_{\\alpha_0/2}.\n\\]\nThis rejection rule depends on the data only through $\\hat p_n$, so it is precisely a test of the form ``reject iff $\\hat p_n \\notin (L,U)$'' where $L < 1/2 < U$ are the two solutions of\n\\[\n\\sqrt{n\\,\\hat p(1-\\hat p)}\\,\\log\\tfrac{\\hat p}{1-\\hat p} = \\pm z_{\\alpha_0/2}.\n\\]\nFor $\\alpha_0 = 0.05$, $z_{\\alpha_0/2} = 1.960$; the equivalent rejection region is\n\\[\n\\Bigl\\{\\hat p_n : \\sqrt{n\\,\\hat p_n(1-\\hat p_n)}\\,\\bigl|\\log\\tfrac{\\hat p_n}{1-\\hat p_n}\\bigr| > 1.96\\Bigr\\},\n\\]\nwhich is monotone in $|\\hat p_n - 1/2|$ near $1/2$, so it has the form $\\{|\\hat p_n - 1/2| > c_n\\}$ for an explicit $c_n$ found by inversion. (At the null $p = 1/2$, $g(p) = 0$ and $p(1-p) = 1/4$, so the test statistic reduces in the usual way to a function of $\\sqrt{n}(\\hat p_n - 1/2)$, recovering the standard Wald test for $H_0: p = 1/2$.) \\hfill$\\square$\n\n\\begin{center}\n**End of solutions.** \\quad Total: 100 points.\n\\end{center}"
+        }
+      ]
+    }
+  ]
+}

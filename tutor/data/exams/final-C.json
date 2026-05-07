@@ -1,0 +1,276 @@
+{
+  "variantId": "C",
+  "title": "Mock Final — Variant C (Computation-Heavy)",
+  "totalPoints": 100,
+  "timeMinutes": 150,
+  "quantileTable": "**Quantile Table (provided).**\n- $z_{\\alpha}$, $t_{\\alpha, d}$, $\\chi^2_{\\alpha, d}$, $F_{\\alpha, d_1, d_2}$, $\\alpha$",
+  "problems": [
+    {
+      "num": 1,
+      "title": "Part A — A1",
+      "section": "Part A",
+      "points": 2,
+      "prompt": "For a two-sided $z$-test of $H_0: \\mu = \\mu_0$ vs.\\ $H_1: \\mu \\ne \\mu_0$, the observed test statistic is $Z = 2.326$. Compute the (two-sided) $p$-value.",
+      "parts": [
+        {
+          "label": "(answer)",
+          "points": 2,
+          "prompt": "",
+          "modelAnswer": "For a two-sided $z$-test the $p$-value is\n\\[\np = 2\\bigl(1 - \\Phi(|Z|)\\bigr) = 2\\bigl(1 - \\Phi(2.326)\\bigr).\n\\]\nFrom the table, $z_{0.01} = 2.326 \\Rightarrow \\Phi(2.326) = 0.99$, hence\n\\[\n\\boxed{p\\text{-value} = 2(1 - 0.99) = 0.02.}\n\\]"
+        }
+      ]
+    },
+    {
+      "num": 2,
+      "title": "Part A — A2",
+      "section": "Part A",
+      "points": 2,
+      "prompt": "Suppose a $95\\%$ confidence interval for $\\mu$ based on a normal sample is reported as $(10,\\ 20)$. Use the test/CI duality to test $H_0: \\mu = 12$ vs.\\ $H_1: \\mu \\ne 12$ at significance level $\\alpha_0 = 0.05$. State the conclusion in one sentence.",
+      "parts": [
+        {
+          "label": "(answer)",
+          "points": 2,
+          "prompt": "",
+          "modelAnswer": "By test/CI duality, the level-$\\alpha$ two-sided test of $H_0: \\mu = \\mu_0$ fails to reject if and only if $\\mu_0$ lies in the corresponding $1-\\alpha$ confidence interval. Since $12 \\in (10, 20)$,\n\\[\n\\boxed{\\text{fail to reject } H_0 \\text{ at } \\alpha_0 = 0.05.}\n\\]\nThe data are consistent with $\\mu = 12$ at the $5\\%$ level."
+        }
+      ]
+    },
+    {
+      "num": 3,
+      "title": "Part A — A3",
+      "section": "Part A",
+      "points": 2,
+      "prompt": "Let $X_1, \\dots, X_n \\iid N(\\mu, \\sigma^2)$ with $\\sigma = 4$ known. Find the smallest sample size $n$ such that the resulting $95\\%$ confidence interval for $\\mu$ has total width at most $1$.",
+      "parts": [
+        {
+          "label": "(answer)",
+          "points": 2,
+          "prompt": "",
+          "modelAnswer": "For $\\sigma$ known, the $95\\%$ CI has total width $W = 2 z_{0.025}\\, \\sigma/\\sqrt{n}$. Setting $W \\le 1$ with $\\sigma = 4$:\n\\[\n\\frac{2(1.960)(4)}{\\sqrt{n}} \\le 1\n\\quad\\Longleftrightarrow\\quad\n\\sqrt{n} \\ge 2(1.960)(4) = 15.68\n\\quad\\Longleftrightarrow\\quad\nn \\ge 15.68^2 = 245.86\\ldots\n\\]\n\\[\n\\boxed{n = 246.}\n\\]"
+        }
+      ]
+    },
+    {
+      "num": 4,
+      "title": "Part A — A4",
+      "section": "Part A",
+      "points": 2,
+      "prompt": "Let $Y$ and $W$ be independent $\\chi^2_8$ random variables. Compute\n\\[\nP\\!\\left(\\frac{Y}{W} > 3.44\\right),\n\\]\ngiven that $F_{0.05,\\,8,\\,8} = 3.44$. (Hint: identify the distribution of $Y/W$.)",
+      "parts": [
+        {
+          "label": "(answer)",
+          "points": 2,
+          "prompt": "",
+          "modelAnswer": "Since $Y, W \\iid \\chi^2_8$, the ratio\n\\[\n\\frac{Y}{W} = \\frac{Y/8}{W/8} \\sim F_{8,\\,8},\n\\]\nso by the definition of an upper-tail $F$-quantile,\n\\[\nP\\!\\bigl(Y/W > F_{0.05,\\,8,\\,8}\\bigr) = P\\!\\bigl(F_{8,8} > 3.44\\bigr) = \\boxed{0.05.}\n\\]"
+        }
+      ]
+    },
+    {
+      "num": 5,
+      "title": "Part A — A5",
+      "section": "Part A",
+      "points": 2,
+      "prompt": "A one-sided $z$-test has Type I error rate $\\alpha_0 = 0.05$ and power $0.80$ at the alternative value $\\theta = 1$. What is the Type II error probability $\\beta$ at $\\theta = 1$?\n\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%",
+      "parts": [
+        {
+          "label": "(answer)",
+          "points": 2,
+          "prompt": "",
+          "modelAnswer": "By definition, $\\beta = 1 - \\pi$ where $\\pi$ is the power, so\n\\[\n\\boxed{\\beta = 1 - 0.80 = 0.20.}\n\\]\n\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
+        }
+      ]
+    },
+    {
+      "num": 6,
+      "title": "One-Sample $t$-Inference",
+      "section": "Part B",
+      "points": 15,
+      "prompt": "A random sample $X_1, \\dots, X_8 \\iid N(\\mu, \\sigma^2)$ with $\\mu, \\sigma^2$ unknown produces the data\n\\[\n3.1,\\ 3.5,\\ 2.6,\\ 3.4,\\ 3.8,\\ 3.0,\\ 2.9,\\ 2.2.\n\\]",
+      "parts": [
+        {
+          "label": "(a)",
+          "points": 4,
+          "prompt": "Compute the sample mean $\\bar{x}$ and the (unbiased) sample standard deviation $s$. Report each to three decimals. \\emph{Useful: $\\sum_i (x_i - \\bar{x})^2 = 1.83875$.}",
+          "modelAnswer": "**Sample mean and SD.** Sum: $3.1+3.5+2.6+3.4+3.8+3.0+2.9+2.2 = 24.5$. Therefore\n\\[\n\\bar{x} = \\frac{24.5}{8} = \\boxed{3.0625.}\n\\]\nUsing the given $\\sum (x_i - \\bar{x})^2 = 1.83875$,\n\\[\ns^2 = \\frac{1.83875}{7} = 0.26268,\n\\qquad\ns = \\sqrt{0.26268} = \\boxed{0.513.}\n\\]"
+        },
+        {
+          "label": "(b)",
+          "points": 4,
+          "prompt": "Construct the $95\\%$ confidence interval for $\\mu$ using the $t$-pivot. Leave $\\sqrt{8}$ unsimplified if needed.",
+          "modelAnswer": "**$95\\%$ $t$-CI.** With $n = 8$, $t_{0.025, 7} = 2.365$, and $s/\\sqrt{n} = 0.513/\\sqrt{8} = 0.513/2.828 = 0.1814$:\n\\[\n\\bar{x} \\pm t_{0.025,\\,7}\\,\\frac{s}{\\sqrt{n}}\n= 3.0625 \\pm (2.365)(0.1814)\n= 3.0625 \\pm 0.4290.\n\\]\n\\[\n\\boxed{95\\% \\text{ CI for }\\mu:\\ (2.634,\\ 3.491).}\n\\]"
+        },
+        {
+          "label": "(c)",
+          "points": 4,
+          "prompt": "Test $H_0: \\mu = 3$ vs.\\ $H_1: \\mu \\ne 3$ at $\\alpha_0 = 0.05$. Report the test statistic, the critical value, and your conclusion.",
+          "modelAnswer": "**Test $H_0: \\mu = 3$ vs.\\ $H_1: \\mu \\ne 3$ at $\\alpha_0 = 0.05$.**\n\\[\nT = \\frac{\\bar{x} - 3}{s/\\sqrt{n}} = \\frac{3.0625 - 3}{0.1814} = \\frac{0.0625}{0.1814} = 0.345.\n\\]\nCritical value: $t_{0.025,\\,7} = 2.365$. Since $|T| = 0.345 < 2.365$,\n\\[\n\\boxed{\\text{fail to reject } H_0\\text{ at level } 0.05.}\n\\]\n(Equivalently, $\\mu_0 = 3$ lies inside the CI from (b).)"
+        },
+        {
+          "label": "(d)",
+          "points": 3,
+          "prompt": "For a \\emph{future} study, suppose $\\sigma$ is known to equal $0.5$. Find the smallest sample size $n^\\star$ such that the resulting $95\\%$ confidence interval for $\\mu$ has half-width at most $0.05$.",
+          "modelAnswer": "**Sample size with $\\sigma = 0.5$ known.** Half-width $z_{0.025}\\, \\sigma/\\sqrt{n} \\le 0.05$:\n\\[\n\\frac{(1.96)(0.5)}{\\sqrt{n}} \\le 0.05\n\\;\\Longleftrightarrow\\;\n\\sqrt{n} \\ge \\frac{(1.96)(0.5)}{0.05} = 19.6\n\\;\\Longleftrightarrow\\;\nn \\ge 19.6^2 = 384.16.\n\\]\n\\[\n\\boxed{n^\\star = 385.}\n\\]"
+        }
+      ]
+    },
+    {
+      "num": 7,
+      "title": "Two-Sample $t$-Inference",
+      "section": "Part B",
+      "points": 15,
+      "prompt": "Two independent random samples were collected:\n\\begin{itemize}[leftmargin=*, itemsep=0pt]\n    \\item Sample 1: $X_1, \\dots, X_8 \\iid N(\\mu_X, \\sigma^2)$ with $\\bar{x} = 10.0$ and \\emph{unbiased sample variance} $s_X^2 = 4.0$.\n    \\item Sample 2: $Y_1, \\dots, Y_8 \\iid N(\\mu_Y, \\sigma^2)$ with $\\bar{y} = 8.0$ and \\emph{unbiased sample variance} $s_Y^2 = 2.0$.\n\\end{itemize}\nAssume the two populations share a common (unknown) variance $\\sigma^2$.",
+      "parts": [
+        {
+          "label": "(a)",
+          "points": 3,
+          "prompt": "Compute the pooled sample variance $s_p^2$.",
+          "modelAnswer": "**Pooled variance.** Using the unbiased sample variances $s_X^2 = 4.0$, $s_Y^2 = 2.0$ with $m = n = 8$:\n\\[\ns_p^2 = \\frac{(m-1)s_X^2 + (n-1)s_Y^2}{m + n - 2}\n= \\frac{7(4.0) + 7(2.0)}{14}\n= \\frac{28 + 14}{14}\n= \\boxed{3.}\n\\]"
+        },
+        {
+          "label": "(b)",
+          "points": 4,
+          "prompt": "Compute the two-sample $t$-statistic $T$ and state its degrees of freedom under $H_0: \\mu_X = \\mu_Y$.",
+          "modelAnswer": "**Test statistic and degrees of freedom.**\n\\[\nT = \\frac{\\bar{x} - \\bar{y}}{\\sqrt{s_p^2\\bigl(\\tfrac{1}{m}+\\tfrac{1}{n}\\bigr)}}\n= \\frac{10 - 8}{\\sqrt{3 \\cdot \\tfrac{1}{4}}}\n= \\frac{2}{\\sqrt{3}/2}\n= \\frac{4}{\\sqrt{3}}\n= \\frac{4\\sqrt{3}}{3} \\approx 2.309.\n\\]\nDegrees of freedom: $m + n - 2 = \\boxed{14}$."
+        },
+        {
+          "label": "(c)",
+          "points": 4,
+          "prompt": "Test $H_0: \\mu_X = \\mu_Y$ vs.\\ $H_1: \\mu_X \\ne \\mu_Y$ at $\\alpha_0 = 0.05$. Report the critical value and your conclusion.",
+          "modelAnswer": "**Test $H_0: \\mu_X = \\mu_Y$ vs.\\ $H_1: \\mu_X \\ne \\mu_Y$ at $\\alpha_0 = 0.05$.** Critical value $t_{0.025,\\,14} = 2.145$. Since $|T| = 2.309 > 2.145$,\n\\[\n\\boxed{\\text{reject } H_0\\text{ at level } 0.05.}\n\\]"
+        },
+        {
+          "label": "(d)",
+          "points": 4,
+          "prompt": "Construct a $95\\%$ confidence interval for $\\mu_X - \\mu_Y$. (You may leave $\\sqrt{3}$ unsimplified.)",
+          "modelAnswer": "**$95\\%$ CI for $\\mu_X - \\mu_Y$.**\n\\[\n(\\bar{x} - \\bar{y}) \\pm t_{0.025,\\,14}\\sqrt{s_p^2\\bigl(\\tfrac{1}{m}+\\tfrac{1}{n}\\bigr)}\n= 2 \\pm (2.145)\\frac{\\sqrt{3}}{2}.\n\\]\nNumerically: $(2.145)(\\sqrt{3}/2) = (2.145)(0.866) = 1.858$, giving\n\\[\n\\boxed{95\\% \\text{ CI:}\\ \\left(2 - \\tfrac{2.145\\sqrt{3}}{2},\\ 2 + \\tfrac{2.145\\sqrt{3}}{2}\\right) = (0.142,\\ 3.858).}\n\\]\nSince $0$ is not in the interval, the conclusion is consistent with rejecting $H_0$ in (c).\n\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n\\section*{Part C --- Major Problems}"
+        }
+      ]
+    },
+    {
+      "num": 8,
+      "title": "Power Function and Sample Size",
+      "section": "Part C",
+      "points": 15,
+      "prompt": "Let $X_1, \\dots, X_n \\iid N(\\mu, \\sigma^2)$ with $\\sigma = 2$ known. Consider testing\n\\[\nH_0: \\mu \\le 10 \\quad \\text{vs.} \\quad H_1: \\mu > 10\n\\]\nat significance level $\\alpha_0 = 0.05$ using the test that rejects $H_0$ when $\\bar{X}$ exceeds a threshold.",
+      "parts": [
+        {
+          "label": "(a)",
+          "points": 4,
+          "prompt": "Find the rejection threshold $c_n$ for $\\bar{X}$ as an explicit function of $n$. Justify briefly why your test has size $\\alpha_0$.",
+          "modelAnswer": "**Rejection threshold.** For the one-sided test, reject $H_0$ when $\\bar{X} > c_n$. Under $\\mu = 10$ (the boundary of $\\Omega_0$), $\\bar{X} \\sim N(10, 4/n)$, so\n\\[\nP_{\\mu=10}(\\bar{X} > c_n) = 1 - \\Phi\\!\\left(\\frac{c_n - 10}{2/\\sqrt{n}}\\right) = \\alpha_0\n\\;\\Longleftrightarrow\\;\n\\frac{c_n - 10}{2/\\sqrt{n}} = z_{0.05} = 1.645.\n\\]\nHence\n\\[\n\\boxed{c_n = 10 + \\frac{1.645 \\cdot 2}{\\sqrt{n}} = 10 + \\frac{3.29}{\\sqrt{n}}.}\n\\]\nBecause the power function is increasing in $\\mu$ (one-sided alternative), the size is attained at $\\mu = 10$ and equals $\\alpha_0$."
+        },
+        {
+          "label": "(b)",
+          "points": 5,
+          "prompt": "Take $n = 16$. Compute the power of the test at $\\mu = 11.645$, i.e., $\\pi(11.645)$. Express the answer as $\\Phi(\\,\\cdot\\,)$ and then evaluate using the table.",
+          "modelAnswer": "**Power at $\\mu = 11.645$ for $n = 16$.** Threshold $c_{16} = 10 + 3.29/4 = 10.8225$. Under $\\mu = 11.645$, $\\bar{X} \\sim N(11.645, 4/16) = N(11.645,\\ 0.25)$, so\n\\[\n\\pi(11.645) = P_{\\mu=11.645}(\\bar{X} > 10.8225)\n= 1 - \\Phi\\!\\left(\\frac{10.8225 - 11.645}{0.5}\\right)\n= 1 - \\Phi(-1.645)\n= \\Phi(1.645).\n\\]\nFrom the table, $z_{0.05} = 1.645 \\Rightarrow \\Phi(1.645) = 1 - 0.05 = 0.95$. Hence\n\\[\n\\boxed{\\pi(11.645) = 0.95.}\n\\]"
+        },
+        {
+          "label": "(c)",
+          "points": 6,
+          "prompt": "Find the smallest sample size $n$ such that $\\pi(11.645) \\ge 0.99$.",
+          "modelAnswer": "**Smallest $n$ with $\\pi(11.645) \\ge 0.99$.** In general,\n\\[\n\\pi(\\mu) = 1 - \\Phi\\!\\left(\\frac{c_n - \\mu}{\\sigma/\\sqrt{n}}\\right)\n= \\Phi\\!\\left(-z_{0.05} + \\frac{\\sqrt{n}\\,(\\mu - 10)}{\\sigma}\\right),\n\\]\nso at $\\mu = 11.645$ and $\\sigma = 2$ this becomes\n\\[\n\\pi(11.645) = \\Phi\\!\\left(-1.645 + \\frac{\\sqrt{n}\\,(1.645)}{2}\\right) = \\Phi\\!\\bigl(-1.645 + 0.8225\\sqrt{n}\\bigr).\n\\]\nWe require $\\pi(11.645) \\ge 0.99 = \\Phi(z_{0.01}) = \\Phi(2.326)$. Equivalently\n\\[\n-1.645 + 0.8225\\sqrt{n} \\ge 2.326\n\\;\\Longleftrightarrow\\;\n\\sqrt{n} \\ge \\frac{2.326 + 1.645}{0.8225} = \\frac{3.971}{0.8225} = 4.828.\n\\]\nSquaring: $n \\ge 23.31$, so the smallest integer is\n\\[\n\\boxed{n = 24.}\n\\]"
+        }
+      ]
+    },
+    {
+      "num": 9,
+      "title": "$F$-Test for Equality of Variances",
+      "section": "Part C",
+      "points": 15,
+      "prompt": "Let $X_1, \\dots, X_8 \\iid N(\\mu_X, \\sigma_X^2)$ and $Y_1, \\dots, Y_8 \\iid N(\\mu_Y, \\sigma_Y^2)$ be independent samples with all four parameters unknown. Define\n\\[\nS_X^2 = \\sum_{i=1}^8 (X_i - \\bar{X})^2, \\qquad S_Y^2 = \\sum_{j=1}^8 (Y_j - \\bar{Y})^2.\n\\]\nThe data give $S_X^2 = 20.0$ and $S_Y^2 = 5.0$.",
+      "parts": [
+        {
+          "label": "(a)",
+          "points": 3,
+          "prompt": "Compute the test statistic\n    \\[\n    V = \\frac{S_X^2/(m-1)}{S_Y^2/(n-1)} \\quad\\text{with } m = n = 8.\n    \\]",
+          "modelAnswer": "**Test statistic.**\n\\[\nV = \\frac{S_X^2/(m-1)}{S_Y^2/(n-1)} = \\frac{20.0/7}{5.0/7} = \\frac{20.0}{5.0} = \\boxed{4.}\n\\]"
+        },
+        {
+          "label": "(b)",
+          "points": 3,
+          "prompt": "State the null distribution of $V$ under $H_0: \\sigma_X^2 = \\sigma_Y^2$.",
+          "modelAnswer": "**Null distribution.** Under $H_0: \\sigma_X^2 = \\sigma_Y^2$, the numerator $S_X^2/(m-1)$ and denominator $S_Y^2/(n-1)$ are independent unbiased estimators of the common variance, with $S_X^2/\\sigma^2 \\sim \\chi^2_{m-1}$ and $S_Y^2/\\sigma^2 \\sim \\chi^2_{n-1}$. Therefore\n\\[\n\\boxed{V \\sim F_{m-1,\\, n-1} = F_{7,\\,7}.}\n\\]"
+        },
+        {
+          "label": "(c)",
+          "points": 5,
+          "prompt": "Test $H_0: \\sigma_X^2 = \\sigma_Y^2$ vs.\\ $H_1: \\sigma_X^2 \\ne \\sigma_Y^2$ at $\\alpha_0 = 0.05$. Use the critical region $\\{V \\le 0.20\\} \\cup \\{V \\ge 4.99\\}$. State the decision and justify.",
+          "modelAnswer": "**Two-sided test at $\\alpha_0 = 0.05$.** Reject $H_0$ when $V \\le F_{0.975,\\,7,7} = 0.20$ or $V \\ge F_{0.025,\\,7,7} = 4.99$. Since $V = 4$ satisfies $0.20 < 4 < 4.99$,\n\\[\n\\boxed{\\text{fail to reject } H_0\\text{ at level } 0.05.}\n\\]\nThe data are consistent with $\\sigma_X^2 = \\sigma_Y^2$ at the $5\\%$ level."
+        },
+        {
+          "label": "(d)",
+          "points": 4,
+          "prompt": "Construct a $95\\%$ confidence interval for the variance ratio $\\sigma_X^2/\\sigma_Y^2$ by inverting the two-sided $F$-test.",
+          "modelAnswer": "**$95\\%$ CI for $\\sigma_X^2/\\sigma_Y^2$.** Define\n\\[\nF^\\star = V \\cdot \\frac{\\sigma_Y^2}{\\sigma_X^2} = \\frac{S_X^2/[(m-1)\\sigma_X^2]}{S_Y^2/[(n-1)\\sigma_Y^2]} \\sim F_{7,\\,7}.\n\\]\nThen with $1 - \\alpha = 0.95$:\n\\[\nP\\!\\bigl(0.20 \\le F^\\star \\le 4.99\\bigr) = 0.95\n\\;\\Longleftrightarrow\\;\nP\\!\\left(\\frac{V}{4.99} \\le \\frac{\\sigma_X^2}{\\sigma_Y^2} \\le \\frac{V}{0.20}\\right) = 0.95.\n\\]\nPlug in $V = 4$:\n\\[\n\\boxed{95\\%\\text{ CI for } \\sigma_X^2/\\sigma_Y^2:\\ \\left(\\tfrac{4}{4.99},\\ \\tfrac{4}{0.20}\\right) = (0.802,\\ 20).}\n\\]\nThe interval contains $1$, again consistent with (c)."
+        }
+      ]
+    },
+    {
+      "num": 10,
+      "title": "Bayesian Inference for a Bernoulli Proportion",
+      "section": "Part C",
+      "points": 15,
+      "prompt": "Let $X_1, \\dots, X_n \\iid \\text{Bernoulli}(p)$ and place a $\\text{Beta}(2, 2)$ prior on $p$. We observe $n = 10$ trials with $\\sum_{i=1}^{10} X_i = 7$.",
+      "parts": [
+        {
+          "label": "(a)",
+          "points": 4,
+          "prompt": "Find the posterior distribution of $p$ given the data. State its parameters explicitly.",
+          "modelAnswer": "**Posterior.** The Beta-Bernoulli conjugacy gives\n\\[\np \\mid X_1,\\dots,X_{10} \\;\\sim\\; \\text{Beta}\\bigl(\\alpha_0 + \\textstyle\\sum X_i,\\ \\beta_0 + n - \\sum X_i\\bigr)\n= \\text{Beta}(2 + 7,\\ 2 + 10 - 7) = \\boxed{\\text{Beta}(9,\\,5).}\n\\]"
+        },
+        {
+          "label": "(b)",
+          "points": 3,
+          "prompt": "Compute the posterior mean (the Bayes estimator under squared-error loss).",
+          "modelAnswer": "**Posterior mean.** For $\\text{Beta}(\\alpha,\\beta)$, $\\mathbb{E}[p] = \\alpha/(\\alpha+\\beta)$:\n\\[\n\\widehat{p}_{\\text{Bayes}} = \\frac{9}{9 + 5} = \\frac{9}{14} \\approx \\boxed{0.643.}\n\\]"
+        },
+        {
+          "label": "(c)",
+          "points": 4,
+          "prompt": "Compute the posterior mode. Recall: for $\\text{Beta}(\\alpha, \\beta)$ with $\\alpha, \\beta > 1$, the mode is $(\\alpha - 1)/(\\alpha + \\beta - 2)$.",
+          "modelAnswer": "**Posterior mode.** For $\\text{Beta}(\\alpha,\\beta)$ with $\\alpha,\\beta>1$, mode $= (\\alpha-1)/(\\alpha+\\beta-2)$:\n\\[\n\\widehat{p}_{\\text{mode}} = \\frac{9 - 1}{9 + 5 - 2} = \\frac{8}{12} = \\frac{2}{3} \\approx \\boxed{0.667.}\n\\]"
+        },
+        {
+          "label": "(d)",
+          "points": 4,
+          "prompt": "Compute the maximum likelihood estimate $\\hat{p}_{\\text{MLE}}$. Report all three quantities (posterior mean, posterior mode, MLE) as fractions and one-line numerical decimals; comment in one sentence on how the prior shifts the estimate.",
+          "modelAnswer": "**MLE and comparison.**\n\\[\n\\widehat{p}_{\\text{MLE}} = \\frac{1}{n}\\sum X_i = \\frac{7}{10} = \\boxed{0.700.}\n\\]\n\n\\begin{tabular}{lll}\nPosterior mean: & $9/14 \\approx 0.643$ \\\\\nPosterior mode: & $8/12 = 2/3 \\approx 0.667$ \\\\\nMLE: & $7/10 = 0.700$\n\\end{tabular}\n\nThe $\\text{Beta}(2,2)$ prior is symmetric with mean $0.5$, so it pulls the estimator toward $0.5$. The mode (with $\\alpha,\\beta>1$ shrinking by one in numerator and two in denominator) coincides with the MLE of an effective _augmented_ sample $(8, 4)$, while the posterior mean uses the full prior mass."
+        }
+      ]
+    },
+    {
+      "num": 11,
+      "title": "Geometric MLE and Asymptotic CI",
+      "section": "Part C",
+      "points": 15,
+      "prompt": "Let $X_1, \\dots, X_n \\iid \\text{Geometric}(p)$ with PMF\n\\[\nf(x \\mid p) = p(1-p)^x, \\quad x = 0, 1, 2, \\dots, \\quad p \\in (0,1).\n\\]\nTake $n = 50$ and assume the observed sum is $\\sum_{i=1}^{50} X_i = 60$ (so the sample mean is $\\bar{X} = 1.2$).",
+      "parts": [
+        {
+          "label": "(a)",
+          "points": 4,
+          "prompt": "Show that the maximum likelihood estimator of $p$ is\n    \\[\n    \\hat{p}_n = \\frac{n}{n + \\sum_i X_i} = \\frac{1}{1 + \\bar{X}}.\n    \\]\n    Compute the numerical value of $\\hat{p}_n$.",
+          "modelAnswer": "**MLE.** The log-likelihood is\n\\[\n\\ell(p) = \\log L(p) = n \\log p + \\Bigl(\\textstyle\\sum X_i\\Bigr)\\log(1-p).\n\\]\nSetting $\\ell'(p) = 0$:\n\\[\n\\ell'(p) = \\frac{n}{p} - \\frac{\\sum X_i}{1-p} = 0\n\\;\\Longleftrightarrow\\;\nn(1-p) = p\\textstyle\\sum X_i\n\\;\\Longleftrightarrow\\;\n\\widehat{p}_n = \\frac{n}{n + \\sum X_i} = \\frac{1}{1 + \\bar{X}}.\n\\]\nNumerically, with $n=50$ and $\\sum X_i = 60$,\n\\[\n\\boxed{\\widehat{p}_n = \\frac{50}{50 + 60} = \\frac{50}{110} = \\frac{5}{11} \\approx 0.4545.}\n\\]"
+        },
+        {
+          "label": "(b)",
+          "points": 4,
+          "prompt": "Compute the Fisher information $I_n(p)$ in the entire sample.",
+          "modelAnswer": "**Fisher information.** For one observation $X$ with $\\mathbb{E}[X] = (1-p)/p$:\n\\[\n\\ell_1(p) = \\log p + X\\log(1-p),\n\\quad\n\\ell_1'(p) = \\frac{1}{p} - \\frac{X}{1-p},\n\\quad\n\\ell_1''(p) = -\\frac{1}{p^2} - \\frac{X}{(1-p)^2}.\n\\]\nHence\n\\[\nI_1(p) = -\\mathbb{E}[\\ell_1''(p)] = \\frac{1}{p^2} + \\frac{\\mathbb{E}[X]}{(1-p)^2}\n= \\frac{1}{p^2} + \\frac{(1-p)/p}{(1-p)^2}\n= \\frac{1}{p^2} + \\frac{1}{p(1-p)}\n= \\frac{1}{p^2(1-p)}.\n\\]\nTherefore\n\\[\n\\boxed{I_n(p) = \\frac{n}{p^2(1-p)}.}\n\\]"
+        },
+        {
+          "label": "(c)",
+          "points": 5,
+          "prompt": "Use the asymptotic normality of the MLE to construct an approximate $95\\%$ confidence interval for $p$. Express the answer as $\\hat{p}_n \\pm 1.96 \\cdot (\\text{plug-in standard error})$; you may leave the standard error as a single unsimplified square root.",
+          "modelAnswer": "**$95\\%$ asymptotic CI.** By MLE asymptotic normality,\n\\[\n\\sqrt{n}(\\widehat{p}_n - p) \\;\\xrightarrow{d}\\; N\\!\\bigl(0,\\ I_1(p)^{-1}\\bigr) = N\\!\\bigl(0,\\ p^2(1-p)\\bigr).\n\\]\nPlugging in the MLE for the standard error,\n\\[\n\\widehat{\\text{SE}}(\\widehat{p}_n) = \\sqrt{\\frac{\\widehat{p}_n^{\\,2}(1-\\widehat{p}_n)}{n}}\n= \\widehat{p}_n \\sqrt{\\frac{1-\\widehat{p}_n}{n}}\n= \\frac{5}{11}\\sqrt{\\frac{6/11}{50}}\n= \\frac{5}{11}\\sqrt{\\frac{6}{550}}\n= \\frac{5}{11}\\sqrt{\\frac{3}{275}}.\n\\]\nApproximate $95\\%$ CI:\n\\[\n\\boxed{\\widehat{p}_n \\pm 1.96 \\cdot \\widehat{\\text{SE}}(\\widehat{p}_n)\n= \\frac{5}{11} \\pm 1.96 \\cdot \\frac{5}{11}\\sqrt{\\frac{3}{275}}.}\n\\]\nFor reference (not required by the prompt), $\\sqrt{3/275} \\approx 0.1044$, so the SE is $\\approx (5/11)(0.1044) \\approx 0.0475$ and the interval is approximately $(0.361,\\ 0.548)$."
+        },
+        {
+          "label": "(d)",
+          "points": 2,
+          "prompt": "Interpret the interval in one sentence (avoid the common probability misstatement).",
+          "modelAnswer": "**Interpretation.** ``We are $95\\%$ confident that the true parameter $p$ lies in the computed interval'' --- where the confidence statement refers to the long-run coverage of the random procedure, _not_ a probability statement about the (fixed but unknown) parameter $p$.\n\n\\begin{center}\n_End of solutions._\n\\end{center}"
+        }
+      ]
+    }
+  ]
+}

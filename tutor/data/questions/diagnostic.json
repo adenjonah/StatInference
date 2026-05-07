@@ -1,0 +1,332 @@
+{
+  "stageId": "diagnostic",
+  "generatedAt": "2026-05-06T20:00:00Z",
+  "mc": [
+    {
+      "id": "diag-001",
+      "type": "mc",
+      "prompt": "Let $X_1, \\ldots, X_n$ be iid Exponential$(\\theta)$ under DeGroot's RATE parameterization, so $f(x \\mid \\theta) = \\theta e^{-\\theta x}$ for $x \\geq 0$. What is $E[X_1]$?",
+      "choices": [
+        { "id": "a", "text": "$\\theta$", "isCorrect": false, "rationale": "$\\theta$ is the rate, not the mean. Easy to slip if you're used to a scale parameterization." },
+        { "id": "b", "text": "$1/\\theta$", "isCorrect": true, "rationale": "Under DeGroot's rate parameterization, $E[X] = 1/\\theta$ and $\\mathrm{Var}(X) = 1/\\theta^2$." },
+        { "id": "c", "text": "$\\theta^2$", "isCorrect": false, "rationale": "Wrong units; this is unrelated to either mean or variance under either parameterization." },
+        { "id": "d", "text": "$1/\\theta^2$", "isCorrect": false, "rationale": "That is the variance under the rate parameterization, not the mean." }
+      ],
+      "conceptId": "notation-conventions",
+      "difficulty": "easy"
+    },
+    {
+      "id": "diag-002",
+      "type": "mc",
+      "prompt": "Let $X$ and $Y$ be random variables with $\\mathrm{Var}(X) = 9$, $\\mathrm{Var}(Y) = 4$, and $\\mathrm{Cov}(X, Y) = -1$. What is $\\mathrm{Var}(X - 3Y + 4)$?",
+      "choices": [
+        { "id": "a", "text": "$45$", "isCorrect": false, "rationale": "This drops the cross term; $\\mathrm{Var}(aX+bY) = a^2\\mathrm{Var}(X) + b^2\\mathrm{Var}(Y) + 2ab\\,\\mathrm{Cov}(X,Y)$ — you can't ignore the covariance." },
+        { "id": "b", "text": "$51$", "isCorrect": true, "rationale": "$(1)^2(9) + (-3)^2(4) + 2(1)(-3)(-1) = 9 + 36 + 6 = 51$. The constant $+4$ doesn't affect variance." },
+        { "id": "c", "text": "$39$", "isCorrect": false, "rationale": "Sign error on the cross term. $2(1)(-3)(-1) = +6$, not $-6$." },
+        { "id": "d", "text": "$55$", "isCorrect": false, "rationale": "The constant $+4$ does NOT contribute to variance — adding a constant just shifts the distribution." }
+      ],
+      "conceptId": "probability-review",
+      "difficulty": "easy"
+    },
+    {
+      "id": "diag-003",
+      "type": "mc",
+      "prompt": "Let $X_1, \\ldots, X_n$ be iid with mean $\\mu$ and finite variance $\\sigma^2 > 0$. Which statement about $\\bar X_n$ is TRUE for arbitrary parent distribution?",
+      "choices": [
+        { "id": "a", "text": "$\\bar X_n \\sim N(\\mu, \\sigma^2/n)$ exactly for any $n \\geq 1$.", "isCorrect": false, "rationale": "Exactly normal only when the $X_i$ are themselves normal. CLT gives an *approximate* normal for large $n$." },
+        { "id": "b", "text": "$\\sqrt{n}(\\bar X_n - \\mu)/\\sigma \\xrightarrow{d} N(0,1)$ as $n \\to \\infty$.", "isCorrect": true, "rationale": "This is the Central Limit Theorem — requires only iid + finite variance, no normality of the $X_i$." },
+        { "id": "c", "text": "$\\bar X_n \\xrightarrow{d} \\mu$ implies $\\bar X_n \\xrightarrow{P} \\mu$ only if the $X_i$ are normal.", "isCorrect": false, "rationale": "Convergence in distribution to a constant always implies convergence in probability — no normality needed." },
+        { "id": "d", "text": "$\\bar X_n \\xrightarrow{P} \\mu$ requires $E[X_1^4] < \\infty$.", "isCorrect": false, "rationale": "WLLN only requires finite mean (Kolmogorov form); the fourth moment is unnecessary." }
+      ],
+      "conceptId": "convergence-clt",
+      "difficulty": "easy"
+    },
+    {
+      "id": "diag-004",
+      "type": "mc",
+      "prompt": "Let $X_1, \\ldots, X_n$ be iid with $E[X_1] = \\mu$ and $\\mathrm{Var}(X_1) = \\sigma^2$. Using Chebyshev's inequality, what is the smallest $n$ guaranteeing $P(|\\bar X_n - \\mu| \\geq 0.1) \\leq 0.05$ when $\\sigma^2 = 4$?",
+      "choices": [
+        { "id": "a", "text": "$n \\geq 80$", "isCorrect": false, "rationale": "This drops the $\\varepsilon^2$ in the denominator. Chebyshev gives $\\sigma^2/(n\\varepsilon^2) \\leq \\delta$, so $n \\geq \\sigma^2/(\\varepsilon^2 \\delta)$." },
+        { "id": "b", "text": "$n \\geq 800$", "isCorrect": false, "rationale": "Off by a factor of 10 — make sure you square $\\varepsilon = 0.1$ to get $0.01$ in the denominator." },
+        { "id": "c", "text": "$n \\geq 8000$", "isCorrect": true, "rationale": "$n \\geq \\sigma^2 / (\\varepsilon^2 \\delta) = 4/((0.01)(0.05)) = 4/0.0005 = 8000$." },
+        { "id": "d", "text": "$n \\geq 80000$", "isCorrect": false, "rationale": "This squares $\\delta$ as well; only $\\varepsilon$ gets squared in the Chebyshev bound." }
+      ],
+      "conceptId": "prob-inequalities",
+      "difficulty": "medium"
+    },
+    {
+      "id": "diag-005",
+      "type": "mc",
+      "prompt": "Suppose $\\sqrt{n}(\\bar X_n - \\theta) \\xrightarrow{d} N(0, \\sigma^2)$ and $g$ is differentiable at $\\theta$ with $g'(\\theta) \\neq 0$. By the delta method, what is the asymptotic distribution of $\\sqrt{n}(g(\\bar X_n) - g(\\theta))$?",
+      "choices": [
+        { "id": "a", "text": "$N(0, \\sigma^2)$", "isCorrect": false, "rationale": "This ignores the transformation entirely — delta method scales the variance by $[g'(\\theta)]^2$." },
+        { "id": "b", "text": "$N(0, \\sigma^2 \\cdot [g'(\\theta)]^2)$", "isCorrect": true, "rationale": "Standard delta method: $\\sqrt{n}(g(\\bar X_n) - g(\\theta)) \\xrightarrow{d} N(0, \\sigma^2 [g'(\\theta)]^2)$, valid when $g'(\\theta) \\neq 0$." },
+        { "id": "c", "text": "$N(g(\\theta), \\sigma^2 [g'(\\theta)]^2)$", "isCorrect": false, "rationale": "After centering by $g(\\theta)$ on the LHS, the limiting distribution has mean 0, not $g(\\theta)$." },
+        { "id": "d", "text": "$N(0, \\sigma^2 [g''(\\theta)]^2)$", "isCorrect": false, "rationale": "$g''$ only enters in the second-order delta method when $g'(\\theta) = 0$ (gives $\\chi^2_1$ scaling, not normal)." }
+      ],
+      "conceptId": "delta-method",
+      "difficulty": "easy"
+    },
+    {
+      "id": "diag-006",
+      "type": "mc",
+      "prompt": "Let $X_1, \\ldots, X_n$ be iid Poisson$(\\lambda)$. What is the method of moments (MOM) estimator of $\\lambda$?",
+      "choices": [
+        { "id": "a", "text": "$\\hat\\lambda = \\bar X_n$", "isCorrect": true, "rationale": "$E[X] = \\lambda$, so setting the population first moment equal to the sample first moment gives $\\hat\\lambda = \\bar X_n$." },
+        { "id": "b", "text": "$\\hat\\lambda = 1/\\bar X_n$", "isCorrect": false, "rationale": "That's the MOM (and MLE) for Exponential rate $\\theta$, not Poisson." },
+        { "id": "c", "text": "$\\hat\\lambda = \\frac{1}{n}\\sum_i (X_i - \\bar X_n)^2$", "isCorrect": false, "rationale": "This is the second central moment. While $\\mathrm{Var}(X) = \\lambda$ in Poisson and this would also be a valid MOM, the question asks for the standard first-moment estimator. Either is acceptable in principle, but $\\bar X_n$ is the canonical answer." },
+        { "id": "d", "text": "$\\hat\\lambda = \\max_i X_i$", "isCorrect": false, "rationale": "The maximum is not a moment-based estimator and is not consistent for $\\lambda$." }
+      ],
+      "conceptId": "mom",
+      "difficulty": "easy"
+    },
+    {
+      "id": "diag-007",
+      "type": "mc",
+      "prompt": "Let $X_1, \\ldots, X_n$ be iid Uniform$([0, \\theta])$ with $\\theta > 0$. What is the maximum likelihood estimator of $\\theta$?",
+      "choices": [
+        { "id": "a", "text": "$\\hat\\theta = \\bar X_n$", "isCorrect": false, "rationale": "$\\bar X_n$ estimates $\\theta/2$ (the mean), not $\\theta$. Note $2\\bar X_n$ is the MOM, not the MLE." },
+        { "id": "b", "text": "$\\hat\\theta = 2\\bar X_n$", "isCorrect": false, "rationale": "This is the MOM estimator (since $E[X] = \\theta/2$), not the MLE." },
+        { "id": "c", "text": "$\\hat\\theta = X_{(n)} = \\max_i X_i$", "isCorrect": true, "rationale": "Likelihood is $L(\\theta) = \\theta^{-n} \\mathbf{1}\\{\\theta \\geq X_{(n)}\\}$, decreasing in $\\theta$, so the smallest valid $\\theta$ is the maximum order statistic. Calculus fails here because the support depends on $\\theta$." },
+        { "id": "d", "text": "$\\hat\\theta = X_{(1)} = \\min_i X_i$", "isCorrect": false, "rationale": "$X_{(1)}$ would force $L(\\theta) = 0$ since $X_{(n)} > X_{(1)}$ — it doesn't satisfy the support constraint." }
+      ],
+      "conceptId": "mle",
+      "difficulty": "medium"
+    },
+    {
+      "id": "diag-008",
+      "type": "mc",
+      "prompt": "Let $X_1, \\ldots, X_n$ be iid $N(\\mu, \\sigma^2)$ with both parameters unknown. Which of the following is TRUE about the MLE of $\\sigma^2$?",
+      "choices": [
+        { "id": "a", "text": "$\\hat\\sigma^2_{\\text{MLE}} = \\frac{1}{n-1}\\sum_i (X_i - \\bar X_n)^2$ and is unbiased.", "isCorrect": false, "rationale": "That's the sample variance $s^2$, which IS unbiased — but it's NOT the MLE. The MLE divides by $n$, not $n-1$." },
+        { "id": "b", "text": "$\\hat\\sigma^2_{\\text{MLE}} = \\frac{1}{n}\\sum_i (X_i - \\bar X_n)^2$ and is biased downward.", "isCorrect": true, "rationale": "MLE divides by $n$; $E[\\hat\\sigma^2_{\\text{MLE}}] = (n-1)\\sigma^2/n < \\sigma^2$, so biased downward." },
+        { "id": "c", "text": "$\\hat\\sigma^2_{\\text{MLE}} = \\frac{1}{n}\\sum_i X_i^2$ and is unbiased.", "isCorrect": false, "rationale": "This forgets to center at $\\bar X_n$ — and ignores the $\\mu$ parameter. Wrong on two counts." },
+        { "id": "d", "text": "The MLE of $\\sigma^2$ does not exist when $\\mu$ is unknown.", "isCorrect": false, "rationale": "It exists; you maximize jointly and get $\\hat\\mu = \\bar X_n$ and $\\hat\\sigma^2 = \\frac{1}{n}\\sum_i (X_i - \\bar X_n)^2$." }
+      ],
+      "conceptId": "mle",
+      "difficulty": "medium"
+    },
+    {
+      "id": "diag-009",
+      "type": "mc",
+      "prompt": "For an estimator $T_n$ of $g(\\theta)$, the mean squared error is $\\mathrm{MSE}(T_n) = E[(T_n - g(\\theta))^2]$. Which decomposition is correct?",
+      "choices": [
+        { "id": "a", "text": "$\\mathrm{MSE}(T_n) = \\mathrm{Var}(T_n) - [\\mathrm{bias}(T_n)]^2$", "isCorrect": false, "rationale": "Sign error — bias squared adds to variance, it doesn't subtract." },
+        { "id": "b", "text": "$\\mathrm{MSE}(T_n) = \\mathrm{Var}(T_n) + [\\mathrm{bias}(T_n)]^2$", "isCorrect": true, "rationale": "Standard bias-variance decomposition. A biased estimator can still have lower MSE than an unbiased one if its variance is much smaller." },
+        { "id": "c", "text": "$\\mathrm{MSE}(T_n) = [\\mathrm{bias}(T_n)]^2$ only when $T_n$ is unbiased.", "isCorrect": false, "rationale": "If $T_n$ is unbiased, bias $= 0$ and MSE = Variance, not bias squared." },
+        { "id": "d", "text": "$\\mathrm{MSE}(T_n) = E[T_n]^2 - \\mathrm{Var}(T_n)$", "isCorrect": false, "rationale": "This isn't a known identity and confuses $E[T_n^2]$ with $E[T_n]^2$." }
+      ],
+      "conceptId": "estimation-principles",
+      "difficulty": "easy"
+    },
+    {
+      "id": "diag-010",
+      "type": "mc",
+      "prompt": "Let $X_1, \\ldots, X_n$ be iid Exponential$(\\theta)$ (rate). By the Fisher-Neyman factorization criterion, which statistic is sufficient for $\\theta$?",
+      "choices": [
+        { "id": "a", "text": "$T = X_{(1)} = \\min_i X_i$", "isCorrect": false, "rationale": "The minimum is sufficient when only the location matters; here the joint $\\theta^n e^{-\\theta \\sum X_i}$ depends on the data through $\\sum X_i$, not the minimum." },
+        { "id": "b", "text": "$T = X_{(n)} = \\max_i X_i$", "isCorrect": false, "rationale": "The maximum is sufficient for support-dependent problems like Uniform$[0,\\theta]$, not for Exponential." },
+        { "id": "c", "text": "$T = \\sum_{i=1}^n X_i$", "isCorrect": true, "rationale": "Joint density $\\theta^n e^{-\\theta \\sum X_i}$ factors as $u(x) = 1$, $v(T, \\theta) = \\theta^n e^{-\\theta T}$ where $T = \\sum X_i$. Equivalently $\\bar X_n$ is sufficient." },
+        { "id": "d", "text": "$T = (\\sum X_i, \\sum X_i^2)$", "isCorrect": false, "rationale": "You only need ONE sufficient statistic for one parameter; this is the sufficient pair for $N(\\mu, \\sigma^2)$ with both unknown." }
+      ],
+      "conceptId": "sufficiency",
+      "difficulty": "medium"
+    },
+    {
+      "id": "diag-011",
+      "type": "mc",
+      "prompt": "Let $X_1, \\ldots, X_n \\mid \\lambda$ be iid Poisson$(\\lambda)$ and place a Gamma$(\\alpha, \\beta)$ prior on $\\lambda$ (rate parameterization). What is the posterior distribution of $\\lambda$?",
+      "choices": [
+        { "id": "a", "text": "Gamma$(\\alpha + \\sum X_i, \\beta + n)$", "isCorrect": true, "rationale": "Gamma is conjugate to Poisson: posterior shape adds the sum of counts, posterior rate adds the sample size." },
+        { "id": "b", "text": "Gamma$(\\alpha + n, \\beta + \\sum X_i)$", "isCorrect": false, "rationale": "Swapped — this is the conjugate update for Exponential likelihood, not Poisson." },
+        { "id": "c", "text": "Gamma$(\\alpha \\cdot \\sum X_i, \\beta \\cdot n)$", "isCorrect": false, "rationale": "Conjugate updates ADD the sufficient statistic and sample size, never multiply." },
+        { "id": "d", "text": "Beta$(\\alpha + \\sum X_i, \\beta + n - \\sum X_i)$", "isCorrect": false, "rationale": "Beta posterior arises from a Bernoulli/Binomial likelihood, not Poisson." }
+      ],
+      "conceptId": "bayesian",
+      "difficulty": "hard"
+    },
+    {
+      "id": "diag-012",
+      "type": "mc",
+      "prompt": "Let $X_1, \\ldots, X_n$ be iid $N(\\mu, \\sigma^2)$. Define $S^2 = \\sum_{i=1}^n (X_i - \\bar X_n)^2$. What is the distribution of $S^2 / \\sigma^2$?",
+      "choices": [
+        { "id": "a", "text": "$\\chi^2_n$", "isCorrect": false, "rationale": "Off by one degree of freedom — centering at the *sample* mean (instead of $\\mu$) costs one df." },
+        { "id": "b", "text": "$\\chi^2_{n-1}$", "isCorrect": true, "rationale": "$\\sum (X_i - \\bar X_n)^2 / \\sigma^2 \\sim \\chi^2_{n-1}$. Equivalently, $(n-1) s^2 / \\sigma^2 \\sim \\chi^2_{n-1}$ where $s^2 = S^2/(n-1)$." },
+        { "id": "c", "text": "$N(0, 2(n-1)\\sigma^4)$", "isCorrect": false, "rationale": "$S^2$ is non-negative, not normal. Although asymptotically normal, the EXACT distribution is chi-squared." },
+        { "id": "d", "text": "$t_{n-1}$", "isCorrect": false, "rationale": "$t_{n-1}$ is the distribution of $\\sqrt{n}(\\bar X_n - \\mu)/s$, not $S^2/\\sigma^2$." }
+      ],
+      "conceptId": "sampling-dists",
+      "difficulty": "easy"
+    },
+    {
+      "id": "diag-013",
+      "type": "mc",
+      "prompt": "Let $X_1, \\ldots, X_{16}$ be iid $N(\\mu, \\sigma^2)$ with $\\sigma^2$ UNKNOWN. Suppose $\\bar X_{16} = 12.5$ and $s^2_{16} = 4.0$. Using $t_{15, 0.025} = 2.131$, what is a 95% confidence interval for $\\mu$?",
+      "choices": [
+        { "id": "a", "text": "$12.5 \\pm 1.96 \\cdot \\frac{2}{\\sqrt{16}} = (11.52,\\ 13.48)$", "isCorrect": false, "rationale": "Used $z_{0.025} = 1.96$ — but $\\sigma^2$ is UNKNOWN, so the correct critical value is $t_{n-1, \\alpha/2}$, not $z_{\\alpha/2}$." },
+        { "id": "b", "text": "$12.5 \\pm 2.131 \\cdot \\frac{2}{\\sqrt{16}} = (11.43,\\ 13.57)$", "isCorrect": true, "rationale": "$\\sigma$ unknown $\\Rightarrow$ use $t_{15}$. CI: $\\bar X \\pm t_{n-1, \\alpha/2} \\cdot s/\\sqrt{n} = 12.5 \\pm 2.131 \\cdot 2/4 = 12.5 \\pm 1.066$." },
+        { "id": "c", "text": "$12.5 \\pm 2.131 \\cdot \\frac{4}{\\sqrt{16}} = (10.37,\\ 14.63)$", "isCorrect": false, "rationale": "Used $s^2 = 4$ instead of $s = 2$ in the standard error — must take square root." },
+        { "id": "d", "text": "$12.5 \\pm 2.131 \\cdot \\frac{2}{16}$", "isCorrect": false, "rationale": "Forgot the square root on $n$; SE is $s/\\sqrt{n}$, not $s/n$." }
+      ],
+      "conceptId": "ci-pivots",
+      "difficulty": "medium"
+    },
+    {
+      "id": "diag-014",
+      "type": "mc",
+      "prompt": "Test/CI duality: a level-$\\alpha$ test of $H_0: \\theta = \\theta_0$ vs $H_1: \\theta \\neq \\theta_0$ rejects $H_0$ iff:",
+      "choices": [
+        { "id": "a", "text": "$\\theta_0$ falls OUTSIDE the corresponding $(1-\\alpha)$ confidence interval.", "isCorrect": true, "rationale": "Test/CI duality: the acceptance region of a level-$\\alpha$ test corresponds exactly to the $(1-\\alpha)$ CI. Reject $H_0$ iff $\\theta_0$ is not in the CI." },
+        { "id": "b", "text": "$\\theta_0$ falls INSIDE the corresponding $(1-\\alpha)$ confidence interval.", "isCorrect": false, "rationale": "Backwards — being inside the CI means the data are consistent with $\\theta_0$, so we DO NOT reject." },
+        { "id": "c", "text": "$\\theta_0$ falls outside the $\\alpha$ confidence interval (not $(1-\\alpha)$).", "isCorrect": false, "rationale": "An $\\alpha$ CI (e.g., 5% confidence) would be very narrow and almost never contain the truth — wrong confidence level." },
+        { "id": "d", "text": "Test/CI duality only holds for one-sided alternatives.", "isCorrect": false, "rationale": "Duality holds for both — two-sided tests pair with two-sided CIs, one-sided tests with one-sided CIs." }
+      ],
+      "conceptId": "ci-tcr-duality",
+      "difficulty": "easy"
+    },
+    {
+      "id": "diag-015",
+      "type": "mc",
+      "prompt": "Let $X_1, \\ldots, X_n$ be iid Bernoulli$(\\theta)$. The Fisher information in a single observation is $I(\\theta) = $",
+      "choices": [
+        { "id": "a", "text": "$\\theta(1-\\theta)$", "isCorrect": false, "rationale": "That's $\\mathrm{Var}(X)$ for Bernoulli — Fisher info is the *reciprocal* up to factors." },
+        { "id": "b", "text": "$\\frac{1}{\\theta(1-\\theta)}$", "isCorrect": true, "rationale": "$\\dot\\ell(x, \\theta) = (x - \\theta)/(\\theta(1-\\theta))$, so $I(\\theta) = E[\\dot\\ell^2] = \\mathrm{Var}(X)/[\\theta(1-\\theta)]^2 = 1/[\\theta(1-\\theta)]$." },
+        { "id": "c", "text": "$\\frac{1}{\\theta^2}$", "isCorrect": false, "rationale": "That's $I(\\theta)$ for Exponential$(\\theta)$ rate, not Bernoulli." },
+        { "id": "d", "text": "$\\frac{n}{\\theta(1-\\theta)}$", "isCorrect": false, "rationale": "That's the *total* sample information $I_n(\\theta) = n I(\\theta)$, not the per-observation $I(\\theta)$." }
+      ],
+      "conceptId": "cr-fisher",
+      "difficulty": "medium"
+    },
+    {
+      "id": "diag-016",
+      "type": "mc",
+      "prompt": "The Cramer-Rao lower bound (CRLB) requires regularity condition (A.1): the support $\\{x : f(x, \\theta) > 0\\}$ does not depend on $\\theta$. For which distribution does CRLB FAIL to apply?",
+      "choices": [
+        { "id": "a", "text": "Bernoulli$(\\theta)$", "isCorrect": false, "rationale": "Support is $\\{0, 1\\}$, independent of $\\theta$ — A.1 holds." },
+        { "id": "b", "text": "Poisson$(\\lambda)$", "isCorrect": false, "rationale": "Support is $\\{0, 1, 2, \\ldots\\}$, independent of $\\lambda$ — A.1 holds." },
+        { "id": "c", "text": "$N(\\mu, 1)$", "isCorrect": false, "rationale": "Support is all of $\\mathbb R$, independent of $\\mu$ — A.1 holds." },
+        { "id": "d", "text": "Uniform$([0, \\theta])$", "isCorrect": true, "rationale": "Support $[0, \\theta]$ depends explicitly on $\\theta$, so A.1 fails. The CRLB does not apply, and indeed $\\frac{n+1}{n} X_{(n)}$ has variance $O(1/n^2)$, beating any $1/n$ bound." }
+      ],
+      "conceptId": "cr-efficiency",
+      "difficulty": "medium"
+    },
+    {
+      "id": "diag-017",
+      "type": "mc",
+      "prompt": "Let $X_1, \\ldots, X_n$ be iid Poisson$(\\theta)$. The Fisher information is $I(\\theta) = 1/\\theta$. Is $\\bar X_n$ efficient for $\\theta$?",
+      "choices": [
+        { "id": "a", "text": "No, because $\\bar X_n$ is biased.", "isCorrect": false, "rationale": "$E[\\bar X_n] = \\theta$, so $\\bar X_n$ IS unbiased." },
+        { "id": "b", "text": "Yes — $\\bar X_n$ is unbiased and $\\mathrm{Var}(\\bar X_n) = \\theta/n = 1/(n I(\\theta))$, achieving the CRLB.", "isCorrect": true, "rationale": "$\\bar X_n$ is unbiased; $\\mathrm{Var}(\\bar X_n) = \\mathrm{Var}(X)/n = \\theta/n$, which equals $1/(n I(\\theta)) = \\theta/n$. CRLB attained $\\Rightarrow$ efficient (also MVUE)." },
+        { "id": "c", "text": "No — efficiency only applies to normal data.", "isCorrect": false, "rationale": "Efficiency is defined whenever the CRLB applies (A.1–A.3 hold) — Poisson satisfies the regularity conditions." },
+        { "id": "d", "text": "No — Poisson does not satisfy the CRLB regularity conditions.", "isCorrect": false, "rationale": "Poisson satisfies all of A.1–A.3 (support $\\{0,1,2,\\ldots\\}$ doesn't depend on $\\theta$, log-density is smooth)." }
+      ],
+      "conceptId": "cr-efficiency",
+      "difficulty": "hard"
+    },
+    {
+      "id": "diag-018",
+      "type": "mc",
+      "prompt": "Consider testing $H_0: \\theta \\in \\Omega_0$ vs $H_1: \\theta \\in \\Omega_1$ with test function $\\delta$. Which expression is the size (Type I error rate) of $\\delta$?",
+      "choices": [
+        { "id": "a", "text": "$\\sup_{\\theta \\in \\Omega_0} P_\\theta(\\text{reject } H_0)$", "isCorrect": true, "rationale": "Size is the supremum of the rejection probability over the NULL parameter space $\\Omega_0$." },
+        { "id": "b", "text": "$\\sup_{\\theta \\in \\Omega_1} P_\\theta(\\text{reject } H_0)$", "isCorrect": false, "rationale": "That's the supremum over $\\Omega_1$ — relates to power, not size. Type I is rejecting when $H_0$ is TRUE, so we sup over $\\Omega_0$." },
+        { "id": "c", "text": "$\\sup_{\\theta \\in \\Omega_1} P_\\theta(\\text{accept } H_0)$", "isCorrect": false, "rationale": "That's worst-case Type II error rate, not size." },
+        { "id": "d", "text": "$\\inf_{\\theta \\in \\Omega_0} P_\\theta(\\text{reject } H_0)$", "isCorrect": false, "rationale": "Infimum gives the BEST-case Type I rate; size uses sup (worst case) for a guaranteed level." }
+      ],
+      "conceptId": "ht-foundations",
+      "difficulty": "medium"
+    },
+    {
+      "id": "diag-019",
+      "type": "mc",
+      "prompt": "A two-sided test of $H_0: \\mu = 0$ vs $H_1: \\mu \\neq 0$ produces test statistic $z_{\\text{obs}} = 1.8$ under the standard normal null. Using $P(Z > 1.8) = 0.0359$, the p-value is:",
+      "choices": [
+        { "id": "a", "text": "$0.0359$", "isCorrect": false, "rationale": "That's the ONE-sided p-value. Two-sided alternatives require doubling for symmetric distributions." },
+        { "id": "b", "text": "$0.0718$", "isCorrect": true, "rationale": "Two-sided p-value $= 2 \\cdot P(Z > |z_{\\text{obs}}|) = 2(0.0359) = 0.0718$." },
+        { "id": "c", "text": "$0.9641$", "isCorrect": false, "rationale": "That's $P(Z \\leq 1.8) = 1 - 0.0359$ — not a p-value." },
+        { "id": "d", "text": "$0.5 - 0.0359 = 0.4641$", "isCorrect": false, "rationale": "Mixes up the formula; standard normal p-value uses tail areas, not differences from 0.5 in this way." }
+      ],
+      "conceptId": "ht-foundations",
+      "difficulty": "easy"
+    },
+    {
+      "id": "diag-020",
+      "type": "mc",
+      "prompt": "By the Neyman-Pearson lemma, the most powerful level-$\\alpha$ test of simple $H_0: \\theta = \\theta_0$ vs simple $H_1: \\theta = \\theta_1$ rejects when:",
+      "choices": [
+        { "id": "a", "text": "The likelihood ratio $L(\\theta_1)/L(\\theta_0) > k$ for some constant $k$ chosen so the test has size $\\alpha$.", "isCorrect": true, "rationale": "NP lemma: among all level-$\\alpha$ tests, the LR test maximizes power. Reject when alternative is *more* likely, i.e., $L_1/L_0 > k$." },
+        { "id": "b", "text": "The likelihood ratio $L(\\theta_0)/L(\\theta_1) > k$.", "isCorrect": false, "rationale": "Ratio is upside down — large $L_0/L_1$ means data favor $H_0$, which would lead to ACCEPTING, not rejecting." },
+        { "id": "c", "text": "The MLE $\\hat\\theta$ is closer to $\\theta_1$ than to $\\theta_0$.", "isCorrect": false, "rationale": "MP test is based on the LR, not on Euclidean distance to candidate parameters." },
+        { "id": "d", "text": "The Fisher information evaluated at $\\theta_0$ exceeds the threshold.", "isCorrect": false, "rationale": "Fisher info is a property of the model, not a test statistic. Irrelevant to the NP rejection rule." }
+      ],
+      "conceptId": "ht-np-ump",
+      "difficulty": "medium"
+    },
+    {
+      "id": "diag-021",
+      "type": "mc",
+      "prompt": "Let $X_1, \\ldots, X_n$ be iid $N(\\mu, \\sigma^2)$ with $\\sigma^2$ KNOWN. For testing $H_0: \\mu \\leq \\mu_0$ vs $H_1: \\mu > \\mu_0$, which statement is TRUE?",
+      "choices": [
+        { "id": "a", "text": "No UMP test exists because the parameter space is composite.", "isCorrect": false, "rationale": "UMP tests CAN exist for composite hypotheses when the family has monotone likelihood ratio (MLR), which the normal does." },
+        { "id": "b", "text": "The UMP level-$\\alpha$ test rejects when $\\sqrt{n}(\\bar X - \\mu_0)/\\sigma > z_{\\alpha}$.", "isCorrect": true, "rationale": "Normal family has MLR in $\\bar X$, so by Karlin-Rubin the one-sided z-test is UMP for one-sided alternatives." },
+        { "id": "c", "text": "The UMP test rejects when $|\\sqrt{n}(\\bar X - \\mu_0)/\\sigma| > z_{\\alpha/2}$.", "isCorrect": false, "rationale": "That's a two-sided test. For one-sided alternatives, two-sided rejection wastes power on the wrong side." },
+        { "id": "d", "text": "A UMP test exists only if $\\sigma^2$ is unknown.", "isCorrect": false, "rationale": "Backwards — UMP for one-sided exists when $\\sigma$ is KNOWN. With $\\sigma$ unknown there's still a UMP via Karlin-Rubin on the t-statistic, but the question hinges on the z-test under known $\\sigma$." }
+      ],
+      "conceptId": "ht-np-ump",
+      "difficulty": "hard"
+    },
+    {
+      "id": "diag-022",
+      "type": "mc",
+      "prompt": "Let $X_1, \\ldots, X_{n}$ be iid $N(\\mu, \\sigma^2)$ with $\\sigma^2$ UNKNOWN. To test $H_0: \\mu = \\mu_0$ vs $H_1: \\mu \\neq \\mu_0$ at level $\\alpha$, the test statistic and its null distribution are:",
+      "choices": [
+        { "id": "a", "text": "$Z = \\sqrt{n}(\\bar X - \\mu_0)/\\sigma \\sim N(0,1)$", "isCorrect": false, "rationale": "Uses $\\sigma$, but $\\sigma$ is UNKNOWN — you must plug in the sample standard deviation $s$ instead. That changes the null to $t_{n-1}$." },
+        { "id": "b", "text": "$T = \\sqrt{n}(\\bar X - \\mu_0)/s \\sim t_{n-1}$", "isCorrect": true, "rationale": "Standard one-sample t-statistic. With $\\sigma$ unknown, replace $\\sigma$ by $s$; under $H_0$, this exactly follows $t_{n-1}$ for normal data." },
+        { "id": "c", "text": "$T = \\sqrt{n-1}(\\bar X - \\mu_0)/s \\sim t_n$", "isCorrect": false, "rationale": "Mixes up $\\sqrt{n}$ vs $\\sqrt{n-1}$ and $t_n$ vs $t_{n-1}$. Correct df is $n-1$ and the multiplier is $\\sqrt{n}$." },
+        { "id": "d", "text": "$F = (\\bar X - \\mu_0)^2 / s^2 \\sim F_{1, n-1}$", "isCorrect": false, "rationale": "$T^2 \\sim F_{1, n-1}$ but the canonical one-sample test uses $T \\sim t_{n-1}$, which captures direction (needed for two-sided p-values)." }
+      ],
+      "conceptId": "ht-tests",
+      "difficulty": "easy"
+    },
+    {
+      "id": "diag-023",
+      "type": "mc",
+      "prompt": "Independent samples: $X_1, \\ldots, X_m$ iid $N(\\mu_X, \\sigma_X^2)$ and $Y_1, \\ldots, Y_n$ iid $N(\\mu_Y, \\sigma_Y^2)$. To test $H_0: \\sigma_X^2 = \\sigma_Y^2$ vs $H_1: \\sigma_X^2 \\neq \\sigma_Y^2$, the appropriate test statistic is:",
+      "choices": [
+        { "id": "a", "text": "$T = (\\bar X - \\bar Y) / s_p \\sqrt{1/m + 1/n}$, with $T \\sim t_{m+n-2}$", "isCorrect": false, "rationale": "That's the two-sample pooled t-test for comparing MEANS, not variances." },
+        { "id": "b", "text": "$F = s_X^2 / s_Y^2$ with $F \\sim F_{m-1, n-1}$ under $H_0$", "isCorrect": true, "rationale": "Ratio of sample variances under $H_0$ follows F with $(m-1, n-1)$ degrees of freedom — the F-test for equality of variances." },
+        { "id": "c", "text": "$\\chi^2 = (m+n-2) s_p^2 / \\sigma_0^2$ with $\\chi^2 \\sim \\chi^2_{m+n-2}$", "isCorrect": false, "rationale": "That's a chi-squared test for a SINGLE specified variance, not for comparing two unknown variances." },
+        { "id": "d", "text": "$Z = (s_X^2 - s_Y^2)/\\sqrt{2(s_X^4/m + s_Y^4/n)}$ with $Z \\sim N(0,1)$", "isCorrect": false, "rationale": "There's an asymptotic-normal-style approximation, but the exact test for normal data uses the F-ratio." }
+      ],
+      "conceptId": "ht-tests",
+      "difficulty": "medium"
+    },
+    {
+      "id": "diag-024",
+      "type": "mc",
+      "prompt": "Two independent samples assumed equal variance: $m = n = 8$, $\\bar X = 10.0$, $\\bar Y = 8.0$, pooled standard deviation $s_p = 2.0$. Use $t_{14, 0.025} = 2.145$. Test $H_0: \\mu_X = \\mu_Y$ vs $H_1: \\mu_X \\neq \\mu_Y$ at $\\alpha = 0.05$. The test statistic and conclusion are:",
+      "choices": [
+        { "id": "a", "text": "$T = 2.0$, fail to reject $H_0$.", "isCorrect": true, "rationale": "$T = (10 - 8)/(2.0 \\sqrt{1/8 + 1/8}) = 2/(2 \\cdot 0.5) = 2.0$. $|2.0| < 2.145$, so do NOT reject at $\\alpha = 0.05$." },
+        { "id": "b", "text": "$T = 2.0$, reject $H_0$.", "isCorrect": false, "rationale": "$|2.0| < 2.145$ — fails to exceed the critical value, so we fail to reject (boundary call but not significant)." },
+        { "id": "c", "text": "$T = 4.0$, reject $H_0$.", "isCorrect": false, "rationale": "Likely forgot the $\\sqrt{1/m + 1/n} = 0.5$ in the denominator, so doubled the statistic." },
+        { "id": "d", "text": "$T = 1.0$, fail to reject $H_0$.", "isCorrect": false, "rationale": "Computational error — likely inserted an extra factor in the denominator." }
+      ],
+      "conceptId": "ht-tests",
+      "difficulty": "hard"
+    },
+    {
+      "id": "diag-025",
+      "type": "mc",
+      "prompt": "Wilks' theorem: under regularity conditions, the likelihood ratio test statistic $\\Lambda = -2 \\log \\frac{\\sup_{\\theta \\in \\Omega_0} L(\\theta)}{\\sup_{\\theta \\in \\Omega} L(\\theta)}$ has what asymptotic null distribution?",
+      "choices": [
+        { "id": "a", "text": "$N(0, 1)$ regardless of dimension.", "isCorrect": false, "rationale": "$\\Lambda$ is non-negative and approximately chi-squared, not normal." },
+        { "id": "b", "text": "$\\chi^2_d$ where $d = \\dim(\\Omega) - \\dim(\\Omega_0)$.", "isCorrect": true, "rationale": "Wilks' theorem: $-2 \\log \\Lambda \\xrightarrow{d} \\chi^2_d$ under $H_0$, with degrees of freedom equal to the difference in parameter-space dimensions." },
+        { "id": "c", "text": "$\\chi^2_n$ where $n$ is the sample size.", "isCorrect": false, "rationale": "Df depends on the parameter dimension difference, not the sample size — the sample size goes to infinity to make the asymptotic argument work." },
+        { "id": "d", "text": "$F_{d, n-d}$ where $d = \\dim(\\Omega) - \\dim(\\Omega_0)$.", "isCorrect": false, "rationale": "F-distribution arises in finite-sample normal problems; Wilks' asymptotic null is chi-squared." }
+      ],
+      "conceptId": "ht-lrt-wilks",
+      "difficulty": "hard"
+    }
+  ],
+  "sa": []
+}
