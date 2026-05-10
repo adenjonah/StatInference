@@ -1,0 +1,191 @@
+{
+  "stageId": "d1-notation",
+  "generatedAt": "2026-05-10T20:17:32.535Z",
+  "mc": [
+    {
+      "id": "d1-notation-mc-1",
+      "prompt": "What is the expected value of a random variable X that follows an Exponential(θ) distribution?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "θ",
+          "isCorrect": false,
+          "rationale": "The expected value of an Exponential(θ) is not θ, but rather 1/θ."
+        },
+        {
+          "id": "b",
+          "text": "1/θ",
+          "isCorrect": true,
+          "rationale": "The expected value of an Exponential(θ) distribution is given by E[X] = 1/θ."
+        },
+        {
+          "id": "c",
+          "text": "1/2θ",
+          "isCorrect": false,
+          "rationale": "1/2θ is incorrect; it does not represent the expected value of an Exponential distribution."
+        },
+        {
+          "id": "d",
+          "text": "θ/2",
+          "isCorrect": false,
+          "rationale": "θ/2 is not the expected value of an Exponential distribution."
+        }
+      ],
+      "conceptId": "notation-conventions",
+      "difficulty": "easy",
+      "type": "mc"
+    },
+    {
+      "id": "d1-notation-mc-2",
+      "prompt": "Which of the following correctly describes the variance of a Gamma(α,β) distribution?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "α/β",
+          "isCorrect": false,
+          "rationale": "The variance of a Gamma distribution is not α/β."
+        },
+        {
+          "id": "b",
+          "text": "α/β²",
+          "isCorrect": true,
+          "rationale": "The variance of a Gamma(α,β) distribution is given by Var(X) = α/β²."
+        },
+        {
+          "id": "c",
+          "text": "2α/β",
+          "isCorrect": false,
+          "rationale": "2α/β is incorrect; it does not represent the variance of a Gamma distribution."
+        },
+        {
+          "id": "d",
+          "text": "α²/β",
+          "isCorrect": false,
+          "rationale": "α²/β does not represent the variance of a Gamma distribution."
+        }
+      ],
+      "conceptId": "notation-conventions",
+      "difficulty": "easy",
+      "type": "mc"
+    },
+    {
+      "id": "d1-notation-mc-3",
+      "prompt": "For a Chi-squared distribution with d degrees of freedom, what is the variance?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "d",
+          "isCorrect": false,
+          "rationale": "The variance of a Chi-squared distribution is not d."
+        },
+        {
+          "id": "b",
+          "text": "d/2",
+          "isCorrect": false,
+          "rationale": "d/2 is incorrect; it does not represent the variance of a Chi-squared distribution."
+        },
+        {
+          "id": "c",
+          "text": "2d",
+          "isCorrect": true,
+          "rationale": "The variance of a Chi-squared distribution is given by Var(X) = 2d."
+        },
+        {
+          "id": "d",
+          "text": "d²",
+          "isCorrect": false,
+          "rationale": "d² does not represent the variance of a Chi-squared distribution."
+        }
+      ],
+      "conceptId": "notation-conventions",
+      "difficulty": "medium",
+      "type": "mc"
+    },
+    {
+      "id": "d1-notation-mc-4",
+      "prompt": "When estimating the mean of a normally distributed population with unknown variance, which distribution should be used for hypothesis testing?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Normal distribution (Z-test)",
+          "isCorrect": false,
+          "rationale": "A Z-test is used when the population variance is known, not when it is unknown."
+        },
+        {
+          "id": "b",
+          "text": "Student's t distribution (t-test)",
+          "isCorrect": true,
+          "rationale": "When the population variance is unknown, the t-distribution is used for hypothesis testing."
+        },
+        {
+          "id": "c",
+          "text": "Chi-squared distribution",
+          "isCorrect": false,
+          "rationale": "The Chi-squared distribution is not used for testing means when variance is unknown."
+        },
+        {
+          "id": "d",
+          "text": "Exponential distribution",
+          "isCorrect": false,
+          "rationale": "The Exponential distribution is not relevant for testing means of normally distributed populations."
+        }
+      ],
+      "conceptId": "notation-conventions",
+      "difficulty": "medium",
+      "type": "mc"
+    },
+    {
+      "id": "d1-notation-mc-5",
+      "prompt": "In the context of hypothesis testing, what does Type I error refer to?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Failing to reject a true null hypothesis",
+          "isCorrect": false,
+          "rationale": "Failing to reject a true null hypothesis is a Type II error."
+        },
+        {
+          "id": "b",
+          "text": "Rejecting a false null hypothesis",
+          "isCorrect": false,
+          "rationale": "Rejecting a false null hypothesis is a correct decision, not an error."
+        },
+        {
+          "id": "c",
+          "text": "Rejecting a true null hypothesis",
+          "isCorrect": true,
+          "rationale": "A Type I error occurs when we reject a true null hypothesis."
+        },
+        {
+          "id": "d",
+          "text": "Failing to reject a false null hypothesis",
+          "isCorrect": false,
+          "rationale": "Failing to reject a false null hypothesis is also a Type II error."
+        }
+      ],
+      "conceptId": "notation-conventions",
+      "difficulty": "hard",
+      "type": "mc"
+    }
+  ],
+  "sa": [
+    {
+      "id": "d1-notation-sa-1",
+      "prompt": "Let X₁, …, Xₙ be a random sample from a Uniform(0, θ) distribution. (a) State the maximum likelihood estimator (MLE) for θ. (b) Discuss whether this estimator is biased or unbiased.",
+      "modelAnswer": "(a) The maximum likelihood estimator for θ is θ̂ = X₍ₙ₎, where X₍ₙ₎ is the maximum of the sample. (b) This estimator is biased because E[θ̂] = (n/(n+1))θ, which is less than θ for finite n.",
+      "rubric": "Correctly states the MLE and discusses its bias.",
+      "conceptId": "notation-conventions",
+      "difficulty": "medium",
+      "type": "sa"
+    },
+    {
+      "id": "d1-notation-sa-2",
+      "prompt": "Let X₁, …, Xₙ be a random sample from a Normal(μ, σ²) distribution. (a) State the method of moments estimator for μ. (b) Compute the method of moments estimator for σ² using the sample variance formula.",
+      "modelAnswer": "(a) The method of moments estimator for μ is μ̂ = X̄, where X̄ is the sample mean. (b) The method of moments estimator for σ² is σ̂² = (1/n)Σ(Xᵢ - X̄)², which is the sample variance formula, and is biased for σ².",
+      "rubric": "Correctly states the MOM estimator for μ and computes the estimator for σ².",
+      "conceptId": "notation-conventions",
+      "difficulty": "easy",
+      "type": "sa"
+    }
+  ]
+}

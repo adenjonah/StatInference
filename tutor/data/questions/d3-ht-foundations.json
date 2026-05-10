@@ -1,0 +1,191 @@
+{
+  "stageId": "d3-ht-foundations",
+  "generatedAt": "2026-05-10T20:21:08.193Z",
+  "mc": [
+    {
+      "id": "d3-ht-foundations-mc-1",
+      "prompt": "What is the definition of a Type I error in hypothesis testing?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Failing to reject the null hypothesis when it is true.",
+          "isCorrect": false,
+          "rationale": "This describes a Type II error."
+        },
+        {
+          "id": "b",
+          "text": "Rejecting the null hypothesis when it is true.",
+          "isCorrect": true,
+          "rationale": "This is the correct definition of a Type I error."
+        },
+        {
+          "id": "c",
+          "text": "Failing to reject the null hypothesis when it is false.",
+          "isCorrect": false,
+          "rationale": "This describes a Type II error."
+        },
+        {
+          "id": "d",
+          "text": "Rejecting the null hypothesis when it is false.",
+          "isCorrect": false,
+          "rationale": "This is a correct decision."
+        }
+      ],
+      "conceptId": "ht-foundations",
+      "difficulty": "easy",
+      "type": "mc"
+    },
+    {
+      "id": "d3-ht-foundations-mc-2",
+      "prompt": "In a one-sided hypothesis test, what is the null hypothesis if we are testing if the mean is greater than a certain value?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "H₀: μ ≥ μ₀",
+          "isCorrect": false,
+          "rationale": "This is incorrect; it should be less than or equal."
+        },
+        {
+          "id": "b",
+          "text": "H₀: μ ≤ μ₀",
+          "isCorrect": true,
+          "rationale": "This is the correct formulation for testing if the mean is greater."
+        },
+        {
+          "id": "c",
+          "text": "H₀: μ = μ₀",
+          "isCorrect": false,
+          "rationale": "This is a simple hypothesis test, not one-sided."
+        },
+        {
+          "id": "d",
+          "text": "H₀: μ < μ₀",
+          "isCorrect": false,
+          "rationale": "This is the opposite of the correct null hypothesis."
+        }
+      ],
+      "conceptId": "ht-foundations",
+      "difficulty": "easy",
+      "type": "mc"
+    },
+    {
+      "id": "d3-ht-foundations-mc-3",
+      "prompt": "What does the p-value represent in hypothesis testing?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "The probability of making a Type I error.",
+          "isCorrect": false,
+          "rationale": "The p-value does not directly represent the probability of a Type I error."
+        },
+        {
+          "id": "b",
+          "text": "The smallest level of significance at which we can reject H₀.",
+          "isCorrect": true,
+          "rationale": "This is the correct interpretation of the p-value."
+        },
+        {
+          "id": "c",
+          "text": "The probability of observing the test statistic under H₀.",
+          "isCorrect": false,
+          "rationale": "This describes the likelihood, not the p-value."
+        },
+        {
+          "id": "d",
+          "text": "The power of the test.",
+          "isCorrect": false,
+          "rationale": "The power is the probability of correctly rejecting H₀."
+        }
+      ],
+      "conceptId": "ht-foundations",
+      "difficulty": "medium",
+      "type": "mc"
+    },
+    {
+      "id": "d3-ht-foundations-mc-4",
+      "prompt": "When conducting a two-sided hypothesis test, if the significance level is set at 0.05, what is the critical value for the rejection region in a standard normal distribution?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "1.96",
+          "isCorrect": true,
+          "rationale": "For a two-sided test at α = 0.05, the critical values are ±1.96."
+        },
+        {
+          "id": "b",
+          "text": "1.645",
+          "isCorrect": false,
+          "rationale": "This is the critical value for a one-sided test at α = 0.05."
+        },
+        {
+          "id": "c",
+          "text": "2.576",
+          "isCorrect": false,
+          "rationale": "This is the critical value for a two-sided test at α = 0.01."
+        },
+        {
+          "id": "d",
+          "text": "0.05",
+          "isCorrect": false,
+          "rationale": "This is the significance level, not a critical value."
+        }
+      ],
+      "conceptId": "ht-foundations",
+      "difficulty": "medium",
+      "type": "mc"
+    },
+    {
+      "id": "d3-ht-foundations-mc-5",
+      "prompt": "Which of the following statements is true regarding the Neyman-Pearson Lemma?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "It guarantees the existence of UMP tests for all types of hypotheses.",
+          "isCorrect": false,
+          "rationale": "UMP tests do not exist for all hypothesis types."
+        },
+        {
+          "id": "b",
+          "text": "It minimizes Type I error for a fixed Type II error rate.",
+          "isCorrect": false,
+          "rationale": "It minimizes Type II error given a fixed Type I error rate."
+        },
+        {
+          "id": "c",
+          "text": "It states that the likelihood ratio test is the most powerful test for simple hypotheses.",
+          "isCorrect": true,
+          "rationale": "This is the essence of the Neyman-Pearson Lemma."
+        },
+        {
+          "id": "d",
+          "text": "It applies only to composite null hypotheses.",
+          "isCorrect": false,
+          "rationale": "It applies to simple hypotheses."
+        }
+      ],
+      "conceptId": "ht-foundations",
+      "difficulty": "hard",
+      "type": "mc"
+    }
+  ],
+  "sa": [
+    {
+      "id": "d3-ht-foundations-sa-1",
+      "prompt": "Let X₁, …, Xₙ be a random sample from a normal distribution with unknown mean μ and known variance σ². (a) State the hypotheses for a two-sided test of the mean. (b) Describe how you would compute the p-value for your test.",
+      "modelAnswer": "(a) The null hypothesis is H₀: μ = μ₀ and the alternative hypothesis is H₁: μ ≠ μ₀. (b) To compute the p-value, I would calculate the test statistic using the formula \\( Z = \\frac{\\overline{X} - μ₀}{\\sigma/\\sqrt{n}} \\) and then find the p-value as \\( 2(1 - \\Phi(|Z|)) \\), where \\( \\Phi \\) is the cumulative distribution function of the standard normal distribution.",
+      "rubric": "Correctly states the hypotheses and describes the p-value computation method.",
+      "conceptId": "ht-foundations",
+      "difficulty": "medium",
+      "type": "sa"
+    },
+    {
+      "id": "d3-ht-foundations-sa-2",
+      "prompt": "Let X₁, …, Xₙ be a random sample from an exponential distribution with rate parameter θ. (a) State the hypotheses for testing if θ is greater than a certain value θ₀. (b) If you find a p-value of 0.03 for your test, what can you conclude at a significance level of 0.05?",
+      "modelAnswer": "(a) The null hypothesis is H₀: θ ≤ θ₀ and the alternative hypothesis is H₁: θ > θ₀. (b) Since the p-value (0.03) is less than the significance level (0.05), we reject the null hypothesis and conclude that there is sufficient evidence to support that θ is greater than θ₀.",
+      "rubric": "Correctly states the hypotheses and interprets the p-value in context of the significance level.",
+      "conceptId": "ht-foundations",
+      "difficulty": "medium",
+      "type": "sa"
+    }
+  ]
+}

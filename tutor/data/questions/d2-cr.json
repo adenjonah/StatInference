@@ -1,0 +1,191 @@
+{
+  "stageId": "d2-cr",
+  "generatedAt": "2026-05-10T20:20:53.342Z",
+  "mc": [
+    {
+      "id": "d2-cr-mc-1",
+      "prompt": "What is the Fisher information for a Poisson distribution with parameter θ?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "1/θ",
+          "isCorrect": true,
+          "rationale": "The Fisher information for a Poisson(θ) distribution is given by I(θ) = 1/θ."
+        },
+        {
+          "id": "b",
+          "text": "θ",
+          "isCorrect": false,
+          "rationale": "This is incorrect; the Fisher information does not equal the parameter itself."
+        },
+        {
+          "id": "c",
+          "text": "θ²",
+          "isCorrect": false,
+          "rationale": "This is incorrect; the Fisher information is not the square of the parameter."
+        },
+        {
+          "id": "d",
+          "text": "1/(θ(1-θ))",
+          "isCorrect": false,
+          "rationale": "This is the Fisher information for a Bernoulli distribution, not Poisson."
+        }
+      ],
+      "conceptId": "cr-fisher",
+      "difficulty": "easy",
+      "type": "mc"
+    },
+    {
+      "id": "d2-cr-mc-2",
+      "prompt": "Which of the following distributions does NOT satisfy the regularity condition A.1 for the Cramer-Rao bound?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Uniform(0, θ)",
+          "isCorrect": true,
+          "rationale": "The support of Uniform(0, θ) depends on θ, violating condition A.1."
+        },
+        {
+          "id": "b",
+          "text": "Normal(μ, σ²)",
+          "isCorrect": false,
+          "rationale": "Normal distributions satisfy the regularity conditions."
+        },
+        {
+          "id": "c",
+          "text": "Exponential(θ)",
+          "isCorrect": false,
+          "rationale": "Exponential distributions satisfy the regularity conditions."
+        },
+        {
+          "id": "d",
+          "text": "Bernoulli(p)",
+          "isCorrect": false,
+          "rationale": "Bernoulli distributions satisfy the regularity conditions."
+        }
+      ],
+      "conceptId": "cr-fisher",
+      "difficulty": "easy",
+      "type": "mc"
+    },
+    {
+      "id": "d2-cr-mc-3",
+      "prompt": "If an estimator achieves the Cramer-Rao Lower Bound, it is considered:",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Unbiased",
+          "isCorrect": false,
+          "rationale": "While it is true that it is unbiased, achieving the CRLB specifically indicates it is efficient."
+        },
+        {
+          "id": "b",
+          "text": "Efficient",
+          "isCorrect": true,
+          "rationale": "An estimator that achieves the CRLB is called efficient."
+        },
+        {
+          "id": "c",
+          "text": "Consistent",
+          "isCorrect": false,
+          "rationale": "Consistency is a different property and does not relate to CRLB."
+        },
+        {
+          "id": "d",
+          "text": "Minimum Variance Unbiased Estimator (MVUE)",
+          "isCorrect": false,
+          "rationale": "While it is MVUE, the term 'efficient' is more direct in this context."
+        }
+      ],
+      "conceptId": "cr-efficiency",
+      "difficulty": "medium",
+      "type": "mc"
+    },
+    {
+      "id": "d2-cr-mc-4",
+      "prompt": "Which of the following statements about the Cramer-Rao Inequality is FALSE?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "It provides a lower bound on the variance of unbiased estimators.",
+          "isCorrect": false,
+          "rationale": "This statement is true; it is the essence of the Cramer-Rao Inequality."
+        },
+        {
+          "id": "b",
+          "text": "It can be applied to biased estimators.",
+          "isCorrect": true,
+          "rationale": "The Cramer-Rao Inequality specifically applies to unbiased estimators only."
+        },
+        {
+          "id": "c",
+          "text": "It requires certain regularity conditions to hold.",
+          "isCorrect": false,
+          "rationale": "This statement is true; the CRLB relies on regularity conditions."
+        },
+        {
+          "id": "d",
+          "text": "An estimator achieving the CRLB is the best unbiased estimator.",
+          "isCorrect": false,
+          "rationale": "This statement is true; it defines the efficient estimator."
+        }
+      ],
+      "conceptId": "cr-fisher",
+      "difficulty": "medium",
+      "type": "mc"
+    },
+    {
+      "id": "d2-cr-mc-5",
+      "prompt": "For a given unbiased estimator T(X_n) of θ, what does it mean if Var(T(X_n)) = CRLB?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "T(X_n) is biased.",
+          "isCorrect": false,
+          "rationale": "If Var(T(X_n)) = CRLB, it indicates T(X_n) is unbiased."
+        },
+        {
+          "id": "b",
+          "text": "T(X_n) is not efficient.",
+          "isCorrect": false,
+          "rationale": "If it achieves CRLB, it is indeed efficient."
+        },
+        {
+          "id": "c",
+          "text": "T(X_n) is the MVUE of θ.",
+          "isCorrect": true,
+          "rationale": "An unbiased estimator that achieves the CRLB is the minimum variance unbiased estimator."
+        },
+        {
+          "id": "d",
+          "text": "T(X_n) has infinite variance.",
+          "isCorrect": false,
+          "rationale": "This is incorrect; achieving CRLB indicates a finite variance."
+        }
+      ],
+      "conceptId": "cr-efficiency",
+      "difficulty": "hard",
+      "type": "mc"
+    }
+  ],
+  "sa": [
+    {
+      "id": "d2-cr-sa-1",
+      "prompt": "Let X_1, …, X_n be a random sample from a Normal distribution N(μ, σ²) with known σ². (a) Derive the Fisher information I(μ) for this model. (b) State the Cramer-Rao Lower Bound for an unbiased estimator of μ.",
+      "modelAnswer": "(a) The Fisher information for N(μ, σ²) is I(μ) = 1/σ². (b) The Cramer-Rao Lower Bound for an unbiased estimator of μ is Var(T(X_n)) ≥ σ²/n.",
+      "rubric": "Correctly derived Fisher information and stated CRLB for μ.",
+      "conceptId": "cr-fisher",
+      "difficulty": "medium",
+      "type": "sa"
+    },
+    {
+      "id": "d2-cr-sa-2",
+      "prompt": "Let X_1, …, X_n be a random sample from an Exponential distribution with parameter θ. (a) Compute the Fisher information I(θ) for this distribution. (b) Verify that the Cramer-Rao Lower Bound holds for an unbiased estimator of θ.",
+      "modelAnswer": "(a) The Fisher information for an Exponential(θ) distribution is I(θ) = 1/θ². (b) The Cramer-Rao Lower Bound states Var(T(X_n)) ≥ θ²/n, which holds for any unbiased estimator of θ, confirming the bound.",
+      "rubric": "Correctly computed Fisher information and verified CRLB for θ.",
+      "conceptId": "cr-fisher",
+      "difficulty": "hard",
+      "type": "sa"
+    }
+  ]
+}

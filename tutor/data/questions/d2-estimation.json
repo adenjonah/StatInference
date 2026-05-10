@@ -1,0 +1,191 @@
+{
+  "stageId": "d2-estimation",
+  "generatedAt": "2026-05-10T20:19:38.348Z",
+  "mc": [
+    {
+      "id": "d2-estimation-mc-1",
+      "prompt": "Which of the following statements about Mean Squared Error (MSE) is true?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "MSE is defined as the average of the absolute differences between the estimator and the true parameter.",
+          "isCorrect": false,
+          "rationale": "This describes Mean Absolute Error (MAD), not MSE."
+        },
+        {
+          "id": "b",
+          "text": "MSE can be decomposed into variance and bias squared of the estimator.",
+          "isCorrect": true,
+          "rationale": "The bias-variance decomposition states that MSE = Var(T_n) + b(T_n, g(theta))^2."
+        },
+        {
+          "id": "c",
+          "text": "MSE is always minimized when the estimator is biased.",
+          "isCorrect": false,
+          "rationale": "Bias can increase MSE; minimizing MSE often involves balancing bias and variance."
+        },
+        {
+          "id": "d",
+          "text": "MSE is independent of the distribution of the estimator.",
+          "isCorrect": false,
+          "rationale": "MSE is affected by the distribution, as it depends on variance and bias."
+        }
+      ],
+      "conceptId": "estimation-principles",
+      "difficulty": "easy",
+      "type": "mc"
+    },
+    {
+      "id": "d2-estimation-mc-2",
+      "prompt": "An estimator is said to be Minimum Variance Unbiased Estimator (MVUE) if it is:",
+      "choices": [
+        {
+          "id": "a",
+          "text": "unbiased and has the smallest variance among all estimators.",
+          "isCorrect": true,
+          "rationale": "An MVUE is defined as being unbiased and having the least variance among all unbiased estimators."
+        },
+        {
+          "id": "b",
+          "text": "biased but has the smallest bias among all estimators.",
+          "isCorrect": false,
+          "rationale": "MVUE must be unbiased, not biased."
+        },
+        {
+          "id": "c",
+          "text": "unbiased and has the largest variance among all estimators.",
+          "isCorrect": false,
+          "rationale": "MVUE has the smallest variance, not the largest."
+        },
+        {
+          "id": "d",
+          "text": "biased and has the smallest MSE among all estimators.",
+          "isCorrect": false,
+          "rationale": "MVUE must be unbiased, not biased."
+        }
+      ],
+      "conceptId": "estimation-principles",
+      "difficulty": "easy",
+      "type": "mc"
+    },
+    {
+      "id": "d2-estimation-mc-3",
+      "prompt": "In the context of the bias-variance tradeoff, which of the following is true?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Increasing bias always decreases variance.",
+          "isCorrect": false,
+          "rationale": "Bias and variance can be inversely related, but increasing bias does not guarantee a decrease in variance."
+        },
+        {
+          "id": "b",
+          "text": "An estimator with zero bias has the minimum MSE.",
+          "isCorrect": false,
+          "rationale": "An estimator can have zero bias but still have high variance, resulting in a high MSE."
+        },
+        {
+          "id": "c",
+          "text": "The goal is to minimize both bias and variance simultaneously.",
+          "isCorrect": false,
+          "rationale": "Minimizing both simultaneously is often impossible; it’s a tradeoff."
+        },
+        {
+          "id": "d",
+          "text": "Reducing variance can increase bias, and vice versa.",
+          "isCorrect": true,
+          "rationale": "The bias-variance tradeoff indicates that reducing one often increases the other."
+        }
+      ],
+      "conceptId": "estimation-principles",
+      "difficulty": "medium",
+      "type": "mc"
+    },
+    {
+      "id": "d2-estimation-mc-4",
+      "prompt": "Which of the following statements about admissibility is true?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "An estimator is admissible if it has the smallest bias.",
+          "isCorrect": false,
+          "rationale": "Admissibility is based on MSE, not just bias."
+        },
+        {
+          "id": "b",
+          "text": "An estimator can be inadmissible even if it is unbiased.",
+          "isCorrect": true,
+          "rationale": "An unbiased estimator can be dominated by another estimator with a smaller MSE."
+        },
+        {
+          "id": "c",
+          "text": "All estimators are admissible if they are unbiased.",
+          "isCorrect": false,
+          "rationale": "Not all unbiased estimators are admissible; they can be dominated by others."
+        },
+        {
+          "id": "d",
+          "text": "Inadmissibility implies that an estimator has a higher variance than all other estimators.",
+          "isCorrect": false,
+          "rationale": "Inadmissibility is related to MSE, not just variance."
+        }
+      ],
+      "conceptId": "estimation-principles",
+      "difficulty": "medium",
+      "type": "mc"
+    },
+    {
+      "id": "d2-estimation-mc-5",
+      "prompt": "In a scenario where X ~ Uniform(0, θ), which of the following is a property of the estimator X_(n) (the maximum)?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "X_(n) is an unbiased estimator of θ.",
+          "isCorrect": false,
+          "rationale": "X_(n) underestimates θ, hence it is biased."
+        },
+        {
+          "id": "b",
+          "text": "X_(n) has a lower MSE than 2*X_bar_n.",
+          "isCorrect": true,
+          "rationale": "X_(n) has a smaller MSE than 2*X_bar_n for estimating θ."
+        },
+        {
+          "id": "c",
+          "text": "X_(n) is always the MVUE of θ.",
+          "isCorrect": false,
+          "rationale": "X_(n) is biased and not the MVUE."
+        },
+        {
+          "id": "d",
+          "text": "X_(n) has the same MSE for all values of θ.",
+          "isCorrect": false,
+          "rationale": "MSE of X_(n) depends on θ."
+        }
+      ],
+      "conceptId": "estimation-principles",
+      "difficulty": "hard",
+      "type": "mc"
+    }
+  ],
+  "sa": [
+    {
+      "id": "d2-estimation-sa-1",
+      "prompt": "Let X_1, ..., X_n be a random sample from a Normal distribution with mean $\theta$ and variance $\tau^2$. (a) State the unbiased estimator of $\theta$ based on this sample. (b) Compute the Mean Squared Error (MSE) of this estimator.",
+      "modelAnswer": "(a) The unbiased estimator of $\theta$ is the sample mean $\bar{X} = \frac{1}{n} \textstyle\bigsum_{i=1}^{n} X_i$. (b) The MSE of this estimator is given by $MSE(\bar{X}, \theta) = Var(\bar{X}) = \frac{\tau^2}{n}$, since it is unbiased.",
+      "rubric": "Correctly identified the unbiased estimator and computed its MSE.",
+      "conceptId": "estimation-principles",
+      "difficulty": "easy",
+      "type": "sa"
+    },
+    {
+      "id": "d2-estimation-sa-2",
+      "prompt": "Let X_1, ..., X_n be a random sample from a Uniform distribution on the interval [0, θ]. (a) State the bias of the estimator $X_{(n)}$ (the maximum). (b) Calculate the MSE of $X_{(n)}$ as an estimator of θ.",
+      "modelAnswer": "(a) The bias of $X_{(n)}$ is $E[X_{(n)}] - \theta = -\frac{\theta}{n+1}$. (b) The MSE of $X_{(n)}$ is $MSE(X_{(n)}, \theta) = Var(X_{(n)}) + \text{Bias}^2 = \frac{\theta^2}{n(n+2)} + \bigg(-\frac{\theta}{n+1}\bigg)^2 = \frac{\theta^2}{n(n+2)} + \frac{\theta^2}{(n+1)^2}$.",
+      "rubric": "Correctly stated the bias and calculated the MSE of the estimator.",
+      "conceptId": "estimation-principles",
+      "difficulty": "medium",
+      "type": "sa"
+    }
+  ]
+}

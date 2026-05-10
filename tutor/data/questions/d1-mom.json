@@ -1,0 +1,191 @@
+{
+  "stageId": "d1-mom",
+  "generatedAt": "2026-05-10T20:18:54.314Z",
+  "mc": [
+    {
+      "id": "d1-mom-mc-1",
+      "prompt": "What is the primary advantage of using the Method of Moments (MOM) for parameter estimation?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "It provides unique estimates for all parameters.",
+          "isCorrect": false,
+          "rationale": "MOM estimates can be non-unique, as different moments may yield different estimates."
+        },
+        {
+          "id": "b",
+          "text": "It is easy to compute and implement.",
+          "isCorrect": true,
+          "rationale": "MOM procedures are generally straightforward, making them valuable for preliminary estimates."
+        },
+        {
+          "id": "c",
+          "text": "It guarantees unbiased estimators for all distributions.",
+          "isCorrect": false,
+          "rationale": "MOM does not guarantee unbiased estimates for all parameters."
+        },
+        {
+          "id": "d",
+          "text": "It always converges faster than maximum likelihood estimators.",
+          "isCorrect": false,
+          "rationale": "Convergence rates depend on the method and context, and MOM may not always be faster."
+        }
+      ],
+      "conceptId": "mom",
+      "difficulty": "easy",
+      "type": "mc"
+    },
+    {
+      "id": "d1-mom-mc-2",
+      "prompt": "In the context of the MOM for a Poisson distribution, which of the following is a correct MOM estimator for the parameter $\u0003bb$?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$\u0003bb = X_{bar}$ from the first moment.",
+          "isCorrect": true,
+          "rationale": "The first moment for Poisson is the expected value, which is $\u0003bb$."
+        },
+        {
+          "id": "b",
+          "text": "$\u0003bb = X_{bar}^2$ from the second moment.",
+          "isCorrect": false,
+          "rationale": "The second moment does not directly yield a valid estimator for $\u0003bb$."
+        },
+        {
+          "id": "c",
+          "text": "$\u0003bb = 2X_{bar}$ from the first moment.",
+          "isCorrect": false,
+          "rationale": "This is incorrect; the first moment gives $\u0003bb = X_{bar}$."
+        },
+        {
+          "id": "d",
+          "text": "$\u0003bb = 1/X_{bar}$ from the first moment.",
+          "isCorrect": false,
+          "rationale": "This is incorrect; the first moment gives $\u0003bb = X_{bar}$, not its reciprocal."
+        }
+      ],
+      "conceptId": "mom",
+      "difficulty": "easy",
+      "type": "mc"
+    },
+    {
+      "id": "d1-mom-mc-3",
+      "prompt": "Which of the following statements about the Method of Moments is true?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "MOM estimators are always unbiased.",
+          "isCorrect": false,
+          "rationale": "MOM estimators can be biased depending on the distribution and moments used."
+        },
+        {
+          "id": "b",
+          "text": "MOM can be applied even when moments do not exist.",
+          "isCorrect": false,
+          "rationale": "MOM requires the existence of at least k finite moments."
+        },
+        {
+          "id": "c",
+          "text": "MOM provides a unique estimate for parameters in all cases.",
+          "isCorrect": false,
+          "rationale": "MOM estimates can be non-unique depending on the moments used."
+        },
+        {
+          "id": "d",
+          "text": "MOM estimators are consistent under mild assumptions.",
+          "isCorrect": true,
+          "rationale": "MOM estimators are consistent as sample moments converge to population moments."
+        }
+      ],
+      "conceptId": "mom",
+      "difficulty": "medium",
+      "type": "mc"
+    },
+    {
+      "id": "d1-mom-mc-4",
+      "prompt": "When estimating parameters using the Method of Moments, what is a common disadvantage?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "It requires large sample sizes to be effective.",
+          "isCorrect": false,
+          "rationale": "While large samples improve estimates, MOM can be applied to smaller samples."
+        },
+        {
+          "id": "b",
+          "text": "It does not provide a unique estimate for parameters.",
+          "isCorrect": true,
+          "rationale": "Different moments can yield different estimates, leading to non-uniqueness."
+        },
+        {
+          "id": "c",
+          "text": "It is computationally intensive.",
+          "isCorrect": false,
+          "rationale": "MOM is generally easy to compute, which is an advantage."
+        },
+        {
+          "id": "d",
+          "text": "It cannot be used for distributions with unknown parameters.",
+          "isCorrect": false,
+          "rationale": "MOM can be used for distributions with unknown parameters as long as moments exist."
+        }
+      ],
+      "conceptId": "mom",
+      "difficulty": "medium",
+      "type": "mc"
+    },
+    {
+      "id": "d1-mom-mc-5",
+      "prompt": "In estimating the parameter $\u0003bb$ of an Exponential distribution using MOM, which of the following is correct?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$\u0003bb = 1/X_{bar}$ from the first moment.",
+          "isCorrect": true,
+          "rationale": "The first moment gives $\u0003bb = 1/E[X] = 1/X_{bar}$."
+        },
+        {
+          "id": "b",
+          "text": "$\u0003bb = X_{bar}$ from the second moment.",
+          "isCorrect": false,
+          "rationale": "The second moment does not directly yield a valid estimator for $\u0003bb$."
+        },
+        {
+          "id": "c",
+          "text": "$\u0003bb = 1/(2X_{bar})$ from the first moment.",
+          "isCorrect": false,
+          "rationale": "This is incorrect; the first moment gives $\u0003bb = 1/X_{bar}$."
+        },
+        {
+          "id": "d",
+          "text": "$\u0003bb = 2/X_{bar}$ from the second moment.",
+          "isCorrect": false,
+          "rationale": "This is not correct; the second moment does not yield $\u0003bb$."
+        }
+      ],
+      "conceptId": "mom",
+      "difficulty": "hard",
+      "type": "mc"
+    }
+  ],
+  "sa": [
+    {
+      "id": "d1-mom-sa-1",
+      "prompt": "Let $X_1, \\, X_2, \\, \text{...}, \\, X_n$ be a random sample from a Normal distribution $N(\\mu, \\sigma^2)$. (a) State the MOM estimators for $\\mu$ and $\\sigma^2$. (b) Verify the consistency of these estimators.",
+      "modelAnswer": "(a) The MOM estimator for $\\mu$ is $\\hat{\\mu}_{MOM} = \\bar{X}$, and for $\\sigma^2$ is $\\hat{\\sigma}^2_{MOM} = \\frac{1}{n} \\sum_{i=1}^{n} X_i^2 - \\bar{X}^2$.\n(b) As $n \\to \\infty$, $\\bar{X} \\to \\mu$ and $\\hat{\\sigma}^2_{MOM} \\to \\sigma^2$, thus both estimators are consistent by the Law of Large Numbers.",
+      "rubric": "Correctly states MOM estimators and verifies consistency using LLN.",
+      "conceptId": "mom",
+      "difficulty": "medium",
+      "type": "sa"
+    },
+    {
+      "id": "d1-mom-sa-2",
+      "prompt": "Let $X_1, \\, X_2, \\, \\ldots, \\, X_n$ be a random sample from a Poisson distribution with parameter $\\lambda$. (a) State the MOM estimator for $\\lambda$. (b) Discuss the potential non-uniqueness of this estimator.",
+      "modelAnswer": "(a) The MOM estimator for $\\lambda$ is $\\hat{\\lambda}_{MOM} = \\bar{X}$.\n(b) Although $\\hat{\\lambda}_{MOM} = \\bar{X}$ is a valid estimator, the non-uniqueness arises because the second moment could also provide a different estimator, $\\hat{\\lambda}_{MOM} = \\frac{\\bar{X}^2 + \\bar{X}}{2}$, which may not equal $\\bar{X}$.",
+      "rubric": "Correctly states MOM estimator and discusses non-uniqueness.",
+      "conceptId": "mom",
+      "difficulty": "hard",
+      "type": "sa"
+    }
+  ]
+}

@@ -1,0 +1,191 @@
+{
+  "stageId": "d1-delta",
+  "generatedAt": "2026-05-10T20:18:37.558Z",
+  "mc": [
+    {
+      "id": "d1-delta-mc-1",
+      "prompt": "If $Z_n$ converges in distribution to $\\theta$, and $g(Z_n)$ is continuous with $g'(\\theta) \\neq 0$, which of the following statements about the Delta Method is true?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$a_n (g(Z_n) - g(\\theta)) -d-> g'(\\theta)Z$",
+          "isCorrect": false,
+          "rationale": "This statement incorrectly suggests that the asymptotic distribution is simply $g'(\\theta)Z$."
+        },
+        {
+          "id": "b",
+          "text": "$a_n (g(Z_n) - g(\\theta)) / g'(\\theta) -d-> F^*$",
+          "isCorrect": true,
+          "rationale": "This is the correct application of the Delta Method as stated in the theorem."
+        },
+        {
+          "id": "c",
+          "text": "$a_n (g(Z_n) - g(\\theta)) \\sim N(0, \\sigma^2)$",
+          "isCorrect": false,
+          "rationale": "This statement misrepresents the asymptotic distribution as normal without considering the scaling by $g'(\\theta)$."
+        },
+        {
+          "id": "d",
+          "text": "$a_n (g(Z_n) - g(\\theta)) \\to 0$",
+          "isCorrect": false,
+          "rationale": "This suggests convergence to zero rather than a specific distribution."
+        }
+      ],
+      "conceptId": "delta-method",
+      "difficulty": "easy",
+      "type": "mc"
+    },
+    {
+      "id": "d1-delta-mc-2",
+      "prompt": "Consider the function $g(x) = x^2$. If $Z_n$ converges in distribution to $\\mu$, what happens when applying the Delta Method?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "The method applies normally since $g'(\\mu) \\neq 0$",
+          "isCorrect": false,
+          "rationale": "This is incorrect if $\\mu = 0$, where $g'(0) = 0$."
+        },
+        {
+          "id": "b",
+          "text": "The Delta Method fails because $g'(\\mu) = 0$",
+          "isCorrect": true,
+          "rationale": "This correctly identifies that the method fails when the derivative is zero."
+        },
+        {
+          "id": "c",
+          "text": "The asymptotic distribution is $N(0, 4\\mu^2)$",
+          "isCorrect": false,
+          "rationale": "This is incorrect as it assumes the method can be applied despite the derivative being zero."
+        },
+        {
+          "id": "d",
+          "text": "The asymptotic distribution is $N(0, 2\\mu)$",
+          "isCorrect": false,
+          "rationale": "This is incorrect due to the misunderstanding of the application of the Delta Method."
+        }
+      ],
+      "conceptId": "delta-method",
+      "difficulty": "medium",
+      "type": "mc"
+    },
+    {
+      "id": "d1-delta-mc-3",
+      "prompt": "If $g(Z_n) = e^{Z_n}$ and $Z_n$ converges in distribution to $\\theta$, what is the asymptotic distribution of $g(Z_n)$ using the Delta Method?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$N(0, e^{2\\theta})$",
+          "isCorrect": false,
+          "rationale": "This confuses the variance with the asymptotic mean."
+        },
+        {
+          "id": "b",
+          "text": "$N(e^{\\theta}, e^{\\theta})$",
+          "isCorrect": false,
+          "rationale": "This incorrectly assumes the variance is the same as the mean."
+        },
+        {
+          "id": "c",
+          "text": "$N(e^{\\theta}, e^{\\theta}^2)$",
+          "isCorrect": true,
+          "rationale": "This correctly applies the Delta Method where the variance is scaled by the square of the derivative."
+        },
+        {
+          "id": "d",
+          "text": "$N(\\theta, \\theta^2)$",
+          "isCorrect": false,
+          "rationale": "This misidentifies the function and its transformation."
+        }
+      ],
+      "conceptId": "delta-method",
+      "difficulty": "hard",
+      "type": "mc"
+    },
+    {
+      "id": "d1-delta-mc-4",
+      "prompt": "When applying the Delta Method, which of the following conditions is necessary for the function $g$?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$g$ must be a polynomial function",
+          "isCorrect": false,
+          "rationale": "This is not a requirement; $g$ can be any continuous function."
+        },
+        {
+          "id": "b",
+          "text": "$g'(\\theta)$ must exist and be non-zero",
+          "isCorrect": true,
+          "rationale": "This is a key requirement for the Delta Method to apply."
+        },
+        {
+          "id": "c",
+          "text": "$g$ must be differentiable everywhere",
+          "isCorrect": false,
+          "rationale": "$g$ only needs to be differentiable at $\\theta$."
+        },
+        {
+          "id": "d",
+          "text": "$g$ must be continuous but not necessarily differentiable",
+          "isCorrect": false,
+          "rationale": "While continuity is required, differentiability at $\\theta$ is also necessary."
+        }
+      ],
+      "conceptId": "delta-method",
+      "difficulty": "medium",
+      "type": "mc"
+    },
+    {
+      "id": "d1-delta-mc-5",
+      "prompt": "In the context of the Delta Method, if $Z_n$ is the sample mean and converges to $\\mu$, what is the transformation $g(Z_n) = \\ln(Z_n)$'s asymptotic distribution?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$N(0, \\mu)$",
+          "isCorrect": false,
+          "rationale": "This incorrectly assumes the mean is zero."
+        },
+        {
+          "id": "b",
+          "text": "$N(\\ln(\\mu), \\frac{1}{\\mu^2})$",
+          "isCorrect": true,
+          "rationale": "This correctly applies the Delta Method with the variance scaled by the derivative."
+        },
+        {
+          "id": "c",
+          "text": "$N(\\mu, \\mu^2)$",
+          "isCorrect": false,
+          "rationale": "This misrepresents the transformation and its variance."
+        },
+        {
+          "id": "d",
+          "text": "$N(\\mu, \\frac{1}{\\mu})$",
+          "isCorrect": false,
+          "rationale": "This incorrectly identifies the variance of the transformation."
+        }
+      ],
+      "conceptId": "delta-method",
+      "difficulty": "hard",
+      "type": "mc"
+    }
+  ],
+  "sa": [
+    {
+      "id": "d1-delta-sa-1",
+      "prompt": "Let $Z_1, Z_2, \\ldots, Z_n$ be a random sample from a normal distribution $N(\\mu, \\sigma^2)$. (a) State the asymptotic distribution of $\\sqrt{n}(Z_n - \\mu)$. (b) Apply the Delta Method to find the asymptotic distribution of $g(Z_n) = Z_n^2$.",
+      "modelAnswer": "(a) By the Central Limit Theorem, $\\sqrt{n}(Z_n - \\mu) \\xrightarrow{d} N(0, \\sigma^2).\\n(b) Since $g'(\\mu) = 2\\mu$, we have $\\sqrt{n}(g(Z_n) - g(\\mu)) \\xrightarrow{d} N(0, 4\\mu^2\\sigma^2)$ using the Delta Method.",
+      "rubric": "Correctly identifies the asymptotic distribution and applies the Delta Method appropriately.",
+      "conceptId": "delta-method",
+      "difficulty": "medium",
+      "type": "sa"
+    },
+    {
+      "id": "d1-delta-sa-2",
+      "prompt": "Let $X_1, X_2, \\ldots, X_n$ be a random sample from an Exponential distribution with parameter $\\theta$. (a) What is the asymptotic distribution of $\\sqrt{n}(\\bar{X} - \\frac{1}{\\theta})$? (b) Use the Delta Method to find the asymptotic distribution of $g(X) = \\frac{1}{X}$.",
+      "modelAnswer": "(a) By the Central Limit Theorem, $\\sqrt{n}(\\bar{X} - \\frac{1}{\\theta}) \\xrightarrow{d} N(0, \\frac{1}{\\theta^2}).\\n(b) The derivative $g'(\\theta^{-1}) = -\\theta^2$, thus $\\sqrt{n}(g(\\bar{X}) - g(\\frac{1}{\\theta})) \\xrightarrow{d} N(0, \\theta^4)$.",
+      "rubric": "Correctly identifies the asymptotic distribution and applies the Delta Method appropriately.",
+      "conceptId": "delta-method",
+      "difficulty": "hard",
+      "type": "sa"
+    }
+  ]
+}

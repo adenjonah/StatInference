@@ -1,0 +1,191 @@
+{
+  "stageId": "d1-convergence",
+  "generatedAt": "2026-05-10T20:18:02.683Z",
+  "mc": [
+    {
+      "id": "d1-convergence-mc-1",
+      "prompt": "Which of the following statements is true regarding the Weak Law of Large Numbers (WLLN)?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "The sample mean converges to the population mean almost surely.",
+          "isCorrect": false,
+          "rationale": "This describes the Strong Law of Large Numbers, not the Weak Law."
+        },
+        {
+          "id": "b",
+          "text": "The sample mean converges in probability to the population mean as n approaches infinity.",
+          "isCorrect": true,
+          "rationale": "This is the definition of the Weak Law of Large Numbers."
+        },
+        {
+          "id": "c",
+          "text": "The sample mean converges in distribution to the population mean.",
+          "isCorrect": false,
+          "rationale": "Convergence in distribution is weaker than convergence in probability."
+        },
+        {
+          "id": "d",
+          "text": "The variance of the sample mean approaches zero as n approaches infinity.",
+          "isCorrect": false,
+          "rationale": "While the variance decreases, it does not imply convergence in probability."
+        }
+      ],
+      "conceptId": "convergence-clt",
+      "difficulty": "easy",
+      "type": "mc"
+    },
+    {
+      "id": "d1-convergence-mc-2",
+      "prompt": "In the context of the Central Limit Theorem (CLT), what is the correct form of convergence?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "The sample mean converges to the population mean.",
+          "isCorrect": false,
+          "rationale": "This is a property of the Law of Large Numbers, not the CLT."
+        },
+        {
+          "id": "b",
+          "text": "The standardized sample mean converges in distribution to a normal distribution.",
+          "isCorrect": true,
+          "rationale": "This is the essence of the Central Limit Theorem."
+        },
+        {
+          "id": "c",
+          "text": "The variance of the sample mean approaches infinity as n increases.",
+          "isCorrect": false,
+          "rationale": "The variance of the sample mean actually approaches zero as n increases."
+        },
+        {
+          "id": "d",
+          "text": "The sample mean converges in probability to a uniform distribution.",
+          "isCorrect": false,
+          "rationale": "The CLT states convergence to a normal distribution, not uniform."
+        }
+      ],
+      "conceptId": "convergence-clt",
+      "difficulty": "easy",
+      "type": "mc"
+    },
+    {
+      "id": "d1-convergence-mc-3",
+      "prompt": "What condition is NOT required for the Central Limit Theorem to hold?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "The random variables must be independent.",
+          "isCorrect": false,
+          "rationale": "Independence is a requirement for the CLT."
+        },
+        {
+          "id": "b",
+          "text": "The random variables must be identically distributed.",
+          "isCorrect": false,
+          "rationale": "Identical distribution is a requirement for the CLT."
+        },
+        {
+          "id": "c",
+          "text": "The random variables must have a finite variance.",
+          "isCorrect": false,
+          "rationale": "Finite variance is required for the CLT."
+        },
+        {
+          "id": "d",
+          "text": "The random variables must have a mean of zero.",
+          "isCorrect": true,
+          "rationale": "The mean can be any value; the CLT does not require a mean of zero."
+        }
+      ],
+      "conceptId": "convergence-clt",
+      "difficulty": "medium",
+      "type": "mc"
+    },
+    {
+      "id": "d1-convergence-mc-4",
+      "prompt": "If a sequence of random variables converges in distribution to a normal distribution, what can we say about their sample means?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "The sample means converge in probability to the population mean.",
+          "isCorrect": false,
+          "rationale": "Convergence in distribution does not imply convergence in probability."
+        },
+        {
+          "id": "b",
+          "text": "The sample means converge to a uniform distribution.",
+          "isCorrect": false,
+          "rationale": "The sample means do not converge to a uniform distribution."
+        },
+        {
+          "id": "c",
+          "text": "The sample means may not converge at all.",
+          "isCorrect": true,
+          "rationale": "Convergence in distribution does not guarantee convergence of the sample means."
+        },
+        {
+          "id": "d",
+          "text": "The sample means converge in distribution to the same normal distribution.",
+          "isCorrect": false,
+          "rationale": "Convergence in distribution does not imply the same distribution for sample means."
+        }
+      ],
+      "conceptId": "convergence-clt",
+      "difficulty": "medium",
+      "type": "mc"
+    },
+    {
+      "id": "d1-convergence-mc-5",
+      "prompt": "What does the Continuous Mapping Theorem state regarding convergence?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "If Z_n converges in probability to b, then g(Z_n) converges in probability to g(b).",
+          "isCorrect": true,
+          "rationale": "This is the definition of the Continuous Mapping Theorem."
+        },
+        {
+          "id": "b",
+          "text": "If Z_n converges in distribution to Z, then g(Z_n) converges in distribution to g(Z).",
+          "isCorrect": false,
+          "rationale": "This is true, but does not encompass the full statement of the theorem."
+        },
+        {
+          "id": "c",
+          "text": "If Z_n converges almost surely to b, then g(Z_n) converges almost surely to g(b).",
+          "isCorrect": false,
+          "rationale": "This is a stronger form of convergence not covered by the Continuous Mapping Theorem."
+        },
+        {
+          "id": "d",
+          "text": "If Z_n converges in probability to Z, then Z_n converges in distribution to Z.",
+          "isCorrect": false,
+          "rationale": "This is a property of convergence types, not a statement of the Continuous Mapping Theorem."
+        }
+      ],
+      "conceptId": "convergence-clt",
+      "difficulty": "hard",
+      "type": "mc"
+    }
+  ],
+  "sa": [
+    {
+      "id": "d1-convergence-sa-1",
+      "prompt": "Let X_1, X_2, ..., X_n be a random sample from a Normal distribution with mean $\theta$ and variance $\tau^2$. (a) State the Central Limit Theorem for this sample mean. (b) What is the limiting distribution of the sample mean as $n$ approaches infinity?",
+      "modelAnswer": "(a) The Central Limit Theorem states that for i.i.d. random variables with mean $\theta$ and variance $\tau^2$, the standardized sample mean converges in distribution to a normal distribution: $$\\sqrt{n} \\left( \\bar{X}_n - \\theta \\right) \\xrightarrow{d} N(0, \\tau^2).$$ (b) As $n$ approaches infinity, the sample mean $\bar{X}_n$ converges in distribution to $N(\\theta, \\frac{\\tau^2}{n})$.",
+      "rubric": "Correctly states the CLT and identifies the limiting distribution.",
+      "conceptId": "convergence-clt",
+      "difficulty": "medium",
+      "type": "sa"
+    },
+    {
+      "id": "d1-convergence-sa-2",
+      "prompt": "Let Y_1, Y_2, ..., Y_n be a random sample from an exponential distribution with rate parameter $\theta$. (a) State the Weak Law of Large Numbers (WLLN) for this sample. (b) Calculate the probability that the sample mean is within 0.1 of the expected value for large n.",
+      "modelAnswer": "(a) The Weak Law of Large Numbers states that the sample mean $\bar{Y}_n$ converges in probability to the expected value $E[Y] = \\frac{1}{\\theta}$ as $n \\to \\infty$: $$P(|\\bar{Y}_n - \\frac{1}{\\theta}| > \\epsilon) \\to 0 \\text{ for any } \\epsilon > 0.$$ (b) For large n, using Chebyshev's inequality, the probability that the sample mean is within 0.1 of the expected value is approximately given by: $$P(|\\bar{Y}_n - \\frac{1}{\\theta}| < 0.1) \\approx 1 - \\frac{Var(Y)}{n \\cdot (0.1)^2} = 1 - \\frac{1/\\theta^2}{n \\cdot 0.01} = 1 - \\frac{100}{n\\theta^2}.$$",
+      "rubric": "Correctly states the WLLN and calculates the probability using Chebyshev's inequality.",
+      "conceptId": "convergence-clt",
+      "difficulty": "medium",
+      "type": "sa"
+    }
+  ]
+}

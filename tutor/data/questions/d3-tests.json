@@ -1,0 +1,191 @@
+{
+  "stageId": "d3-tests",
+  "generatedAt": "2026-05-10T20:21:23.596Z",
+  "mc": [
+    {
+      "id": "d3-tests-mc-1",
+      "prompt": "What is the correct critical value for a two-sided t-test with a significance level of 0.05 and 10 degrees of freedom?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "2.228",
+          "isCorrect": true,
+          "rationale": "This is the correct critical value for a two-sided t-test with 10 degrees of freedom at the 0.05 significance level."
+        },
+        {
+          "id": "b",
+          "text": "1.812",
+          "isCorrect": false,
+          "rationale": "This value corresponds to a one-sided test, not a two-sided test."
+        },
+        {
+          "id": "c",
+          "text": "2.764",
+          "isCorrect": false,
+          "rationale": "This value is too high for a two-sided test with 10 degrees of freedom."
+        },
+        {
+          "id": "d",
+          "text": "3.169",
+          "isCorrect": false,
+          "rationale": "This value is for a much lower significance level or higher degrees of freedom."
+        }
+      ],
+      "conceptId": "two-sample",
+      "difficulty": "easy",
+      "type": "mc"
+    },
+    {
+      "id": "d3-tests-mc-2",
+      "prompt": "In a hypothesis test comparing two means, what is the main reason for using a t-test rather than a z-test?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "The sample size is large.",
+          "isCorrect": false,
+          "rationale": "A z-test is typically used for large sample sizes."
+        },
+        {
+          "id": "b",
+          "text": "The population variance is unknown.",
+          "isCorrect": true,
+          "rationale": "The t-test is used when the population variance is unknown and estimated from the sample."
+        },
+        {
+          "id": "c",
+          "text": "The test is one-sided.",
+          "isCorrect": false,
+          "rationale": "Both t-tests and z-tests can be one-sided or two-sided."
+        },
+        {
+          "id": "d",
+          "text": "The samples are dependent.",
+          "isCorrect": false,
+          "rationale": "The t-test can be used for independent or dependent samples, but the reason here is about variance."
+        }
+      ],
+      "conceptId": "two-sample",
+      "difficulty": "easy",
+      "type": "mc"
+    },
+    {
+      "id": "d3-tests-mc-3",
+      "prompt": "What is the power of a test?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "The probability of rejecting the null hypothesis when it is true.",
+          "isCorrect": false,
+          "rationale": "This describes a Type I error, not the power."
+        },
+        {
+          "id": "b",
+          "text": "The probability of failing to reject the null hypothesis when it is false.",
+          "isCorrect": false,
+          "rationale": "This describes a Type II error, not the power."
+        },
+        {
+          "id": "c",
+          "text": "The probability of rejecting the null hypothesis when it is false.",
+          "isCorrect": true,
+          "rationale": "This correctly defines the power of a test."
+        },
+        {
+          "id": "d",
+          "text": "The significance level of the test.",
+          "isCorrect": false,
+          "rationale": "The significance level is the probability of a Type I error, not the power."
+        }
+      ],
+      "conceptId": "ht-tests",
+      "difficulty": "medium",
+      "type": "mc"
+    },
+    {
+      "id": "d3-tests-mc-4",
+      "prompt": "When conducting a two-sample t-test, what assumption is made about the variances of the two populations?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "They are equal.",
+          "isCorrect": true,
+          "rationale": "The two-sample t-test assumes equal variances unless specified otherwise."
+        },
+        {
+          "id": "b",
+          "text": "They are unequal.",
+          "isCorrect": false,
+          "rationale": "This is not an assumption of the standard two-sample t-test."
+        },
+        {
+          "id": "c",
+          "text": "They are both zero.",
+          "isCorrect": false,
+          "rationale": "This is not a valid assumption for any hypothesis test."
+        },
+        {
+          "id": "d",
+          "text": "They are independent.",
+          "isCorrect": false,
+          "rationale": "While the samples must be independent, this is not about the variances."
+        }
+      ],
+      "conceptId": "two-sample",
+      "difficulty": "medium",
+      "type": "mc"
+    },
+    {
+      "id": "d3-tests-mc-5",
+      "prompt": "In hypothesis testing, what is a Type II error?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Rejecting the null hypothesis when it is true.",
+          "isCorrect": false,
+          "rationale": "This defines a Type I error."
+        },
+        {
+          "id": "b",
+          "text": "Failing to reject the null hypothesis when it is true.",
+          "isCorrect": false,
+          "rationale": "This is not a Type II error; it is the correct decision."
+        },
+        {
+          "id": "c",
+          "text": "Failing to reject the null hypothesis when it is false.",
+          "isCorrect": true,
+          "rationale": "This correctly defines a Type II error."
+        },
+        {
+          "id": "d",
+          "text": "Rejecting the null hypothesis when it is false.",
+          "isCorrect": false,
+          "rationale": "This is the correct decision, not an error."
+        }
+      ],
+      "conceptId": "ht-tests",
+      "difficulty": "hard",
+      "type": "mc"
+    }
+  ],
+  "sa": [
+    {
+      "id": "d3-tests-sa-1",
+      "prompt": "Let X₁, ..., Xₙ be a random sample from a normal distribution with unknown mean μ and known variance σ². (a) State the null and alternative hypotheses for testing if the mean is equal to a specific value μ₀. (b) Describe the test statistic used for this hypothesis test.",
+      "modelAnswer": "(a) The null hypothesis is H₀: μ = μ₀ and the alternative hypothesis is H₁: μ ≠ μ₀. (b) The test statistic is given by U_n = \\frac{\\overline{X}_n - μ₀}{s_n / \\sqrt{n}} where \\overline{X}_n is the sample mean and s_n is the sample standard deviation.",
+      "rubric": "Full credit for correct hypotheses and accurate description of the test statistic.",
+      "conceptId": "ht-tests",
+      "difficulty": "medium",
+      "type": "sa"
+    },
+    {
+      "id": "d3-tests-sa-2",
+      "prompt": "Let X₁, ..., Xₘ be a random sample from a normal distribution with unknown mean μ₁ and variance σ², and Y₁, ..., Yₙ be a random sample from another normal distribution with unknown mean μ₂ and the same variance σ². (a) State the null and alternative hypotheses for testing if the means are equal. (b) Compute the test statistic for this hypothesis test.",
+      "modelAnswer": "(a) The null hypothesis is H₀: μ₁ = μ₂ and the alternative hypothesis is H₁: μ₁ ≠ μ₂. (b) The test statistic is U_{m,n} = \\frac{\\sqrt{m+n-2}(\\overline{X}_m - \\overline{Y}_n)}{\\sqrt{(\\frac{1}{m} + \\frac{1}{n})(S_X^2 + S_Y^2)}} where \\overline{X}_m and \\overline{Y}_n are the sample means and S_X² and S_Y² are the sample variances.",
+      "rubric": "Full credit for correct hypotheses and accurate computation of the test statistic.",
+      "conceptId": "two-sample",
+      "difficulty": "hard",
+      "type": "sa"
+    }
+  ]
+}

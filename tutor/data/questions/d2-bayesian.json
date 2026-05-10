@@ -1,0 +1,191 @@
+{
+  "stageId": "d2-bayesian",
+  "generatedAt": "2026-05-10T20:20:08.760Z",
+  "mc": [
+    {
+      "id": "d2-bayesian-mc-1",
+      "prompt": "What does the prior distribution in Bayesian inference represent?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "The likelihood of the data given the parameter.",
+          "isCorrect": false,
+          "rationale": "The prior distribution represents beliefs about the parameter before observing data, not the likelihood."
+        },
+        {
+          "id": "b",
+          "text": "The distribution of the unknown parameter before observing data.",
+          "isCorrect": true,
+          "rationale": "The prior distribution encodes our beliefs about the parameter θ before any data is observed."
+        },
+        {
+          "id": "c",
+          "text": "The posterior distribution after observing data.",
+          "isCorrect": false,
+          "rationale": "The posterior distribution is derived after observing data, not before."
+        },
+        {
+          "id": "d",
+          "text": "The marginal distribution of the data.",
+          "isCorrect": false,
+          "rationale": "The marginal distribution is related to the overall distribution of data, not the prior beliefs about the parameter."
+        }
+      ],
+      "conceptId": "bayesian",
+      "difficulty": "easy",
+      "type": "mc"
+    },
+    {
+      "id": "d2-bayesian-mc-2",
+      "prompt": "In Bayesian inference, what is the Bayes estimator under squared error loss?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "The posterior median.",
+          "isCorrect": false,
+          "rationale": "The Bayes estimator under squared error loss is the posterior mean, not the median."
+        },
+        {
+          "id": "b",
+          "text": "The posterior mode.",
+          "isCorrect": false,
+          "rationale": "The Bayes estimator under squared error loss is the posterior mean, not the mode."
+        },
+        {
+          "id": "c",
+          "text": "The posterior mean.",
+          "isCorrect": true,
+          "rationale": "Under squared error loss, the Bayes estimator is the posterior mean, minimizing expected loss."
+        },
+        {
+          "id": "d",
+          "text": "The prior mean.",
+          "isCorrect": false,
+          "rationale": "The prior mean is not the estimator; the Bayes estimator is based on the posterior distribution."
+        }
+      ],
+      "conceptId": "bayesian",
+      "difficulty": "easy",
+      "type": "mc"
+    },
+    {
+      "id": "d2-bayesian-mc-3",
+      "prompt": "Which of the following pairs represents a likelihood and its conjugate prior?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Normal likelihood and Gamma prior.",
+          "isCorrect": false,
+          "rationale": "The normal likelihood with known variance has a normal prior, not a gamma prior."
+        },
+        {
+          "id": "b",
+          "text": "Poisson likelihood and Beta prior.",
+          "isCorrect": false,
+          "rationale": "The Poisson likelihood has a gamma prior, not a beta prior."
+        },
+        {
+          "id": "c",
+          "text": "Bernoulli likelihood and Normal prior.",
+          "isCorrect": false,
+          "rationale": "The Bernoulli likelihood has a beta prior, not a normal prior."
+        },
+        {
+          "id": "d",
+          "text": "Binomial likelihood and Beta prior.",
+          "isCorrect": true,
+          "rationale": "The Binomial likelihood is conjugate to the Beta prior, resulting in a Beta posterior."
+        }
+      ],
+      "conceptId": "bayesian",
+      "difficulty": "medium",
+      "type": "mc"
+    },
+    {
+      "id": "d2-bayesian-mc-4",
+      "prompt": "What happens to the influence of the prior as the sample size increases in Bayesian inference?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "The influence of the prior increases.",
+          "isCorrect": false,
+          "rationale": "As sample size increases, the influence of the prior diminishes, not increases."
+        },
+        {
+          "id": "b",
+          "text": "The posterior becomes independent of the prior.",
+          "isCorrect": false,
+          "rationale": "The posterior still incorporates the prior but becomes less influenced by it as more data is observed."
+        },
+        {
+          "id": "c",
+          "text": "The posterior concentrates around the prior mean.",
+          "isCorrect": false,
+          "rationale": "The posterior concentrates around the sample mean as n increases, not the prior mean."
+        },
+        {
+          "id": "d",
+          "text": "The influence of the prior diminishes.",
+          "isCorrect": true,
+          "rationale": "With larger sample sizes, the data increasingly dominates the posterior, reducing the prior's influence."
+        }
+      ],
+      "conceptId": "bayesian",
+      "difficulty": "medium",
+      "type": "mc"
+    },
+    {
+      "id": "d2-bayesian-mc-5",
+      "prompt": "When using Bayes' theorem, what does the denominator in the posterior distribution formula represent?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "The likelihood of the data given the parameter.",
+          "isCorrect": false,
+          "rationale": "The denominator is not just the likelihood; it normalizes the posterior across all parameters."
+        },
+        {
+          "id": "b",
+          "text": "The prior distribution of the parameter.",
+          "isCorrect": false,
+          "rationale": "The denominator is not the prior; it combines the prior and likelihood to normalize the posterior."
+        },
+        {
+          "id": "c",
+          "text": "The marginal distribution of the data.",
+          "isCorrect": true,
+          "rationale": "The denominator is the marginal distribution of the data, ensuring the posterior integrates to 1."
+        },
+        {
+          "id": "d",
+          "text": "The expected value of the prior.",
+          "isCorrect": false,
+          "rationale": "The denominator is not related to the expected value of the prior; it normalizes the posterior."
+        }
+      ],
+      "conceptId": "bayesian",
+      "difficulty": "hard",
+      "type": "mc"
+    }
+  ],
+  "sa": [
+    {
+      "id": "d2-bayesian-sa-1",
+      "prompt": "Let X_1, ..., X_n be a random sample from a Poisson distribution with parameter λ. (a) Specify a conjugate prior for λ. (b) Derive the posterior distribution for λ after observing data X = (x_1, ..., x_n).",
+      "modelAnswer": "(a) A conjugate prior for λ is the Gamma distribution, specifically Gamma(α, β). (b) The posterior distribution for λ given the data is Gamma(α + Σx_i, β + n), where Σx_i is the sum of observed data and n is the sample size.",
+      "rubric": "Correctly identifies the conjugate prior and derives the posterior distribution accurately.",
+      "conceptId": "bayesian",
+      "difficulty": "medium",
+      "type": "sa"
+    },
+    {
+      "id": "d2-bayesian-sa-2",
+      "prompt": "Let X_1, ..., X_n be a random sample from a Normal distribution with unknown mean μ and known variance σ². (a) State the prior distribution for μ if we assume it follows a Normal distribution. (b) Compute the posterior mean of μ given the prior mean μ₀ and sample mean X̄.",
+      "modelAnswer": "(a) The prior distribution for μ can be specified as Normal(μ₀, v₀²). (b) The posterior mean of μ is given by \\(\\mu_n = \\frac{\\frac{\\mu_0}{v_0^2} + \\frac{n\\bar{X}}{\\sigma^2}}{\\frac{1}{v_0^2} + \\frac{n}{\\sigma^2}}\\).",
+      "rubric": "Correctly states the prior and computes the posterior mean using the formula.",
+      "conceptId": "bayesian",
+      "difficulty": "hard",
+      "type": "sa"
+    }
+  ]
+}

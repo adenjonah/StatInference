@@ -1,0 +1,191 @@
+{
+  "stageId": "d1-prob-review",
+  "generatedAt": "2026-05-10T20:17:46.674Z",
+  "mc": [
+    {
+      "id": "d1-prob-review-mc-1",
+      "prompt": "What is the expected value of a random variable X that follows an Exponential distribution with rate parameter θ?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "θ",
+          "isCorrect": false,
+          "rationale": "The expected value for an Exponential distribution is 1/θ, not θ."
+        },
+        {
+          "id": "b",
+          "text": "1/θ",
+          "isCorrect": true,
+          "rationale": "The expected value of an Exponential(θ) distribution is given by E[X] = 1/θ."
+        },
+        {
+          "id": "c",
+          "text": "θ²",
+          "isCorrect": false,
+          "rationale": "The expected value is not related to θ²; it is 1/θ."
+        },
+        {
+          "id": "d",
+          "text": "0",
+          "isCorrect": false,
+          "rationale": "The expected value cannot be zero for a positive rate parameter θ."
+        }
+      ],
+      "conceptId": "probability-review",
+      "difficulty": "easy",
+      "type": "mc"
+    },
+    {
+      "id": "d1-prob-review-mc-2",
+      "prompt": "In a binomial distribution Binom(n, p), what is the variance?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "np(1-p)",
+          "isCorrect": true,
+          "rationale": "The variance of a Binomial distribution is given by Var(X) = np(1-p)."
+        },
+        {
+          "id": "b",
+          "text": "np",
+          "isCorrect": false,
+          "rationale": "The variance is not simply np; it includes the factor (1-p)."
+        },
+        {
+          "id": "c",
+          "text": "n²p",
+          "isCorrect": false,
+          "rationale": "Variance does not involve n²; it has a specific formula involving (1-p)."
+        },
+        {
+          "id": "d",
+          "text": "(1-p)/n",
+          "isCorrect": false,
+          "rationale": "This is incorrect; the variance is np(1-p), not divided by n."
+        }
+      ],
+      "conceptId": "probability-review",
+      "difficulty": "easy",
+      "type": "mc"
+    },
+    {
+      "id": "d1-prob-review-mc-3",
+      "prompt": "If X follows a Poisson distribution with parameter λ, what is the probability P(X = k)?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "λ^k / k!",
+          "isCorrect": false,
+          "rationale": "The correct formula includes an exponential term e^{-λ}."
+        },
+        {
+          "id": "b",
+          "text": "e^{-λ} λ^k / k!",
+          "isCorrect": true,
+          "rationale": "The probability mass function for Poisson is P(X = k) = e^{-λ} λ^k / k!."
+        },
+        {
+          "id": "c",
+          "text": "e^{λ} λ^k / k!",
+          "isCorrect": false,
+          "rationale": "The exponential term should be negative, not positive."
+        },
+        {
+          "id": "d",
+          "text": "1 - e^{-λ} λ^k",
+          "isCorrect": false,
+          "rationale": "This does not represent the probability mass function for Poisson."
+        }
+      ],
+      "conceptId": "probability-review",
+      "difficulty": "medium",
+      "type": "mc"
+    },
+    {
+      "id": "d1-prob-review-mc-4",
+      "prompt": "When estimating the mean of a normally distributed population with unknown variance, which test statistic should be used?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Z statistic",
+          "isCorrect": false,
+          "rationale": "The Z statistic is used when the population variance is known."
+        },
+        {
+          "id": "b",
+          "text": "t statistic",
+          "isCorrect": true,
+          "rationale": "The t statistic is used when the population variance is unknown."
+        },
+        {
+          "id": "c",
+          "text": "Chi-squared statistic",
+          "isCorrect": false,
+          "rationale": "The Chi-squared statistic is not used for estimating means."
+        },
+        {
+          "id": "d",
+          "text": "F statistic",
+          "isCorrect": false,
+          "rationale": "The F statistic is used for comparing variances, not means."
+        }
+      ],
+      "conceptId": "probability-review",
+      "difficulty": "medium",
+      "type": "mc"
+    },
+    {
+      "id": "d1-prob-review-mc-5",
+      "prompt": "What is the support of a random variable X that follows a Uniform(0, θ) distribution?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "(0, θ)",
+          "isCorrect": false,
+          "rationale": "The support includes the endpoints in a Uniform distribution."
+        },
+        {
+          "id": "b",
+          "text": "[0, θ]",
+          "isCorrect": true,
+          "rationale": "The support of Uniform(0, θ) is the closed interval [0, θ]."
+        },
+        {
+          "id": "c",
+          "text": "(0, θ]",
+          "isCorrect": false,
+          "rationale": "The support is not half-open; it includes 0."
+        },
+        {
+          "id": "d",
+          "text": "[0, θ)",
+          "isCorrect": false,
+          "rationale": "The support is not half-open; it includes θ."
+        }
+      ],
+      "conceptId": "probability-review",
+      "difficulty": "hard",
+      "type": "mc"
+    }
+  ],
+  "sa": [
+    {
+      "id": "d1-prob-review-sa-1",
+      "prompt": "Let X_1, ..., X_n be a random sample from a normal distribution N(μ, σ^2). (a) State the central limit theorem. (b) What is the distribution of the sample mean \bar{X} for large n?",
+      "modelAnswer": "(a) The central limit theorem states that as n approaches infinity, the distribution of the sample mean \bar{X} approaches a normal distribution regardless of the shape of the population distribution, provided the population has a finite mean and variance. (b) For large n, \bar{X} follows a normal distribution N(μ, σ²/n).",
+      "rubric": "Correctly states the central limit theorem and identifies the distribution of the sample mean.",
+      "conceptId": "probability-review",
+      "difficulty": "medium",
+      "type": "sa"
+    },
+    {
+      "id": "d1-prob-review-sa-2",
+      "prompt": "Let X_1, ..., X_n be a random sample from an Exponential(θ) distribution. (a) What is the maximum likelihood estimator (MLE) for θ? (b) Compute the variance of the MLE.",
+      "modelAnswer": "(a) The maximum likelihood estimator for θ based on the sample is \\\\hat{θ} = 1/\bar{X}, where \bar{X} is the sample mean. (b) The variance of the MLE \\\\hat{θ} is given by Var(\\\\hat{θ}) = θ²/n, where n is the sample size.",
+      "rubric": "Correctly identifies the MLE for θ and computes its variance.",
+      "conceptId": "probability-review",
+      "difficulty": "hard",
+      "type": "sa"
+    }
+  ]
+}

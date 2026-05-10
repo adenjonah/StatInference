@@ -1,0 +1,191 @@
+{
+  "stageId": "d2-cis",
+  "generatedAt": "2026-05-10T20:20:40.234Z",
+  "mc": [
+    {
+      "id": "d2-cis-mc-1",
+      "prompt": "Which of the following statements is true about confidence intervals?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "A confidence interval provides a fixed range that always contains the parameter θ.",
+          "isCorrect": false,
+          "rationale": "Confidence intervals are random intervals that contain θ with a certain probability, not fixed ranges."
+        },
+        {
+          "id": "b",
+          "text": "A confidence interval can be constructed using a pivot that depends on θ.",
+          "isCorrect": false,
+          "rationale": "Pivots must have distributions that do not depend on θ to construct confidence intervals."
+        },
+        {
+          "id": "c",
+          "text": "A wider confidence interval corresponds to a higher confidence level.",
+          "isCorrect": true,
+          "rationale": "Increasing the confidence level results in a wider interval to ensure θ is captured."
+        },
+        {
+          "id": "d",
+          "text": "Confidence intervals can be calculated without any sample data.",
+          "isCorrect": false,
+          "rationale": "Confidence intervals require sample data to estimate the parameter θ."
+        }
+      ],
+      "conceptId": "ci-pivots",
+      "difficulty": "easy",
+      "type": "mc"
+    },
+    {
+      "id": "d2-cis-mc-2",
+      "prompt": "For a sample from a normal distribution with unknown variance, which is the correct form of the confidence interval for the mean?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "$$\\left[\\bar{X} - \\frac{s}{\\sqrt{n}} z_{\\alpha/2}, \\bar{X} + \\frac{s}{\\sqrt{n}} z_{\\alpha/2}\\right]$$",
+          "isCorrect": false,
+          "rationale": "This formula incorrectly uses the z-distribution instead of the t-distribution."
+        },
+        {
+          "id": "b",
+          "text": "$$\\left[\\bar{X} - \\frac{s}{\\sqrt{n}} t_{n-1, \\alpha/2}, \\bar{X} + \\frac{s}{\\sqrt{n}} t_{n-1, \\alpha/2}\\right]$$",
+          "isCorrect": true,
+          "rationale": "This is the correct formula using the t-distribution for unknown variance."
+        },
+        {
+          "id": "c",
+          "text": "$$\\left[\\bar{X} - \\frac{\\sigma}{\\sqrt{n}} t_{n-1, \\alpha/2}, \\bar{X} + \\frac{\\sigma}{\\sqrt{n}} t_{n-1, \\alpha/2}\\right]$$",
+          "isCorrect": false,
+          "rationale": "This formula incorrectly uses the population standard deviation instead of the sample standard deviation."
+        },
+        {
+          "id": "d",
+          "text": "$$\\left[\\bar{X} - \\frac{s}{\\sqrt{n}} t_{n-1}, \\bar{X} + \\frac{s}{\\sqrt{n}} t_{n-1}\\right]$$",
+          "isCorrect": false,
+          "rationale": "This formula omits the correct quantile for the desired confidence level."
+        }
+      ],
+      "conceptId": "ci-pivots",
+      "difficulty": "medium",
+      "type": "mc"
+    },
+    {
+      "id": "d2-cis-mc-3",
+      "prompt": "If you increase the sample size while keeping the confidence level constant, what happens to the width of the confidence interval?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "The width of the confidence interval increases.",
+          "isCorrect": false,
+          "rationale": "Increasing sample size decreases the width of the interval."
+        },
+        {
+          "id": "b",
+          "text": "The width of the confidence interval decreases.",
+          "isCorrect": true,
+          "rationale": "A larger sample size results in a narrower confidence interval."
+        },
+        {
+          "id": "c",
+          "text": "The width of the confidence interval remains the same.",
+          "isCorrect": false,
+          "rationale": "The width does not remain the same; it decreases with larger sample sizes."
+        },
+        {
+          "id": "d",
+          "text": "The width of the confidence interval becomes infinite.",
+          "isCorrect": false,
+          "rationale": "The interval does not become infinite; it narrows with larger sample sizes."
+        }
+      ],
+      "conceptId": "ci-pivots",
+      "difficulty": "easy",
+      "type": "mc"
+    },
+    {
+      "id": "d2-cis-mc-4",
+      "prompt": "What is the main purpose of using the method of pivots in constructing confidence intervals?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "To ensure that the confidence interval is always exact for all sample sizes.",
+          "isCorrect": false,
+          "rationale": "Pivots help construct intervals but do not guarantee exactness for all sample sizes."
+        },
+        {
+          "id": "b",
+          "text": "To find a statistic whose distribution does not depend on the parameter θ.",
+          "isCorrect": true,
+          "rationale": "The pivot must have a distribution independent of θ to construct valid confidence intervals."
+        },
+        {
+          "id": "c",
+          "text": "To determine the sample size needed for a fixed width confidence interval.",
+          "isCorrect": false,
+          "rationale": "The method of pivots does not determine sample size; it constructs the interval."
+        },
+        {
+          "id": "d",
+          "text": "To calculate the exact value of the parameter θ.",
+          "isCorrect": false,
+          "rationale": "Pivots are used to estimate intervals, not to calculate exact parameter values."
+        }
+      ],
+      "conceptId": "ci-pivots",
+      "difficulty": "medium",
+      "type": "mc"
+    },
+    {
+      "id": "d2-cis-mc-5",
+      "prompt": "Which of the following is a common misconception about confidence intervals?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Confidence intervals can be used to estimate the parameter θ.",
+          "isCorrect": false,
+          "rationale": "Confidence intervals are indeed used to estimate parameters."
+        },
+        {
+          "id": "b",
+          "text": "A 95% confidence interval means that 95% of the time the parameter θ will be in the interval.",
+          "isCorrect": true,
+          "rationale": "This misconception incorrectly suggests that θ is random; it is fixed."
+        },
+        {
+          "id": "c",
+          "text": "The width of the confidence interval is affected by the confidence level and sample size.",
+          "isCorrect": false,
+          "rationale": "This is correct; both factors indeed affect the width."
+        },
+        {
+          "id": "d",
+          "text": "Confidence intervals can be interpreted as probabilities for the parameter θ.",
+          "isCorrect": false,
+          "rationale": "This is incorrect; the interval itself is random, not θ."
+        }
+      ],
+      "conceptId": "ci-pivots",
+      "difficulty": "hard",
+      "type": "mc"
+    }
+  ],
+  "sa": [
+    {
+      "id": "d2-cis-sa-1",
+      "prompt": "Let X₁, ..., Xₙ be a random sample from a normal distribution with unknown mean μ and unknown variance σ². (a) State the formula for the confidence interval for μ at a confidence level of 1 - α. (b) Explain why the t-distribution is used instead of the normal distribution in this case.",
+      "modelAnswer": "(a) The confidence interval for μ is given by $$\\left[\\bar{X} - \\frac{s}{\\sqrt{n}} t_{n-1, \\alpha/2}, \\bar{X} + \\frac{s}{\\sqrt{n}} t_{n-1, \\alpha/2}\\right].$$ (b) The t-distribution is used because the population variance is unknown, and it accounts for additional uncertainty in the estimate of the standard deviation from the sample.",
+      "rubric": "Correctly states the CI formula and explains the use of the t-distribution.",
+      "conceptId": "ci-pivots",
+      "difficulty": "medium",
+      "type": "sa"
+    },
+    {
+      "id": "d2-cis-sa-2",
+      "prompt": "Let X₁, ..., Xₙ be a random sample from a Bernoulli distribution with parameter θ. (a) Write the formula for the approximate confidence interval for θ using the sample proportion. (b) Discuss the conditions under which this approximation is valid.",
+      "modelAnswer": "(a) The approximate confidence interval for θ is given by $$\\left[\\hat{\\theta} - z_{\\alpha/2} \\sqrt{\\frac{\\hat{\\theta}(1-\\hat{\\theta})}{n}}, \\hat{\\theta} + z_{\\alpha/2} \\sqrt{\\frac{\\hat{\\theta}(1-\\hat{\\theta})}{n}}\\right],$$ where $$\\hat{\\theta} = \\frac{1}{n} \\sum_{i=1}^{n} X_i.$$ (b) This approximation is valid when both np and n(1-p) are greater than 5, ensuring that the sample size is large enough for the Central Limit Theorem to apply.",
+      "rubric": "Correctly writes the CI formula and discusses the conditions for validity.",
+      "conceptId": "ci-pivots",
+      "difficulty": "medium",
+      "type": "sa"
+    }
+  ]
+}

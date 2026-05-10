@@ -1,0 +1,191 @@
+{
+  "stageId": "d1-inequalities",
+  "generatedAt": "2026-05-10T20:18:18.718Z",
+  "mc": [
+    {
+      "id": "d1-inequalities-mc-1",
+      "prompt": "What does the Markov Inequality state for a nonnegative random variable W?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "P(W >= t) <= E(W) / t",
+          "isCorrect": true,
+          "rationale": "This is the direct statement of the Markov Inequality."
+        },
+        {
+          "id": "b",
+          "text": "P(W >= t) >= E(W) / t",
+          "isCorrect": false,
+          "rationale": "This is incorrect; Markov provides an upper bound, not a lower bound."
+        },
+        {
+          "id": "c",
+          "text": "P(W >= t) = E(W) / t",
+          "isCorrect": false,
+          "rationale": "This is not a correct representation; it suggests equality which does not hold."
+        },
+        {
+          "id": "d",
+          "text": "P(W < t) <= E(W) / t",
+          "isCorrect": false,
+          "rationale": "This is the opposite of what Markov states; it concerns the lower tail, not the upper."
+        }
+      ],
+      "conceptId": "prob-inequalities",
+      "difficulty": "easy",
+      "type": "mc"
+    },
+    {
+      "id": "d1-inequalities-mc-2",
+      "prompt": "In the context of Chebyshev's Inequality, what does the variable tau represent?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "The mean of the random variable",
+          "isCorrect": false,
+          "rationale": "Tau represents the distance from the mean, not the mean itself."
+        },
+        {
+          "id": "b",
+          "text": "The variance of the random variable",
+          "isCorrect": false,
+          "rationale": "Tau is not the variance; it is a threshold for deviation."
+        },
+        {
+          "id": "c",
+          "text": "A threshold for deviation from the mean",
+          "isCorrect": true,
+          "rationale": "This is correct; tau indicates how far we are measuring from the mean."
+        },
+        {
+          "id": "d",
+          "text": "The expected value of the random variable",
+          "isCorrect": false,
+          "rationale": "Expected value is not represented by tau; it is a different concept."
+        }
+      ],
+      "conceptId": "prob-inequalities",
+      "difficulty": "easy",
+      "type": "mc"
+    },
+    {
+      "id": "d1-inequalities-mc-3",
+      "prompt": "Which of the following is a consequence of applying Chebyshev's Inequality to a sample mean?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "P(|Z - E(Z)| >= tau) <= Var(Z) / tau^2",
+          "isCorrect": true,
+          "rationale": "This is the direct statement of Chebyshev's Inequality applied to the sample mean."
+        },
+        {
+          "id": "b",
+          "text": "P(Z >= E(Z) + tau) <= Var(Z) / tau",
+          "isCorrect": false,
+          "rationale": "This incorrectly modifies the inequality and the form of the deviation."
+        },
+        {
+          "id": "c",
+          "text": "P(|Z - E(Z)| < tau) <= Var(Z) / tau^2",
+          "isCorrect": false,
+          "rationale": "This is incorrect; Chebyshev gives an upper bound on the probability of being far from the mean."
+        },
+        {
+          "id": "d",
+          "text": "P(Z <= E(Z) - tau) >= Var(Z) / tau^2",
+          "isCorrect": false,
+          "rationale": "This is incorrect; it misapplies the inequality and uses a lower bound."
+        }
+      ],
+      "conceptId": "prob-inequalities",
+      "difficulty": "medium",
+      "type": "mc"
+    },
+    {
+      "id": "d1-inequalities-mc-4",
+      "prompt": "If W is a nonnegative random variable with E(W) = 10, what is the maximum probability P(W >= 20) according to Markov's Inequality?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "0.5",
+          "isCorrect": false,
+          "rationale": "This is not derived from the inequality; it does not follow from the given information."
+        },
+        {
+          "id": "b",
+          "text": "0.1",
+          "isCorrect": true,
+          "rationale": "Using Markov's Inequality, P(W >= 20) <= E(W) / 20 = 10 / 20 = 0.5."
+        },
+        {
+          "id": "c",
+          "text": "0.2",
+          "isCorrect": false,
+          "rationale": "This value does not correspond to the application of Markov's Inequality."
+        },
+        {
+          "id": "d",
+          "text": "0.05",
+          "isCorrect": false,
+          "rationale": "This does not follow from the inequality given the expected value."
+        }
+      ],
+      "conceptId": "prob-inequalities",
+      "difficulty": "medium",
+      "type": "mc"
+    },
+    {
+      "id": "d1-inequalities-mc-5",
+      "prompt": "What is the relationship between the variance of a random variable and the bounds provided by Chebyshev's Inequality?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Higher variance leads to tighter bounds",
+          "isCorrect": false,
+          "rationale": "Higher variance actually leads to looser bounds, as the right side increases."
+        },
+        {
+          "id": "b",
+          "text": "Lower variance leads to tighter bounds",
+          "isCorrect": true,
+          "rationale": "This is correct; lower variance results in a smaller upper bound on the probability."
+        },
+        {
+          "id": "c",
+          "text": "Variance has no effect on the bounds",
+          "isCorrect": false,
+          "rationale": "Variance directly affects the bounds according to Chebyshev's Inequality."
+        },
+        {
+          "id": "d",
+          "text": "Variance must be zero for Chebyshev's Inequality to hold",
+          "isCorrect": false,
+          "rationale": "Chebyshev's Inequality holds for any variance, not just zero."
+        }
+      ],
+      "conceptId": "prob-inequalities",
+      "difficulty": "hard",
+      "type": "mc"
+    }
+  ],
+  "sa": [
+    {
+      "id": "d1-inequalities-sa-1",
+      "prompt": "Let X_1, …, X_n be a random sample from a distribution with mean μ and variance σ². (a) State Chebyshev's Inequality. (b) Use Chebyshev's Inequality to derive the probability that the sample mean is within k standard deviations of the true mean.",
+      "modelAnswer": "(a) Chebyshev's Inequality states that P(|Z - E(Z)| >= k) <= Var(Z) / k² for any random variable Z. (b) For the sample mean \\(\\bar{X} = \\frac{1}{n} \\sum_{i=1}^{n} X_i\\), we have Var(\\bar{X}) = \\frac{\\sigma^2}{n}. Thus, P(|\\bar{X} - \\mu| >= k\\sigma) <= \\frac{\\sigma^2/n}{(k\\sigma)^2} = \\frac{1}{nk^2}.",
+      "rubric": "Correctly states Chebyshev's Inequality and applies it to the sample mean.",
+      "conceptId": "prob-inequalities",
+      "difficulty": "medium",
+      "type": "sa"
+    },
+    {
+      "id": "d1-inequalities-sa-2",
+      "prompt": "Let W be a nonnegative random variable with E(W) = 5. (a) State Markov's Inequality. (b) Calculate the upper bound for P(W >= 15) using Markov's Inequality.",
+      "modelAnswer": "(a) Markov's Inequality states that P(W >= t) <= E(W) / t for any t > 0. (b) For t = 15, we have P(W >= 15) <= E(W) / 15 = 5 / 15 = 1/3.",
+      "rubric": "Accurately states Markov's Inequality and computes the probability bound correctly.",
+      "conceptId": "prob-inequalities",
+      "difficulty": "easy",
+      "type": "sa"
+    }
+  ]
+}

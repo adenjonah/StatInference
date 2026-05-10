@@ -1,0 +1,191 @@
+{
+  "stageId": "d2-sampling",
+  "generatedAt": "2026-05-10T20:20:22.259Z",
+  "mc": [
+    {
+      "id": "d2-sampling-mc-1",
+      "prompt": "What is the expected value of a Gamma(3, 2) random variable?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "1",
+          "isCorrect": false,
+          "rationale": "The expected value is calculated as α/λ, which is 3/2 here."
+        },
+        {
+          "id": "b",
+          "text": "2",
+          "isCorrect": false,
+          "rationale": "This is incorrect; the expected value is not just the shape parameter."
+        },
+        {
+          "id": "c",
+          "text": "3/2",
+          "isCorrect": true,
+          "rationale": "Correct, as E(X) = α/λ = 3/2."
+        },
+        {
+          "id": "d",
+          "text": "6",
+          "isCorrect": false,
+          "rationale": "This is incorrect; the expected value is not the product of parameters."
+        }
+      ],
+      "conceptId": "sampling-dists",
+      "difficulty": "easy",
+      "type": "mc"
+    },
+    {
+      "id": "d2-sampling-mc-2",
+      "prompt": "If you have a sample mean $\bar{X}$ from a normal distribution with known variance $\tau^2$, which distribution does $\frac{\bar{X} - \theta}{\tau/\root n$ follow?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Normal distribution",
+          "isCorrect": true,
+          "rationale": "With known variance, the sample mean follows a Normal distribution."
+        },
+        {
+          "id": "b",
+          "text": "t-distribution",
+          "isCorrect": false,
+          "rationale": "The t-distribution is used when the variance is unknown."
+        },
+        {
+          "id": "c",
+          "text": "Chi-squared distribution",
+          "isCorrect": false,
+          "rationale": "This distribution is not applicable for sample means."
+        },
+        {
+          "id": "d",
+          "text": "Gamma distribution",
+          "isCorrect": false,
+          "rationale": "The Gamma distribution does not apply in this context."
+        }
+      ],
+      "conceptId": "sampling-dists",
+      "difficulty": "easy",
+      "type": "mc"
+    },
+    {
+      "id": "d2-sampling-mc-3",
+      "prompt": "For a sample drawn from a normal distribution, what is the distribution of the sample variance $s^2$?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Normal distribution",
+          "isCorrect": false,
+          "rationale": "The sample variance does not follow a normal distribution."
+        },
+        {
+          "id": "b",
+          "text": "t-distribution",
+          "isCorrect": false,
+          "rationale": "The sample variance is not modeled by the t-distribution."
+        },
+        {
+          "id": "c",
+          "text": "Chi-squared distribution",
+          "isCorrect": true,
+          "rationale": "The sample variance follows a scaled chi-squared distribution."
+        },
+        {
+          "id": "d",
+          "text": "Gamma distribution",
+          "isCorrect": false,
+          "rationale": "While related, the sample variance does not follow a Gamma distribution directly."
+        }
+      ],
+      "conceptId": "sampling-dists",
+      "difficulty": "medium",
+      "type": "mc"
+    },
+    {
+      "id": "d2-sampling-mc-4",
+      "prompt": "What is the variance of a random variable $X$ that follows a Chi-squared distribution with 4 degrees of freedom?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "2",
+          "isCorrect": false,
+          "rationale": "The variance is not equal to the degrees of freedom."
+        },
+        {
+          "id": "b",
+          "text": "4",
+          "isCorrect": true,
+          "rationale": "For a Chi-squared distribution, variance is 2 times the degrees of freedom."
+        },
+        {
+          "id": "c",
+          "text": "8",
+          "isCorrect": false,
+          "rationale": "This is twice the degrees of freedom, which is incorrect."
+        },
+        {
+          "id": "d",
+          "text": "0",
+          "isCorrect": false,
+          "rationale": "The variance cannot be zero for a Chi-squared distribution."
+        }
+      ],
+      "conceptId": "sampling-dists",
+      "difficulty": "medium",
+      "type": "mc"
+    },
+    {
+      "id": "d2-sampling-mc-5",
+      "prompt": "In hypothesis testing, what is the consequence of using a one-sided test when a two-sided test is appropriate?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Increased Type I error rate",
+          "isCorrect": false,
+          "rationale": "The Type I error rate remains the same for a one-sided test."
+        },
+        {
+          "id": "b",
+          "text": "Decreased power of the test",
+          "isCorrect": true,
+          "rationale": "A one-sided test may have less power than a two-sided test for detecting effects."
+        },
+        {
+          "id": "c",
+          "text": "Increased sample size requirement",
+          "isCorrect": false,
+          "rationale": "Sample size does not inherently change based on test type."
+        },
+        {
+          "id": "d",
+          "text": "No effect on p-value interpretation",
+          "isCorrect": false,
+          "rationale": "The interpretation of p-values differs between one-sided and two-sided tests."
+        }
+      ],
+      "conceptId": "sampling-dists",
+      "difficulty": "hard",
+      "type": "mc"
+    }
+  ],
+  "sa": [
+    {
+      "id": "d2-sampling-sa-1",
+      "prompt": "(a) Let $X_1, X_2, \text{...}, X_n$ be a random sample from a Normal distribution with mean $\theta$ and variance $\tau^2$. State the sampling distribution of the sample mean $\bar{X}$. (b) What is the standard error of the sample mean?",
+      "modelAnswer": "(a) The sampling distribution of the sample mean $\bar{X}$ is given by $\bar{X} \thicksim N(\theta, \tau^2/n)$. (b) The standard error of the sample mean is given by $SE(\bar{X}) = \frac{\tau}{\root n$.",
+      "rubric": "Correctly identifies the sampling distribution and computes the standard error.",
+      "conceptId": "sampling-dists",
+      "difficulty": "medium",
+      "type": "sa"
+    },
+    {
+      "id": "d2-sampling-sa-2",
+      "prompt": "(a) Let $X_1, X_2, \text{...}, X_n$ be iid random variables from a $Gamma(2, \beta)$ distribution. What is the distribution of $S = \frac{1}{n} \text{sum}(X_i)$? (b) Compute the expected value of $S$.",
+      "modelAnswer": "(a) The distribution of $S$ is $Gamma(2n, \beta)$. (b) The expected value of $S$ is $E[S] = \frac{2n}{\beta}$.",
+      "rubric": "Correctly identifies the distribution and computes the expected value.",
+      "conceptId": "sampling-dists",
+      "difficulty": "hard",
+      "type": "sa"
+    }
+  ]
+}

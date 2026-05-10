@@ -1,0 +1,191 @@
+{
+  "stageId": "d3-lrt",
+  "generatedAt": "2026-05-10T20:21:36.658Z",
+  "mc": [
+    {
+      "id": "d3-lrt-mc-1",
+      "prompt": "In a likelihood ratio test, what does the test statistic typically compare?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "The means of two populations.",
+          "isCorrect": false,
+          "rationale": "This is too specific; the test compares likelihoods."
+        },
+        {
+          "id": "b",
+          "text": "The likelihoods of the null and alternative hypotheses.",
+          "isCorrect": true,
+          "rationale": "The likelihood ratio test compares the likelihoods under the null and alternative hypotheses."
+        },
+        {
+          "id": "c",
+          "text": "The variances of two populations.",
+          "isCorrect": false,
+          "rationale": "This is incorrect; the test focuses on likelihoods, not variances."
+        },
+        {
+          "id": "d",
+          "text": "The sample sizes of the two groups being compared.",
+          "isCorrect": false,
+          "rationale": "Sample sizes are not directly compared in a likelihood ratio test."
+        }
+      ],
+      "conceptId": "ht-lrt-wilks",
+      "difficulty": "easy",
+      "type": "mc"
+    },
+    {
+      "id": "d3-lrt-mc-2",
+      "prompt": "What is the primary goal of a uniformly most powerful (UMP) test?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "To minimize Type I error only.",
+          "isCorrect": false,
+          "rationale": "The UMP test aims to maximize power, not just minimize Type I error."
+        },
+        {
+          "id": "b",
+          "text": "To maximize power among all tests with a given Type I error rate.",
+          "isCorrect": true,
+          "rationale": "The UMP test maximizes power while controlling Type I error."
+        },
+        {
+          "id": "c",
+          "text": "To ensure Type II error is zero.",
+          "isCorrect": false,
+          "rationale": "It is impossible to achieve zero Type II error while maintaining a Type I error rate."
+        },
+        {
+          "id": "d",
+          "text": "To provide a two-sided test for any hypothesis.",
+          "isCorrect": false,
+          "rationale": "UMP tests are generally not available for two-sided alternatives."
+        }
+      ],
+      "conceptId": "ht-lrt-wilks",
+      "difficulty": "easy",
+      "type": "mc"
+    },
+    {
+      "id": "d3-lrt-mc-3",
+      "prompt": "When conducting a t-test for a mean with unknown variance, which distribution is used for the test statistic?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Normal distribution.",
+          "isCorrect": false,
+          "rationale": "The t-distribution is used when the variance is unknown."
+        },
+        {
+          "id": "b",
+          "text": "t-distribution with n-1 degrees of freedom.",
+          "isCorrect": true,
+          "rationale": "The t-test uses the t-distribution when variance is unknown."
+        },
+        {
+          "id": "c",
+          "text": "Chi-squared distribution.",
+          "isCorrect": false,
+          "rationale": "The chi-squared distribution is not used for the t-test."
+        },
+        {
+          "id": "d",
+          "text": "F-distribution.",
+          "isCorrect": false,
+          "rationale": "The F-distribution is not applicable in this context."
+        }
+      ],
+      "conceptId": "ht-lrt-wilks",
+      "difficulty": "medium",
+      "type": "mc"
+    },
+    {
+      "id": "d3-lrt-mc-4",
+      "prompt": "In hypothesis testing, what does a p-value represent?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "The probability of making a Type I error.",
+          "isCorrect": false,
+          "rationale": "The p-value indicates the strength of evidence, not the Type I error probability."
+        },
+        {
+          "id": "b",
+          "text": "The smallest significance level at which the null hypothesis can be rejected.",
+          "isCorrect": true,
+          "rationale": "The p-value is the smallest α at which H₀ would be rejected."
+        },
+        {
+          "id": "c",
+          "text": "The probability that the null hypothesis is true.",
+          "isCorrect": false,
+          "rationale": "The p-value does not provide the probability that H₀ is true."
+        },
+        {
+          "id": "d",
+          "text": "The power of the test.",
+          "isCorrect": false,
+          "rationale": "The p-value and the power of the test are different concepts."
+        }
+      ],
+      "conceptId": "ht-lrt-wilks",
+      "difficulty": "medium",
+      "type": "mc"
+    },
+    {
+      "id": "d3-lrt-mc-5",
+      "prompt": "Which of the following statements about the likelihood ratio test is true?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "It is always a two-sided test.",
+          "isCorrect": false,
+          "rationale": "Likelihood ratio tests can be one-sided or two-sided depending on the hypotheses."
+        },
+        {
+          "id": "b",
+          "text": "It minimizes Type I error without regard for Type II error.",
+          "isCorrect": false,
+          "rationale": "The test balances Type I and Type II errors under specified conditions."
+        },
+        {
+          "id": "c",
+          "text": "It can be used for both simple and composite hypotheses.",
+          "isCorrect": true,
+          "rationale": "Likelihood ratio tests can be applied to both types of hypotheses."
+        },
+        {
+          "id": "d",
+          "text": "It requires known variances for all tests.",
+          "isCorrect": false,
+          "rationale": "The test can be applied even when variances are unknown."
+        }
+      ],
+      "conceptId": "ht-lrt-wilks",
+      "difficulty": "hard",
+      "type": "mc"
+    }
+  ],
+  "sa": [
+    {
+      "id": "d3-lrt-sa-1",
+      "prompt": "Let X_1, …, X_n be a random sample from a Normal distribution with unknown mean μ and known variance σ². (a) State the null and alternative hypotheses for testing if μ = μ₀. (b) What is the test statistic used for this hypothesis test?",
+      "modelAnswer": "(a) The null hypothesis is H₀: μ = μ₀, and the alternative hypothesis is H₁: μ ≠ μ₀. (b) The test statistic is T = \\frac{\\overline{X} - μ₀}{\\sigma / \\sqrt{n}}, where \\overline{X} is the sample mean.",
+      "rubric": "Correctly states hypotheses and identifies the test statistic.",
+      "conceptId": "ht-lrt-wilks",
+      "difficulty": "easy",
+      "type": "sa"
+    },
+    {
+      "id": "d3-lrt-sa-2",
+      "prompt": "Let X_1, …, X_n be a random sample from an Exponential(θ) distribution. (a) Derive the likelihood function for θ based on the sample. (b) Determine the maximum likelihood estimator (MLE) for θ.",
+      "modelAnswer": "(a) The likelihood function is L(θ) = θ^n e^{-θ \\sum_{i=1}^n X_i} for θ > 0. (b) The MLE for θ is \\hat{θ} = \\frac{n}{\\sum_{i=1}^n X_i}.",
+      "rubric": "Correctly derives the likelihood function and finds the MLE.",
+      "conceptId": "ht-lrt-wilks",
+      "difficulty": "medium",
+      "type": "sa"
+    }
+  ]
+}

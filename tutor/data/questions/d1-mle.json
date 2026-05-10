@@ -1,0 +1,191 @@
+{
+  "stageId": "d1-mle",
+  "generatedAt": "2026-05-10T20:22:19.657Z",
+  "mc": [
+    {
+      "id": "d1-mle-mc-1",
+      "prompt": "What is the MLE of the parameter \\( \\theta \\) for a Poisson distribution with observed data \\( X_1, \\ldots, X_n \\)?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "\\( \\frac{1}{n} \\sum_{i=1}^{n} X_i \\)",
+          "isCorrect": false,
+          "rationale": "This is the method of moments estimator, not the MLE."
+        },
+        {
+          "id": "b",
+          "text": "\\( \\max(X_1, \\ldots, X_n) \\)",
+          "isCorrect": false,
+          "rationale": "This is the MLE for a uniform distribution, not Poisson."
+        },
+        {
+          "id": "c",
+          "text": "\\( \\frac{1}{n} \\sum_{i=1}^{n} X_i = \\bar{X} \\)",
+          "isCorrect": true,
+          "rationale": "The MLE for a Poisson distribution is the sample mean."
+        },
+        {
+          "id": "d",
+          "text": "\\( \\sum_{i=1}^{n} X_i \\)",
+          "isCorrect": false,
+          "rationale": "This is the total count, not the average."
+        }
+      ],
+      "conceptId": "mle",
+      "difficulty": "easy",
+      "type": "mc"
+    },
+    {
+      "id": "d1-mle-mc-2",
+      "prompt": "In the context of MLE, what does the invariance property state?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "The MLE is always unique.",
+          "isCorrect": false,
+          "rationale": "The MLE may not be unique, especially in certain distributions."
+        },
+        {
+          "id": "b",
+          "text": "If \\( \\hat{\\theta} \\) is the MLE of \\( \\theta \\), then any function of \\( \\hat{\\theta} \\) is also an MLE.",
+          "isCorrect": true,
+          "rationale": "This is the definition of the invariance property of MLE."
+        },
+        {
+          "id": "c",
+          "text": "MLEs are always consistent for large samples.",
+          "isCorrect": false,
+          "rationale": "Consistency is a property but not guaranteed without regularity conditions."
+        },
+        {
+          "id": "d",
+          "text": "The MLE is always the maximum of the likelihood function.",
+          "isCorrect": false,
+          "rationale": "The MLE maximizes the likelihood, but may not always exist."
+        }
+      ],
+      "conceptId": "mle",
+      "difficulty": "easy",
+      "type": "mc"
+    },
+    {
+      "id": "d1-mle-mc-3",
+      "prompt": "What is the MLE of \\( \\sigma^2 \\) for a normal distribution when the mean \\( \\mu \\) is known?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "\\( \\frac{1}{n-1} \\sum_{i=1}^{n} (X_i - \\mu)^2 \\)",
+          "isCorrect": false,
+          "rationale": "This is the unbiased estimator; MLE uses \\( n \\) in the denominator."
+        },
+        {
+          "id": "b",
+          "text": "\\( \\frac{1}{n} \\sum_{i=1}^{n} (X_i - \\mu)^2 \\)",
+          "isCorrect": true,
+          "rationale": "This is the MLE of \\( \\sigma^2 \\) for a normal distribution."
+        },
+        {
+          "id": "c",
+          "text": "\\( \\mu^2 \\)",
+          "isCorrect": false,
+          "rationale": "This does not relate to the estimation of variance."
+        },
+        {
+          "id": "d",
+          "text": "\\( \\max(X_i - \\mu) \\)",
+          "isCorrect": false,
+          "rationale": "This does not represent a valid estimation method for variance."
+        }
+      ],
+      "conceptId": "mle",
+      "difficulty": "medium",
+      "type": "mc"
+    },
+    {
+      "id": "d1-mle-mc-4",
+      "prompt": "If the likelihood function does not have a maximum, which of the following statements is true?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "The MLE does not exist.",
+          "isCorrect": true,
+          "rationale": "If the likelihood function does not achieve a maximum, the MLE cannot be defined."
+        },
+        {
+          "id": "b",
+          "text": "The MLE is infinite.",
+          "isCorrect": false,
+          "rationale": "The MLE is not defined if there is no maximum."
+        },
+        {
+          "id": "c",
+          "text": "The MLE is equal to the mean of the sample.",
+          "isCorrect": false,
+          "rationale": "The MLE cannot be determined without a maximum."
+        },
+        {
+          "id": "d",
+          "text": "The MLE can be approximated by the method of moments.",
+          "isCorrect": false,
+          "rationale": "The method of moments does not guarantee an MLE."
+        }
+      ],
+      "conceptId": "mle",
+      "difficulty": "medium",
+      "type": "mc"
+    },
+    {
+      "id": "d1-mle-mc-5",
+      "prompt": "Consider a uniform distribution \\( U(\\theta, \\theta + 1) \\). What is the MLE of \\( \\theta \\)?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "\\( \\min(X_1, \\ldots, X_n) \\)",
+          "isCorrect": false,
+          "rationale": "This is incorrect; the MLE is based on the maximum."
+        },
+        {
+          "id": "b",
+          "text": "\\( \\max(X_1, \\ldots, X_n) - 1 \\)",
+          "isCorrect": true,
+          "rationale": "The MLE for \\( \\theta \\) is the maximum observed value minus 1."
+        },
+        {
+          "id": "c",
+          "text": "\\( \\frac{1}{2} \\sum_{i=1}^{n} X_i \\)",
+          "isCorrect": false,
+          "rationale": "This does not relate to the estimation of \\( \\theta \\) for a uniform distribution."
+        },
+        {
+          "id": "d",
+          "text": "\\( \\frac{1}{n} \\sum_{i=1}^{n} X_i \\)",
+          "isCorrect": false,
+          "rationale": "This is the sample mean, not the MLE for \\( \\theta \\)."
+        }
+      ],
+      "conceptId": "mle",
+      "difficulty": "hard",
+      "type": "mc"
+    }
+  ],
+  "sa": [
+    {
+      "id": "d1-mle-sa-1",
+      "prompt": "Let \\( X_1, \\ldots, X_n \\) be a random sample from a Poisson distribution with parameter \\( \\theta \\). (a) Derive the likelihood function for this sample. (b) Find the MLE of \\( \\theta \\).",
+      "modelAnswer": "(a) The likelihood function is given by \\( L_n(\\theta) = \\prod_{i=1}^{n} \\frac{\\theta^{X_i} e^{-\\theta}}{X_i!} = \\frac{\\theta^{\\sum X_i} e^{-n\\theta}}{\\prod_{i=1}^{n} X_i!} \\). (b) To find the MLE, we maximize the log-likelihood: \\( l_n(\\theta) = \\sum X_i \\log(\\theta) - n\\theta \\). Setting the derivative to zero gives \\( \\hat{\\theta} = \\frac{1}{n} \\sum_{i=1}^{n} X_i \\).",
+      "rubric": "Correctly derives the likelihood function and finds the MLE.",
+      "conceptId": "mle",
+      "difficulty": "easy",
+      "type": "sa"
+    },
+    {
+      "id": "d1-mle-sa-2",
+      "prompt": "Let \\( X_1, \\ldots, X_n \\) be a random sample from a uniform distribution \\( U(0, \\theta) \\). (a) State the likelihood function. (b) Show that the MLE of \\( \\theta \\) is \\( \\max(X_1, \\ldots, X_n) \\).",
+      "modelAnswer": "(a) The likelihood function is \\( L_n(\\theta) = \\prod_{i=1}^{n} \\frac{1}{\\theta} I_{[0, \\theta]}(X_i) = \\frac{1}{\\theta^n} I_{[0, \\theta]}(\\max(X_i)) \\). (b) The likelihood function is constant for \\( \\theta \\geq \\max(X_i) \\) and decreases for \\( \\theta < \\max(X_i) \\), thus the MLE is \\( \\hat{\\theta} = \\max(X_1, \\ldots, X_n) \\).",
+      "rubric": "Correctly states the likelihood function and shows the MLE derivation.",
+      "conceptId": "mle",
+      "difficulty": "medium",
+      "type": "sa"
+    }
+  ]
+}

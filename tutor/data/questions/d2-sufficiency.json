@@ -1,0 +1,191 @@
+{
+  "stageId": "d2-sufficiency",
+  "generatedAt": "2026-05-10T20:19:55.835Z",
+  "mc": [
+    {
+      "id": "d2-sufficiency-mc-1",
+      "prompt": "Which of the following statements is true regarding sufficient statistics?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "A sufficient statistic provides all information about the parameter of interest contained in the sample.",
+          "isCorrect": true,
+          "rationale": "This is the definition of a sufficient statistic."
+        },
+        {
+          "id": "b",
+          "text": "A sufficient statistic must always be a function of the sample mean.",
+          "isCorrect": false,
+          "rationale": "Sufficient statistics can take many forms and are not limited to the sample mean."
+        },
+        {
+          "id": "c",
+          "text": "A sufficient statistic can depend on the parameter of interest.",
+          "isCorrect": false,
+          "rationale": "By definition, a sufficient statistic does not depend on the parameter."
+        },
+        {
+          "id": "d",
+          "text": "Every statistic derived from a sample is sufficient for the parameter.",
+          "isCorrect": false,
+          "rationale": "Not every statistic is sufficient; only those that meet the criteria do."
+        }
+      ],
+      "conceptId": "sufficiency",
+      "difficulty": "easy",
+      "type": "mc"
+    },
+    {
+      "id": "d2-sufficiency-mc-2",
+      "prompt": "In the context of the Rao-Blackwell theorem, which of the following statements is correct?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Any estimator can be improved by conditioning on the sample mean.",
+          "isCorrect": false,
+          "rationale": "The improvement is through conditioning on a sufficient statistic, not necessarily the sample mean."
+        },
+        {
+          "id": "b",
+          "text": "The Rao-Blackwell theorem guarantees that the new estimator will have a higher MSE than the original.",
+          "isCorrect": false,
+          "rationale": "The theorem guarantees that the MSE will be lower or equal, not higher."
+        },
+        {
+          "id": "c",
+          "text": "The new estimator formed by conditioning on a sufficient statistic is guaranteed to be at least as good as the original estimator in terms of MSE.",
+          "isCorrect": true,
+          "rationale": "This is the essence of the Rao-Blackwell theorem."
+        },
+        {
+          "id": "d",
+          "text": "Only unbiased estimators can be improved using the Rao-Blackwell theorem.",
+          "isCorrect": false,
+          "rationale": "The theorem applies to any estimator, not just unbiased ones."
+        }
+      ],
+      "conceptId": "sufficiency",
+      "difficulty": "easy",
+      "type": "mc"
+    },
+    {
+      "id": "d2-sufficiency-mc-3",
+      "prompt": "Which of the following distributions has a sufficient statistic that is a function of the maximum of the sample?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Exponential(θ)",
+          "isCorrect": false,
+          "rationale": "For Exponential distributions, the sum of the sample is the sufficient statistic."
+        },
+        {
+          "id": "b",
+          "text": "Normal(μ, σ²)",
+          "isCorrect": false,
+          "rationale": "For Normal distributions, both the sample mean and sample variance are sufficient."
+        },
+        {
+          "id": "c",
+          "text": "Uniform(0, θ)",
+          "isCorrect": true,
+          "rationale": "For Uniform distributions, the maximum value is a sufficient statistic."
+        },
+        {
+          "id": "d",
+          "text": "Poisson(θ)",
+          "isCorrect": false,
+          "rationale": "For Poisson distributions, the sum of the sample is the sufficient statistic."
+        }
+      ],
+      "conceptId": "sufficiency",
+      "difficulty": "medium",
+      "type": "mc"
+    },
+    {
+      "id": "d2-sufficiency-mc-4",
+      "prompt": "According to the factorization criterion, which of the following is a necessary condition for a statistic to be sufficient?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "The joint distribution must be independent of the parameter.",
+          "isCorrect": false,
+          "rationale": "The joint distribution must depend on the parameter through the statistic."
+        },
+        {
+          "id": "b",
+          "text": "The joint distribution can be factored into a product of two functions, one of which depends only on the sample.",
+          "isCorrect": true,
+          "rationale": "This is the essence of the factorization criterion."
+        },
+        {
+          "id": "c",
+          "text": "The statistic must be a linear combination of the sample values.",
+          "isCorrect": false,
+          "rationale": "Sufficient statistics can take various forms, not just linear combinations."
+        },
+        {
+          "id": "d",
+          "text": "The statistic must be the sample mean.",
+          "isCorrect": false,
+          "rationale": "The sample mean is not always a sufficient statistic."
+        }
+      ],
+      "conceptId": "sufficiency",
+      "difficulty": "medium",
+      "type": "mc"
+    },
+    {
+      "id": "d2-sufficiency-mc-5",
+      "prompt": "Which of the following is a common pitfall when identifying sufficient statistics?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Assuming that all statistics derived from a sample are sufficient.",
+          "isCorrect": false,
+          "rationale": "Not all statistics are sufficient; only those meeting the criteria are."
+        },
+        {
+          "id": "b",
+          "text": "Confusing the conditions for sufficiency with those for unbiasedness.",
+          "isCorrect": true,
+          "rationale": "Sufficiency and unbiasedness are distinct concepts."
+        },
+        {
+          "id": "c",
+          "text": "Believing that sufficient statistics must be unique for a given distribution.",
+          "isCorrect": false,
+          "rationale": "A distribution can have multiple sufficient statistics."
+        },
+        {
+          "id": "d",
+          "text": "Thinking that sufficiency guarantees a lower variance for any estimator.",
+          "isCorrect": false,
+          "rationale": "Sufficiency does not guarantee lower variance, only that the information about the parameter is captured."
+        }
+      ],
+      "conceptId": "sufficiency",
+      "difficulty": "hard",
+      "type": "mc"
+    }
+  ],
+  "sa": [
+    {
+      "id": "d2-sufficiency-sa-1",
+      "prompt": "(a) Let X_1, \u001a, X_n be a random sample from a Poisson distribution with parameter \u0003B8. (b) Show that T = \u0003A3_{i=1}^{n} X_i is a sufficient statistic for \u0003B8.",
+      "modelAnswer": "(a) The likelihood function for a Poisson distribution is given by L(θ | x) = (θ^Σ x_i * e^{-nθ}) / (Π x_i!). To show T is sufficient, we can factor the likelihood function into u(x) and ν(T, θ) as follows: u(x) = 1/Π x_i! and ν(T, θ) = e^{-nθ} * θ^{Σ x_i}. Since the factorization meets the criteria, T is sufficient for θ. (b) Therefore, T = Σ X_i captures all information about θ contained in the sample.",
+      "rubric": "Correctly identifies the likelihood and shows proper factorization to establish sufficiency.",
+      "conceptId": "sufficiency",
+      "difficulty": "medium",
+      "type": "sa"
+    },
+    {
+      "id": "d2-sufficiency-sa-2",
+      "prompt": "(a) Let X_1, \u001a, X_n be a random sample from a Uniform(0, θ) distribution. (b) Identify a sufficient statistic for θ and justify your answer using the factorization criterion.",
+      "modelAnswer": "(a) The likelihood function for a Uniform(0, θ) distribution is L(θ | x) = (1/θ^n) * I(0 < x_i < θ for all i). (b) We can factor this as u(x) = 1 and ν(T, θ) = 1/θ^n where T = max(X_1, ..., X_n). Since u(x) does not depend on θ and ν depends on θ only through T, by the factorization criterion, T is a sufficient statistic for θ.",
+      "rubric": "Correctly identifies the likelihood and applies the factorization criterion to establish sufficiency.",
+      "conceptId": "sufficiency",
+      "difficulty": "medium",
+      "type": "sa"
+    }
+  ]
+}
