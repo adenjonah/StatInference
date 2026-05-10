@@ -1,120 +1,145 @@
 \documentclass[11pt]{article}
+
 \usepackage[margin=1in]{geometry}
-\usepackage{amsmath,amssymb}
-\usepackage{mathtools}
-\usepackage{parskip}
+\usepackage{amsmath}
+\usepackage{amssymb}
 
-\allowdisplaybreaks
-
-\title{STAT GU4204 --- Homework 3}
-\author{Jonah Aden}
-\date{Due: 04/28/2026}
-
-\newcommand{\E}{\mathbb{E}}
-\newcommand{\Var}{\mathrm{Var}}
-\newcommand{\Cov}{\mathrm{Cov}}
-\newcommand{\iid}{\stackrel{\text{iid}}{\sim}}
-\newcommand{\CRLB}{\mathrm{CRLB}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
 
 \begin{document}
-\maketitle
 
-%----------------------------------------------------------------
-\section*{8.5.2(a)}
-Let $X_1,\dots,X_n \iid N(\mu,\sigma^2)$ with $\mu,\sigma^2$ unknown, and $(S_n')^2 = \frac{1}{n-1}\sum(X_i-\bar X_n)^2$.
+\begin{center}
+    {\large\textbf{STAT GU4204 --- Homework 3}}\\[2pt]
+    {\small Jonah Aden \quad $\cdot$ \quad April 28, 2026}
+\end{center}
 
-By Fisher--Cochran, $\bar X_n \perp (S_n')^2$, so
+\vspace{0.5em}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 8.5.2}
+
+Since $\sigma^2$ is unknown, use the $t$-pivot
+$T = (\bar{X}_n - \mu)/(S'/\sqrt{n}) \sim t_{n-1}$, giving
 \[
-T = \sqrt{n}\,\frac{\bar X_n - \mu}{S_n'} \sim t_{n-1}
+\bar{X}_n \pm t_{(1+\gamma)/2,\,n-1}\,\frac{S'}{\sqrt{n}}.
 \]
-is a pivot. For $c = T_{n-1,(1+\gamma)/2}$, symmetry gives $\Pr(-c \le T \le c)=\gamma$. Inverting:
+The $t$-density is symmetric and unimodal, so this equal-tailed CI is also the shortest at each level.
+
+Computing from the eight data points: $\sum x_i = 24.5$, so $\bar{x} = 3.0625$; and $\sum (x_i - \bar{x})^2 = 1.83875$, giving $s'^2 = 1.83875/7 = 0.2627$, $s' = 0.5125$, and $s'/\sqrt{8} = 0.1812$.
+
+With $df = 7$ critical values:
+
+\begin{center}
+\begin{tabular}{c c c c}
+$\gamma$ & $t_{(1+\gamma)/2,\,7}$ & $t \cdot s'/\sqrt{n}$ & CI \\
+\hline
+$0.90$ & $1.895$ & $0.3434$ & $\boxed{(2.719,\ 3.406)}$ \\[2pt]
+$0.95$ & $2.365$ & $0.4285$ & $\boxed{(2.634,\ 3.491)}$ \\[2pt]
+$0.99$ & $3.499$ & $0.6340$ & $\boxed{(2.428,\ 3.697)}$ \\
+\end{tabular}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 8.5.4}
+
+With $\sigma^2$ known, the $95\%$ CI is $\bar{X}_n \pm z_{0.975}\,\sigma/\sqrt{n}$, with length $L = 2z_{0.975}\sigma/\sqrt{n}$. Using $z_{0.975} = 1.96$ and requiring $L \le 0.01\sigma$:
 \[
-\boxed{\left(\bar X_n - T_{n-1,(1+\gamma)/2}\frac{S_n'}{\sqrt{n}},\;\; \bar X_n + T_{n-1,(1+\gamma)/2}\frac{S_n'}{\sqrt{n}}\right)}
-\]
-is a $\gamma$ confidence interval for $\mu$.
-
-\bigskip
-%----------------------------------------------------------------
-\section*{8.5.4}
-Let $X_1,\dots,X_n \iid N(\mu,\sigma^2)$ with both parameters unknown.
-
-Since $(n-1)(S_n')^2/\sigma^2 \sim \chi^2_{n-1}$, this is a pivot. Using equal-tail cutoffs $a=\chi^2_{n-1,\alpha/2}$, $b=\chi^2_{n-1,1-\alpha/2}$ with $\alpha=1-\gamma$, we have $\Pr(a \le V \le b)=\gamma$. Inverting for $\sigma^2$:
-\[
-\boxed{\left(\frac{(n-1)(S_n')^2}{\chi^2_{n-1,1-\alpha/2}},\;\;\frac{(n-1)(S_n')^2}{\chi^2_{n-1,\alpha/2}}\right), \quad \alpha=1-\gamma}
-\]
-
-\bigskip
-%----------------------------------------------------------------
-\section*{8.7.11(a)}
-Let $X_1,\dots,X_n \iid N(\mu,\sigma^2)$ and $T_c = c\sum_{i=1}^n(X_i-\bar X_n)^2$.
-
-Since $\sum(X_i-\bar X_n)^2/\sigma^2 \sim \chi^2_{n-1}$, we have $\E\bigl[\sum(X_i-\bar X_n)^2\bigr]=(n-1)\sigma^2$, so
-\[
-\E[T_c] = c(n-1)\sigma^2.
-\]
-Setting $\E[T_c]=\sigma^2$ requires $c(n-1)=1$, so $\displaystyle\boxed{c = \frac{1}{n-1}}$.
-
-\bigskip
-%----------------------------------------------------------------
-\section*{8.8.2}
-Let $f(x\mid\theta)=\theta e^{-\theta x}$ for $x>0$.
-
-The log-likelihood is $\ell = \log\theta - \theta x$, giving $\dot\ell = 1/\theta - x$ and $\ddot\ell = -1/\theta^2$. Therefore
-\[
-I(\theta) = -\E[\ddot\ell] = \boxed{\dfrac{1}{\theta^2}}.
-\]
-
-\bigskip
-%----------------------------------------------------------------
-\section*{8.8.7}
-Let $X_1,\dots,X_n \iid N(\mu,\sigma^2)$ with $\mu$ known, and $\hat\sigma^2 = \frac{1}{n}\sum(X_i-\mu)^2$.
-
-\textit{Unbiasedness.} Since $\sum(X_i-\mu)^2/\sigma^2 \sim \chi^2_n$, we get $\E[\hat\sigma^2]=\sigma^2$.
-
-\textit{Variance.} Using $\Var(\chi^2_n)=2n$:
-\[
-\Var(\hat\sigma^2) = \frac{\sigma^4}{n^2}\cdot 2n = \frac{2\sigma^4}{n}.
-\]
-
-\textit{Fisher information for $\theta=\sigma^2$.} From $\ell = -\frac{1}{2}\log(2\pi\theta)-\frac{(x-\mu)^2}{2\theta}$:
-\[
-\ddot\ell = \frac{1}{2\theta^2} - \frac{(x-\mu)^2}{\theta^3} \implies I(\sigma^2) = \frac{1}{2\sigma^4}.
-\]
-
-\textit{Efficiency.} $\displaystyle\CRLB = \frac{1}{nI(\sigma^2)} = \frac{2\sigma^4}{n} = \Var(\hat\sigma^2)$.
-
-Since $\hat\sigma^2$ is unbiased and attains the CRLB, it is efficient. $\square$
-
-\bigskip
-%----------------------------------------------------------------
-\section*{8.8.17}
-Let $T$ be unbiased for $g(\theta)$ and $U_n=\sum_{i=1}^n\dot\ell(X_i,\theta)$. Under regularity conditions, $\E[U_n]=0$, $\Var(U_n)=nI(\theta)$, and differentiating $\E[T]=g(\theta)$ under the integral gives $\Cov(T,U_n)=g'(\theta)$.
-
-Applying Cauchy--Schwarz to the mean-zero variables $T-g(\theta)$ and $U_n$:
-\[
-[g'(\theta)]^2 = [\Cov(T,U_n)]^2 \le \Var(T)\cdot nI(\theta),
-\]
-which is the CRLB. Equality holds iff $T-g(\theta) = u(\theta)U_n$ a.s. Taking covariance with $U_n$:
-\[
-g'(\theta) = u(\theta)\cdot nI(\theta) \implies u(\theta) = \frac{g'(\theta)}{nI(\theta)},
-\]
-and then $\Var(T)=u(\theta)^2\cdot nI(\theta)=[g'(\theta)]^2/(nI(\theta))=\CRLB$. $\square$
-
-\bigskip
-%----------------------------------------------------------------
-\section*{9.1.1(a)}
-Let $X_1,\dots,X_n \iid N(\mu,1)$; reject $H_0:\mu=0$ when $\bar X_n > c$.
-
-Under $H_0$, $\bar X_n \sim N(0,1/n)$:
-\[
-\alpha(c) = \Pr_{\mu=0}(\bar X_n > c) = 1-\Phi(\sqrt{n}\,c).
-\]
-Under $H_1:\mu=1$, $\bar X_n \sim N(1,1/n)$:
-\[
-\beta(c) = \Pr_{\mu=1}(\bar X_n \le c) = \Phi\!\bigl(\sqrt{n}(c-1)\bigr).
+\frac{2(1.96)}{\sqrt{n}} \le 0.01
+\;\Longleftrightarrow\;
+\sqrt{n} \ge 392
+\;\Longleftrightarrow\;
+n \ge 392^2.
 \]
 \[
-\boxed{\alpha(c)=1-\Phi(\sqrt{n}\,c),\qquad \beta(c)=\Phi\!\bigl(\sqrt{n}(c-1)\bigr).}
+\boxed{n \ge 153{,}664.}
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 8.7.11}
+
+Write $\sigma_B^2 = \sigma^2$, so $\sigma_A^2 = 4\sigma^2$. By independence, $\operatorname{Var}(\bar{X}_m) = 4\sigma^2/m$ and $\operatorname{Var}(\bar{Y}_n) = \sigma^2/n$.
+
+\textbf{(a)} For any $\alpha, m, n$,
+\[
+E[\hat{\theta}] = \alpha\,\theta + (1-\alpha)\,\theta = \theta,
+\]
+so $\hat{\theta}$ is unbiased \emph{for every} $\alpha \in \mathbb{R}$ and every $m,n \ge 1$ --- the unbiasedness does not constrain any of these.
+
+\textbf{(b)}
+\[
+\operatorname{Var}(\hat{\theta}) = \frac{4\alpha^2 \sigma^2}{m} + \frac{(1-\alpha)^2\sigma^2}{n}.
+\]
+Differentiating w.r.t.\ $\alpha$ and setting to zero:
+\[
+\frac{8\alpha}{m} - \frac{2(1-\alpha)}{n} = 0
+\;\Longrightarrow\;
+8\alpha n = 2m(1-\alpha)
+\;\Longrightarrow\;
+\boxed{\alpha^* = \frac{m}{m + 4n}.}
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 8.8.2}
+
+Geometric with $f(x \mid p) = p(1-p)^x$, $x = 0,1,2,\dots$ and $E[X] = (1-p)/p$ (DeGroot \S5.5).
+\[
+\log f = \log p + x\log(1-p),
+\qquad
+\frac{\partial^2 \log f}{\partial p^2} = -\frac{1}{p^2} - \frac{x}{(1-p)^2}.
+\]
+Then
+\[
+I(p) = \frac{1}{p^2} + \frac{E[X]}{(1-p)^2}
+= \frac{1}{p^2} + \frac{1}{p(1-p)}
+= \boxed{\frac{1}{p^2(1-p)}.}
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 8.8.7}
+
+For Bernoulli$(p)$, $\log f = x\log p + (1-x)\log(1-p)$, so
+\[
+\frac{\partial^2 \log f}{\partial p^2} = -\frac{x}{p^2} - \frac{1-x}{(1-p)^2}
+\;\Longrightarrow\;
+I_1(p) = \frac{p}{p^2} + \frac{1-p}{(1-p)^2} = \frac{1}{p(1-p)}.
+\]
+For an i.i.d.\ sample of size $n$, $I_n(p) = n/[p(1-p)]$, so by the Cram\'er--Rao inequality any unbiased estimator $T$ of $p$ satisfies
+\[
+\operatorname{Var}(T) \ge \frac{1}{I_n(p)} = \frac{p(1-p)}{n}.
+\]
+Now $\bar{X}_n$ is unbiased ($E[\bar{X}_n] = p$) and
+\[
+\operatorname{Var}(\bar{X}_n) = \frac{\operatorname{Var}(X_1)}{n} = \frac{p(1-p)}{n},
+\]
+which equals the CRLB. So $\bar{X}_n$ attains the bound and is therefore efficient. \hfill $\blacksquare$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 8.8.17}
+
+For $X \sim \mathrm{Bin}(n,p)$ with $n$ known,
+\[
+\log f = \log\binom{n}{x} + x\log p + (n-x)\log(1-p),
+\quad
+\frac{\partial^2\log f}{\partial p^2} = -\frac{x}{p^2} - \frac{n-x}{(1-p)^2}.
+\]
+Note that $E[X] = np$ and $E[n-X] = n(1-p)$, so
+\[
+I(p) = \frac{np}{p^2} + \frac{n(1-p)}{(1-p)^2}
+= \frac{n}{p} + \frac{n}{1-p}
+= \frac{n[(1-p) + p]}{p(1-p)}
+= \boxed{\frac{n}{p(1-p)}.}
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 9.1.1(a)}
+
+DeGroot's exponential is parameterized by rate $\beta$: $f(x \mid \beta) = \beta e^{-\beta x}$ for $x \ge 0$. The test rejects exactly when $X \ge 1$, so
+\[
+\pi(\beta) = P_\beta(X \ge 1) = \int_1^\infty \beta e^{-\beta x}\,dx = e^{-\beta}.
+\]
+\[
+\boxed{\pi(\beta) = e^{-\beta} \quad \text{for all } \beta > 0.}
 \]
 
 \end{document}

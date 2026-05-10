@@ -1,0 +1,86 @@
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumitem}
+
+\title{STAT GU4204 --- HW4 Extra Credit (Questions)}
+\author{Jonah Aden}
+\date{Out: 05/02 --- Submission optional through 05/05 5pm grace period}
+
+\begin{document}
+
+\maketitle
+
+\noindent\textit{Note: This HW is on most recent material covered after the last HW.
+Students are responsible for the final exam from the problems in this HW.
+Submission is optional and for extra credit, graded on submission and effort.
+Not submitting will not negatively affect the course grade.}
+
+\bigskip
+
+\section*{Section 9.5}
+
+\paragraph{Problem 2.}
+Suppose that nine observations are selected at random from the normal distribution
+with unknown mean $\mu$ and unknown variance $\sigma^2$, and for these nine
+observations it is found that $\bar{X}_n = 22$ and
+$\sum_{i=1}^{n}(X_i - \bar{X}_n)^2 = 72$.
+\begin{enumerate}[label=(\alph*)]
+    \item Carry out a test of the following hypotheses at the level of significance $0.05$:
+    \[
+        H_0\colon \mu \leq 20, \qquad H_1\colon \mu > 20.
+    \]
+    \item Carry out a test of the following hypotheses at the level of significance $0.05$
+    by using the two-sided $t$ test:
+    \[
+        H_0\colon \mu = 20, \qquad H_1\colon \mu \neq 20.
+    \]
+    \item From the data, construct the observed confidence interval for $\mu$ with
+    confidence coefficient $0.95$.
+\end{enumerate}
+
+\paragraph{Problem 4.}
+Suppose that a random sample of eight observations $X_1, \dots, X_8$ is taken from
+the normal distribution with unknown mean $\mu$ and unknown variance $\sigma^2$,
+and it is desired to test the following hypotheses:
+\[
+    H_0\colon \mu = 0, \qquad H_1\colon \mu \neq 0.
+\]
+Suppose also that the sample data are such that $\sum_{i=1}^{8} X_i = -11.2$ and
+$\sum_{i=1}^{8} X_i^2 = 43.7$. If a symmetric $t$ test is performed at the level of
+significance $0.10$ so that each tail of the critical region has probability $0.05$,
+should the hypothesis $H_0$ be rejected or not?
+
+\section*{Section 9.6}
+
+\paragraph{Problem 1.}
+In Example 9.6.3, we discussed Roman pottery found at two different locations in
+Great Britain. There were samples found at other locations as well. One other
+location, Island Thorns, had five samples $X_1, \dots, X_n$ with an average
+aluminum oxide percentage of $\bar{X} = 18.18$ with
+$\sum_{i=1}^{5}(X_i - \bar{X})^2 = 12.61$. Let $Y_1, \dots, Y_5$ be the five sample
+measurements from Ashley Rails in Example 9.6.3. Test the null hypothesis that the
+mean aluminum oxide percentages at Ashley Rails and Island Thorns are the same
+versus the alternative that they are different at level $\alpha_0 = 0.05$.
+
+\section*{Additional Question}
+
+\paragraph{Q1.}
+Consider the pdf and the hypothesis test given in the textbook in exercise 9.10: \#4.
+The pdf is:
+\[
+    f(x \mid \theta) =
+    \begin{cases}
+        2(1-\theta)x + \theta, & 0 \leq x \leq 1, \\
+        0, & \text{otherwise},
+    \end{cases}
+\]
+where the value of $\theta$ is unknown ($0 \leq \theta \leq 2$). Given this
+hypothesis test rejects $H_0$ when $x > 1/3$, compute the probabilities of Type~I
+and Type~II errors.
+
+\end{document}
