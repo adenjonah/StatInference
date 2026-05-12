@@ -175,6 +175,22 @@ export const ChatMessageSchema = z.object({
 });
 export type ChatMessage = z.infer<typeof ChatMessageSchema>;
 
+// ----- Flashcards -----
+
+export const FlashcardSchema = z.object({
+  id: z.string(),
+  type: z.enum(["tf", "definition", "statement"]),
+  category: z.string(),
+  front: z.string(),
+  back: z.string(),
+});
+export type Flashcard = z.infer<typeof FlashcardSchema>;
+
+export const FlashcardDeckSchema = z.object({
+  cards: z.array(FlashcardSchema),
+});
+export type FlashcardDeck = z.infer<typeof FlashcardDeckSchema>;
+
 // ----- Grading API -----
 
 export const GradeRequestSchema = z.object({

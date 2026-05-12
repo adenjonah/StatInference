@@ -62,7 +62,7 @@ export default async function Home() {
 
         <DashboardClient manifest={manifest} />
 
-        <section className="mt-10 grid gap-4 md:grid-cols-2">
+        <section className="mt-10 grid gap-4 md:grid-cols-3">
           <Card>
             <CardHeader>
               <CardTitle>Start here</CardTitle>
@@ -74,7 +74,16 @@ export default async function Home() {
           </Card>
           <Card>
             <CardHeader>
-              <CardTitle>Jump to mock final</CardTitle>
+              <CardTitle>Flashcards</CardTitle>
+              <CardDescription>T/F + definitions + theorem statements for rapid review.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Link href="/flashcards"><Button variant="outline">Open deck</Button></Link>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>Mock final</CardTitle>
               <CardDescription>Variant E is the most-likely prediction of Baydil&apos;s final.</CardDescription>
             </CardHeader>
             <CardContent>

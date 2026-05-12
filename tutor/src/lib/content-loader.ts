@@ -3,6 +3,8 @@ import path from "node:path";
 import {
   ExamFile,
   ExamFileSchema,
+  FlashcardDeck,
+  FlashcardDeckSchema,
   QuizFile,
   QuizFileSchema,
   StageManifest,
@@ -30,6 +32,16 @@ export async function loadQuestions(filename: string): Promise<QuizFile | null> 
   try {
     const raw = await fs.readFile(p, "utf8");
     return QuizFileSchema.parse(JSON.parse(raw));
+  } catch {
+    return null;
+  }
+}
+
+export async function loadFlashcards(): Promise<FlashcardDeck | null> {
+  const p = path.join(DATA_DIR, "flashcards.json");
+  try {
+    const raw = await fs.readFile(p, "utf8");
+    return FlashcardDeckSchema.parse(JSON.parse(raw));
   } catch {
     return null;
   }

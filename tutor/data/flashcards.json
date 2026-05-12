@@ -1,0 +1,74 @@
+{
+  "cards": [
+    {
+      "id": "fc-001",
+      "type": "tf",
+      "category": "convergence",
+      "front": "**T/F:** If $Z_n \\xrightarrow{d} Z$, then $Z_n \\xrightarrow{P} Z$.",
+      "back": "**FALSE.** Convergence in distribution does *not* imply convergence in probability in general. The implication only goes the other way (prob ⟹ dist), with one exception: if the limit $Z$ is a constant, then dist ⟹ prob also holds."
+    },
+    {
+      "id": "fc-002",
+      "type": "tf",
+      "category": "mle",
+      "front": "**T/F:** The MLE is always an unbiased estimator of the parameter.",
+      "back": "**FALSE.** Classic counterexample: $X_1,\\ldots,X_n \\sim N(\\mu, \\sigma^2)$. The MLE of $\\sigma^2$ is $\\hat\\sigma^2 = \\frac{1}{n}\\sum(X_i - \\bar X)^2$, which is biased: $E[\\hat\\sigma^2] = \\frac{n-1}{n}\\sigma^2$. Bessel's correction gives the unbiased $s^2 = \\frac{1}{n-1}\\sum(X_i - \\bar X)^2$."
+    },
+    {
+      "id": "fc-003",
+      "type": "tf",
+      "category": "consistency",
+      "front": "**T/F:** If $\\hat\\theta_n$ is consistent for $\\theta$, then $\\hat\\theta_n$ is unbiased for $\\theta$ for every finite $n$.",
+      "back": "**FALSE.** Consistency is an *asymptotic* statement ($\\hat\\theta_n \\xrightarrow{P} \\theta$ as $n \\to \\infty$); it says nothing about bias at finite $n$. The MLE of $\\sigma^2$ above is consistent but biased for every finite $n$."
+    },
+    {
+      "id": "fc-004",
+      "type": "tf",
+      "category": "confidence-intervals",
+      "front": "**T/F:** A 95% confidence interval $(2.3, 4.7)$ for $\\mu$ means $P(\\mu \\in (2.3, 4.7)) = 0.95$.",
+      "back": "**FALSE.** Once the data is observed, $(2.3, 4.7)$ is a fixed interval and $\\mu$ is a fixed unknown — the probability is either 0 or 1. The correct interpretation: the *procedure* that produced the interval traps the true $\\mu$ with probability 0.95 *before* the data is observed. Equivalently: 95% of intervals constructed this way will contain $\\mu$."
+    },
+    {
+      "id": "fc-005",
+      "type": "tf",
+      "category": "sampling-distributions",
+      "front": "**T/F:** For $X_1,\\ldots,X_n$ iid $N(\\mu, \\sigma^2)$, the sample mean $\\bar X_n$ and sample variance $s_n^2$ are independent.",
+      "back": "**TRUE.** Special property of the normal distribution (Basu / DeGroot Prop 6.3). This independence is what makes the $t$-statistic $U_n = \\frac{\\sqrt n(\\bar X_n - \\mu)}{s_n}$ actually have a $t_{n-1}$ distribution — numerator and denominator must be independent."
+    },
+    {
+      "id": "fc-006",
+      "type": "tf",
+      "category": "cramer-rao",
+      "front": "**T/F:** The Cramér–Rao Lower Bound applies to $X_1, \\ldots, X_n$ iid Uniform$[0, \\theta]$.",
+      "back": "**FALSE.** Regularity condition **(A.1)** requires that the support of $f(x;\\theta)$ does *not* depend on $\\theta$. For Uniform$[0,\\theta]$ the support $[0,\\theta]$ depends on $\\theta$, so (A.1) fails and the CRLB is inapplicable. The MVUE $(1 + 1/n) X_{(n)}$ in fact has MSE *below* what the CRLB would predict."
+    },
+    {
+      "id": "fc-007",
+      "type": "tf",
+      "category": "estimation",
+      "front": "**T/F:** A biased estimator can have lower MSE than every unbiased estimator of the same parameter.",
+      "back": "**TRUE.** Bias–variance tradeoff: $\\text{MSE} = \\text{Var} + \\text{bias}^2$. A small amount of bias can buy a much larger reduction in variance. Classic example: for $X_i$ iid Uniform$[0,\\theta]$, the biased estimator $X_{(n)}$ has *much* lower MSE than the unbiased $2\\bar X$ (the MoM estimator)."
+    },
+    {
+      "id": "fc-008",
+      "type": "definition",
+      "category": "sufficiency",
+      "front": "**Define:** What does it mean for a statistic $T = \\varphi(X_1, \\ldots, X_n)$ to be **sufficient** for $\\theta$? State the Fisher–Neyman Factorization Criterion.",
+      "back": "$T$ is **sufficient for $\\theta$** if the conditional distribution of $\\mathbf X$ given $T = t$ does not depend on $\\theta$.\n\nEquivalently (**Factorization Criterion**), $T$ is sufficient iff the joint density factorizes as\n$$ f_n(\\mathbf x;\\theta) = u(\\mathbf x)\\,\\nu\\!\\left(\\varphi(\\mathbf x),\\,\\theta\\right) $$\nwhere $u$ depends only on the data and $\\nu$ depends on $\\theta$ only through $T$."
+    },
+    {
+      "id": "fc-009",
+      "type": "definition",
+      "category": "hypothesis-testing",
+      "front": "**Define:** What is the **$p$-value** of a hypothesis test? State the decision rule.",
+      "back": "The **$p$-value** is the smallest significance level $\\alpha_0$ at which the observed data would lead to rejecting $H_0$. Equivalently, the *observed level of significance*.\n\n**Decision rule:** reject $H_0$ at level $\\alpha_0 \\iff p\\text{-value} \\le \\alpha_0$.\n\nFor a two-sided test the $p$-value picks up a factor of 2: $p = 2[1 - F_{T|H_0}(|t_{\\text{obs}}|)]$."
+    },
+    {
+      "id": "fc-010",
+      "type": "statement",
+      "category": "hypothesis-testing",
+      "front": "**State:** The **Neyman–Pearson Lemma**.",
+      "back": "For testing **simple** $H_0: \\theta = \\theta_0$ vs **simple** $H_1: \\theta = \\theta_1$, any test $\\delta'$ of the form\n$$ \\text{reject } H_0 \\iff f_1(\\mathbf x) > k\\, f_0(\\mathbf x), \\quad \\text{accept} \\iff f_1(\\mathbf x) < k\\, f_0(\\mathbf x) $$\n(with $k > 0$ chosen so the test has the desired size $\\alpha_0$) is **most powerful**: any other test $\\delta$ with $\\alpha(\\delta) \\le \\alpha(\\delta')$ satisfies $\\beta(\\delta) \\ge \\beta(\\delta')$.\n\nThe optimal test rejects when the *likelihood ratio* $\\Lambda = f_1/f_0$ is large."
+    }
+  ]
+}
