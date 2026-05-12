@@ -191,6 +191,16 @@ export const FlashcardDeckSchema = z.object({
 });
 export type FlashcardDeck = z.infer<typeof FlashcardDeckSchema>;
 
+export const FlashcardsStateSchema = z.object({
+  index: z.number().int().min(0).default(0),
+  seenIds: z.array(z.string()).default([]),
+  category: z.string().default("__all__"),
+  typeFilter: z.string().default("__all__"),
+  shuffledOrderIds: z.array(z.string()).nullable().default(null),
+  updatedAt: z.string().default(() => new Date().toISOString()),
+});
+export type FlashcardsState = z.infer<typeof FlashcardsStateSchema>;
+
 // ----- Grading API -----
 
 export const GradeRequestSchema = z.object({

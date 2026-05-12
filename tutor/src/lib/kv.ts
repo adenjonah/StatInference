@@ -3,6 +3,7 @@ import {
   ChatMessage,
   DailyReport,
   ExamState,
+  FlashcardsState,
   Mastery,
   Profile,
   StageProgress,
@@ -40,6 +41,7 @@ const k = {
   dailyReports: () => `user:${USER_ID}:dailyReports`,
   chat: (stageId: string) => `user:${USER_ID}:chat:${stageId}`,
   exam: (variantId: string) => `user:${USER_ID}:exam:${variantId}`,
+  flashcards: () => `user:${USER_ID}:flashcards`,
 };
 
 // ----- Profile -----
@@ -136,6 +138,16 @@ export async function getExamState(variantId: string): Promise<ExamState | null>
 
 export async function setExamState(variantId: string, state: ExamState): Promise<void> {
   await kv().set(k.exam(variantId), state);
+}
+
+// ----- Flashcards state -----
+
+export async function getFlashcardsState(): Promise<FlashcardsState | null> {
+  return (await kv().get<FlashcardsState>(k.flashcards())) ?? null;
+}
+
+export async function setFlashcardsState(state: FlashcardsState): Promise<void> {
+  await kv().set(k.flashcards(), state);
 }
 
 // ----- Smoke test -----
