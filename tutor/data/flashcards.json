@@ -2,73 +2,773 @@
   "cards": [
     {
       "id": "fc-001",
-      "type": "tf",
-      "category": "convergence",
-      "front": "**T/F:** If $Z_n \\xrightarrow{d} Z$, then $Z_n \\xrightarrow{P} Z$.",
-      "back": "**FALSE.** Convergence in distribution does *not* imply convergence in probability in general. The implication only goes the other way (prob ⟹ dist), with one exception: if the limit $Z$ is a constant, then dist ⟹ prob also holds."
+      "type": "definition",
+      "category": "fundamentals",
+      "front": "**Define:** Statistic.",
+      "back": "**Plain English:** A number (or vector) you compute from your data — like the average or the maximum. The key rule: it must depend **only on the data**, never on an unknown parameter.\n\n**Formal:** $T = \\varphi(X_1, \\ldots, X_n)$ where $\\varphi$ does not depend on any unknown $\\theta$.\n\n**Example:** $\\bar X_n = \\frac{1}{n}\\sum X_i$ ✓ statistic. $\\bar X_n - \\mu$ ✗ not a statistic (uses unknown $\\mu$)."
     },
     {
       "id": "fc-002",
-      "type": "tf",
-      "category": "mle",
-      "front": "**T/F:** The MLE is always an unbiased estimator of the parameter.",
-      "back": "**FALSE.** Classic counterexample: $X_1,\\ldots,X_n \\sim N(\\mu, \\sigma^2)$. The MLE of $\\sigma^2$ is $\\hat\\sigma^2 = \\frac{1}{n}\\sum(X_i - \\bar X)^2$, which is biased: $E[\\hat\\sigma^2] = \\frac{n-1}{n}\\sigma^2$. Bessel's correction gives the unbiased $s^2 = \\frac{1}{n-1}\\sum(X_i - \\bar X)^2$."
+      "type": "definition",
+      "category": "fundamentals",
+      "front": "**Define:** Parameter + parameter space $\\Omega$.",
+      "back": "**Plain English:** A parameter is the unknown thing you want to learn about (like the true mean $\\mu$ of a population). The parameter space is the set of all values it could possibly take.\n\n**Formal:** $\\theta$ is the parameter; $\\Omega$ is the set of all admissible $\\theta$.\n\n**Example:** For $N(\\mu, \\sigma^2)$, $\\theta = (\\mu, \\sigma^2)$ and $\\Omega = \\mathbb{R} \\times (0, \\infty)$."
     },
     {
       "id": "fc-003",
-      "type": "tf",
-      "category": "consistency",
-      "front": "**T/F:** If $\\hat\\theta_n$ is consistent for $\\theta$, then $\\hat\\theta_n$ is unbiased for $\\theta$ for every finite $n$.",
-      "back": "**FALSE.** Consistency is an *asymptotic* statement ($\\hat\\theta_n \\xrightarrow{P} \\theta$ as $n \\to \\infty$); it says nothing about bias at finite $n$. The MLE of $\\sigma^2$ above is consistent but biased for every finite $n$."
+      "type": "definition",
+      "category": "fundamentals",
+      "front": "**Define:** Estimator vs estimate.",
+      "back": "**Plain English:** An estimator is a *rule* (a random variable, since it depends on random data). An estimate is the *number* you get after plugging in observed values.\n\n**Estimator:** $\\hat\\theta_n = \\varphi(X_1, \\ldots, X_n)$ — a random variable.\n\n**Estimate:** $\\varphi(x_1, \\ldots, x_n)$ — the realized number.\n\n**Example:** $\\bar X$ is an estimator of $\\mu$; if data is $(2, 4, 6)$, the estimate is $4$."
     },
     {
       "id": "fc-004",
-      "type": "tf",
-      "category": "confidence-intervals",
-      "front": "**T/F:** A 95% confidence interval $(2.3, 4.7)$ for $\\mu$ means $P(\\mu \\in (2.3, 4.7)) = 0.95$.",
-      "back": "**FALSE.** Once the data is observed, $(2.3, 4.7)$ is a fixed interval and $\\mu$ is a fixed unknown — the probability is either 0 or 1. The correct interpretation: the *procedure* that produced the interval traps the true $\\mu$ with probability 0.95 *before* the data is observed. Equivalently: 95% of intervals constructed this way will contain $\\mu$."
+      "type": "definition",
+      "category": "fundamentals",
+      "front": "**Define:** Random sample (iid).",
+      "back": "**Plain English:** A set of $n$ observations that are independent and identically distributed (iid) — they share the same distribution and don't influence each other.\n\n**Formal:** $X_1, \\ldots, X_n$ are iid from $f(\\cdot; \\theta)$ if their joint density is $f_n(\\mathbf x; \\theta) = \\prod_{i=1}^n f(x_i; \\theta)$.\n\n**On exams:** Baydil writes \"Let $X_1, \\ldots, X_n$ be a random sample from [distribution]\" — this is the iid setup."
     },
     {
       "id": "fc-005",
-      "type": "tf",
-      "category": "sampling-distributions",
-      "front": "**T/F:** For $X_1,\\ldots,X_n$ iid $N(\\mu, \\sigma^2)$, the sample mean $\\bar X_n$ and sample variance $s_n^2$ are independent.",
-      "back": "**TRUE.** Special property of the normal distribution (Basu / DeGroot Prop 6.3). This independence is what makes the $t$-statistic $U_n = \\frac{\\sqrt n(\\bar X_n - \\mu)}{s_n}$ actually have a $t_{n-1}$ distribution — numerator and denominator must be independent."
+      "type": "definition",
+      "category": "fundamentals",
+      "front": "**Define:** Sample mean.",
+      "back": "$$ \\bar X_n = \\frac{1}{n} \\sum_{i=1}^n X_i. $$\n\n**Key properties for iid $X_i$ with $E[X] = \\mu$, $\\text{Var}(X) = \\sigma^2$:**\n- $E[\\bar X_n] = \\mu$ (unbiased)\n- $\\text{Var}(\\bar X_n) = \\sigma^2 / n$ (variance shrinks with $n$)\n- $\\bar X_n \\xrightarrow{P} \\mu$ (WLLN)"
     },
     {
       "id": "fc-006",
-      "type": "tf",
-      "category": "cramer-rao",
-      "front": "**T/F:** The Cramér–Rao Lower Bound applies to $X_1, \\ldots, X_n$ iid Uniform$[0, \\theta]$.",
-      "back": "**FALSE.** Regularity condition **(A.1)** requires that the support of $f(x;\\theta)$ does *not* depend on $\\theta$. For Uniform$[0,\\theta]$ the support $[0,\\theta]$ depends on $\\theta$, so (A.1) fails and the CRLB is inapplicable. The MVUE $(1 + 1/n) X_{(n)}$ in fact has MSE *below* what the CRLB would predict."
+      "type": "definition",
+      "category": "fundamentals",
+      "front": "**Define:** Sample variance $s_n^2$.",
+      "back": "$$ s_n^2 = \\frac{1}{n - 1} \\sum_{i=1}^n (X_i - \\bar X_n)^2. $$\n\n**Plain English:** Average squared deviation from the mean, with denominator $n-1$ instead of $n$ (Bessel's correction).\n\n**Why $n-1$?** Makes $s_n^2$ **unbiased** for $\\sigma^2$: $E[s_n^2] = \\sigma^2$. The MLE version with $n$ in the denominator is biased."
     },
     {
       "id": "fc-007",
-      "type": "tf",
-      "category": "estimation",
-      "front": "**T/F:** A biased estimator can have lower MSE than every unbiased estimator of the same parameter.",
-      "back": "**TRUE.** Bias–variance tradeoff: $\\text{MSE} = \\text{Var} + \\text{bias}^2$. A small amount of bias can buy a much larger reduction in variance. Classic example: for $X_i$ iid Uniform$[0,\\theta]$, the biased estimator $X_{(n)}$ has *much* lower MSE than the unbiased $2\\bar X$ (the MoM estimator)."
+      "type": "definition",
+      "category": "fundamentals",
+      "front": "**Define:** Bias of an estimator.",
+      "back": "$$ b(T_n) = E[T_n] - g(\\theta). $$\n\n**Plain English:** On average across many samples, how far off is your estimator from the truth?\n\n**Unbiased** means $b = 0$ for **all** $\\theta \\in \\Omega$ — the estimator hits the target on average, no matter what the true parameter is."
     },
     {
       "id": "fc-008",
       "type": "definition",
-      "category": "sufficiency",
-      "front": "**Define:** What does it mean for a statistic $T = \\varphi(X_1, \\ldots, X_n)$ to be **sufficient** for $\\theta$? State the Fisher–Neyman Factorization Criterion.",
-      "back": "$T$ is **sufficient for $\\theta$** if the conditional distribution of $\\mathbf X$ given $T = t$ does not depend on $\\theta$.\n\nEquivalently (**Factorization Criterion**), $T$ is sufficient iff the joint density factorizes as\n$$ f_n(\\mathbf x;\\theta) = u(\\mathbf x)\\,\\nu\\!\\left(\\varphi(\\mathbf x),\\,\\theta\\right) $$\nwhere $u$ depends only on the data and $\\nu$ depends on $\\theta$ only through $T$."
+      "category": "fundamentals",
+      "front": "**Define:** MSE (Mean Squared Error) + bias-variance decomposition.",
+      "back": "$$ \\text{MSE}(T_n, g(\\theta)) = E[(T_n - g(\\theta))^2] = \\text{Var}(T_n) + [\\text{bias}(T_n)]^2. $$\n\n**Plain English:** How wrong is the estimator on average, in squared error? Two components: how spread out it is (variance) and how off-center it is (bias).\n\n**For unbiased estimators:** MSE = Var (just variance)."
     },
     {
       "id": "fc-009",
       "type": "definition",
-      "category": "hypothesis-testing",
-      "front": "**Define:** What is the **$p$-value** of a hypothesis test? State the decision rule.",
-      "back": "The **$p$-value** is the smallest significance level $\\alpha_0$ at which the observed data would lead to rejecting $H_0$. Equivalently, the *observed level of significance*.\n\n**Decision rule:** reject $H_0$ at level $\\alpha_0 \\iff p\\text{-value} \\le \\alpha_0$.\n\nFor a two-sided test the $p$-value picks up a factor of 2: $p = 2[1 - F_{T|H_0}(|t_{\\text{obs}}|)]$."
+      "category": "estimation",
+      "front": "**Define:** Consistency.",
+      "back": "**Plain English:** As you collect more data, the estimator gets closer to the truth.\n\n**Formal:** $\\hat\\theta_n$ is **consistent** for $\\theta$ if\n$$ \\hat\\theta_n \\xrightarrow{P} \\theta \\text{ as } n \\to \\infty. $$\n\n**Critical:** Consistency is *asymptotic*. It says **nothing** about finite-$n$ bias. The MLE of $\\sigma^2$ is consistent but biased."
     },
     {
       "id": "fc-010",
+      "type": "definition",
+      "category": "convergence",
+      "front": "**Define:** Convergence in probability ($Z_n \\xrightarrow{P} Z$).",
+      "back": "**Plain English:** For any tiny tolerance $\\varepsilon$, the chance that $Z_n$ is more than $\\varepsilon$ away from $Z$ shrinks to 0.\n\n**Formal:** For every $\\varepsilon > 0$,\n$$ \\lim_{n \\to \\infty} P(|Z_n - Z| > \\varepsilon) = 0. $$"
+    },
+    {
+      "id": "fc-011",
+      "type": "definition",
+      "category": "convergence",
+      "front": "**Define:** Convergence in distribution ($Z_n \\xrightarrow{d} Z$).",
+      "back": "**Plain English:** The shape of $Z_n$'s distribution approaches the shape of $Z$'s distribution.\n\n**Formal:** $F_n(u) \\to F(u)$ at every continuity point $u$ of $F$, where $F_n, F$ are the CDFs of $Z_n, Z$.\n\n**Key:** Convergence in distribution is **weaker** than convergence in probability. Prob ⟹ dist, but **NOT** the reverse (unless the limit is constant)."
+    },
+    {
+      "id": "fc-012",
+      "type": "statement",
+      "category": "convergence",
+      "front": "**State:** Weak Law of Large Numbers (WLLN).",
+      "back": "If $X_1, X_2, \\ldots$ are iid with finite mean $\\mu$, then\n$$ \\bar X_n \\xrightarrow{P} \\mu. $$\n\n**Plain English:** Sample average converges (in probability) to the true mean. As $n$ grows, $\\bar X_n$ becomes a great estimator.\n\n**Conditions needed:** iid + finite mean. (Proof typically uses Chebyshev when variance also exists.)"
+    },
+    {
+      "id": "fc-013",
+      "type": "statement",
+      "category": "convergence",
+      "front": "**State:** Central Limit Theorem (CLT).",
+      "back": "If $X_1, X_2, \\ldots$ iid with mean $\\mu$, finite variance $\\sigma^2$, then\n$$ \\frac{\\sqrt n (\\bar X_n - \\mu)}{\\sigma} \\xrightarrow{d} N(0, 1). $$\n\n**Plain English:** No matter what shape your original distribution has, the *standardized* sample mean is approximately standard normal for large $n$.\n\n**Conditions:** iid + finite variance. Does **not** require $X_i$ to be normal."
+    },
+    {
+      "id": "fc-014",
+      "type": "statement",
+      "category": "convergence",
+      "front": "**State:** Continuous Mapping Theorem (CMT).",
+      "back": "If $Z_n \\xrightarrow{P} b$ and $g$ is continuous at $b$, then $g(Z_n) \\xrightarrow{P} g(b)$.\n\nSame works for $\\xrightarrow{d}$: $Z_n \\xrightarrow{d} Z$ + $g$ continuous ⟹ $g(Z_n) \\xrightarrow{d} g(Z)$.\n\n**Use:** if $\\bar X_n \\xrightarrow{P} \\mu$, then $1/\\bar X_n \\xrightarrow{P} 1/\\mu$ (provided $\\mu \\neq 0$)."
+    },
+    {
+      "id": "fc-015",
+      "type": "statement",
+      "category": "convergence",
+      "front": "**State:** Slutsky's Theorem.",
+      "back": "If $X_n \\xrightarrow{d} X$ and $Y_n \\xrightarrow{P} c$ (constant), then\n$$ X_n + Y_n \\xrightarrow{d} X + c, \\quad X_n Y_n \\xrightarrow{d} cX, \\quad X_n / Y_n \\xrightarrow{d} X/c \\text{ (if } c \\neq 0\\text{)}. $$\n\n**Use:** lets you replace a parameter with a consistent estimator and keep CLT-style limits working."
+    },
+    {
+      "id": "fc-016",
+      "type": "statement",
+      "category": "inequalities",
+      "front": "**State:** Markov's inequality.",
+      "back": "If $W \\ge 0$ and $t > 0$:\n$$ P(W \\ge t) \\le \\frac{E[W]}{t}. $$\n\n**Plain English:** A non-negative random variable can't have a huge probability of being far above its mean.\n\n**Requires:** $W$ non-negative."
+    },
+    {
+      "id": "fc-017",
+      "type": "statement",
+      "category": "inequalities",
+      "front": "**State:** Chebyshev's inequality.",
+      "back": "For any RV $Z$ with finite variance and $\\tau > 0$:\n$$ P(|Z - E[Z]| \\ge \\tau) \\le \\frac{\\text{Var}(Z)}{\\tau^2}. $$\n\n**Plain English:** It's unlikely $Z$ falls far from its mean — and \"unlikely\" is quantified by variance.\n\n**For sample mean:** $P(|\\bar X_n - \\mu| \\ge \\tau) \\le \\frac{\\sigma^2}{n\\tau^2}$ — use this to solve for sample size $n$."
+    },
+    {
+      "id": "fc-018",
+      "type": "statement",
+      "category": "delta-method",
+      "front": "**State:** Delta Method.",
+      "back": "If $\\sqrt n (Z_n - \\theta) \\xrightarrow{d} N(0, \\sigma^2)$ and $g$ is differentiable at $\\theta$ with $g'(\\theta) \\neq 0$, then\n$$ \\sqrt n (g(Z_n) - g(\\theta)) \\xrightarrow{d} N(0, \\sigma^2 [g'(\\theta)]^2). $$\n\n**Plain English:** Asymptotically-normal estimators stay asymptotically normal after a smooth transformation — variance scales by the squared derivative.\n\n**Critical:** $g'(\\theta) \\neq 0$. If $g'(\\theta) = 0$, you need a 2nd-order version."
+    },
+    {
+      "id": "fc-019",
+      "type": "memorize",
+      "category": "conventions",
+      "front": "**Memorize (DeGroot):** Exponential$(\\theta)$ uses the *rate* parameterization.",
+      "back": "$$ f(x; \\theta) = \\theta e^{-\\theta x}, \\quad x > 0. $$\n\n**Mean** $= 1/\\theta$. **Variance** $= 1/\\theta^2$.\n\n**Baydil trap:** people commonly think of Exp(θ) with mean θ (scale parameterization). DeGroot uses **rate** — so if exam says $\\text{Exp}(\\theta)$, $E[X] = 1/\\theta$."
+    },
+    {
+      "id": "fc-020",
+      "type": "memorize",
+      "category": "conventions",
+      "front": "**Memorize (DeGroot):** Geometric$(p)$ starts at 0.",
+      "back": "$$ P(X = x) = p (1-p)^x, \\quad x = 0, 1, 2, \\ldots $$\n\n**Mean** $= (1-p)/p$. **Variance** $= (1-p)/p^2$.\n\n**Baydil trap:** Some textbooks define Geometric to start at 1 (number of trials to first success). DeGroot starts at 0 (number of failures before first success)."
+    },
+    {
+      "id": "fc-021",
+      "type": "memorize",
+      "category": "conventions",
+      "front": "**Memorize:** $\\chi^2_d = \\text{Gamma}(d/2, 1/2)$ (rate).",
+      "back": "$\\chi^2_d$ with $d$ degrees of freedom equals Gamma with shape $d/2$ and rate $1/2$.\n\n**Mean** $= d$. **Variance** $= 2d$.\n\n**Connection:** If $Z_1, \\ldots, Z_d$ iid $N(0,1)$, then $\\sum Z_i^2 \\sim \\chi^2_d$. Also: $\\sum$ of independent $\\chi^2_{m_i}$ is $\\chi^2_{\\sum m_i}$."
+    },
+    {
+      "id": "fc-022",
+      "type": "definition",
+      "category": "sampling-distributions",
+      "front": "**Define:** $t$-distribution.",
+      "back": "$$ T = \\frac{Z}{\\sqrt{V / m}} \\sim t_m $$\nwhere $Z \\sim N(0,1)$, $V \\sim \\chi^2_m$, and **$Z \\perp V$** (independent).\n\n**Properties:**\n- Symmetric around 0\n- Heavier tails than normal\n- $t_m \\to N(0,1)$ as $m \\to \\infty$\n- Used when $\\sigma$ is unknown (you plug in $s$ for $\\sigma$)"
+    },
+    {
+      "id": "fc-023",
+      "type": "definition",
+      "category": "sampling-distributions",
+      "front": "**Define:** $F$-distribution.",
+      "back": "$$ F_{m,n} = \\frac{Y/m}{W/n} $$\nwhere $Y \\sim \\chi^2_m$, $W \\sim \\chi^2_n$, and **$Y \\perp W$**.\n\n**Use:** ratios of variances. The two-sample $F$-test statistic is\n$$ V = \\frac{S_X^2/(m-1)}{S_Y^2/(n-1)} \\sim F_{m-1, n-1} \\text{ under equal variances.} $$\n\n**Reciprocal:** $1/F_{m,n} \\sim F_{n,m}$ (swap dfs)."
+    },
+    {
+      "id": "fc-024",
+      "type": "statement",
+      "category": "sampling-distributions",
+      "front": "**Memorize:** For iid $N(\\mu, \\sigma^2)$, $\\bar X_n \\perp s_n^2$.",
+      "back": "**The sample mean and sample variance are independent** in the normal model (Basu / DeGroot Prop 6.3). This is a *special* property of the normal — does not hold for most other distributions.\n\n**Why it matters:** This independence is exactly what makes\n$$ \\frac{\\sqrt n (\\bar X_n - \\mu)}{s_n} \\sim t_{n-1}. $$\nThe $t$-stat's numerator (normal) and denominator (chi-squared-based) must be independent for the ratio to have a $t$ distribution."
+    },
+    {
+      "id": "fc-025",
+      "type": "statement",
+      "category": "sampling-distributions",
+      "front": "**Memorize:** For iid $N(\\mu, \\sigma^2)$, $\\frac{(n-1) s_n^2}{\\sigma^2} \\sim \\chi^2_{n-1}$.",
+      "back": "Equivalently, $\\sum (X_i - \\bar X_n)^2 / \\sigma^2 \\sim \\chi^2_{n-1}$.\n\n**Why $n - 1$ degrees of freedom?** Replacing $\\mu$ with $\\bar X_n$ in the sum imposes one linear constraint ($\\sum(X_i - \\bar X) = 0$), costing one df.\n\n**Use:** foundation for CIs and tests about $\\sigma^2$."
+    },
+    {
+      "id": "fc-026",
+      "type": "definition",
+      "category": "mle",
+      "front": "**Define:** Likelihood + log-likelihood.",
+      "back": "Given iid data $X_1, \\ldots, X_n$ from $f(\\cdot; \\theta)$:\n\n**Likelihood** (function of $\\theta$, with data fixed):\n$$ L(\\theta) = \\prod_{i=1}^n f(X_i; \\theta). $$\n\n**Log-likelihood:**\n$$ \\ell(\\theta) = \\log L(\\theta) = \\sum_{i=1}^n \\log f(X_i; \\theta). $$\n\nWe maximize the log because sums are easier to differentiate than products."
+    },
+    {
+      "id": "fc-027",
+      "type": "definition",
+      "category": "mle",
+      "front": "**Define:** Maximum Likelihood Estimator (MLE).",
+      "back": "$$ \\hat\\theta_n = \\arg\\max_{\\theta \\in \\Omega} L(\\theta). $$\n\n**Recipe:**\n1. Write down $L(\\theta)$ (or $\\ell(\\theta)$).\n2. Take derivative $\\dot\\ell(\\theta)$.\n3. Set $\\dot\\ell(\\theta) = 0$ — this is the **score equation**.\n4. Solve for $\\theta$ to get $\\hat\\theta_n$.\n5. Verify $\\ddot\\ell(\\hat\\theta_n) < 0$ (concavity / maximum).\n\n**Caution:** May not exist, may not be unique, may be biased."
+    },
+    {
+      "id": "fc-028",
+      "type": "statement",
+      "category": "mle",
+      "front": "**State:** MLE Invariance.",
+      "back": "If $\\hat\\theta_n$ is the MLE of $\\theta$, then for any function $g$, **$g(\\hat\\theta_n)$ is the MLE of $g(\\theta)$**.\n\n**Example:** MLE of $\\theta$ in Exp$(\\theta)$ (rate) is $\\hat\\theta = 1/\\bar X$, so MLE of the mean $\\mu = 1/\\theta$ is $1/\\hat\\theta = \\bar X$.\n\nWorks even if $g$ is not invertible."
+    },
+    {
+      "id": "fc-029",
+      "type": "memorize",
+      "category": "mle",
+      "front": "**Memorize:** Common MLEs (must know cold for the exam).",
+      "back": "| Distribution | MLE |\n|---|---|\n| Bernoulli$(p)$ | $\\hat p = \\bar X$ |\n| Binomial$(n, p)$ | $\\hat p = \\bar X / n$ |\n| Poisson$(\\lambda)$ | $\\hat\\lambda = \\bar X$ |\n| Exp$(\\theta)$ rate | $\\hat\\theta = 1/\\bar X$ |\n| $N(\\mu, \\sigma^2)$ | $\\hat\\mu = \\bar X$, $\\hat\\sigma^2 = \\frac{1}{n}\\sum(X_i - \\bar X)^2$ |\n| Uniform$(0,\\theta)$ | $\\hat\\theta = X_{(n)} = \\max X_i$ |\n\n**Note:** $\\hat\\sigma^2$ above is **biased**. The Uniform MLE is by inspection, not calculus."
+    },
+    {
+      "id": "fc-030",
+      "type": "definition",
+      "category": "mom",
+      "front": "**Define:** Method of Moments (MoM).",
+      "back": "**Recipe:** match population moments to sample moments and solve for the parameters.\n\n1. Express $\\mu_j(\\theta) = E[X^j]$ for $j = 1, \\ldots, k$ (where $k$ = number of parameters).\n2. Compute sample moments $\\hat\\mu_j = \\frac{1}{n} \\sum X_i^j$.\n3. Solve $\\mu_j(\\theta) = \\hat\\mu_j$.\n\n**MoM ≠ unique:** different moment choices give different estimators. MoM **is** consistent (under WLLN + CMT)."
+    },
+    {
+      "id": "fc-031",
+      "type": "definition",
+      "category": "estimation",
+      "front": "**Define:** MVUE.",
+      "back": "**Minimum Variance Unbiased Estimator** — an unbiased estimator with the smallest possible variance, uniformly in $\\theta$.\n\n**Formally:** $T$ is MVUE for $g(\\theta)$ if:\n1. $E[T] = g(\\theta)$ for all $\\theta$ (unbiased).\n2. For any other unbiased $T'$, $\\text{Var}(T) \\le \\text{Var}(T')$ for all $\\theta$.\n\nWhen the CRLB is achievable by an unbiased estimator, that estimator is the MVUE."
+    },
+    {
+      "id": "fc-032",
+      "type": "definition",
+      "category": "estimation",
+      "front": "**Define:** Efficient estimator.",
+      "back": "An **unbiased** estimator that achieves the Cramér–Rao Lower Bound:\n$$ \\text{Var}_\\theta(T) = \\frac{1}{n I(\\theta)}. $$\n\n**Note:** Efficient ⟹ MVUE (in the regular case where CRLB applies). Not all problems have an efficient estimator; the MLE is **asymptotically** efficient under regularity."
+    },
+    {
+      "id": "fc-033",
+      "type": "definition",
+      "category": "estimation",
+      "front": "**Define:** Dominance + Admissibility.",
+      "back": "**$T_n$ dominates $S_n$:** $\\text{MSE}(T_n) \\le \\text{MSE}(S_n)$ for all $\\theta$, with strict inequality somewhere.\n\n**$S_n$ is inadmissible:** there exists some $T_n$ that dominates it. (You'd never use $S_n$ if you can use $T_n$ instead.)\n\nIf no estimator dominates $S_n$, then $S_n$ is **admissible**."
+    },
+    {
+      "id": "fc-034",
+      "type": "definition",
+      "category": "sufficiency",
+      "front": "**Define:** Sufficient statistic.",
+      "back": "**Plain English:** A summary of the data that captures *everything* the data tells you about $\\theta$. After conditioning on a sufficient statistic, the rest of the data is just noise (its conditional distribution is parameter-free).\n\n**Formal:** $T = \\varphi(\\mathbf X)$ is **sufficient for $\\theta$** if the conditional distribution of $\\mathbf X$ given $T = t$ does not depend on $\\theta$."
+    },
+    {
+      "id": "fc-035",
+      "type": "statement",
+      "category": "sufficiency",
+      "front": "**State:** Fisher–Neyman Factorization Criterion.",
+      "back": "$T = \\varphi(\\mathbf X)$ is sufficient for $\\theta$ iff the joint density factorizes:\n$$ f_n(\\mathbf x; \\theta) = u(\\mathbf x) \\cdot \\nu(\\varphi(\\mathbf x), \\theta), $$\nwhere $u$ depends only on the data and $\\nu$ depends on $\\theta$ only through $T$.\n\n**Use on the exam:** write down the joint density, isolate the part that depends on $\\theta$, identify what function of the data it uses — that's $T$."
+    },
+    {
+      "id": "fc-036",
+      "type": "memorize",
+      "category": "sufficiency",
+      "front": "**Memorize:** Common sufficient statistics.",
+      "back": "| Family | Sufficient statistic |\n|---|---|\n| Bernoulli$(p)$ | $T = \\sum X_i$ |\n| Poisson$(\\lambda)$ | $T = \\sum X_i$ |\n| $N(\\mu, \\sigma^2 \\text{ known})$ | $T = \\bar X$ |\n| $N(\\mu \\text{ known}, \\sigma^2)$ | $T = \\sum(X_i - \\mu)^2$ |\n| $N(\\mu, \\sigma^2)$ both | $(\\sum X_i, \\sum X_i^2)$ or $(\\bar X, s^2)$ |\n| Exp$(\\theta)$ rate | $T = \\sum X_i$ |\n| Uniform$(0, \\theta)$ | $T = X_{(n)}$ |\n\nUse factorization criterion to verify."
+    },
+    {
+      "id": "fc-037",
+      "type": "statement",
+      "category": "sufficiency",
+      "front": "**State:** Rao–Blackwell Theorem.",
+      "back": "Let $T$ be sufficient for $\\theta$ and $U$ an unbiased estimator of $g(\\theta)$. Define\n$$ U^* = E[U \\mid T]. $$\n\nThen:\n1. $U^*$ is a function of $T$ (a statistic, since conditioning on a sufficient statistic gives parameter-free conditional distribution).\n2. $U^*$ is unbiased for $g(\\theta)$.\n3. $\\text{Var}(U^*) \\le \\text{Var}(U)$ (strict unless $U$ already a function of $T$).\n\n**Takeaway:** improve any unbiased estimator by conditioning on a sufficient statistic."
+    },
+    {
+      "id": "fc-038",
+      "type": "definition",
+      "category": "cramer-rao",
+      "front": "**Define:** Score function.",
+      "back": "$$ \\dot\\ell(x, \\theta) = \\frac{\\partial}{\\partial \\theta} \\log f(x; \\theta). $$\n\n**Plain English:** The slope of the log-likelihood at $\\theta$, evaluated at one data point.\n\n**Score equation** (for MLE): $\\sum_i \\dot\\ell(X_i, \\theta) = 0$, solve for $\\theta$.\n\n**Key property under regularity:** $E[\\dot\\ell(X, \\theta)] = 0$ — the score has mean zero."
+    },
+    {
+      "id": "fc-039",
+      "type": "definition",
+      "category": "cramer-rao",
+      "front": "**Define:** Fisher information $I(\\theta)$.",
+      "back": "$$ I(\\theta) = E_\\theta[\\dot\\ell^2(X, \\theta)] = -E_\\theta[\\ddot\\ell(X, \\theta)] $$\n(2nd equality under regularity).\n\n**Plain English:** How much the data carries about $\\theta$. Large $I(\\theta)$ ⟹ data is informative ⟹ estimators can be very precise. Small $I(\\theta)$ ⟹ noisy data.\n\n**For $n$ iid:** $I_n(\\theta) = n \\cdot I(\\theta)$."
+    },
+    {
+      "id": "fc-040",
+      "type": "statement",
+      "category": "cramer-rao",
+      "front": "**State:** Cramér–Rao Lower Bound (CRLB).",
+      "back": "Under regularity (A.1)–(A.3), if $T(\\mathbf X_n)$ is an **unbiased** estimator of $g(\\theta)$:\n$$ \\text{Var}_\\theta(T) \\ge \\frac{[g'(\\theta)]^2}{n \\cdot I(\\theta)}. $$\n\n**Special case** $g(\\theta) = \\theta$: $\\text{Var}_\\theta(T) \\ge \\frac{1}{n I(\\theta)}$.\n\n**Plain English:** No unbiased estimator can have variance below this bound."
+    },
+    {
+      "id": "fc-041",
+      "type": "statement",
+      "category": "cramer-rao",
+      "front": "**State:** Regularity conditions (A.1)–(A.3).",
+      "back": "**(A.1)** The support $A_\\theta = \\{x : f(x, \\theta) > 0\\}$ does NOT depend on $\\theta$.\n*Rules out Uniform$(0, \\theta)$, where support changes with $\\theta$.*\n\n**(A.2)** Interchange of differentiation and integration: $\\frac{\\partial}{\\partial\\theta} \\int W f_n\\, dx = \\int W \\frac{\\partial f_n}{\\partial\\theta} dx$.\n\n**(A.3)** $\\dot\\ell(x, \\theta)$ exists and is finite for all $x \\in A$ and $\\theta \\in \\Omega$.\n\n**Baydil exam trap:** \"Which regularity condition fails for Uniform$(0,\\theta)$?\" → (A.1)."
+    },
+    {
+      "id": "fc-042",
+      "type": "memorize",
+      "category": "cramer-rao",
+      "front": "**Memorize:** Common Fisher informations.",
+      "back": "| Family | $I(\\theta)$ | CRLB for $\\theta$ |\n|---|---|---|\n| Bernoulli$(\\theta)$ | $\\frac{1}{\\theta(1-\\theta)}$ | $\\frac{\\theta(1-\\theta)}{n}$ |\n| Poisson$(\\theta)$ | $\\frac{1}{\\theta}$ | $\\frac{\\theta}{n}$ |\n| $N(\\mu, \\sigma^2$ known) | $\\frac{1}{\\sigma^2}$ | $\\frac{\\sigma^2}{n}$ |\n| $N(\\mu$ known, $\\sigma^2)$ | $\\frac{1}{2\\sigma^4}$ | $\\frac{2\\sigma^4}{n}$ |\n| Exp$(\\theta)$ rate | $\\frac{1}{\\theta^2}$ | $\\frac{\\theta^2}{n}$ |\n\nFor Bernoulli/Poisson/Normal-$\\mu$: $\\bar X$ achieves the CRLB → **MVUE / efficient**."
+    },
+    {
+      "id": "fc-043",
+      "type": "statement",
+      "category": "cramer-rao",
+      "front": "**State:** Asymptotic distribution of the MLE.",
+      "back": "Under regularity,\n$$ \\sqrt n (\\hat\\theta_n - \\theta) \\xrightarrow{d} N\\!\\left(0, \\frac{1}{I(\\theta)}\\right). $$\n\n**Plain English:** The MLE is approximately normal in large samples, with mean $\\theta$ and variance $1/(n I(\\theta))$ — the CRLB.\n\nSo MLE is **asymptotically efficient** even if not exactly efficient at finite $n$."
+    },
+    {
+      "id": "fc-044",
+      "type": "definition",
+      "category": "bayesian",
+      "front": "**Define:** Prior and posterior distributions.",
+      "back": "**Prior** $\\xi(\\theta)$: belief about $\\theta$ *before* observing data.\n\n**Posterior** $\\xi(\\theta \\mid \\mathbf x)$: belief about $\\theta$ *after* observing data, by Bayes' rule:\n$$ \\xi(\\theta \\mid \\mathbf x) \\propto f_n(\\mathbf x \\mid \\theta) \\cdot \\xi(\\theta). $$\n\n(\"Posterior $\\propto$ likelihood × prior\" — proportional form is enough since the normalization is determined.)"
+    },
+    {
+      "id": "fc-045",
+      "type": "definition",
+      "category": "bayesian",
+      "front": "**Define:** Conjugate prior.",
+      "back": "A prior such that the posterior belongs to the *same parametric family*. Makes Bayesian updates closed-form.\n\n**Common pairs (memorize!):**\n- Beta$(\\alpha, \\beta)$ prior + Bernoulli/Binomial → Beta posterior\n- Normal prior + Normal likelihood (known $\\sigma^2$) → Normal posterior\n- Gamma prior + Poisson → Gamma posterior\n- Gamma prior + Exponential → Gamma posterior\n- Inverse-Gamma prior + Normal likelihood (unknown $\\sigma^2$) → Inverse-Gamma posterior"
+    },
+    {
+      "id": "fc-046",
+      "type": "statement",
+      "category": "bayesian",
+      "front": "**State:** Bayes estimator under squared-error loss.",
+      "back": "$$ \\hat\\theta_B = E[\\theta \\mid \\mathbf X] $$\n— the **posterior mean**.\n\n**Plain English:** If your loss is $(\\theta - \\hat\\theta)^2$, the optimal Bayesian point estimator is the mean of the posterior distribution.\n\n**Under absolute-error loss** $|\\theta - \\hat\\theta|$: the Bayes estimator is the **posterior median**."
+    },
+    {
+      "id": "fc-047",
+      "type": "memorize",
+      "category": "bayesian",
+      "front": "**Memorize:** Beta–Bernoulli conjugacy.",
+      "back": "**Setup:** $X_1, \\ldots, X_n$ iid Bernoulli$(p)$, prior $p \\sim \\text{Beta}(\\alpha, \\beta)$. Let $T = \\sum X_i$.\n\n**Posterior:** $p \\mid \\mathbf X \\sim \\text{Beta}(\\alpha + T,\\, \\beta + n - T)$.\n\n**Bayes estimator (squared-error loss):** posterior mean $= \\frac{\\alpha + T}{\\alpha + \\beta + n}$, which is a weighted average of prior mean $\\frac{\\alpha}{\\alpha + \\beta}$ and sample mean $\\bar X$. As $n \\to \\infty$ ⟹ $\\bar X$."
+    },
+    {
+      "id": "fc-048",
+      "type": "definition",
+      "category": "confidence-intervals",
+      "front": "**Define:** Pivot.",
+      "back": "A function $\\Psi(\\mathbf X_n, g(\\theta))$ of both data and parameter whose **distribution does not depend on $\\theta$**.\n\n**Why useful:** if you know the pivot's distribution exactly, you can find $a, b$ with $P(a \\le \\Psi \\le b) = 1 - \\alpha$, then invert to get an interval for $g(\\theta)$.\n\n**Examples:**\n- $\\sqrt n(\\bar X - \\mu)/\\sigma \\sim N(0,1)$ (σ known)\n- $\\sqrt n(\\bar X - \\mu)/s \\sim t_{n-1}$ (σ unknown)\n- $(n-1)s^2/\\sigma^2 \\sim \\chi^2_{n-1}$"
+    },
+    {
+      "id": "fc-049",
+      "type": "definition",
+      "category": "confidence-intervals",
+      "front": "**Define:** $(1-\\alpha)$ Confidence Interval.",
+      "back": "A random interval $(A(\\mathbf X), B(\\mathbf X))$ such that\n$$ P_\\theta(A \\le g(\\theta) \\le B) \\ge 1 - \\alpha \\quad \\text{for all } \\theta. $$\n\n**Exact CI:** equality holds.\n**Approximate CI:** approximate equality (e.g., CLT-based).\n\n**Critical interpretation:** the *interval* is random; $\\theta$ is fixed. The procedure traps $\\theta$ with probability $1-\\alpha$ — NOT \"$\\theta$ has 95% chance of being in this fixed interval.\""
+    },
+    {
+      "id": "fc-050",
+      "type": "memorize",
+      "category": "confidence-intervals",
+      "front": "**Memorize:** Common confidence intervals.",
+      "back": "**$z$-CI for $\\mu$, $\\sigma$ known:**\n$$ \\bar X_n \\pm z_{\\alpha/2} \\cdot \\sigma/\\sqrt n $$\n\n**$t$-CI for $\\mu$, $\\sigma$ unknown:**\n$$ \\bar X_n \\pm t_{\\alpha/2, n-1} \\cdot s_n/\\sqrt n $$\n\n**$\\chi^2$-CI for $\\sigma^2$ (normal data, $\\mu$ unknown):**\n$$ \\left(\\frac{(n-1)s_n^2}{\\chi^2_{\\alpha/2, n-1}},\\, \\frac{(n-1)s_n^2}{\\chi^2_{1-\\alpha/2, n-1}}\\right) $$\n\n**CLT-based approximate CI** for any parameter $\\theta$ with asymptotically normal $\\hat\\theta$:\n$$ \\hat\\theta \\pm z_{\\alpha/2} \\cdot \\widehat{\\text{SE}}(\\hat\\theta). $$"
+    },
+    {
+      "id": "fc-051",
+      "type": "definition",
+      "category": "hypothesis-testing",
+      "front": "**Define:** Null and alternative hypotheses.",
+      "back": "Partition the parameter space: $\\Omega = \\Omega_0 \\cup \\Omega_1$, disjoint.\n\n**$H_0: \\theta \\in \\Omega_0$** — null hypothesis (the default / status quo).\n**$H_1: \\theta \\in \\Omega_1$** — alternative hypothesis.\n\n**Simple** if the set is a single point ($\\Omega_0 = \\{\\theta_0\\}$); **composite** otherwise.\n\n**Goal:** Is there enough evidence in the data against $H_0$?"
+    },
+    {
+      "id": "fc-052",
+      "type": "definition",
+      "category": "hypothesis-testing",
+      "front": "**Define:** Test, critical region, test statistic.",
+      "back": "A **test procedure** $\\delta$ partitions the sample space:\n- **Rejection region (critical region)** $S_1$ — values of $\\mathbf X$ where we reject $H_0$.\n- **Acceptance region** $S_0$ — where we fail to reject.\n\nMost tests use a **test statistic** $T = \\varphi(\\mathbf X)$ and reject when $T$ lies in a fixed subset $R$ of $\\mathbb{R}$.\n\n**Common form:** reject when $T \\ge c$ for some critical value $c$."
+    },
+    {
+      "id": "fc-053",
+      "type": "definition",
+      "category": "hypothesis-testing",
+      "front": "**Define:** Type I error + Type II error.",
+      "back": "| | Don't reject $H_0$ | Reject $H_0$ |\n|---|---|---|\n| $H_0$ true | ✓ Correct | **Type I error** |\n| $H_1$ true | **Type II error** | ✓ Correct |\n\n**Type I:** rejecting $H_0$ when $H_0$ is true. Probability $\\alpha$.\n**Type II:** failing to reject $H_0$ when $H_1$ is true. Probability $\\beta$.\n\nBaydil exam: Type I corresponds to $\\Omega_0$; Type II to $\\Omega_1$."
+    },
+    {
+      "id": "fc-054",
+      "type": "definition",
+      "category": "hypothesis-testing",
+      "front": "**Define:** Power function $\\pi(\\theta \\mid \\delta)$.",
+      "back": "$$ \\pi(\\theta \\mid \\delta) = P_\\theta(\\text{reject } H_0) = P_\\theta(\\mathbf X \\in S_1). $$\n\n**Plain English:** Probability of rejecting $H_0$, computed assuming $\\theta$ is the true value.\n\n**For $\\theta \\in \\Omega_0$:** $\\pi(\\theta) = P(\\text{Type I error})$.\n**For $\\theta \\in \\Omega_1$:** $1 - \\pi(\\theta) = P(\\text{Type II error})$.\n\n**Power:** $\\pi(\\theta)$ evaluated under $H_1$ (how often we correctly reject)."
+    },
+    {
+      "id": "fc-055",
+      "type": "definition",
+      "category": "hypothesis-testing",
+      "front": "**Define:** Size + Level of a test.",
+      "back": "**Size:** $\\alpha(\\delta) = \\sup_{\\theta \\in \\Omega_0} \\pi(\\theta \\mid \\delta)$ — worst-case Type I error rate.\n\n**Level $\\alpha_0$ test:** $\\pi(\\theta \\mid \\delta) \\le \\alpha_0$ for all $\\theta \\in \\Omega_0$, equivalently size $\\le \\alpha_0$.\n\n**For simple $H_0: \\theta = \\theta_0$:** size $= \\pi(\\theta_0)$ — just evaluate at $\\theta_0$.\n**For composite $H_0$:** must take sup over $\\Omega_0$."
+    },
+    {
+      "id": "fc-056",
+      "type": "definition",
+      "category": "hypothesis-testing",
+      "front": "**Define:** $p$-value + decision rule.",
+      "back": "**$p$-value:** the smallest significance level $\\alpha_0$ at which the observed data would reject $H_0$. Also called *observed level of significance*.\n\n**Decision rule:** reject $H_0$ at level $\\alpha_0 \\iff p \\le \\alpha_0$.\n\n**Two-sided:** $p = 2[1 - F_{T \\mid H_0}(|t_{\\text{obs}}|)]$ (factor of 2 — common Baydil trap).\n**One-sided** ($H_1: \\theta > \\theta_0$): $p = 1 - F_{T \\mid H_0}(t_{\\text{obs}})$."
+    },
+    {
+      "id": "fc-057",
       "type": "statement",
       "category": "hypothesis-testing",
-      "front": "**State:** The **Neyman–Pearson Lemma**.",
-      "back": "For testing **simple** $H_0: \\theta = \\theta_0$ vs **simple** $H_1: \\theta = \\theta_1$, any test $\\delta'$ of the form\n$$ \\text{reject } H_0 \\iff f_1(\\mathbf x) > k\\, f_0(\\mathbf x), \\quad \\text{accept} \\iff f_1(\\mathbf x) < k\\, f_0(\\mathbf x) $$\n(with $k > 0$ chosen so the test has the desired size $\\alpha_0$) is **most powerful**: any other test $\\delta$ with $\\alpha(\\delta) \\le \\alpha(\\delta')$ satisfies $\\beta(\\delta) \\ge \\beta(\\delta')$.\n\nThe optimal test rejects when the *likelihood ratio* $\\Lambda = f_1/f_0$ is large."
+      "front": "**State:** One-sample $z$-test (normal mean, $\\sigma$ KNOWN).",
+      "back": "$$ Z = \\frac{\\sqrt n (\\bar X_n - \\mu_0)}{\\sigma} \\sim N(0, 1) \\text{ under } H_0: \\mu = \\mu_0. $$\n\n**Two-sided** ($H_1: \\mu \\neq \\mu_0$): reject if $|Z| > z_{\\alpha_0/2}$.\n**One-sided** ($H_1: \\mu > \\mu_0$): reject if $Z > z_{\\alpha_0}$.\n**One-sided** ($H_1: \\mu < \\mu_0$): reject if $Z < -z_{\\alpha_0}$.\n\n**Common critical values:** $z_{0.025} = 1.96$, $z_{0.05} = 1.645$, $z_{0.005} = 2.576$."
+    },
+    {
+      "id": "fc-058",
+      "type": "statement",
+      "category": "hypothesis-testing",
+      "front": "**State:** One-sample $t$-test (normal mean, $\\sigma$ UNKNOWN).",
+      "back": "$$ U_n = \\frac{\\sqrt n (\\bar X_n - \\mu_0)}{s_n} \\sim t_{n-1} \\text{ under } H_0: \\mu = \\mu_0. $$\n\n**Two-sided:** reject if $|U_n| > t_{\\alpha_0/2, n-1}$.\n**One-sided** ($\\mu > \\mu_0$): reject if $U_n > t_{\\alpha_0, n-1}$.\n\n**Baydil trap:** Use $z$ when $\\sigma$ is **known**, $t$ when $\\sigma$ is **unknown**. Same formula except plug $s_n$ for $\\sigma$ and use $t_{n-1}$ critical values."
+    },
+    {
+      "id": "fc-059",
+      "type": "statement",
+      "category": "hypothesis-testing",
+      "front": "**State:** Two-sample $t$-test (pooled).",
+      "back": "**Setup:** Two iid normal samples, sizes $m, n$, with **common unknown** variance $\\sigma^2$.\n\n**Pooled variance:** $s_p^2 = \\frac{S_X^2 + S_Y^2}{m + n - 2}$ where $S_X^2 = \\sum (X_i - \\bar X)^2$, etc.\n\n**Test statistic:**\n$$ U = \\frac{\\bar X_m - \\bar Y_n}{s_p \\sqrt{\\frac{1}{m} + \\frac{1}{n}}} \\sim t_{m+n-2} \\text{ under } H_0: \\mu_X = \\mu_Y. $$\n\n**Two-sided:** reject if $|U| > t_{\\alpha_0/2, m+n-2}$."
+    },
+    {
+      "id": "fc-060",
+      "type": "statement",
+      "category": "hypothesis-testing",
+      "front": "**State:** $F$-test for variance ratio.",
+      "back": "**Setup:** Two independent normal samples, sizes $m, n$, both means and variances unknown.\n\n**Test statistic:**\n$$ V = \\frac{S_X^2 / (m - 1)}{S_Y^2 / (n - 1)} \\sim F_{m-1, n-1} \\text{ under } H_0: \\sigma_X^2 = \\sigma_Y^2. $$\n\n**Two-sided** (level $\\alpha_0$): reject if $V \\le F_{\\alpha_0/2, m-1, n-1}$ OR $V \\ge F_{1 - \\alpha_0/2, m-1, n-1}$.\n\n**Lower-tail trick:** $F_{1-\\alpha, m, n} = 1 / F_{\\alpha, n, m}$ (swap dfs)."
+    },
+    {
+      "id": "fc-061",
+      "type": "statement",
+      "category": "hypothesis-testing",
+      "front": "**State:** Neyman–Pearson Lemma (simple vs simple).",
+      "back": "For testing **simple** $H_0: \\theta = \\theta_0$ vs **simple** $H_1: \\theta = \\theta_1$, the test\n$$ \\text{reject } H_0 \\iff \\frac{f_1(\\mathbf x)}{f_0(\\mathbf x)} > k $$\nwith $k > 0$ chosen so the test has size $\\alpha_0$, is **MOST POWERFUL** at level $\\alpha_0$.\n\nAny other level-$\\alpha_0$ test $\\delta$ has $\\beta(\\delta) \\ge \\beta(\\delta_{NP})$.\n\n**Recipe:** form likelihood ratio, simplify until it depends only on a statistic $T(\\mathbf x)$, find $c$ via $P_{\\theta_0}(T > c) = \\alpha_0$."
+    },
+    {
+      "id": "fc-062",
+      "type": "definition",
+      "category": "hypothesis-testing",
+      "front": "**Define:** UMP test (Uniformly Most Powerful).",
+      "back": "Setup: composite alternative, e.g., $H_0: \\theta \\le \\theta_0$ vs $H_1: \\theta > \\theta_0$.\n\nA test $\\delta^*$ is **UMP at level $\\alpha_0$** if:\n1. Size $\\le \\alpha_0$\n2. For every other level-$\\alpha_0$ test $\\delta$: $\\pi(\\theta \\mid \\delta) \\le \\pi(\\theta \\mid \\delta^*)$ for ALL $\\theta \\in \\Omega_1$.\n\n**Caveat:** UMP tests usually exist only for **one-sided alternatives** in **MLR families**. Not for general two-sided alternatives."
+    },
+    {
+      "id": "fc-063",
+      "type": "definition",
+      "category": "hypothesis-testing",
+      "front": "**Define:** Monotone Likelihood Ratio (MLR) + Karlin–Rubin.",
+      "back": "Family $\\{f(x; \\theta)\\}$ has **MLR in $T(x)$** if for $\\theta_1 < \\theta_2$:\n$$ \\frac{f(x; \\theta_2)}{f(x; \\theta_1)} \\text{ is nondecreasing in } T(x). $$\n\n**Karlin–Rubin Theorem:** if MLR in $T$, then for $H_0: \\theta \\le \\theta_0$ vs $H_1: \\theta > \\theta_0$, the test \"reject when $T > c$\" with $c$ chosen so $P_{\\theta_0}(T > c) = \\alpha_0$ is **UMP** at level $\\alpha_0$.\n\n**Examples of MLR families:** Bernoulli, Poisson, Exp, Normal (in $\\mu$), one-parameter exponential families."
+    },
+    {
+      "id": "fc-064",
+      "type": "definition",
+      "category": "hypothesis-testing",
+      "front": "**Define:** Likelihood Ratio Test (LRT) statistic.",
+      "back": "For $H_0: \\theta \\in \\Omega_0$ vs $H_1: \\theta \\in \\Omega_1 = \\Omega \\setminus \\Omega_0$:\n$$ \\Lambda(\\mathbf x) = \\frac{\\sup_{\\theta \\in \\Omega_0} L(\\theta)}{\\sup_{\\theta \\in \\Omega} L(\\theta)} \\in [0, 1]. $$\n\n**Plain English:** ratio of the best fit under $H_0$ to the best fit over the whole parameter space. Small $\\Lambda$ ⟹ $H_0$ fits much worse ⟹ reject.\n\n**Reject** when $\\Lambda < c$ for chosen threshold."
+    },
+    {
+      "id": "fc-065",
+      "type": "statement",
+      "category": "hypothesis-testing",
+      "front": "**State:** Wilks' Theorem.",
+      "back": "Under regularity and $H_0$:\n$$ -2 \\log \\Lambda(\\mathbf X) \\xrightarrow{d} \\chi^2_r \\text{ as } n \\to \\infty, $$\nwhere $r = \\dim(\\Omega) - \\dim(\\Omega_0)$ is the number of restrictions in $H_0$.\n\n**Use:** asymptotic level-$\\alpha_0$ test — reject when $-2 \\log \\Lambda > \\chi^2_{1 - \\alpha_0, r}$.\n\n**Example:** testing $H_0: \\mu = \\mu_0$ in $N(\\mu, \\sigma^2)$ → $r = 1$ → $-2 \\log \\Lambda \\to \\chi^2_1$."
+    },
+    {
+      "id": "fc-066",
+      "type": "statement",
+      "category": "hypothesis-testing",
+      "front": "**State:** Test–CI duality.",
+      "back": "A $(1 - \\alpha_0)$ CI for $\\theta$ is the set of all $\\theta_0$ for which a level-$\\alpha_0$ test of $H_0: \\theta = \\theta_0$ would **fail to reject**.\n\n**Equivalent statements:**\n$$ \\theta_0 \\in \\text{CI}_{1-\\alpha_0} \\iff \\text{test of } H_0: \\theta = \\theta_0 \\text{ fails to reject at level } \\alpha_0. $$\n\n**Construction:** invert the acceptance region of the test.\n\n**Use on exam:** if you have a CI, you can answer test questions for free, and vice versa."
+    },
+    {
+      "id": "fc-067",
+      "type": "tf",
+      "category": "convergence",
+      "front": "**T/F:** If $Z_n \\xrightarrow{d} Z$, then $Z_n \\xrightarrow{P} Z$.",
+      "back": "**FALSE.** Convergence in distribution does NOT imply convergence in probability in general. Implication goes the other way (prob ⟹ dist), with one exception: if the limit $Z$ is a **constant**, then dist ⟹ prob also holds."
+    },
+    {
+      "id": "fc-068",
+      "type": "tf",
+      "category": "mle",
+      "front": "**T/F:** The MLE is always an unbiased estimator.",
+      "back": "**FALSE.** Counterexample: $X_i$ iid $N(\\mu, \\sigma^2)$. MLE of $\\sigma^2$ is $\\hat\\sigma^2_{\\text{MLE}} = \\frac{1}{n}\\sum(X_i - \\bar X)^2$, which is **biased**: $E[\\hat\\sigma^2] = \\frac{n-1}{n}\\sigma^2$. The unbiased version uses $n-1$ (Bessel's correction)."
+    },
+    {
+      "id": "fc-069",
+      "type": "tf",
+      "category": "estimation",
+      "front": "**T/F:** Consistent ⟹ unbiased at every finite $n$.",
+      "back": "**FALSE.** Consistency is asymptotic ($\\hat\\theta_n \\xrightarrow{P} \\theta$ as $n \\to \\infty$). It says nothing about finite-$n$ bias. The MLE of $\\sigma^2$ above is consistent but biased for every finite $n$."
+    },
+    {
+      "id": "fc-070",
+      "type": "tf",
+      "category": "confidence-intervals",
+      "front": "**T/F:** A 95% confidence interval $(2.3, 4.7)$ for $\\mu$ means $P(\\mu \\in (2.3, 4.7)) = 0.95$.",
+      "back": "**FALSE.** Once data is observed, the interval is fixed and $\\mu$ is a fixed unknown — the probability is either 0 or 1. Correct interpretation: the *procedure* traps the true $\\mu$ with probability 0.95 before the data is observed. Equivalently: 95% of intervals constructed this way contain $\\mu$."
+    },
+    {
+      "id": "fc-071",
+      "type": "tf",
+      "category": "cramer-rao",
+      "front": "**T/F:** The CRLB applies to $X_1, \\ldots, X_n$ iid Uniform$[0, \\theta]$.",
+      "back": "**FALSE.** Regularity condition (A.1) requires the support to NOT depend on $\\theta$. For Uniform$[0,\\theta]$, the support $[0, \\theta]$ depends on $\\theta$, so (A.1) fails and CRLB doesn't apply. In fact $(1 + 1/n) X_{(n)}$ has MSE *below* what CRLB would predict."
+    },
+    {
+      "id": "fc-072",
+      "type": "tf",
+      "category": "estimation",
+      "front": "**T/F:** A biased estimator can have lower MSE than every unbiased estimator.",
+      "back": "**TRUE.** Bias–variance tradeoff: MSE = Var + bias². A small bias can buy a big variance reduction. For iid Uniform$[0,\\theta]$, the biased $X_{(n)}$ has *much* lower MSE than the unbiased $2\\bar X$."
+    },
+    {
+      "id": "fc-073",
+      "type": "tf",
+      "category": "convergence",
+      "front": "**T/F:** The CLT requires the $X_i$ to be normally distributed.",
+      "back": "**FALSE.** That's the whole point of CLT — works for ANY distribution with finite variance. The conclusion is that the *standardized sample mean* is approximately $N(0,1)$ for large $n$, regardless of the underlying distribution shape."
+    },
+    {
+      "id": "fc-074",
+      "type": "tf",
+      "category": "convergence",
+      "front": "**T/F:** The CLT requires finite variance.",
+      "back": "**TRUE.** Without finite second moment, the classical CLT fails. (Heavy-tailed distributions need stable laws instead.)"
+    },
+    {
+      "id": "fc-075",
+      "type": "tf",
+      "category": "delta-method",
+      "front": "**T/F:** The Delta Method requires $g'(\\theta) \\neq 0$.",
+      "back": "**TRUE.** If $g'(\\theta) = 0$, the first-order Delta Method gives a degenerate $N(0, 0)$ limit. Use the 2nd-order version: $n(g(Z_n) - g(\\theta)) \\xrightarrow{d} \\frac{1}{2}\\sigma^2 g''(\\theta) \\chi^2_1$ if $g''(\\theta) \\neq 0$."
+    },
+    {
+      "id": "fc-076",
+      "type": "tf",
+      "category": "sampling-distributions",
+      "front": "**T/F:** For iid $N(\\mu, \\sigma^2)$, $\\bar X_n$ and $s_n^2$ are independent.",
+      "back": "**TRUE.** Special property of the normal distribution (Basu / DeGroot Prop 6.3). This independence is exactly what makes $\\frac{\\sqrt n(\\bar X_n - \\mu)}{s_n} \\sim t_{n-1}$ — the numerator (normal) and denominator (chi-squared-based) must be independent for the ratio to have a $t$ distribution."
+    },
+    {
+      "id": "fc-077",
+      "type": "tf",
+      "category": "hypothesis-testing",
+      "front": "**T/F:** Rejecting $H_0$ proves $H_1$ is true.",
+      "back": "**FALSE.** Rejecting just means the data is sufficiently inconsistent with $H_0$ at the chosen level — it does NOT prove $H_1$. Type I error rate $\\alpha_0$ is the probability you rejected wrongly under $H_0$."
+    },
+    {
+      "id": "fc-078",
+      "type": "tf",
+      "category": "hypothesis-testing",
+      "front": "**T/F:** Failing to reject $H_0$ proves $H_0$ is true.",
+      "back": "**FALSE.** Only means insufficient evidence to reject at this sample size + level. The Type II error rate $\\beta$ is the probability you missed a true effect."
+    },
+    {
+      "id": "fc-079",
+      "type": "tf",
+      "category": "hypothesis-testing",
+      "front": "**T/F:** UMP tests typically exist for two-sided alternatives.",
+      "back": "**FALSE.** UMP tests usually do NOT exist for two-sided alternatives ($H_1: \\theta \\neq \\theta_0$) — the optimal test against $\\theta > \\theta_0$ differs from the optimal test against $\\theta < \\theta_0$. UMP usually exists only for one-sided alternatives in MLR families (Karlin–Rubin)."
+    },
+    {
+      "id": "fc-080",
+      "type": "tf",
+      "category": "hypothesis-testing",
+      "front": "**T/F:** For composite null $\\Omega_0$, the size of a test equals the supremum of the power function over $\\Omega_0$.",
+      "back": "**TRUE.** $\\alpha(\\delta) = \\sup_{\\theta \\in \\Omega_0} \\pi(\\theta \\mid \\delta)$. Common Baydil trap: you must take a sup over $\\Omega_0$, not just evaluate at one point."
+    },
+    {
+      "id": "fc-081",
+      "type": "tf",
+      "category": "hypothesis-testing",
+      "front": "**T/F:** Lowering $\\alpha$ (making test more conservative) typically raises $\\beta$.",
+      "back": "**TRUE.** Fundamental trade-off: smaller rejection region (lower $\\alpha$) ⟹ harder to reject ⟹ higher Type II rate. The only way to lower both simultaneously is to **increase $n$**."
+    },
+    {
+      "id": "fc-082",
+      "type": "tf",
+      "category": "conventions",
+      "front": "**T/F:** Under DeGroot conventions, Exp$(\\theta)$ has mean $\\theta$.",
+      "back": "**FALSE.** DeGroot uses **rate** parameterization: $f(x; \\theta) = \\theta e^{-\\theta x}$, so $E[X] = 1/\\theta$ and $\\text{Var}(X) = 1/\\theta^2$. Mean is the **reciprocal** of the rate. Common Baydil trap."
+    },
+    {
+      "id": "fc-083",
+      "type": "tf",
+      "category": "conventions",
+      "front": "**T/F:** Under DeGroot, Geometric$(p)$ has support $\\{1, 2, 3, \\ldots\\}$.",
+      "back": "**FALSE.** DeGroot's Geometric starts at 0: pmf $p(1-p)^x$ on $x = 0, 1, 2, \\ldots$. So mean is $(1-p)/p$, NOT $1/p$. Watch for this on the exam."
+    },
+    {
+      "id": "fc-084",
+      "type": "tf",
+      "category": "conventions",
+      "front": "**T/F:** $\\chi^2_d$ equals $\\text{Gamma}(d/2, 1/2)$ under DeGroot's rate parameterization.",
+      "back": "**TRUE.** $\\chi^2_d = \\text{Gamma}(d/2, 1/2)$. Mean $= d$, variance $= 2d$. Reproductive: sum of independent $\\chi^2_{m_i}$ is $\\chi^2_{\\sum m_i}$."
+    },
+    {
+      "id": "fc-085",
+      "type": "tf",
+      "category": "mle",
+      "front": "**T/F:** The MLE of $\\theta$ for $X_i$ iid Uniform$(0, \\theta)$ is $X_{(n)} = \\max X_i$.",
+      "back": "**TRUE.** Calculus fails because likelihood isn't differentiable. By inspection: $L(\\theta) = \\theta^{-n} \\mathbb{1}\\{\\theta \\ge X_{(n)}\\}$, maximized by the *smallest* valid $\\theta$ — namely $X_{(n)}$."
+    },
+    {
+      "id": "fc-086",
+      "type": "tf",
+      "category": "mle",
+      "front": "**T/F:** For $X_i$ iid Exp$(\\theta)$ (rate), MLE of $\\theta$ is $1/\\bar X_n$.",
+      "back": "**TRUE.** $\\ell(\\theta) = n \\log\\theta - \\theta \\sum X_i$. Score: $n/\\theta - \\sum X_i = 0 \\Rightarrow \\hat\\theta = n/\\sum X_i = 1/\\bar X_n$. The MLE is the **reciprocal** of the sample mean (because $\\theta$ is the rate, $1/\\theta$ is the mean)."
+    },
+    {
+      "id": "fc-087",
+      "type": "tf",
+      "category": "hypothesis-testing",
+      "front": "**T/F:** Under regularity, the MLE of a single parameter $\\theta$ satisfies $\\sqrt n (\\hat\\theta_n - \\theta) \\xrightarrow{d} N(0, 1/I(\\theta))$.",
+      "back": "**TRUE.** Asymptotic efficiency of the MLE: variance equals the CRLB $1/I(\\theta)$ asymptotically, even if MLE isn't exactly efficient at finite $n$."
+    },
+    {
+      "id": "fc-088",
+      "type": "tf",
+      "category": "cramer-rao",
+      "front": "**T/F:** $E[\\dot\\ell(X, \\theta)] = 0$ under regularity.",
+      "back": "**TRUE.** Differentiating $\\int f(x; \\theta)\\, dx = 1$ under the integral sign (regularity needed) yields $E[\\dot\\ell] = 0$. The score has mean zero — used in proofs of the CRLB and asymptotic normality of MLE."
+    },
+    {
+      "id": "fc-089",
+      "type": "tf",
+      "category": "cramer-rao",
+      "front": "**T/F:** $\\text{Var}[\\dot\\ell(X, \\theta)] = I(\\theta)$.",
+      "back": "**TRUE.** Since $E[\\dot\\ell] = 0$, $\\text{Var}[\\dot\\ell] = E[\\dot\\ell^2] = I(\\theta)$ by definition of Fisher information. For $n$ iid: $\\text{Var}[\\dot\\ell_n] = n I(\\theta)$."
+    },
+    {
+      "id": "fc-090",
+      "type": "tf",
+      "category": "hypothesis-testing",
+      "front": "**T/F:** A $95\\%$ CI for $\\mu$ contains $\\mu_0$ iff the two-sided level-$0.05$ test of $H_0: \\mu = \\mu_0$ fails to reject.",
+      "back": "**TRUE.** This is test–CI duality. Equivalent statements:\n- $\\mu_0 \\in \\text{CI}_{0.95} \\iff$ test fails to reject at $\\alpha_0 = 0.05$.\n- The CI is exactly the set of values $\\mu_0$ for which we wouldn't reject.\n\nGreat exam shortcut: build one, get the other for free."
+    },
+    {
+      "id": "fc-091",
+      "type": "tf",
+      "category": "sampling-distributions",
+      "front": "**T/F:** $1/F_{m,n} \\sim F_{n,m}$.",
+      "back": "**TRUE.** Reciprocal swaps the degrees of freedom. **Useful identity:** $F_{1-\\alpha, m, n} = 1 / F_{\\alpha, n, m}$ — lets you compute lower-tail F-quantiles from upper-tail tables."
+    },
+    {
+      "id": "fc-092",
+      "type": "tf",
+      "category": "hypothesis-testing",
+      "front": "**T/F:** For a two-sample $t$-test with **pooled** variance, you must assume $\\sigma_X^2 = \\sigma_Y^2$.",
+      "back": "**TRUE.** Pooled $t$ requires the common-variance assumption. If variances differ, use **Welch's $t$-test** (different denominator, approximate $t$ degrees of freedom). The $F$-test for variance ratio is how you'd check the assumption."
+    },
+    {
+      "id": "fc-093",
+      "type": "tf",
+      "category": "convergence",
+      "front": "**T/F:** Almost-sure convergence ⟹ convergence in probability ⟹ convergence in distribution.",
+      "back": "**TRUE.** Hierarchy of convergence modes. Almost-sure (SLLN) is strongest, then convergence in probability, then convergence in distribution. The reverse implications generally fail."
+    },
+    {
+      "id": "fc-094",
+      "type": "tf",
+      "category": "sampling-distributions",
+      "front": "**T/F:** $t_m \\xrightarrow{d} N(0,1)$ as $m \\to \\infty$.",
+      "back": "**TRUE.** As degrees of freedom grow, $\\sqrt{V/m} \\xrightarrow{P} 1$ (by WLLN applied to $\\chi^2_m/m$). By Slutsky, $t_m = Z/\\sqrt{V/m} \\xrightarrow{d} Z \\sim N(0,1)$. Practically: $t_{30+}$ values are already very close to $z$ values."
+    },
+    {
+      "id": "fc-095",
+      "type": "tf",
+      "category": "mom",
+      "front": "**T/F:** The MoM estimator is unique.",
+      "back": "**FALSE.** Different choices of moments yield different estimators. For example, for Exp$(\\theta)$ (rate): using the first moment gives $\\hat\\theta = 1/\\bar X$, but using the second moment gives a different estimator. MoM is consistent but not uniquely defined."
+    },
+    {
+      "id": "fc-096",
+      "type": "tf",
+      "category": "estimation",
+      "front": "**T/F:** An unbiased estimator always exists for any parameter.",
+      "back": "**FALSE.** Counterexample: $g(\\theta) = \\theta/(1-\\theta)$ in Bernoulli$(\\theta)$ has NO unbiased estimator (any function of $\\sum X_i$ is a polynomial in $\\theta$, but $\\theta/(1-\\theta)$ isn't)."
+    },
+    {
+      "id": "fc-097",
+      "type": "tf",
+      "category": "hypothesis-testing",
+      "front": "**T/F:** For one-sided $H_0: \\theta \\le \\theta_0$ with MLR in $T$, the test \"reject when $T > c$\" is UMP at level $\\alpha_0$ where $c$ satisfies $P_{\\theta_0}(T > c) = \\alpha_0$.",
+      "back": "**TRUE.** Karlin–Rubin. MLR ensures the simple-vs-simple NP test has the same rejection region for every $\\theta_1 > \\theta_0$, so it's UMP across the entire alternative. The size sup is achieved at $\\theta = \\theta_0$ (boundary)."
+    },
+    {
+      "id": "fc-098",
+      "type": "tf",
+      "category": "hypothesis-testing",
+      "front": "**T/F:** In Wilks' theorem, $r$ (degrees of freedom) equals the number of free parameters under $H_1$ minus under $H_0$.",
+      "back": "**TRUE.** $r = \\dim(\\Omega) - \\dim(\\Omega_0)$ — the number of independent constraints $H_0$ imposes. E.g., testing $\\mu = \\mu_0$ in $N(\\mu, \\sigma^2)$: $r = 2 - 1 = 1$."
+    },
+    {
+      "id": "fc-099",
+      "type": "definition",
+      "category": "fundamentals",
+      "front": "**Define:** MGF (moment generating function).",
+      "back": "$$ M_X(t) = E[e^{tX}] $$\nfor $t$ in some open interval around 0.\n\n**Property:** $E[X^k] = M_X^{(k)}(0)$ (the $k$-th derivative at 0).\n\n**Uniqueness:** if two RVs have the same MGF on a neighborhood of 0, they have the same distribution.\n\n**Independent sums:** if $X, Y$ are independent, $M_{X+Y}(t) = M_X(t) \\cdot M_Y(t)$."
+    },
+    {
+      "id": "fc-100",
+      "type": "memorize",
+      "category": "fundamentals",
+      "front": "**Memorize:** Reproductive properties (sum of independent RVs).",
+      "back": "| Independent sum | Distribution of sum |\n|---|---|\n| Bernoulli$(p)$ | Binomial$(n, p)$ |\n| Binomial$(n_i, p)$ | Binomial$(\\sum n_i, p)$ |\n| Poisson$(\\lambda_i)$ | Poisson$(\\sum \\lambda_i)$ |\n| Gamma$(\\alpha_i, \\beta)$ same $\\beta$ | Gamma$(\\sum \\alpha_i, \\beta)$ |\n| $\\chi^2_{m_i}$ | $\\chi^2_{\\sum m_i}$ |\n| $N(\\mu_i, \\sigma_i^2)$ | $N(\\sum \\mu_i, \\sum \\sigma_i^2)$ |\n\n**Linear combos of normals:** $\\sum a_i X_i \\sim N(\\sum a_i \\mu_i, \\sum a_i^2 \\sigma_i^2)$ for independent $X_i$."
+    },
+    {
+      "id": "fc-101",
+      "type": "memorize",
+      "category": "fundamentals",
+      "front": "**Memorize:** Key normal facts.",
+      "back": "- $X \\sim N(\\mu, \\sigma^2)$: PDF $\\frac{1}{\\sqrt{2\\pi}\\sigma} e^{-(x-\\mu)^2/(2\\sigma^2)}$\n- Standardization: $Z = (X - \\mu)/\\sigma \\sim N(0, 1)$\n- Linear transform: $aX + b \\sim N(a\\mu + b, a^2 \\sigma^2)$ (note $a^2$ for variance!)\n- $\\Phi(-x) = 1 - \\Phi(x)$ (symmetry)\n- Common quantiles: $\\Phi(1.96) = 0.975$, $\\Phi(1.645) = 0.95$, $\\Phi(2.576) = 0.995$"
+    },
+    {
+      "id": "fc-102",
+      "type": "memorize",
+      "category": "fundamentals",
+      "front": "**Memorize:** Common distributions reference table.",
+      "back": "| Dist | $E[X]$ | $\\text{Var}(X)$ |\n|---|---|---|\n| Ber$(p)$ | $p$ | $p(1-p)$ |\n| Binom$(n,p)$ | $np$ | $np(1-p)$ |\n| Poisson$(\\lambda)$ | $\\lambda$ | $\\lambda$ |\n| Geom$(p)$ from 0 | $(1-p)/p$ | $(1-p)/p^2$ |\n| Exp$(\\theta)$ rate | $1/\\theta$ | $1/\\theta^2$ |\n| Gamma$(\\alpha,\\beta)$ rate | $\\alpha/\\beta$ | $\\alpha/\\beta^2$ |\n| Unif$[a,b]$ | $(a+b)/2$ | $(b-a)^2/12$ |\n| $\\chi^2_d$ | $d$ | $2d$ |\n| Beta$(\\alpha,\\beta)$ | $\\alpha/(\\alpha+\\beta)$ | $\\frac{\\alpha\\beta}{(\\alpha+\\beta)^2(\\alpha+\\beta+1)}$ |"
+    },
+    {
+      "id": "fc-103",
+      "type": "tf",
+      "category": "fundamentals",
+      "front": "**T/F:** If $X \\sim N(\\mu, \\sigma^2)$ and $Y = aX + b$, then $Y \\sim N(a\\mu + b, a\\sigma^2)$.",
+      "back": "**FALSE.** Variance scales by $a^2$, not $a$. Correct: $Y \\sim N(a\\mu + b, \\boxed{a^2}\\sigma^2)$. Common arithmetic trap."
+    },
+    {
+      "id": "fc-104",
+      "type": "tf",
+      "category": "fundamentals",
+      "front": "**T/F:** Sum of independent Poisson$(\\lambda_i)$ is Poisson$(\\sum \\lambda_i)$.",
+      "back": "**TRUE.** Reproductive property. Easy proof via MGFs: $M_{\\sum X_i}(t) = \\prod M_{X_i}(t) = \\prod e^{\\lambda_i(e^t - 1)} = e^{(\\sum \\lambda_i)(e^t - 1)}$ — MGF of Poisson$(\\sum \\lambda_i)$."
+    },
+    {
+      "id": "fc-105",
+      "type": "definition",
+      "category": "sufficiency",
+      "front": "**Define:** Minimal sufficient statistic + complete statistic.",
+      "back": "**Minimal sufficient:** a sufficient statistic that is a function of every other sufficient statistic. The \"smallest\" sufficient statistic.\n\n**Complete:** $T$ is complete if $E[g(T)] = 0$ for all $\\theta$ implies $g \\equiv 0$. (Loose interpretation: no nontrivial unbiased estimator of 0 based on $T$ alone.)\n\n**Lehmann–Scheffé:** if $T$ is complete and sufficient, then any unbiased estimator that is a function of $T$ is the **unique** MVUE."
+    },
+    {
+      "id": "fc-106",
+      "type": "statement",
+      "category": "hypothesis-testing",
+      "front": "**State:** Sample-size derivation for desired power (one-sided $z$-test).",
+      "back": "Test $H_0: \\mu = \\mu_0$ vs $H_1: \\mu = \\mu_1 > \\mu_0$ at level $\\alpha_0$, $\\sigma$ known. Want power $\\ge 1 - \\beta$ at $\\mu_1$.\n\n$$ n^* = \\left\\lceil \\sigma^2 \\cdot \\frac{(z_{\\alpha_0} + z_\\beta)^2}{(\\mu_1 - \\mu_0)^2} \\right\\rceil $$\n\n**Derivation:** Reject when $\\bar X > \\mu_0 + z_{\\alpha_0}\\sigma/\\sqrt n$. Power at $\\mu_1$ = $P_{\\mu_1}(\\bar X > \\mu_0 + z_{\\alpha_0}\\sigma/\\sqrt n) = 1 - \\Phi(z_{\\alpha_0} - \\sqrt n(\\mu_1 - \\mu_0)/\\sigma)$. Set this $\\ge 1 - \\beta$, solve for $n$."
+    },
+    {
+      "id": "fc-107",
+      "type": "tf",
+      "category": "bayesian",
+      "front": "**T/F:** For Beta$(\\alpha, \\beta)$ prior on $p$ and iid Bernoulli$(p)$ data with $T = \\sum X_i$, the posterior is Beta$(\\alpha + T, \\beta + n - T)$.",
+      "back": "**TRUE.** Likelihood $\\propto p^T (1-p)^{n-T}$. Prior $\\propto p^{\\alpha-1}(1-p)^{\\beta-1}$. Posterior $\\propto p^{\\alpha+T-1}(1-p)^{\\beta+n-T-1}$ = kernel of Beta$(\\alpha+T, \\beta+n-T)$.\n\nPosterior mean $= \\frac{\\alpha + T}{\\alpha + \\beta + n}$ — weighted average of prior mean and sample mean. As $n \\to \\infty$ ⟹ $\\bar X$."
+    },
+    {
+      "id": "fc-108",
+      "type": "tf",
+      "category": "estimation",
+      "front": "**T/F:** For iid Uniform$[0, \\theta]$, the unbiased MVUE of $\\theta$ is $(1 + 1/n) X_{(n)}$ with MSE $\\theta^2 / [n(n+2)]$.",
+      "back": "**TRUE.** Compare:\n- MLE $X_{(n)}$: biased, $E = \\frac{n}{n+1}\\theta$, MSE $\\approx 2\\theta^2/n^2$\n- MoM $2\\bar X$: unbiased, MSE $= \\theta^2/(3n)$ — *much* larger than MVUE\n- MVUE $(1 + 1/n)X_{(n)}$: unbiased, MSE $= \\theta^2/[n(n+2)]$ ✓ smallest\n\nNotably, MVUE's MSE shrinks as $1/n^2$ — much faster than typical $1/n$ rates."
+    },
+    {
+      "id": "fc-109",
+      "type": "tf",
+      "category": "hypothesis-testing",
+      "front": "**T/F:** The acceptance region of a level-$\\alpha_0$ two-sided test of $H_0: \\mu = \\mu_0$ for normal mean (σ known) is $\\mu_0 - \\frac{\\sigma}{\\sqrt n} z_{\\alpha_0/2} \\le \\bar X \\le \\mu_0 + \\frac{\\sigma}{\\sqrt n} z_{\\alpha_0/2}$.",
+      "back": "**TRUE.** Invert this for $\\mu_0$: $\\bar X - \\frac{\\sigma}{\\sqrt n}z_{\\alpha_0/2} \\le \\mu_0 \\le \\bar X + \\frac{\\sigma}{\\sqrt n}z_{\\alpha_0/2}$ — the $(1-\\alpha_0)$ $z$-CI for $\\mu$. Direct illustration of test–CI duality."
+    },
+    {
+      "id": "fc-110",
+      "type": "tf",
+      "category": "hypothesis-testing",
+      "front": "**T/F:** For a sample of $n$ iid $N(\\theta, 1)$ testing $H_0: \\theta = 0$ vs $H_1: \\theta = \\theta_1 > 0$, the Neyman-Pearson optimal test rejects when $\\bar X_n > c$ for some constant $c$.",
+      "back": "**TRUE.** Likelihood ratio: $f_1/f_0 = \\exp(n\\bar x \\theta_1 - n\\theta_1^2/2)$. Reject when LR $> k$ ⟺ $\\bar X > c$ where $c = \\frac{\\theta_1}{2} + \\frac{\\log k}{n \\theta_1}$. Choose $c = z_{\\alpha_0}/\\sqrt n$ for size $\\alpha_0$."
     }
   ]
 }
