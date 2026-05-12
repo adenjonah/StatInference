@@ -179,7 +179,7 @@ export type ChatMessage = z.infer<typeof ChatMessageSchema>;
 
 export const FlashcardSchema = z.object({
   id: z.string(),
-  type: z.enum(["tf", "definition", "statement"]),
+  type: z.enum(["tf", "definition", "statement", "memorize"]),
   category: z.string(),
   front: z.string(),
   back: z.string(),

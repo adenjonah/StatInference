@@ -25,12 +25,14 @@ const TYPE_LABELS: Record<Flashcard["type"], string> = {
   tf: "True / False",
   definition: "Definition",
   statement: "Theorem",
+  memorize: "Memorize",
 };
 
 const TYPE_VARIANTS: Record<Flashcard["type"], "default" | "success" | "warning" | "neutral"> = {
   tf: "warning",
   definition: "default",
   statement: "success",
+  memorize: "neutral",
 };
 
 const ALL = "__all__";
